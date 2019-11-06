@@ -9680,7 +9680,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\na:link\n{\ntext-decoration:none;\n}\n", ""]);
+exports.push([module.i, "\na:link\r\n{\r\ntext-decoration:none;\n}\r\n", ""]);
 
 // exports
 
@@ -49846,7 +49846,7 @@ if(false) {}
     // TODO remove in v1 final
     mounted: function mounted () {
       if (this.topIndicator === true) {
-        var p = Object({"MIX_PUSHER_APP_KEY":"","MIX_PUSHER_APP_CLUSTER":"mt1","NODE_ENV":"development"});
+        var p = Object({"NODE_ENV":"development"});
         if (p.PROD !== true) {
           console.info('\n\n[Quasar] QTabs info: please rename top-indicator to switch-indicator prop');
         }
@@ -67476,7 +67476,7 @@ if(false) {}
   var CloseDialog = Object.assign({}, ClosePopup,
     {name: 'close-dialog',
     bind: function bind (el, bindings, vnode) {
-      var p = Object({"MIX_PUSHER_APP_KEY":"","MIX_PUSHER_APP_CLUSTER":"mt1","NODE_ENV":"development"});
+      var p = Object({"NODE_ENV":"development"});
       if (p.PROD !== true) {
         console.info('\n\n[Quasar] info: please rename v-close-dialog (deprecated) with v-close-popup');
       }
@@ -67486,7 +67486,7 @@ if(false) {}
   var CloseMenu = Object.assign({}, ClosePopup,
     {name: 'close-menu',
     bind: function bind (el, bindings, vnode) {
-      var p = Object({"MIX_PUSHER_APP_KEY":"","MIX_PUSHER_APP_CLUSTER":"mt1","NODE_ENV":"development"});
+      var p = Object({"NODE_ENV":"development"});
       if (p.PROD !== true) {
         console.info('\n\n[Quasar] info: please rename v-close-menu (deprecated) with v-close-popup');
       }
@@ -87331,8 +87331,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/alejandroesteban/Desktop/proyectos2019/template_vue_laravel_2019/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/alejandroesteban/Desktop/proyectos2019/template_vue_laravel_2019/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\david\Desktop\Proyectos NeoFox\neofox_contable\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\david\Desktop\Proyectos NeoFox\neofox_contable\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
