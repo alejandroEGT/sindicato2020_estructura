@@ -3127,6 +3127,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Media",
   data: function data() {
@@ -70817,10 +70827,6 @@ var render = function() {
             }
           },
           [
-            _c("q-card-section", [
-              _c("div", { staticClass: "text-h6" }, [_vm._v("Bienvenido")])
-            ]),
-            _vm._v(" "),
             _c(
               "q-tabs",
               {
@@ -70834,9 +70840,15 @@ var render = function() {
                 }
               },
               [
-                _c("q-tab", { attrs: { label: "Login", name: "login" } }),
+                _c("q-tab", {
+                  staticClass: "text-h6",
+                  attrs: { label: "Login", name: "login" }
+                }),
                 _vm._v(" "),
-                _c("q-tab", { attrs: { label: "Registro", name: "registro" } })
+                _c("q-tab", {
+                  staticClass: "text-h6",
+                  attrs: { label: "Registro", name: "registro" }
+                })
               ],
               1
             ),
@@ -70893,7 +70905,7 @@ var render = function() {
                     _c("br"),
                     _vm._v(" "),
                     _c("q-btn", {
-                      staticClass: "center",
+                      staticClass: "content-center",
                       attrs: {
                         color: "primary",
                         icon: "mail",
@@ -70951,7 +70963,7 @@ var render = function() {
                     _c("br"),
                     _vm._v(" "),
                     _c("q-btn", {
-                      staticClass: "center",
+                      staticClass: "content-center",
                       attrs: {
                         color: "primary",
                         icon: "mail",
