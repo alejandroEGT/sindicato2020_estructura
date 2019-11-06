@@ -43,7 +43,13 @@
             <q-input v-model="email" label="Ingrese su correo" />
             <q-input v-model="password" label="Ingrese su contraseña" />
             <br />
-            <q-btn class="content-center" color="primary" icon="mail" label="Registrarse" />
+            <q-btn
+              class="content-center"
+              color="primary"
+              @click="registrar"
+              icon="mail"
+              label="Registrarse"
+            />
           </q-tab-panel>
         </q-tab-panels>
       </q-card>
@@ -56,6 +62,7 @@ export default {
   name: "Media",
   data() {
     return {
+      nombre: "",
       email: "",
       password: "",
       error: false,
@@ -80,6 +87,17 @@ export default {
         redirect: "/index",
         fetchUser: true
       });
+    },
+
+    registrar(){
+      const datos = {
+        'name': this.nombre,
+        'email': this.email,
+        'password': this.password
+      }
+      axios.post('api/auth/register', datos).then((res)=>{
+					console.log(res)
+				});
     }
   }
 };

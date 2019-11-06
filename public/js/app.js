@@ -3137,10 +3137,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Media",
   data: function data() {
     return {
+      nombre: "",
       email: "",
       password: "",
       error: false,
@@ -3163,6 +3170,16 @@ __webpack_require__.r(__webpack_exports__);
         rememberMe: true,
         redirect: "/index",
         fetchUser: true
+      });
+    },
+    registrar: function registrar() {
+      var datos = {
+        'name': this.nombre,
+        'email': this.email,
+        'password': this.password
+      };
+      axios.post('api/auth/register', datos).then(function (res) {
+        console.log(res);
       });
     }
   }
@@ -70968,7 +70985,8 @@ var render = function() {
                         color: "primary",
                         icon: "mail",
                         label: "Registrarse"
-                      }
+                      },
+                      on: { click: _vm.registrar }
                     })
                   ],
                   1
