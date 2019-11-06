@@ -84,105 +84,52 @@
         >
     </WebCam> -->
 
-    <button @click="onStart"> iniciar</button>
-     <button @click="onStop"> Detener</button>
+
   </div>
 
 
     
     <div class="row justify-center">
-      <div class="col-12 col-md-6">
-        <q-card class="my-card">
-          <q-item>
-            <q-item-section avatar>
-              <q-avatar>
-                <img src="https://scontent.fccp1-1.fna.fbcdn.net/v/t1.0-1/p160x160/69370955_3135947683112296_3794748084420870144_n.jpg?_nc_cat=100&_nc_oc=AQlOpTIUyinfMRDjtwkCc9sCB3B-8xqzAbELcB0Gj43q3AWJB0gin0dQKhsxFD03LfU&_nc_ht=scontent.fccp1-1.fna&oh=ee046f87adca0cc45bf03a909312a68d&oe=5E20FC91">
-              </q-avatar>
-            </q-item-section>
+      <div class="col-12 col-md-10">
+          
+          <div class="row q-col-gutter-md">
+            
+                <div class="col-12 col-md-3">
+                   <q-card class="my-card">
+                      <q-img src="https://cdn.quasar.dev/img/parallax2.jpg">
+                        <div class="absolute-bottom">
+                          <div class="text-h6">Contabilidad</div>
+                          <div class="text-subtitle2">Cuentas y prestamos</div>
+                        </div>
+                      </q-img>
 
-            <q-item-section>
-              <q-item-label>Title</q-item-label>
-              <q-item-label caption>hace 2 minutos</q-item-label>
-            </q-item-section>
-          </q-item>
+                      <q-card-actions>
+                        <q-btn flat>Entrar</q-btn>
+                        <!-- <q-btn flat>Action 2</q-btn> -->
+                      </q-card-actions>
+                    </q-card>
+                </div>
 
-          <img src="https://cdn.quasar.dev/img/parallax2.jpg">
-          <q-card-section>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-          </q-card-section>
-          <hr>
-          <div class="q-pa-md" style="max-width: 100%">
+                <div class="col-12 col-md-3">
+                   <q-card class="my-card">
+                      <q-img src="https://cdn.quasar.dev/img/parallax2.jpg">
+                        <div class="absolute-bottom">
+                          <div class="text-h6">Clientes y proveedores</div>
+                          <div class="text-subtitle2">Registro de clientes y proveedores</div>
+                        </div>
+                      </q-img>
 
-            <q-expansion-item
-              v-model="expanded"
-              icon="chat"
-              label="Foro abierto"
-              caption="0 coemntarios"
-            >
-              <q-card>
-                <q-card-section>
-                  
-                    <div class="row">
-                      <div class="col-3 col-md-2">
-                        <q-avatar>
-                              <img src="https://scontent.fccp1-1.fna.fbcdn.net/v/t1.0-1/c2.0.40.40a/p40x40/69244077_2495071723872301_9078154412278415360_n.jpg?_nc_cat=102&_nc_oc=AQlmjeCvAF6D92WEjAkYQ9Q2Fi2WHuvafEZRLgxQwP7G-O46o6wd8hJ_63jCXa92bIA&_nc_ht=scontent.fccp1-1.fna&oh=44bb370b2f92430bd85a7ea32fd616ee&oe=5E62CCE1">
-                            </q-avatar>
-                      </div>
-                      <div class="col-9 col-md-10">
-                      Pienso que eres una mierda, chau!!
-                      mejora mas tu ano weta qlo Pienso que eres una mierda, chau!!
-                      mejora mas tu ano weta qlo Pienso que eres una mierda, chau!!
-                      mejora mas tu ano weta qlo
-                       
-                      </div>
+                      <q-card-actions>
+                        <q-btn flat>Entrar</q-btn>
+                        <!-- <q-btn flat>Action 2</q-btn> -->
+                      </q-card-actions>
+                    </q-card>
+                </div>
 
-                      <q-separator inset /><br>
-                    </div>
-                    <div class="row">
-                      <div class="col-3 col-md-2">
-                        <q-avatar>
-                              <img src="https://cdn.quasar.dev/img/avatar.png">
-                            </q-avatar>
-                      </div>
-                      <div class="col-9 col-md-10">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                       
-                      </div>
-                      <q-separator inset /><br>
-                    </div>
-                    <div class="row">
-                      <div class="col-3 col-md-2">
-                        <q-avatar>
-                              <img src="https://cdn.quasar.dev/img/avatar.png">
-                            </q-avatar>
-                      </div>
-                      <div class="col-9 col-md-10">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                       
-                      </div>
-                      <q-separator inset /><br>
-                    </div>
 
-                    <q-input
-                      v-model="text"
-                      filled
-                      type="textarea"
-                      label="Escribe tu comentario..."
-                    />
-                      
-
-                </q-card-section>
-              </q-card>
-            </q-expansion-item>
           </div>
-        </q-card>
+
+
       </div>
     </div>
    

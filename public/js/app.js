@@ -3301,12 +3301,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       nombreCuenta: null,
       descripcionCuenta: null,
-      accept: false
+      accept: false,
+      text: '',
+      ph: '',
+      dense: false
     };
   },
   methods: {
@@ -3346,59 +3351,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -75670,38 +75622,18 @@ var render = function() {
                         [
                           _c("q-input", {
                             attrs: {
-                              filled: "",
-                              label: "Nombre *",
-                              hint: "Nombre de la cuenta",
-                              "lazy-rules": "",
-                              rules: [
-                                function(val) {
-                                  return (
-                                    (val && val.length > 0) ||
-                                    "Porfavor ingrese un nombre de cuenta"
-                                  )
-                                }
-                              ]
+                              outlined: "",
+                              label: "Label",
+                              placeholder: "Placeholder",
+                              hint: "With placeholder",
+                              dense: _vm.dense
                             },
-                            scopedSlots: _vm._u([
-                              {
-                                key: "prepend",
-                                fn: function() {
-                                  return [
-                                    _c("q-icon", {
-                                      attrs: { name: "account_balance_wallet" }
-                                    })
-                                  ]
-                                },
-                                proxy: true
-                              }
-                            ]),
                             model: {
-                              value: _vm.nombreCuenta,
+                              value: _vm.ph,
                               callback: function($$v) {
-                                _vm.nombreCuenta = $$v
+                                _vm.ph = $$v
                               },
-                              expression: "nombreCuenta"
+                              expression: "ph"
                             }
                           }),
                           _vm._v(" "),
@@ -75956,226 +75888,78 @@ var render = function() {
       )
     ]),
     _vm._v(" "),
-    _c("div", [
-      _c("button", { on: { click: _vm.onStart } }, [_vm._v(" iniciar")]),
-      _vm._v(" "),
-      _c("button", { on: { click: _vm.onStop } }, [_vm._v(" Detener")])
-    ]),
+    _c("div"),
     _vm._v(" "),
     _c("div", { staticClass: "row justify-center" }, [
-      _c(
-        "div",
-        { staticClass: "col-12 col-md-6" },
-        [
+      _c("div", { staticClass: "col-12 col-md-10" }, [
+        _c("div", { staticClass: "row q-col-gutter-md" }, [
           _c(
-            "q-card",
-            { staticClass: "my-card" },
+            "div",
+            { staticClass: "col-12 col-md-3" },
             [
               _c(
-                "q-item",
+                "q-card",
+                { staticClass: "my-card" },
                 [
                   _c(
-                    "q-item-section",
-                    { attrs: { avatar: "" } },
+                    "q-img",
+                    {
+                      attrs: { src: "https://cdn.quasar.dev/img/parallax2.jpg" }
+                    },
                     [
-                      _c("q-avatar", [
-                        _c("img", {
-                          attrs: {
-                            src:
-                              "https://scontent.fccp1-1.fna.fbcdn.net/v/t1.0-1/p160x160/69370955_3135947683112296_3794748084420870144_n.jpg?_nc_cat=100&_nc_oc=AQlOpTIUyinfMRDjtwkCc9sCB3B-8xqzAbELcB0Gj43q3AWJB0gin0dQKhsxFD03LfU&_nc_ht=scontent.fccp1-1.fna&oh=ee046f87adca0cc45bf03a909312a68d&oe=5E20FC91"
-                          }
-                        })
+                      _c("div", { staticClass: "absolute-bottom" }, [
+                        _c("div", { staticClass: "text-h6" }, [
+                          _vm._v("Contabilidad")
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "text-subtitle2" }, [
+                          _vm._v("Cuentas y prestamos")
+                        ])
                       ])
-                    ],
-                    1
+                    ]
                   ),
                   _vm._v(" "),
                   _c(
-                    "q-item-section",
-                    [
-                      _c("q-item-label", [_vm._v("Title")]),
-                      _vm._v(" "),
-                      _c("q-item-label", { attrs: { caption: "" } }, [
-                        _vm._v("hace 2 minutos")
-                      ])
-                    ],
+                    "q-card-actions",
+                    [_c("q-btn", { attrs: { flat: "" } }, [_vm._v("Entrar")])],
                     1
                   )
                 ],
                 1
-              ),
-              _vm._v(" "),
-              _c("img", {
-                attrs: { src: "https://cdn.quasar.dev/img/parallax2.jpg" }
-              }),
-              _vm._v(" "),
-              _c("q-card-section", [
-                _vm._v(
-                  "\n          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\n          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\n          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\n          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\n          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\n          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n        "
-                )
-              ]),
-              _vm._v(" "),
-              _c("hr"),
-              _vm._v(" "),
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "col-12 col-md-3" },
+            [
               _c(
-                "div",
-                {
-                  staticClass: "q-pa-md",
-                  staticStyle: { "max-width": "100%" }
-                },
+                "q-card",
+                { staticClass: "my-card" },
                 [
                   _c(
-                    "q-expansion-item",
+                    "q-img",
                     {
-                      attrs: {
-                        icon: "chat",
-                        label: "Foro abierto",
-                        caption: "0 coemntarios"
-                      },
-                      model: {
-                        value: _vm.expanded,
-                        callback: function($$v) {
-                          _vm.expanded = $$v
-                        },
-                        expression: "expanded"
-                      }
+                      attrs: { src: "https://cdn.quasar.dev/img/parallax2.jpg" }
                     },
                     [
-                      _c(
-                        "q-card",
-                        [
-                          _c(
-                            "q-card-section",
-                            [
-                              _c(
-                                "div",
-                                { staticClass: "row" },
-                                [
-                                  _c(
-                                    "div",
-                                    { staticClass: "col-3 col-md-2" },
-                                    [
-                                      _c("q-avatar", [
-                                        _c("img", {
-                                          attrs: {
-                                            src:
-                                              "https://scontent.fccp1-1.fna.fbcdn.net/v/t1.0-1/c2.0.40.40a/p40x40/69244077_2495071723872301_9078154412278415360_n.jpg?_nc_cat=102&_nc_oc=AQlmjeCvAF6D92WEjAkYQ9Q2Fi2WHuvafEZRLgxQwP7G-O46o6wd8hJ_63jCXa92bIA&_nc_ht=scontent.fccp1-1.fna&oh=44bb370b2f92430bd85a7ea32fd616ee&oe=5E62CCE1"
-                                          }
-                                        })
-                                      ])
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    { staticClass: "col-9 col-md-10" },
-                                    [
-                                      _vm._v(
-                                        "\n                    Pienso que eres una mierda, chau!!\n                    mejora mas tu ano weta qlo Pienso que eres una mierda, chau!!\n                    mejora mas tu ano weta qlo Pienso que eres una mierda, chau!!\n                    mejora mas tu ano weta qlo\n                     \n                    "
-                                      )
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c("q-separator", { attrs: { inset: "" } }),
-                                  _c("br")
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                { staticClass: "row" },
-                                [
-                                  _c(
-                                    "div",
-                                    { staticClass: "col-3 col-md-2" },
-                                    [
-                                      _c("q-avatar", [
-                                        _c("img", {
-                                          attrs: {
-                                            src:
-                                              "https://cdn.quasar.dev/img/avatar.png"
-                                          }
-                                        })
-                                      ])
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    { staticClass: "col-9 col-md-10" },
-                                    [
-                                      _vm._v(
-                                        "\n                      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\n                      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\n                     \n                    "
-                                      )
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c("q-separator", { attrs: { inset: "" } }),
-                                  _c("br")
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                { staticClass: "row" },
-                                [
-                                  _c(
-                                    "div",
-                                    { staticClass: "col-3 col-md-2" },
-                                    [
-                                      _c("q-avatar", [
-                                        _c("img", {
-                                          attrs: {
-                                            src:
-                                              "https://cdn.quasar.dev/img/avatar.png"
-                                          }
-                                        })
-                                      ])
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    { staticClass: "col-9 col-md-10" },
-                                    [
-                                      _vm._v(
-                                        "\n                      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\n                      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\n                     \n                    "
-                                      )
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c("q-separator", { attrs: { inset: "" } }),
-                                  _c("br")
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c("q-input", {
-                                attrs: {
-                                  filled: "",
-                                  type: "textarea",
-                                  label: "Escribe tu comentario..."
-                                },
-                                model: {
-                                  value: _vm.text,
-                                  callback: function($$v) {
-                                    _vm.text = $$v
-                                  },
-                                  expression: "text"
-                                }
-                              })
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      )
-                    ],
+                      _c("div", { staticClass: "absolute-bottom" }, [
+                        _c("div", { staticClass: "text-h6" }, [
+                          _vm._v("Clientes y proveedores")
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "text-subtitle2" }, [
+                          _vm._v("Registro de clientes y proveedores")
+                        ])
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "q-card-actions",
+                    [_c("q-btn", { attrs: { flat: "" } }, [_vm._v("Entrar")])],
                     1
                   )
                 ],
@@ -76184,9 +75968,8 @@ var render = function() {
             ],
             1
           )
-        ],
-        1
-      )
+        ])
+      ])
     ])
   ])
 }
