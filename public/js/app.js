@@ -75982,7 +75982,7 @@ var render = function() {
                           attrs: { flat: "" },
                           on: { click: _vm.url_crear_cliente }
                         },
-                        [_vm._v("Entrar")]
+                        [_vm._v("Crear clientes")]
                       )
                     ],
                     1
