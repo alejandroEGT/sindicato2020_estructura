@@ -3495,6 +3495,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 // import { WebCam } from 'vue-cam-vision'
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -3537,6 +3538,12 @@ __webpack_require__.r(__webpack_exports__);
     },
     url_perfil: function url_perfil() {
       this.$router.push('/mi-perfil');
+    },
+    url_crear_cliente: function url_crear_cliente() {
+      this.$router.push('/registro-clientes');
+    },
+    url_crear_cuenta: function url_crear_cuenta() {
+      this.$router.push('/crear-cuenta');
     }
   }
 });
@@ -75921,7 +75928,16 @@ var render = function() {
                   _vm._v(" "),
                   _c(
                     "q-card-actions",
-                    [_c("q-btn", { attrs: { flat: "" } }, [_vm._v("Entrar")])],
+                    [
+                      _c(
+                        "q-btn",
+                        {
+                          attrs: { flat: "" },
+                          on: { click: _vm.url_crear_cuenta }
+                        },
+                        [_vm._v("Crear cuentas")]
+                      )
+                    ],
                     1
                   )
                 ],
@@ -75959,7 +75975,16 @@ var render = function() {
                   _vm._v(" "),
                   _c(
                     "q-card-actions",
-                    [_c("q-btn", { attrs: { flat: "" } }, [_vm._v("Entrar")])],
+                    [
+                      _c(
+                        "q-btn",
+                        {
+                          attrs: { flat: "" },
+                          on: { click: _vm.url_crear_cliente }
+                        },
+                        [_vm._v("Entrar")]
+                      )
+                    ],
                     1
                   )
                 ],

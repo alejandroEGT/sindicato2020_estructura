@@ -104,7 +104,7 @@
                       </q-img>
 
                       <q-card-actions>
-                        <q-btn flat>Entrar</q-btn>
+                        <q-btn flat @click="url_crear_cuenta">Crear cuentas</q-btn>
                         <!-- <q-btn flat>Action 2</q-btn> -->
                       </q-card-actions>
                     </q-card>
@@ -120,7 +120,8 @@
                       </q-img>
 
                       <q-card-actions>
-                        <q-btn flat>Entrar</q-btn>
+                        <q-btn flat @click="url_crear_cliente">Entrar</q-btn>
+
                         <!-- <q-btn flat>Action 2</q-btn> -->
                       </q-card-actions>
                     </q-card>
@@ -188,7 +189,15 @@ export default {
       },
         url_perfil(){
         this.$router.push('/mi-perfil');
-    },
+       },
+        url_crear_cliente(){
+        this.$router.push('/registro-clientes');
+       },
+
+       url_crear_cuenta(){
+        this.$router.push('/crear-cuenta');
+       },
+
 
 
 
