@@ -76618,7 +76618,34 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_vm._v("\n    crear prestamo\n")])
+  return _c("div", { staticClass: "q-pa-md" }, [
+    _c("div", { staticClass: "row justify-center" }, [
+      _c(
+        "div",
+        { staticClass: "col-md-7" },
+        [
+          _c(
+            "q-card",
+            { staticClass: "my-card" },
+            [
+              _c("q-card-section", { staticClass: "bg-primary text-white" }, [
+                _c("div", { staticClass: "text-h6" }, [
+                  _vm._v("Crear prestamo")
+                ])
+              ]),
+              _vm._v(" "),
+              _c("q-separator"),
+              _vm._v(
+                "\n\t\t\t\t\t\n\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Illum mollitia maiores assumenda impedit eos porro deleniti. Animi officia illum, itaque ratione perferendis quibusdam unde delectus asperiores, laborum, facilis modi amet.\n\t\t\t      \n\t\t\t    "
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
