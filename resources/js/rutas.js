@@ -5,6 +5,11 @@ import CreateComponent from './components/Create.vue';
 import crearUsuario from './components/usuarios/crearUsuario.vue';
 // import EditComponent from './components/EditComponent.vue';
 
+
+//prestamos
+import CrearPrestamo from './components/auth/prestamos/crear_prestamos.vue';
+import ListarPrestamo from './components/auth/prestamos/listar_prestamos.vue';
+
 import Auth from "./components/auth/auth.vue";
 import Index from './components/auth/index.vue';
 import MiPerfil from './components/auth/perfil.vue';
@@ -50,6 +55,8 @@ const routes = [
       { path: '/index', component: Index, name: 'Index' },
       { path: '/mi-perfil', component: MiPerfil, name: 'miPerfil' },
       { path: '/crear-cuenta', component: crearCuenta, name: 'crearCuenta' },
+      { path: '/crear-prestamo', component: CrearPrestamo, name: 'CrearPrestamo' },
+      { path: '/listar-prestamo', component: CrearPrestamo, name: 'ListarPrestamo' },
     ]
   },
   // {
