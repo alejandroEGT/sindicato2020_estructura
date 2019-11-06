@@ -2,50 +2,56 @@
 import Outer from './components/outer.vue';
 import HomeComponent from './components/Home.vue';
 import CreateComponent from './components/Create.vue';
-// import IndexComponent from './components/IndexComponent.vue';
+import crearUsuario from './components/usuarios/crearUsuario.vue';
 // import EditComponent from './components/EditComponent.vue';
 
- import Auth from "./components/auth/auth.vue";
- import Index from './components/auth/index.vue';
- import MiPerfil from './components/auth/perfil.vue';
+import Auth from "./components/auth/auth.vue";
+import Index from './components/auth/index.vue';
+import MiPerfil from './components/auth/perfil.vue';
+import crearCuenta from './components/auth/cuentas/crearCuenta.vue';
 
 const routes = [
   {
     path: '/',
-      component: Outer,
-      name:'Admin',
-      redirect:'home',
-      iconCls:'el-icon-message',
-      meta:{auth:false},
+    component: Outer,
+    name: 'Admin',
+    redirect: 'home',
+    iconCls: 'el-icon-message',
+    meta: { auth: false },
 
-      children:[
-         {
-            name: 'home',
-            path: '/',
-            component: HomeComponent
-        },
-        {
-            name: 'create',
-            path: '/create',
-            component: CreateComponent
-        },
-         
-          //{path: '/terminos',name: 'terminos',component: Terminos,meta: { auth: false }},
-      ] 
+    children: [
+      {
+        name: 'home',
+        path: '/',
+        component: HomeComponent
+      },
+      {
+        name: 'create',
+        path: '/create',
+        component: CreateComponent
+      },
+
+      {
+        path: '/crear-usuario',
+        name: 'crearUsuario',
+        component: crearUsuario
+      },
+    ]
   },
- 
- {
+
+  {
     path: '/home',
     component: Auth,
     name: 'Administration',
-    redirect:'index',
+    redirect: 'index',
     iconCls: 'el-icon-message',
-    meta: {auth: true},
+    meta: { auth: true },
     children: [
-        { path: '/index', component: Index, name: 'Index' },
-        { path: '/mi-perfil', component: MiPerfil, name: 'miPerfil' },
+      { path: '/index', component: Index, name: 'Index' },
+      { path: '/mi-perfil', component: MiPerfil, name: 'miPerfil' },
+      { path: '/crear-cuenta', component: crearCuenta, name: 'crearCuenta' },
     ]
-},
+  },
   // {
   //     name: 'posts',
   //     path: '/posts',
