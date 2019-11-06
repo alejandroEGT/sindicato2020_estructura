@@ -3119,13 +3119,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Media",
   data: function data() {
     return {
       email: "",
       password: "",
-      error: false
+      error: false,
+      tab: "login"
     };
   },
   methods: {
@@ -70809,72 +70818,149 @@ var render = function() {
           },
           [
             _c("q-card-section", [
-              _c(
-                "div",
-                { staticClass: "text-h6 justify-center" },
-                [
-                  _c(
-                    "q-tabs",
-                    {
-                      staticClass: "text-teal",
-                      model: {
-                        value: _vm.tab,
-                        callback: function($$v) {
-                          _vm.tab = $$v
-                        },
-                        expression: "tab"
-                      }
-                    },
-                    [
-                      _c("q-tab", { attrs: { label: "Login", name: "Login" } }),
-                      _vm._v(" "),
-                      _c("q-tab", {
-                        attrs: { label: "Registro", name: "Registro" }
-                      })
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
+              _c("div", { staticClass: "text-h6" }, [_vm._v("Bienvenido")])
             ]),
             _vm._v(" "),
             _c(
-              "q-card-section",
+              "q-tabs",
+              {
+                staticClass: "text-white",
+                model: {
+                  value: _vm.tab,
+                  callback: function($$v) {
+                    _vm.tab = $$v
+                  },
+                  expression: "tab"
+                }
+              },
               [
-                _c("q-input", {
-                  attrs: { label: "Ingrese su correo" },
-                  model: {
-                    value: _vm.email,
-                    callback: function($$v) {
-                      _vm.email = $$v
+                _c("q-tab", { attrs: { label: "Login", name: "login" } }),
+                _vm._v(" "),
+                _c("q-tab", { attrs: { label: "Registro", name: "registro" } })
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "q-tab-panels",
+              {
+                attrs: { animated: "" },
+                model: {
+                  value: _vm.tab,
+                  callback: function($$v) {
+                    _vm.tab = $$v
+                  },
+                  expression: "tab"
+                }
+              },
+              [
+                _c(
+                  "q-tab-panel",
+                  {
+                    staticStyle: {
+                      background:
+                        "radial-gradient(circle, #35a2ff 0%, #014a88 100%)"
                     },
-                    expression: "email"
-                  }
-                }),
+                    attrs: { name: "login" }
+                  },
+                  [
+                    _c("q-input", {
+                      attrs: { label: "Ingrese su correo" },
+                      model: {
+                        value: _vm.email,
+                        callback: function($$v) {
+                          _vm.email = $$v
+                        },
+                        expression: "email"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("q-separator"),
+                    _vm._v(" "),
+                    _c("q-input", {
+                      attrs: { label: "Ingrese su contraseña" },
+                      model: {
+                        value: _vm.password,
+                        callback: function($$v) {
+                          _vm.password = $$v
+                        },
+                        expression: "password"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("q-separator"),
+                    _vm._v(" "),
+                    _c("br"),
+                    _vm._v(" "),
+                    _c("q-btn", {
+                      staticClass: "center",
+                      attrs: {
+                        color: "primary",
+                        icon: "mail",
+                        label: "Ingresar"
+                      },
+                      on: { click: _vm.login }
+                    })
+                  ],
+                  1
+                ),
                 _vm._v(" "),
-                _c("q-separator"),
-                _vm._v(" "),
-                _c("q-input", {
-                  attrs: { label: "Ingrese su contraseña" },
-                  model: {
-                    value: _vm.password,
-                    callback: function($$v) {
-                      _vm.password = $$v
+                _c(
+                  "q-tab-panel",
+                  {
+                    staticStyle: {
+                      background:
+                        "radial-gradient(circle, #35a2ff 0%, #014a88 100%)"
                     },
-                    expression: "password"
-                  }
-                }),
-                _vm._v(" "),
-                _c("q-separator"),
-                _vm._v(" "),
-                _c("br"),
-                _vm._v(" "),
-                _c("q-btn", {
-                  staticClass: "justify-center",
-                  attrs: { color: "primary", icon: "mail", label: "Ingresar" },
-                  on: { click: _vm.login }
-                })
+                    attrs: { name: "registro" }
+                  },
+                  [
+                    _c("q-input", {
+                      attrs: { label: "Ingrese su nombre" },
+                      model: {
+                        value: _vm.nombre,
+                        callback: function($$v) {
+                          _vm.nombre = $$v
+                        },
+                        expression: "nombre"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("q-input", {
+                      attrs: { label: "Ingrese su correo" },
+                      model: {
+                        value: _vm.email,
+                        callback: function($$v) {
+                          _vm.email = $$v
+                        },
+                        expression: "email"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("q-input", {
+                      attrs: { label: "Ingrese su contraseña" },
+                      model: {
+                        value: _vm.password,
+                        callback: function($$v) {
+                          _vm.password = $$v
+                        },
+                        expression: "password"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("br"),
+                    _vm._v(" "),
+                    _c("q-btn", {
+                      staticClass: "center",
+                      attrs: {
+                        color: "primary",
+                        icon: "mail",
+                        label: "Registrarse"
+                      }
+                    })
+                  ],
+                  1
+                )
               ],
               1
             )
