@@ -4,9 +4,12 @@ export default {
         loading1: false,
         loading2: false,
         progress: false,
-        fecha: '',
-        descripcion: '',
-        monto: ''
+        showing: false,
+        fechaNac: '',
+        rut:'',
+        nombres: '',
+        aPaterno: '',
+        aMaterno:''
       }
     },
   

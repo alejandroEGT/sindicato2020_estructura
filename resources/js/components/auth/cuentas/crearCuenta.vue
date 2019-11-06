@@ -7,7 +7,9 @@
             <q-card class="my-card">
               <q-card-section>
                 <q-form @submit="onSubmit" @reset="onReset" class="q-gutter-md">
-                  <q-input
+
+                   <q-input outlined v-model="ph" label="Label" placeholder="Placeholder" hint="With placeholder" :dense="dense" />
+                  <!-- <q-input
                     filled
                     v-model="nombreCuenta"
                     label="Nombre *"
@@ -18,7 +20,7 @@
                     <template v-slot:prepend>
                       <q-icon name="account_balance_wallet" />
                     </template>
-                  </q-input>
+                  </q-input> -->
 
                   <q-input
                     filled
@@ -56,7 +58,12 @@ export default {
       nombreCuenta: null,
       descripcionCuenta: null,
 
-      accept: false
+      accept: false,
+
+      text: '',
+      ph: '',
+
+      dense: false
     };
   },
 

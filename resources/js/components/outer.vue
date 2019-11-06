@@ -1,22 +1,20 @@
 <template>
-  <div class="">
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <router-link to="/" class="nav-link">Home</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link to="/create" class="nav-link">Create Post</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link to="/posts" class="nav-link">Posts</router-link>
-        </li>
-      </ul>
-    </nav><br />
+  <div class>
+    <q-bar>
+      <div class="cursor-pointer">
+        <router-link to="/" class="nav-link">Home</router-link>
+      </div>
+      <div class="cursor-pointer">
+        <router-link to="/create" class="nav-link">Create Post</router-link>
+      </div>
+      <div class="cursor-pointer gt-xs">
+        <router-link to="/posts" class="nav-link">Posts</router-link>
+      </div>
+    </q-bar>
+    <br />
 
-      <transition name="">
+    <transition name>
       <router-view></router-view>
     </transition>
-
-</div>
+  </div>
 </template>
