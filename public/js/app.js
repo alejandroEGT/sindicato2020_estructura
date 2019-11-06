@@ -3241,11 +3241,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      name: null,
-      age: null,
+      nombreCuenta: null,
+      descripcionCuenta: null,
       accept: false
     };
   },
@@ -3253,23 +3268,23 @@ __webpack_require__.r(__webpack_exports__);
     onSubmit: function onSubmit() {
       if (this.accept !== true) {
         this.$q.notify({
-          color: 'red-5',
-          textColor: 'white',
-          icon: 'warning',
-          message: 'You need to accept the license and terms first'
+          color: "red-5",
+          textColor: "white",
+          icon: "warning",
+          message: "You need to accept the license and terms first"
         });
       } else {
         this.$q.notify({
-          color: 'green-4',
-          textColor: 'white',
-          icon: 'cloud_done',
-          message: 'Submitted'
+          color: "green-4",
+          textColor: "white",
+          icon: "cloud_done",
+          message: "Submitted"
         });
       }
     },
     onReset: function onReset() {
-      this.name = "";
-      this.age = "";
+      this.nombreCuenta = null;
+      this.descripcionCuenta = null;
       this.accept = false;
     }
   }
@@ -71019,104 +71034,150 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c(
-      "div",
-      { staticClass: "q-pa-md", staticStyle: { "max-width": "400px" } },
-      [
-        _c(
-          "q-form",
-          {
-            staticClass: "q-gutter-md",
-            on: { submit: _vm.onSubmit, reset: _vm.onReset }
-          },
-          [
-            _c("q-input", {
-              attrs: {
-                filled: "",
-                label: "Your name *",
-                hint: "Name and surname",
-                "lazy-rules": "",
-                rules: [
-                  function(val) {
-                    return (val && val.length > 0) || "Please type something"
-                  }
-                ]
-              },
-              model: {
-                value: _vm.name,
-                callback: function($$v) {
-                  _vm.name = $$v
-                },
-                expression: "name"
-              }
-            }),
-            _vm._v(" "),
-            _c("q-input", {
-              attrs: {
-                filled: "",
-                type: "number",
-                label: "Your age *",
-                "lazy-rules": "",
-                rules: [
-                  function(val) {
-                    return (
-                      (val !== null && val !== "") || "Please type your age"
-                    )
-                  },
-                  function(val) {
-                    return (val > 0 && val < 100) || "Please type a real age"
-                  }
-                ]
-              },
-              model: {
-                value: _vm.age,
-                callback: function($$v) {
-                  _vm.age = $$v
-                },
-                expression: "age"
-              }
-            }),
-            _vm._v(" "),
-            _c("q-toggle", {
-              attrs: { label: "Confirmar la cuenta a crearse." },
-              model: {
-                value: _vm.accept,
-                callback: function($$v) {
-                  _vm.accept = $$v
-                },
-                expression: "accept"
-              }
-            }),
-            _vm._v(" "),
-            _c(
-              "div",
-              [
-                _c("q-btn", {
-                  attrs: {
-                    label: "Crear Cuenta",
-                    type: "submit",
-                    color: "primary"
-                  }
-                }),
-                _vm._v(" "),
-                _c("q-btn", {
-                  staticClass: "q-ml-sm",
-                  attrs: {
-                    label: "Limpiar",
-                    type: "reset",
-                    color: "primary",
-                    flat: ""
-                  }
-                })
-              ],
-              1
-            )
-          ],
-          1
-        )
-      ],
-      1
-    )
+    _c("div", { staticClass: "row justify-center" }, [
+      _c("div", { staticClass: "col-6" }, [
+        _c("div", { staticClass: "q-pa-md" }, [
+          _c(
+            "div",
+            { staticClass: "q-pa-md items-start q-gutter-md" },
+            [
+              _c(
+                "q-card",
+                { staticClass: "my-card" },
+                [
+                  _c(
+                    "q-card-section",
+                    [
+                      _c(
+                        "q-form",
+                        {
+                          staticClass: "q-gutter-md",
+                          on: { submit: _vm.onSubmit, reset: _vm.onReset }
+                        },
+                        [
+                          _c("q-input", {
+                            attrs: {
+                              filled: "",
+                              label: "Nombre *",
+                              hint: "Nombre de la cuenta",
+                              "lazy-rules": "",
+                              rules: [
+                                function(val) {
+                                  return (
+                                    (val && val.length > 0) ||
+                                    "Porfavor ingrese un nombre de cuenta"
+                                  )
+                                }
+                              ]
+                            },
+                            scopedSlots: _vm._u([
+                              {
+                                key: "prepend",
+                                fn: function() {
+                                  return [
+                                    _c("q-icon", {
+                                      attrs: { name: "account_balance_wallet" }
+                                    })
+                                  ]
+                                },
+                                proxy: true
+                              }
+                            ]),
+                            model: {
+                              value: _vm.nombreCuenta,
+                              callback: function($$v) {
+                                _vm.nombreCuenta = $$v
+                              },
+                              expression: "nombreCuenta"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("q-input", {
+                            attrs: {
+                              filled: "",
+                              label: "Descripcion *",
+                              hint: "Descripcion de la cuenta",
+                              "lazy-rules": "",
+                              rules: [
+                                function(val) {
+                                  return (
+                                    (val && val.length > 0) ||
+                                    "Porfavor ingrese una descripcion de cuenta"
+                                  )
+                                }
+                              ]
+                            },
+                            scopedSlots: _vm._u([
+                              {
+                                key: "prepend",
+                                fn: function() {
+                                  return [
+                                    _c("q-icon", {
+                                      attrs: { name: "description" }
+                                    })
+                                  ]
+                                },
+                                proxy: true
+                              }
+                            ]),
+                            model: {
+                              value: _vm.descripcionCuenta,
+                              callback: function($$v) {
+                                _vm.descripcionCuenta = $$v
+                              },
+                              expression: "descripcionCuenta"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("q-toggle", {
+                            attrs: { label: "Confirmar la cuenta a crearse." },
+                            model: {
+                              value: _vm.accept,
+                              callback: function($$v) {
+                                _vm.accept = $$v
+                              },
+                              expression: "accept"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            [
+                              _c("q-btn", {
+                                attrs: {
+                                  label: "Crear Cuenta",
+                                  type: "submit",
+                                  color: "primary"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("q-btn", {
+                                staticClass: "q-ml-sm",
+                                attrs: {
+                                  label: "Limpiar",
+                                  type: "reset",
+                                  color: "primary",
+                                  flat: ""
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ])
+      ])
+    ])
   ])
 }
 var staticRenderFns = []

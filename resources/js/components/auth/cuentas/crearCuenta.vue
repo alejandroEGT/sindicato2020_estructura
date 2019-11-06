@@ -1,41 +1,56 @@
 <template>
   <div>
-      <div class="q-pa-md" style="max-width: 400px">
-    
-        <q-form
-          @submit="onSubmit"
-          @reset="onReset"
-          class="q-gutter-md"
-        >
-          <q-input
-            filled
-            v-model="name"
-            label="Your name *"
-            hint="Name and surname"
-            lazy-rules
-            :rules="[ val => val && val.length > 0 || 'Please type something']"
-          />
-    
-          <q-input
-            filled
-            type="number"
-            v-model="age"
-            label="Your age *"
-            lazy-rules
-            :rules="[
-              val => val !== null && val !== '' || 'Please type your age',
-              val => val > 0 && val < 100 || 'Please type a real age'
-            ]"
-          />
-    
-          <q-toggle v-model="accept" label="Confirmar la cuenta a crearse." />
-    
-          <div>
-            <q-btn label="Crear Cuenta" type="submit" color="primary"/>
-             <q-btn label="Limpiar" type="reset" color="primary" flat class="q-ml-sm" />
+    <div class="row justify-center">
+      <div class="col-6">
+        <div class="q-pa-md">
+          <div class="q-pa-md items-start q-gutter-md">
+            <q-card class="my-card">
+              <q-card-section>
+                <q-form @submit="onSubmit" @reset="onReset" class="q-gutter-md">
+                  <q-input
+                    filled
+                    v-model="nombreCuenta"
+                    label="Nombre *"
+                    hint="Nombre de la cuenta"
+                    lazy-rules
+                    :rules="[ val => val && val.length > 0 || 'Porfavor ingrese un nombre de cuenta']"
+                  >
+                    <template v-slot:prepend>
+                      <q-icon name="account_balance_wallet" />
+                    </template>
+                  </q-input>
+
+                  <q-input
+                    filled
+                    v-model="descripcionCuenta"
+                    label="Descripcion *"
+                    hint="Descripcion de la cuenta"
+                    lazy-rules
+                    :rules="[ val => val && val.length > 0 || 'Porfavor ingrese una descripcion de cuenta']"
+                  >
+                    <template v-slot:prepend>
+                      <q-icon name="description" />
+                    </template>
+                  </q-input>
+
+                  <q-toggle v-model="accept" label="Confirmar la cuenta a crearse." />
+
+                  <div>
+                    <q-btn label="Crear Cuenta" type="submit" color="primary" />
+                    <q-btn label="Limpiar" type="reset" color="primary" flat class="q-ml-sm" />
+                  </div>
+                </q-form>
+              </q-card-section>
+            </q-card>
           </div>
-        </q-form>
-    
+        </div>
+      </div>
+    </div>
+  </div>
+</template>    
+       
+              </div>
+          </div>
       </div>
   </div>
 </template>
@@ -43,42 +58,41 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
-      name: null,
-      age: null,
+      nombreCuenta: null,
+      descripcionCuenta: null,
 
       accept: false
-    }
+    };
   },
 
   methods: {
-    onSubmit () {
+    onSubmit() {
       if (this.accept !== true) {
         this.$q.notify({
-          color: 'red-5',
-          textColor: 'white',
-          icon: 'warning',
-          message: 'You need to accept the license and terms first'
-        })
-      }
-      else {
+          color: "red-5",
+          textColor: "white",
+          icon: "warning",
+          message: "You need to accept the license and terms first"
+        });
+      } else {
         this.$q.notify({
-          color: 'green-4',
-          textColor: 'white',
-          icon: 'cloud_done',
-          message: 'Submitted'
-        })
+          color: "green-4",
+          textColor: "white",
+          icon: "cloud_done",
+          message: "Submitted"
+        });
       }
     },
 
-    onReset () {
-      this.name = ""
-      this.age = ""
-      this.accept = false
+    onReset() {
+      this.nombreCuenta = null;
+      this.descripcionCuenta = null;
+      this.accept = false;
     }
   }
-}
+};
 </script>
 
 
