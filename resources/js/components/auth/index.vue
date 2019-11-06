@@ -105,6 +105,8 @@
 
                       <q-card-actions>
                         <q-btn flat @click="url_crear_cuenta">Crear cuentas</q-btn>
+                        <br>
+                        <q-btn flat @click="url_listar_cuenta">Listar cuentas</q-btn>
                         <!-- <q-btn flat>Action 2</q-btn> -->
                       </q-card-actions>
                     </q-card>
@@ -198,7 +200,9 @@ export default {
         this.$router.push('/crear-cuenta');
        },
 
-
+       url_listar_cuenta(){
+        this.$router.push('/listar-cuenta');
+       },
 
 
     // async onCapture () {

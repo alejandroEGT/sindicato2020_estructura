@@ -1,52 +1,54 @@
 <template>
-  <div>
+  <div><br>
     <div class="row justify-center">
-      <div class="col-6">
-        <div class="q-pa-md">
-          <div class="q-pa-md items-start q-gutter-md">
-            <q-card class="my-card">
-              <q-card-section>
-                <q-form @submit="onSubmit" @reset="onReset" class="q-gutter-md">
 
-                   <q-input outlined v-model="ph" label="Label" placeholder="Placeholder" hint="With placeholder" :dense="dense" />
-                  <!-- <q-input
-                    filled
-                    v-model="nombreCuenta"
-                    label="Nombre *"
-                    hint="Nombre de la cuenta"
-                    lazy-rules
-                    :rules="[ val => val && val.length > 0 || 'Porfavor ingrese un nombre de cuenta']"
-                  >
-                    <template v-slot:prepend>
-                      <q-icon name="account_balance_wallet" />
-                    </template>
-                  </q-input> -->
+      <div class="col-8">
+          
+          <q-card class="my-card">
+            <q-card-section class="bg-primary text-white">
+              <div class="text-h6">Crear cuenta</div>
+             
+            </q-card-section>
 
-                  <q-input
-                    filled
-                    v-model="descripcionCuenta"
-                    label="Descripcion *"
-                    hint="Descripcion de la cuenta"
-                    lazy-rules
-                    :rules="[ val => val && val.length > 0 || 'Porfavor ingrese una descripcion de cuenta']"
-                  >
-                    <template v-slot:prepend>
-                      <q-icon name="description" />
-                    </template>
-                  </q-input>
+            <q-separator />
+            <div class="col-6">
+                  <div class="q-pa-md">
+                     
+                          <q-form @submit="onSubmit" @reset="onReset" class="q-col-gutter-md q-col-gutter-md">
 
-                  <q-toggle v-model="accept" label="Confirmar la cuenta a crearse." />
+                              <q-input
+                              outlined
+                              v-model="nombre"
+                              label="Nombre de cuenta"
+                              stack-label
+                              type="text"
+                            />
 
-                  <div>
-                    <q-btn label="Crear Cuenta" type="submit" color="primary" />
-                    <q-btn label="Limpiar" type="reset" color="primary" flat class="q-ml-sm" />
+                             <q-input
+                                outlined
+                                v-model="descripcion"
+                                label="Descripcion de cuenta"
+                                stack-label
+                                type="textarea"
+                              />
+
+
+                        
+                              <div class="row justify-center">
+                                <div class="col-2">
+                                  <q-btn class="" label="Crear" type="submit" color="primary" />
+                                </div>
+                              </div>
+                           
+                          </q-form>
+                        
+                
                   </div>
-                </q-form>
-              </q-card-section>
-            </q-card>
-          </div>
-        </div>
+                </div>
+            
+          </q-card>
       </div>
+          
     </div>
   </div>
 </template>    
@@ -63,27 +65,29 @@ export default {
       text: '',
       ph: '',
 
-      dense: false
+      dense: false,
+
+      nombre:'', descripcion:''
     };
   },
 
   methods: {
     onSubmit() {
-      if (this.accept !== true) {
-        this.$q.notify({
-          color: "red-5",
-          textColor: "white",
-          icon: "warning",
-          message: "You need to accept the license and terms first"
-        });
-      } else {
-        this.$q.notify({
-          color: "green-4",
-          textColor: "white",
-          icon: "cloud_done",
-          message: "Submitted"
-        });
+      const data = {
+        'nombre': this.nombre,
+        'descripcion': this.descripcion
       }
+
+      axios.post('api/crear_cuenta', data).then((res)=>{
+          if (res.data.estado = 'success') {
+            this.$q.notify({
+            color: "green-4",
+            textColor: "white",
+            icon: "cloud_done",
+            message: "Cuenta creada"
+          });
+          }
+      });
     },
 
     onReset() {
@@ -91,8 +95,19 @@ export default {
       this.descripcionCuenta = null;
       this.accept = false;
     }
+  },
+
+  crear(){
+
+      
   }
 };
 </script>
+
+<style type="text/css">
+  .zip-input  {
+      height: 15px;
+}
+</style>
 
 

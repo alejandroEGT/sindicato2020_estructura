@@ -3303,6 +3303,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3311,33 +3313,37 @@ __webpack_require__.r(__webpack_exports__);
       accept: false,
       text: '',
       ph: '',
-      dense: false
+      dense: false,
+      nombre: '',
+      descripcion: ''
     };
   },
   methods: {
     onSubmit: function onSubmit() {
-      if (this.accept !== true) {
-        this.$q.notify({
-          color: "red-5",
-          textColor: "white",
-          icon: "warning",
-          message: "You need to accept the license and terms first"
-        });
-      } else {
-        this.$q.notify({
-          color: "green-4",
-          textColor: "white",
-          icon: "cloud_done",
-          message: "Submitted"
-        });
-      }
+      var _this = this;
+
+      var data = {
+        'nombre': this.nombre,
+        'descripcion': this.descripcion
+      };
+      axios.post('api/crear_cuenta', data).then(function (res) {
+        if (res.data.estado = 'success') {
+          _this.$q.notify({
+            color: "green-4",
+            textColor: "white",
+            icon: "cloud_done",
+            message: "Cuenta creada"
+          });
+        }
+      });
     },
     onReset: function onReset() {
       this.nombreCuenta = null;
       this.descripcionCuenta = null;
       this.accept = false;
     }
-  }
+  },
+  crear: function crear() {}
 });
 
 /***/ }),
@@ -3351,6 +3357,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
 //
 //
 //
@@ -3544,6 +3552,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     url_crear_cuenta: function url_crear_cuenta() {
       this.$router.push('/crear-cuenta');
+    },
+    url_listar_cuenta: function url_listar_cuenta() {
+      this.$router.push('/listar-cuenta');
     }
   }
 });
@@ -9750,6 +9761,25 @@ exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader
 
 // module
 exports.push([module.i, "\n.fade-enter-active, .fade-leave-active {\n  transition: opacity .5s\n}\n.fade-enter, .fade-leave-active {\n  opacity: 0\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/cuentas/crearCuenta.vue?vue&type=style&index=0&lang=css&":
+/*!******************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/auth/cuentas/crearCuenta.vue?vue&type=style&index=0&lang=css& ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.zip-input  {\n      height: 15px;\n}\n", ""]);
 
 // exports
 
@@ -74561,6 +74591,36 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/cuentas/crearCuenta.vue?vue&type=style&index=0&lang=css&":
+/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/auth/cuentas/crearCuenta.vue?vue&type=style&index=0&lang=css& ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./crearCuenta.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/cuentas/crearCuenta.vue?vue&type=style&index=0&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/index.vue?vue&type=style&index=0&lang=css&":
 /*!********************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/auth/index.vue?vue&type=style&index=0&lang=css& ***!
@@ -75606,129 +75666,214 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
+    _c("br"),
+    _vm._v(" "),
     _c("div", { staticClass: "row justify-center" }, [
-      _c("div", { staticClass: "col-6" }, [
-        _c("div", { staticClass: "q-pa-md" }, [
+      _c(
+        "div",
+        { staticClass: "col-8" },
+        [
           _c(
-            "div",
-            { staticClass: "q-pa-md items-start q-gutter-md" },
+            "q-card",
+            { staticClass: "my-card" },
             [
-              _c(
-                "q-card",
-                { staticClass: "my-card" },
-                [
-                  _c(
-                    "q-card-section",
-                    [
-                      _c(
-                        "q-form",
-                        {
-                          staticClass: "q-gutter-md",
-                          on: { submit: _vm.onSubmit, reset: _vm.onReset }
-                        },
-                        [
-                          _c("q-input", {
-                            attrs: {
-                              outlined: "",
-                              label: "Label",
-                              placeholder: "Placeholder",
-                              hint: "With placeholder",
-                              dense: _vm.dense
+              _c("q-card-section", { staticClass: "bg-primary text-white" }, [
+                _c("div", { staticClass: "text-h6" }, [_vm._v("Crear cuenta")])
+              ]),
+              _vm._v(" "),
+              _c("q-separator"),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-6" }, [
+                _c(
+                  "div",
+                  { staticClass: "q-pa-md" },
+                  [
+                    _c(
+                      "q-form",
+                      {
+                        staticClass: "q-col-gutter-md q-col-gutter-md",
+                        on: { submit: _vm.onSubmit, reset: _vm.onReset }
+                      },
+                      [
+                        _c("q-input", {
+                          attrs: {
+                            outlined: "",
+                            label: "Nombre de cuenta",
+                            "stack-label": "",
+                            type: "text"
+                          },
+                          model: {
+                            value: _vm.nombre,
+                            callback: function($$v) {
+                              _vm.nombre = $$v
                             },
-                            model: {
-                              value: _vm.ph,
-                              callback: function($$v) {
-                                _vm.ph = $$v
-                              },
-                              expression: "ph"
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("q-input", {
-                            attrs: {
-                              filled: "",
-                              label: "Descripcion *",
-                              hint: "Descripcion de la cuenta",
-                              "lazy-rules": "",
-                              rules: [
-                                function(val) {
-                                  return (
-                                    (val && val.length > 0) ||
-                                    "Porfavor ingrese una descripcion de cuenta"
-                                  )
-                                }
-                              ]
+                            expression: "nombre"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("q-input", {
+                          attrs: {
+                            outlined: "",
+                            label: "Descripcion de cuenta",
+                            "stack-label": "",
+                            type: "textarea"
+                          },
+                          model: {
+                            value: _vm.descripcion,
+                            callback: function($$v) {
+                              _vm.descripcion = $$v
                             },
-                            scopedSlots: _vm._u([
-                              {
-                                key: "prepend",
-                                fn: function() {
-                                  return [
-                                    _c("q-icon", {
-                                      attrs: { name: "description" }
-                                    })
-                                  ]
-                                },
-                                proxy: true
-                              }
-                            ]),
-                            model: {
-                              value: _vm.descripcionCuenta,
-                              callback: function($$v) {
-                                _vm.descripcionCuenta = $$v
-                              },
-                              expression: "descripcionCuenta"
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("q-toggle", {
-                            attrs: { label: "Confirmar la cuenta a crearse." },
-                            model: {
-                              value: _vm.accept,
-                              callback: function($$v) {
-                                _vm.accept = $$v
-                              },
-                              expression: "accept"
-                            }
-                          }),
-                          _vm._v(" "),
+                            expression: "descripcion"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "row justify-center" }, [
                           _c(
                             "div",
+                            { staticClass: "col-2" },
                             [
                               _c("q-btn", {
                                 attrs: {
-                                  label: "Crear Cuenta",
+                                  label: "Crear",
                                   type: "submit",
                                   color: "primary"
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("q-btn", {
-                                staticClass: "q-ml-sm",
-                                attrs: {
-                                  label: "Limpiar",
-                                  type: "reset",
-                                  color: "primary",
-                                  flat: ""
                                 }
                               })
                             ],
                             1
                           )
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
+                        ])
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ])
             ],
             1
           )
-        ])
-      ])
+        ],
+        1
+      )
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/cuentas/listarCuenta.vue?vue&type=template&id=3dec6627&":
+/*!****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/auth/cuentas/listarCuenta.vue?vue&type=template&id=3dec6627& ***!
+  \****************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("br"),
+    _vm._v(" "),
+    _c("div", { staticClass: "row justify-center" }, [
+      _c(
+        "div",
+        { staticClass: "col-8" },
+        [
+          _c(
+            "q-card",
+            { staticClass: "my-card" },
+            [
+              _c("q-card-section", { staticClass: "bg-primary text-white" }, [
+                _c("div", { staticClass: "text-h6" }, [
+                  _vm._v("Lista de cuentas")
+                ])
+              ]),
+              _vm._v(" "),
+              _c("q-separator"),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-6" }, [
+                _c(
+                  "div",
+                  { staticClass: "q-pa-md" },
+                  [
+                    _c(
+                      "q-form",
+                      {
+                        staticClass: "q-col-gutter-md q-col-gutter-md",
+                        on: { submit: _vm.onSubmit, reset: _vm.onReset }
+                      },
+                      [
+                        _c("q-input", {
+                          attrs: {
+                            outlined: "",
+                            label: "Nombre de cuenta",
+                            "stack-label": "",
+                            type: "text"
+                          },
+                          model: {
+                            value: _vm.nombre,
+                            callback: function($$v) {
+                              _vm.nombre = $$v
+                            },
+                            expression: "nombre"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("q-input", {
+                          attrs: {
+                            outlined: "",
+                            label: "Descripcion de cuenta",
+                            "stack-label": "",
+                            type: "textarea"
+                          },
+                          model: {
+                            value: _vm.descripcion,
+                            callback: function($$v) {
+                              _vm.descripcion = $$v
+                            },
+                            expression: "descripcion"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "row justify-center" }, [
+                          _c(
+                            "div",
+                            { staticClass: "col-2" },
+                            [
+                              _c("q-btn", {
+                                attrs: {
+                                  label: "Crear",
+                                  type: "submit",
+                                  color: "primary"
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        ])
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ])
+            ],
+            1
+          )
+        ],
+        1
+      )
     ])
   ])
 }
@@ -75936,6 +76081,17 @@ var render = function() {
                           on: { click: _vm.url_crear_cuenta }
                         },
                         [_vm._v("Crear cuentas")]
+                      ),
+                      _vm._v(" "),
+                      _c("br"),
+                      _vm._v(" "),
+                      _c(
+                        "q-btn",
+                        {
+                          attrs: { flat: "" },
+                          on: { click: _vm.url_listar_cuenta }
+                        },
+                        [_vm._v("Listar cuentas")]
                       )
                     ],
                     1
@@ -91862,7 +92018,9 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _crearCuenta_vue_vue_type_template_id_50dcd72f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./crearCuenta.vue?vue&type=template&id=50dcd72f& */ "./resources/js/components/auth/cuentas/crearCuenta.vue?vue&type=template&id=50dcd72f&");
 /* harmony import */ var _crearCuenta_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./crearCuenta.vue?vue&type=script&lang=js& */ "./resources/js/components/auth/cuentas/crearCuenta.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _crearCuenta_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./crearCuenta.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/auth/cuentas/crearCuenta.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
@@ -91870,7 +92028,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _crearCuenta_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _crearCuenta_vue_vue_type_template_id_50dcd72f___WEBPACK_IMPORTED_MODULE_0__["render"],
   _crearCuenta_vue_vue_type_template_id_50dcd72f___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
@@ -91902,6 +92060,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/auth/cuentas/crearCuenta.vue?vue&type=style&index=0&lang=css&":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/components/auth/cuentas/crearCuenta.vue?vue&type=style&index=0&lang=css& ***!
+  \***********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_crearCuenta_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader!../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./crearCuenta.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/cuentas/crearCuenta.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_crearCuenta_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_crearCuenta_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_crearCuenta_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_crearCuenta_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_crearCuenta_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
 /***/ "./resources/js/components/auth/cuentas/crearCuenta.vue?vue&type=template&id=50dcd72f&":
 /*!*********************************************************************************************!*\
   !*** ./resources/js/components/auth/cuentas/crearCuenta.vue?vue&type=template&id=50dcd72f& ***!
@@ -91915,6 +92089,59 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_crearCuenta_vue_vue_type_template_id_50dcd72f___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_crearCuenta_vue_vue_type_template_id_50dcd72f___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/auth/cuentas/listarCuenta.vue":
+/*!***************************************************************!*\
+  !*** ./resources/js/components/auth/cuentas/listarCuenta.vue ***!
+  \***************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _listarCuenta_vue_vue_type_template_id_3dec6627___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./listarCuenta.vue?vue&type=template&id=3dec6627& */ "./resources/js/components/auth/cuentas/listarCuenta.vue?vue&type=template&id=3dec6627&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+var script = {}
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
+  script,
+  _listarCuenta_vue_vue_type_template_id_3dec6627___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _listarCuenta_vue_vue_type_template_id_3dec6627___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/auth/cuentas/listarCuenta.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/auth/cuentas/listarCuenta.vue?vue&type=template&id=3dec6627&":
+/*!**********************************************************************************************!*\
+  !*** ./resources/js/components/auth/cuentas/listarCuenta.vue?vue&type=template&id=3dec6627& ***!
+  \**********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_listarCuenta_vue_vue_type_template_id_3dec6627___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./listarCuenta.vue?vue&type=template&id=3dec6627& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/cuentas/listarCuenta.vue?vue&type=template&id=3dec6627&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_listarCuenta_vue_vue_type_template_id_3dec6627___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_listarCuenta_vue_vue_type_template_id_3dec6627___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -92307,11 +92534,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_auth_index_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/auth/index.vue */ "./resources/js/components/auth/index.vue");
 /* harmony import */ var _components_auth_perfil_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/auth/perfil.vue */ "./resources/js/components/auth/perfil.vue");
 /* harmony import */ var _components_auth_cuentas_crearCuenta_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/auth/cuentas/crearCuenta.vue */ "./resources/js/components/auth/cuentas/crearCuenta.vue");
+/* harmony import */ var _components_auth_cuentas_listarCuenta_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/auth/cuentas/listarCuenta.vue */ "./resources/js/components/auth/cuentas/listarCuenta.vue");
 
 
 
  // import EditComponent from './components/EditComponent.vue';
 //prestamos
+
 
 
 
@@ -92362,6 +92591,10 @@ var routes = [{
     path: '/crear-cuenta',
     component: _components_auth_cuentas_crearCuenta_vue__WEBPACK_IMPORTED_MODULE_9__["default"],
     name: 'crearCuenta'
+  }, {
+    path: '/listar-cuenta',
+    component: _components_auth_cuentas_listarCuenta_vue__WEBPACK_IMPORTED_MODULE_10__["default"],
+    name: 'listarCuenta'
   }, {
     path: '/crear-prestamo',
     component: _components_auth_prestamos_crear_prestamos_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
