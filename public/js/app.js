@@ -3371,6 +3371,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+// import { WebCam } from 'vue-cam-vision'
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3387,9 +3412,21 @@ __webpack_require__.r(__webpack_exports__);
         months: 'Enero_Febrero_Marzo_Abril_Mayo_Junio_Julio_Agosto_Septiembre_Octubre_Noviembre_Diciembre'.split('_'),
         monthsShort: 'Ene_Feb_Mar_Abr_May_Jun_Jul_Ago_Sep_Oct_Nov_Dic'.split('_'),
         firstDayOfWeek: 1,
-        expanded: false
+        expanded: false //webcam
+        // captures: [],
+        // imgReport: [],
+        // frontCam: false,
+        // webcam: null,
+        // img: null,
+        // camera: null,
+        // deviceId: null,
+        // devices: [],
+        // googleKey: config.googleVisionKey
+
       }
     };
+  },
+  components: {// WebCam
   },
   methods: {
     logout: function logout() {
@@ -71032,6 +71069,12 @@ var render = function() {
         ],
         1
       )
+    ]),
+    _vm._v(" "),
+    _c("div", [
+      _c("button", { on: { click: _vm.onStart } }, [_vm._v(" iniciar")]),
+      _vm._v(" "),
+      _c("button", { on: { click: _vm.onStop } }, [_vm._v(" Detener")])
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "row justify-center" }, [

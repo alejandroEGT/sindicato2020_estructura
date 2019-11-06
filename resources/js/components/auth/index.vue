@@ -65,6 +65,30 @@
       </q-btn>
     </div>
     </div>
+
+
+
+  <div>
+    <!-- <WebCam
+        ref="webcam"
+        :deviceId="deviceId"
+        width="auto"
+        height="100%"
+        @cameras="onCameras"
+        @camera-change="onCameraChange"
+        :isFrontCam="frontCam"
+        :googleKey="googleKey"
+
+         @started="onStarted"
+         @stopped="onStopped"
+        >
+    </WebCam> -->
+
+    <button @click="onStart"> iniciar</button>
+     <button @click="onStop"> Detener</button>
+  </div>
+
+
     
     <div class="row justify-center">
       <div class="col-12 col-md-6">
@@ -173,7 +197,7 @@
 
 <script>
 
-
+// import { WebCam } from 'vue-cam-vision'
 export default {
   data () {
     return {
@@ -190,9 +214,23 @@ export default {
         months: 'Enero_Febrero_Marzo_Abril_Mayo_Junio_Julio_Agosto_Septiembre_Octubre_Noviembre_Diciembre'.split('_'),
         monthsShort: 'Ene_Feb_Mar_Abr_May_Jun_Jul_Ago_Sep_Oct_Nov_Dic'.split('_'),
         firstDayOfWeek: 1,
-        expanded: false
+        expanded: false,
+
+        //webcam
+        // captures: [],
+        // imgReport: [],
+        // frontCam: false,
+        // webcam: null,
+        // img: null,
+        // camera: null,
+        // deviceId: null,
+        // devices: [],
+        // googleKey: config.googleVisionKey
       }
     }
+  },
+   components: {
+    // WebCam
   },
   methods:{
     logout: function () {
@@ -204,6 +242,36 @@ export default {
         url_perfil(){
         this.$router.push('/mi-perfil');
     },
+
+
+
+    // async onCapture () {
+    //   this.img = await this.$refs.webcam.capture()
+    // },
+    // onStarted (stream) {
+    //   console.log('On Started Event', stream)
+    // },
+    // onStopped (stream) {
+    //   console.log('On Stopped Event', stream)
+    // },
+    // onStop () {
+    //   this.$refs.webcam.stop()
+    // },
+    // onStart () {
+    //   this.$refs.webcam.start()
+    // },
+    // onError (error) {
+    //   console.log('On Error Event', error)
+    // },
+    // onCameras (cameras) {
+    //   this.devices = cameras
+    //   console.log('On Cameras Event', cameras)
+    // },
+    // onCameraChange (deviceId) {
+    //   this.deviceId = deviceId
+    //   this.camera = deviceId
+    //   console.log('On Camera Change Event', deviceId)
+    // }
 
   }
 }
