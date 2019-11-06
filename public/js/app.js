@@ -3733,7 +3733,10 @@ __webpack_require__.r(__webpack_exports__);
     return {
       loading1: false,
       loading2: false,
-      progress: false
+      progress: false,
+      fecha: '',
+      descripcion: '',
+      monto: ''
     };
   },
   methods: {
@@ -71062,11 +71065,11 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "row justify-center" }, [
-      _c("div", { staticClass: "col-12 col-md-6" }, [
+    _c("div", { staticClass: "q-pa-md items-start q-gutter-md" }, [
+      _c("div", { staticClass: "row justify-center" }, [
         _c(
           "div",
-          { staticClass: "q-pa-md items-start q-gutter-md" },
+          { staticClass: "col-12 col-md-8" },
           [
             _c(
               "q-card",
@@ -71083,26 +71086,77 @@ var render = function() {
                 _c("q-card-section", [
                   _c(
                     "div",
-                    { staticClass: "col-12 col-md-8" },
+                    { staticClass: "row justify-center q-col-gutter-md" },
                     [
-                      _c("q-input", {
-                        attrs: {
-                          outlined: "",
-                          label: "Ingrese fecha de nacimiento",
-                          "stack-label": "",
-                          dense: _vm.dense,
-                          type: "date"
-                        },
-                        model: {
-                          value: _vm.text,
-                          callback: function($$v) {
-                            _vm.text = $$v
-                          },
-                          expression: "text"
-                        }
-                      })
-                    ],
-                    1
+                      _c(
+                        "div",
+                        { staticClass: "col-12 col-md-4" },
+                        [
+                          _c("q-input", {
+                            attrs: {
+                              outlined: "",
+                              label: "Ingrese fecha de nacimiento",
+                              "stack-label": "",
+                              type: "date"
+                            },
+                            model: {
+                              value: _vm.fecha,
+                              callback: function($$v) {
+                                _vm.fecha = $$v
+                              },
+                              expression: "fecha"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "col-12 col-md-4" },
+                        [
+                          _c("q-input", {
+                            attrs: {
+                              outlined: "",
+                              label: "Ingrese descripcion",
+                              "stack-label": "",
+                              type: "text"
+                            },
+                            model: {
+                              value: _vm.descripcion,
+                              callback: function($$v) {
+                                _vm.descripcion = $$v
+                              },
+                              expression: "descripcion"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "col-12 col-md-4" },
+                        [
+                          _c("q-input", {
+                            attrs: {
+                              outlined: "",
+                              label: "Ingrese monto",
+                              "stack-label": "",
+                              type: "number"
+                            },
+                            model: {
+                              value: _vm.monto,
+                              callback: function($$v) {
+                                _vm.monto = $$v
+                              },
+                              expression: "monto"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    ]
                   )
                 ]),
                 _vm._v(" "),

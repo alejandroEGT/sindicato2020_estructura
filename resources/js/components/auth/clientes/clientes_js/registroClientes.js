@@ -3,7 +3,10 @@ export default {
       return {
         loading1: false,
         loading2: false,
-        progress: false
+        progress: false,
+        fecha: '',
+        descripcion: '',
+        monto: ''
       }
     },
   
