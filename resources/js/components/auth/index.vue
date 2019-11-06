@@ -86,6 +86,7 @@
 
     <button @click="onStart"> iniciar</button>
      <button @click="onStop"> Detener</button>
+     <router-link to="/registro-clientes" class="q-btn bg-green text-white">clientes</router-link>
   </div>
 
 
