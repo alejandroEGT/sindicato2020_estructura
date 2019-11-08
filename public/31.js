@@ -1,8 +1,8 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[31],{
 
-/***/ "./node_modules/quasar/lang/ro.js":
+/***/ "./node_modules/quasar/lang/pt.js":
 /*!****************************************!*\
-  !*** ./node_modules/quasar/lang/ro.js ***!
+  !*** ./node_modules/quasar/lang/pt.js ***!
   \****************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -10,95 +10,95 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
-  isoName: 'ro',
-  nativeName: 'Română',
+  isoName: 'pt',
+  nativeName: 'Português',
   label: {
-    clear: 'Golește',
+    clear: 'Limpar',
     ok: 'OK',
-    cancel: 'Anulează',
-    close: 'Închide',
-    set: 'Setează',
-    select: 'Alege',
-    reset: 'Resetează',
-    remove: 'Elimină',
-    update: 'Actualizează',
-    create: 'Creează',
-    search: 'Caută',
-    filter: 'Filtrează',
-    refresh: 'Actualizează'
+    cancel: 'Cancelar',
+    close: 'Fechar',
+    set: 'Marcar',
+    select: 'Escolher',
+    reset: 'Limpar',
+    remove: 'Remover',
+    update: 'Atualizar',
+    create: 'Criar',
+    search: 'Procurar',
+    filter: 'Filtrar',
+    refresh: 'Recarregar'
   },
   date: {
-    days: 'Duminică_Luni_Marți_Miercuri_Joi_Vineri_Sâmbătă'.split('_'),
-    daysShort: 'Dum_Lun_Mar_Mie_Joi_Vin_Sâm'.split('_'),
-    months: 'Ianuarie_Februarie_Martie_Aprilie_Mai_Iunie_Iulie_August_Septembrie_Octombrie_Noiembrie_Decembrie'.split('_'),
-    monthsShort: 'Ian_Feb_Mar_Apr_Mai_Iun_Iul_Aug_Sep_Oct_Nov_Dec'.split('_'),
+    days: 'Domingo_Segunda-feira_Terça-feira_Quarta-feira_Quinta-feira_Sexta-feira_Sábado'.split('_'),
+    daysShort: 'Dom_Seg_Ter_Qua_Qui_Sex_Sáb'.split('_'),
+    months: 'Janeiro_Fevereiro_Março_Abril_Maio_Junho_Julho_Agosto_Setembro_Outubro_Novembro_Dezembro'.split('_'),
+    monthsShort: 'Jan_Fev_Mar_Abr_Mai_Jun_Jul_Ago_Set_Out_Nov_Dez'.split('_'),
     firstDayOfWeek: 1, // 0-6, 0 - Sunday, 1 Monday, ...
     format24h: true
   },
   table: {
-    noData: 'Nu sunt date disponibile',
-    noResults: 'Nu am găsit înregistrări care să corespundă',
-    loading: 'Se încarcă...',
+    noData: 'Sem dados disponíveis',
+    noResults: 'Não foi encontrado nenhum resultado',
+    loading: 'A carregar...',
     selectedRecords: function (rows) {
-      return rows > 1
-        ? rows + ' înregistrări selectate.'
-        : (rows === 0 ? 'Nici o' : '1') + ' înregistrare selectată.'
+      return rows > 0
+        ? rows + ' linha' + (rows === 1 ? ' selecionada' : 's selecionadas') + '.'
+        : 'Nenhuma linha selecionada.'
     },
-    recordsPerPage: 'Înregistrări pe pagină:',
-    allRows: 'Toate',
+    recordsPerPage: 'Linhas por página:',
+    allRows: 'Todas',
     pagination: function (start, end, total) {
-      return start + '-' + end + ' din ' + total
+      return start + '-' + end + ' de ' + total
     },
-    columns: 'Coloane'
+    columns: 'Colunas'
   },
   editor: {
     url: 'URL',
-    bold: 'Îngroșat',
-    italic: 'Înclinat',
-    strikethrough: 'Tăiat',
-    underline: 'Subliniat',
-    unorderedList: 'Listă neordonată',
-    orderedList: 'Listă ordonată',
-    subscript: 'Dedesubt',
-    superscript: 'Deasupra',
+    bold: 'Negrito',
+    italic: 'Itálico',
+    strikethrough: 'Rasurado',
+    underline: 'Sublinhado',
+    unorderedList: 'Lista não-ordenada',
+    orderedList: 'Lista ordenada',
+    subscript: 'Subscrito',
+    superscript: 'Sobrescrito',
     hyperlink: 'Hyperlink',
-    toggleFullscreen: 'Comută ecran complet',
-    quote: 'Citat',
-    left: 'Aliniere la stânga',
-    center: 'Aliniere la centru',
-    right: 'Aliniere la dreapta',
-    justify: 'Aliniere totală',
-    print: 'Tipărește',
-    outdent: 'Scade spațierea',
-    indent: 'Crește spațierea',
-    removeFormat: 'Îndepărtează formatările',
-    formatting: 'Formatare',
-    fontSize: 'Mărime font',
-    align: 'Aliniază',
-    hr: 'Adaugă linie orizontală',
-    undo: 'Schimbă inapoi',
-    redo: 'Refă',
-    header1: 'Header 1',
-    header2: 'Header 2',
-    header3: 'Header 3',
-    header4: 'Header 4',
-    header5: 'Header 5',
-    header6: 'Header 6',
-    paragraph: 'Paragraf',
-    code: 'Cod',
-    size1: 'Foarte mic',
-    size2: 'Mic',
+    toggleFullscreen: 'Maximizar',
+    quote: 'Citação',
+    left: 'Alinhado à esquerda',
+    center: 'Alinhado ao centro',
+    right: 'Alinhado à direita',
+    justify: 'Justificado',
+    print: 'Imprimir',
+    outdent: 'Diminuir indentação',
+    indent: 'Aumentar indentação',
+    removeFormat: 'Remover formatação',
+    formatting: 'Formatação',
+    fontSize: 'Tamanho do tipo de letra',
+    align: 'Alinhar',
+    hr: 'Inserir linha horizontal',
+    undo: 'Desfazer',
+    redo: 'Refazer',
+    header1: 'Cabeçalho 1',
+    header2: 'Cabeçalho 2',
+    header3: 'Cabeçalho 3',
+    header4: 'Cabeçalho 4',
+    header5: 'Cabeçalho 5',
+    header6: 'Cabeçalho 6',
+    paragraph: 'Parágrafo',
+    code: 'Código',
+    size1: 'Muito pequeno',
+    size2: 'Pequeno',
     size3: 'Normal',
-    size4: 'Mediu-mare',
-    size5: 'Big',
-    size6: 'Foarte mare',
-    size7: 'Maxim',
-    defaultFont: 'Font implicit',
-    viewSource: 'Vizualizare sursă'
+    size4: 'Médio',
+    size5: 'Grande',
+    size6: 'Enorme',
+    size7: 'Máximo',
+    defaultFont: 'Tipo de letra padrão',
+    viewSource: 'Exibir fonte'
   },
   tree: {
-    noNodes: 'Nu sunt date disponibile',
-    noResults: 'Nu am găsit noduri care să corespundă'
+    noNodes: 'Sem nós disponíveis',
+    noResults: 'Nenhum resultado encontrado'
   }
 });
 

@@ -1,8 +1,8 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[42],{
 
-/***/ "./node_modules/quasar/lang/zh-hant.js":
+/***/ "./node_modules/quasar/lang/zh-hans.js":
 /*!*********************************************!*\
-  !*** ./node_modules/quasar/lang/zh-hant.js ***!
+  !*** ./node_modules/quasar/lang/zh-hans.js ***!
   \*********************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -10,30 +10,30 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
-  isoName: 'zh-hant',
-  nativeName: '中文(繁體)',
+  isoName: 'zh-hans',
+  nativeName: '中文(简体)',
   label: {
-    clear: '清除',
-    ok: '確定',
+    clear: '清空',
+    ok: '确定',
     cancel: '取消',
-    close: '關閉',
-    set: '設定',
-    select: '選擇',
+    close: '关闭',
+    set: '设置',
+    select: '选择',
     reset: '重置',
     remove: '移除',
     update: '更新',
-    create: '新增',
-    search: '搜尋',
-    filter: '篩選',
-    refresh: '更新'
+    create: '创建',
+    search: '搜索',
+    filter: '过滤',
+    refresh: '刷新'
   },
   date: {
     days: '星期日_星期一_星期二_星期三_星期四_星期五_星期六'.split('_'),
-    daysShort: '週日_週一_週二_週三_週四_週五_週六'.split('_'),
+    daysShort: '周日_周一_周二_周三_周四_周五_周六'.split('_'),
     months: '一月_二月_三月_四月_五月_六月_七月_八月_九月_十月_十一月_十二月'.split('_'),
     monthsShort: '一月_二月_三月_四月_五月_六月_七月_八月_九月_十月_十一月_十二月'.split('_'),
     headerTitle: function (date) {
-      return new Intl.DateTimeFormat('zh-hant', {
+      return new Intl.DateTimeFormat('zh-hans', {
         weekday: 'short', month: 'short', day: 'numeric'
       }).format(date)
     },
@@ -41,13 +41,13 @@ __webpack_require__.r(__webpack_exports__);
     format24h: false
   },
   table: {
-    noData: '無資料',
-    noResults: '無相符資料',
-    loading: '載入中...',
+    noData: '没有可用数据',
+    noResults: '找不到匹配的数据',
+    loading: '正在加载...',
     selectedRecords: function (rows) {
-      return '已選擇' + rows + '筆'
+      return '已选择' + rows + '行'
     },
-    recordsPerPage: '每頁筆數:',
+    recordsPerPage: '每页的行数:',
     allRows: '全部',
     pagination: function (start, end, total) {
       return start + '-' + end + ' / ' + total
@@ -55,53 +55,53 @@ __webpack_require__.r(__webpack_exports__);
     columns: '列'
   },
   editor: {
-    url: '網址',
-    bold: '粗體',
-    italic: '斜體',
-    strikethrough: '刪除線',
-    underline: '下劃線',
-    unorderedList: '項目符號清單',
-    orderedList: '編號清單',
-    subscript: '下標',
-    superscript: '上標',
-    hyperlink: '超連結',
-    toggleFullscreen: '切換全螢幕',
-    quote: '引言',
-    left: '靠左對齊',
-    center: '置中對齊',
-    right: '靠右對齊',
-    justify: '左右對齊',
-    print: '列印',
-    outdent: '減少縮排',
-    indent: '增加縮排',
-    removeFormat: '清除格式',
-    formatting: '式樣',
-    fontSize: '字型大小',
-    align: '對齊',
-    hr: '插入水平線',
-    undo: '復原',
-    redo: '取消復原',
-    header1: '標題 1',
-    header2: '標題 2',
-    header3: '標題 3',
-    header4: '標題 4',
-    header5: '標題 5',
-    header6: '標題 6',
+    url: 'URL',
+    bold: '粗体',
+    italic: '斜体',
+    strikethrough: '删除线',
+    underline: '下划线',
+    unorderedList: '无序列表',
+    orderedList: '有序列表',
+    subscript: '下标',
+    superscript: '上标',
+    hyperlink: '超链接',
+    toggleFullscreen: '全屏切换',
+    quote: '引号',
+    left: '左对齐',
+    center: '居中对齐',
+    right: '右对齐',
+    justify: '两端对齐',
+    print: '打印',
+    outdent: '减少缩进',
+    indent: '增加缩进',
+    removeFormat: '清除样式',
+    formatting: '格式化',
+    fontSize: '字体大小',
+    align: '对齐',
+    hr: '插入水平线',
+    undo: '撤消',
+    redo: '重做',
+    header1: '标题一',
+    header2: '标题二',
+    header3: '标题三',
+    header4: '标题四',
+    header5: '标题五',
+    header6: '标题六',
     paragraph: '段落',
-    code: '程式碼',
+    code: '代码',
     size1: '非常小',
-    size2: '比較小',
+    size2: '比较小',
     size3: '正常',
     size4: '中等偏大',
     size5: '大',
     size6: '非常大',
-    size7: '超級大',
-    defaultFont: '預設字型',
-    viewSource: '查看資料'
+    size7: '超级大',
+    defaultFont: '默认字体',
+    viewSource: '查看资料'
   },
   tree: {
-    noNodes: '無節點',
-    noResults: '無相符節點'
+    noNodes: '没有可用节点',
+    noResults: '找不到匹配的节点'
   }
 });
 

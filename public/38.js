@@ -1,8 +1,8 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[38],{
 
-/***/ "./node_modules/quasar/lang/tr.js":
+/***/ "./node_modules/quasar/lang/th.js":
 /*!****************************************!*\
-  !*** ./node_modules/quasar/lang/tr.js ***!
+  !*** ./node_modules/quasar/lang/th.js ***!
   \****************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -10,93 +10,95 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
-  isoName: 'tr',
-  nativeName: 'Türkçe',
+  isoName: 'th',
+  nativeName: 'ไทย',
   label: {
-    clear: 'Temizle',
-    ok: 'Tamam',
-    cancel: 'İptal',
-    close: 'Kapat',
-    set: 'Ayarla',
-    select: 'Seç',
-    reset: 'Sıfırla',
-    remove: 'Kaldır',
-    update: 'Güncelle',
-    create: 'Oluştur',
-    search: 'Ara',
-    filter: 'Süz',
-    refresh: 'Yenile'
+    clear: 'ล้าง',
+    ok: 'ตกลง',
+    cancel: 'ยกเลิก',
+    close: 'ปิด',
+    set: 'ตั้งค่า',
+    select: 'เลือก',
+    reset: 'ตั้งใหม่',
+    remove: 'ลบ',
+    update: 'ปรับปรุง',
+    create: 'สร้าง',
+    search: 'ค้นหา',
+    filter: 'กรอง',
+    refresh: 'รีเฟรช'
   },
   date: {
-    days: 'Pazar_Pazartesi_Salı_Çarşamba_Perşembe_Cuma_Cumartesi'.split('_'),
-    daysShort: 'Paz_Pzt_Sal_Çar_Per_Cum_Cmt'.split('_'),
-    months: 'Ocak_Şubat_Mart_Nisan_Mayıs_Haziran_Temmuz_Ağustos_Eylül_Ekim_Kasım_Aralık'.split('_'),
-    monthsShort: 'Oca_Şub_Mar_Nis_May_Haz_Tem_Ağu_Eyl_Eki_Kas_Ara'.split('_'),
+    days: 'อาทิตย์_จันทร์_อังคาร_พุธ_พฤหัสบดี_ศุกร์_เสาร์'.split('_'),
+    daysShort: 'อา._จ._อ._พ._พฤ_.ศ._ส.'.split('_'),
+    months: 'มกราคม_กุมภาพันธ์_มีนาคม_เมษายน_พฤษภาคม_มิถุนายน_กรกฎาคม_สิงหาคม_กันยายน_ตุลาคม_พฤศจิการยน_ธันวาคม'.split('_'),
+    monthsShort: 'ม.ค._ก.พ._มี.ค._เม.ย._พ.ค._มิ.ย._ก.ค._ส.ค._ก.ย._ต.ค._พ.ย._ธ.ค.'.split('_'),
     firstDayOfWeek: 1, // 0-6, 0 - Sunday, 1 Monday, ...
     format24h: true
   },
   table: {
-    noData: 'Veri yok',
-    noResults: 'Uyuşan kayıt bulunamadı',
-    loading: 'Yükleniyor...',
+    noData: 'ไม่มีข้อมูล',
+    noResults: 'ไม่มีผลลัพธ์',
+    loading: 'กำลังโหลด...',
     selectedRecords: function (rows) {
-      return rows + ' seçili kayıt.'
+      return rows > 0
+        ? 'เลือกทั้งหมด ' + rows + ' แถว'
+        : 'ไม่มีแถวที่ถูกเลือก'
     },
-    recordsPerPage: 'Sayfa başına kayıt:',
-    allRows: 'Tümü',
+    recordsPerPage: 'แถวต่อหน้า:',
+    allRows: 'แถวทั้งหมด',
     pagination: function (start, end, total) {
-      return start + '-' + end + ' toplam ' + total
+      return start + '-' + end + ' of ' + total
     },
-    columns: 'Sütunlar'
+    columns: 'คอลัมน์'
   },
   editor: {
     url: 'URL',
-    bold: 'Kalın',
-    italic: 'Eğik',
-    strikethrough: 'Üstü çizili',
-    underline: 'Altı çizili',
-    unorderedList: 'Sırasız Liste',
-    orderedList: 'Sıralı Liste',
-    subscript: 'Alt betik',
-    superscript: 'Üst betik',
-    hyperlink: 'Köprü',
-    toggleFullscreen: 'Tam ekranı Aç-Kapa',
-    quote: 'Alıntı',
-    left: 'Sola hizala',
-    center: 'Ortala',
-    right: 'Sağa hizala',
-    justify: 'Sığdır',
-    print: 'Yazdır',
-    outdent: 'Girintiyi azalt',
-    indent: 'Girintiyi artır',
-    removeFormat: 'Biçimlendirmeyi kaldır',
-    formatting: 'Biçimliyor',
-    fontSize: 'Yazı Tipi Boyutu',
-    align: 'Hizala',
-    hr: 'Yatay Çizgi Ekle',
-    undo: 'Geri Al',
-    redo: 'Yinele',
-    header1: 'Başlık 1',
-    header2: 'Başlık 2',
-    header3: 'Başlık 3',
-    header4: 'Başlık 4',
-    header5: 'Başlık 5',
-    header6: 'Başlık 6',
-    paragraph: 'Paragraf',
-    code: 'Kod',
-    size1: 'Çok küçük',
-    size2: 'Küçük',
-    size3: 'Normal',
-    size4: 'Orta-geniş',
-    size5: 'Büyük',
-    size6: 'Çok büyük',
-    size7: 'En büyük',
-    defaultFont: 'Varsayılan Yazı Tipi',
-    viewSource: 'Kaynağı Görüntüle'
+    bold: 'ตัวหนา',
+    italic: 'ตัวเอียง',
+    strikethrough: 'เส้นคร่อม',
+    underline: 'เส้นใต้',
+    unorderedList: 'รายการ',
+    orderedList: 'ลำดับรายการ',
+    subscript: 'ตัวห้อย',
+    superscript: 'ตัวยก',
+    hyperlink: 'ไฮเปอร์ลิงค์',
+    toggleFullscreen: 'สลับเต็มจอ',
+    quote: 'อ้างอิง',
+    left: 'ชิดซ้าย',
+    center: 'แนวกลาง',
+    right: 'ชิดขวา',
+    justify: 'ชิดขอบ',
+    print: 'พิมพ์',
+    outdent: 'ลดย่อหน้า',
+    indent: 'เพิ่มย่อหน้า',
+    removeFormat: 'ล้างรูปแบบ',
+    formatting: 'จัดรูปแบบ',
+    fontSize: 'ขนาดอักษร',
+    align: 'แนว',
+    hr: 'เพิ่มเส้นขั้นบรรทัด',
+    undo: 'ยกเลิก',
+    redo: 'ทำซ้ำ',
+    header1: 'หัวข้อ 1',
+    header2: 'หัวข้อ 2',
+    header3: 'หัวข้อ 3',
+    header4: 'หัวข้อ 4',
+    header5: 'หัวข้อ 5',
+    header6: 'หัวข้อ 6',
+    paragraph: 'ย่อหน้า',
+    code: 'โค้ด',
+    size1: 'เล็กมาก',
+    size2: 'เล็ก',
+    size3: 'ปกติ',
+    size4: 'ใหญ่กว่าปกติ',
+    size5: 'ใหญ่',
+    size6: 'ใหญ่มาก',
+    size7: 'ใหญ่เต็มที่',
+    defaultFont: 'ฟอนต์มาตรฐาน',
+    viewSource: 'ดูที่มา'
   },
   tree: {
-    noNodes: 'Düğüm yok',
-    noResults: 'Uyuşan düğüm bulunamadı'
+    noNodes: 'ไม่มีโหนด',
+    noResults: 'ไม่พบโหนดตามที่ระบุ'
   }
 });
 

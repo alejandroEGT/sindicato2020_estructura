@@ -1,8 +1,8 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[34],{
 
-/***/ "./node_modules/quasar/lang/sl.js":
+/***/ "./node_modules/quasar/lang/sk.js":
 /*!****************************************!*\
-  !*** ./node_modules/quasar/lang/sl.js ***!
+  !*** ./node_modules/quasar/lang/sk.js ***!
   \****************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -10,95 +10,95 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
-  isoName: 'sl',
-  nativeName: 'Slovenski Jezik',
+  isoName: 'sk',
+  nativeName: 'Slovenčina',
   label: {
-    clear: 'Počisti',
-    ok: 'Vredu',
-    cancel: 'Prekliči',
-    close: 'Zapri',
-    set: 'Postavi',
-    select: 'Izberi',
-    reset: 'Obnovi',
-    remove: 'Odstrani',
-    update: 'Posodobi',
-    create: 'Ustvari',
-    search: 'Išči',
-    filter: 'Filtriraj',
-    refresh: 'Ponovno naloži'
+    clear: 'Vymazať',
+    ok: 'OK',
+    cancel: 'Zrušiť',
+    close: 'Zavrieť',
+    set: 'Nastaviť',
+    select: 'Vybrať',
+    reset: 'Resetovať',
+    remove: 'Odstrániť',
+    update: 'Upraviť',
+    create: 'Vytvoriť',
+    search: 'Hľadať',
+    filter: 'Filtrovať',
+    refresh: 'Obnoviť'
   },
   date: {
-    days: 'Nedelja_Ponedeljek_Torek_Sreda_Četrtek_Petek_Sobota'.split('_'),
-    daysShort: 'Ned_Pon_Tor_Sre_Čet_Pet_Sob'.split('_'),
-    months: 'Januar_Februar_Marec_April_Maj_Junij_Julij_Avgust_September_Oktober_November_December'.split('_'),
-    monthsShort: 'Jan_Feb_Mar_Apr_Maj_Jun_Jul_Avg_Sep_Okt_Nov_Dec'.split('_'),
-    firstDayOfWeek: 1, // 0-6, 0 - Nedelja, 1 Ponedeljek, ...
+    days: 'Nedeľa_Pondelok_Utorok_Streda_Štvrtok_Piatok_Sobota'.split('_'),
+    daysShort: 'Ned_Pon_Uto_Str_Štv_Pia_Sob'.split('_'),
+    months: 'Január_Február_Marec_Apríl_Máj_Jún_Júl_August_September_Október_November_December'.split('_'),
+    monthsShort: 'Jan_Feb_Mar_Apr_Máj_Jún_Júl_Aug_Sep_Okt_Nov_Dec'.split('_'),
+    firstDayOfWeek: 1, // 0-6, 0 - Sunday, 1 Monday, ...
     format24h: true
   },
   table: {
-    noData: 'Ni dosegljivih podatkov',
-    noResults: 'Ne najdem ustreznic',
-    loading: 'Nalagam...',
+    noData: 'Nie sú dostupné údaje',
+    noResults: 'Neboli nájdené vyhovujúce záznamy',
+    loading: 'Načítavam...',
     selectedRecords: function (rows) {
-      return rows === 1
-        ? '1 izbrana vrstica.'
-        : (rows === 2 ? '2 izbrani vrstici.' : (rows === 0 ? 'Ni' : rows) + ' izbranih vrstic.')
+      return rows > 0
+        ? rows + ' ' + (rows === 1 ? 'riadok vybratý' : (rows < 5 ? 'riadky vybraté' : 'riadkov vybratých')) + '.'
+        : 'Žiadne vybraté riadky.'
     },
-    recordsPerPage: 'Vrstic na stran:',
-    allRows: 'Vse',
+    recordsPerPage: 'Riadkov na stránku:',
+    allRows: 'Všetky',
     pagination: function (start, end, total) {
-      return start + '-' + end + ' od ' + total
+      return start + '-' + end + ' z ' + total
     },
-    columns: 'Stolpci'
+    columns: 'Stĺpce'
   },
   editor: {
     url: 'URL',
-    bold: 'Krepko',
-    italic: 'Ležeče',
-    strikethrough: 'Prečrtano',
-    underline: 'Podčrtaj',
-    unorderedList: 'Neoštevilčen seznam',
-    orderedList: 'Oštevilčen seznam',
-    subscript: 'Podpisano',
-    superscript: 'Nadpisano',
-    hyperlink: 'Hiper povezava',
-    toggleFullscreen: 'Preklopi celoten zaslon',
-    quote: 'Citat',
-    left: 'Poravnaj levo',
-    center: 'Poravnaj na sredino',
-    right: 'Poravnaj desno',
-    justify: 'Obojestranska poravnava',
-    print: 'Natisni',
-    outdent: 'Zmanjšaj zamik',
-    indent: 'Povečaj zamik',
-    removeFormat: 'Odstrani formatiranje',
-    formatting: 'Formatiranje',
-    fontSize: 'Velikost pisave',
-    align: 'Poravnava',
-    hr: 'Vstavi horizontalno pravilo',
-    undo: 'Razveljavi',
-    redo: 'Uveljavi',
-    header1: 'Naslov 1',
-    header2: 'Naslov 2',
-    header3: 'Naslov 3',
-    header4: 'Naslov 4',
-    header5: 'Naslov 5',
-    header6: 'Naslov 6',
-    paragraph: 'Odstavek',
-    code: 'Koda',
-    size1: 'Najmanjše',
-    size2: 'Manjše',
-    size3: 'Običajna velikost',
-    size4: 'Srednje veliko',
-    size5: 'Veliko',
-    size6: 'Večje',
-    size7: 'Največje',
-    defaultFont: 'Privzeta pisava',
-    viewSource: 'Prikaži vir'
+    bold: 'Tučné',
+    italic: 'Kurzíva',
+    strikethrough: 'Prečiarknuté',
+    underline: 'Podčiarknuté',
+    unorderedList: 'Odrážky',
+    orderedList: 'Číslovanie',
+    subscript: 'Dolný index',
+    superscript: 'Horný index',
+    hyperlink: 'Odkaz',
+    toggleFullscreen: 'Prepnúť na celú obrazovku',
+    quote: 'Citovať',
+    left: 'Zarovnať doľava',
+    center: 'Centrovať',
+    right: 'Zarovnať doprava',
+    justify: 'Zarovnať podľa okrajov',
+    print: 'Tlačiť',
+    outdent: 'Zmenšiť odsadenie',
+    indent: 'Zväčšiť odsadenie',
+    removeFormat: 'Odstrániť formátovanie',
+    formatting: 'Formátovanie',
+    fontSize: 'Veľkosť písma',
+    align: 'Zarovnať',
+    hr: 'Vložiť horizontálny oddelovač',
+    undo: 'Späť',
+    redo: 'Znova',
+    header1: 'Hlavička 1',
+    header2: 'Hlavička 2',
+    header3: 'Hlavička 3',
+    header4: 'Hlavička 4',
+    header5: 'Hlavička 5',
+    header6: 'Hlavička 6',
+    paragraph: 'Odsek',
+    code: 'Kód',
+    size1: 'Veľmi malé',
+    size2: 'Malé',
+    size3: 'Normálne',
+    size4: 'Stredne veľké',
+    size5: 'Veľké',
+    size6: 'Veľmi veľké',
+    size7: 'Maximálne',
+    defaultFont: 'Predvolené písmo',
+    viewSource: 'Zdroj pohladu'
   },
   tree: {
-    noNodes: 'Ni dosegljivih vozlišč',
-    noResults: 'Ne najdem ustreznih vozlišč'
+    noNodes: 'Nie sú dostupné vetvy',
+    noResults: 'Neboli nájdené vyhovujúce vetvy'
   }
 });
 

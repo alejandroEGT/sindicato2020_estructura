@@ -1,111 +1,104 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[10],{
 
-/***/ "./node_modules/quasar/lang/fa-ir.js":
-/*!*******************************************!*\
-  !*** ./node_modules/quasar/lang/fa-ir.js ***!
-  \*******************************************/
+/***/ "./node_modules/quasar/lang/es.js":
+/*!****************************************!*\
+  !*** ./node_modules/quasar/lang/es.js ***!
+  \****************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-const days = 'یکشنبه_دوشنبه_سه‌شنبه_چهارشنبه_پنجشنبه_جمعه_شنبه'.split('_')
-const monthsShort = 'فروردین_اردیبهشت_خرداد_تیر_مرداد_شهریور_مهر_آبان_آذر_دی_بهمن_اسفند'.split('_')
-
 /* harmony default export */ __webpack_exports__["default"] = ({
-  isoName: 'fa-ir',
-  nativeName: 'فارسی',
-  rtl: true,
+  isoName: 'es',
+  nativeName: 'Español',
   label: {
-    clear: 'پاک‌سازی',
-    ok: 'قبول',
-    cancel: 'لغو',
-    close: 'بستن',
-    set: 'ثبت',
-    select: 'انتخاب',
-    reset: 'بازنشانی',
-    remove: 'حذف',
-    update: 'بروزرسانی',
-    create: 'ساخت',
-    search: 'جستجو',
-    filter: 'فیلتر',
-    refresh: 'تازه‌سازی'
+    clear: 'Borrar',
+    ok: 'OK',
+    cancel: 'Cancelar',
+    close: 'Cerrar',
+    set: 'Establecer',
+    select: 'Seleccionar',
+    reset: 'Restablecer',
+    remove: 'Eliminar',
+    update: 'Actualizar',
+    create: 'Crear',
+    search: 'Buscar',
+    filter: 'Filtrar',
+    refresh: 'Actualizar'
   },
   date: {
-    days: days,
-    daysShort: 'ی_د_س_چ_پ_ج_ش'.split('_'),
-    months: 'فروردین_اردیبهشت_خرداد_تیر_مرداد_شهریور_مهر_آبان_آذر_دی_بهمن_اسفند'.split('_'),
-    monthsShort: monthsShort,
-    headerTitle: function (date, model) {
-      return days[ date.getDay() ] + '، ' +
-        model.day + ' ' +
-        monthsShort[ model.month - 1 ]
-    },
-    firstDayOfWeek: 6,
+    days: 'Domingo_Lunes_Martes_Miércoles_Jueves_Viernes_Sábado'.split('_'),
+    daysShort: 'Dom_Lun_Mar_Mié_Jue_Vie_Sáb'.split('_'),
+    months: 'Enero_Febrero_Marzo_Abril_Mayo_Junio_Julio_Agosto_Septiembre_Octubre_Noviembre_Diciembre'.split('_'),
+    monthsShort: 'Ene_Feb_Mar_Abr_May_Jun_Jul_Ago_Sep_Oct_Nov_Dic'.split('_'),
+    firstDayOfWeek: 1, // 0-6, 0 - Sunday, 1 Monday, ...
     format24h: true
   },
   table: {
-    noData: 'اطلاعاتی موجود نیست',
-    noResults: 'هیچ موردی یافت نشد',
-    loading: 'در حال بارگذاری ...',
+    noData: 'Sin datos disponibles',
+    noResults: 'No se han encontrado resultado',
+    loading: 'Cargando...',
     selectedRecords: function (rows) {
-      return rows === 0 ? 'رکوردی انتخاب نشده' : rows + ' رکورد انتخاب شده'
+      return rows > 1
+        ? rows + ' filas seleccionadas.'
+        : (rows === 0 ? 'Sin' : '1') + ' fila seleccionada.'
     },
-    recordsPerPage: 'رکورد در صفحه:',
-    allRows: 'همه',
+    recordsPerPage: 'Filas por página:',
+    allRows: 'Todas',
     pagination: function (start, end, total) {
-      return start + '-' + end + ' از ' + total
+      return start + '-' + end + ' de ' + total
     },
-    columns: 'ستون'
+    columns: 'Columnas'
   },
   editor: {
-    url: 'آدرس',
-    bold: 'کلفت',
-    italic: 'کج',
-    strikethrough: 'خط‌خورده',
-    underline: 'زیرخط',
-    unorderedList: 'فهرست غیرترتیبی',
-    orderedList: 'فهرست ترتیبی',
-    subscript: 'زیرنویس',
-    superscript: 'بالانویس',
-    hyperlink: 'پیوند',
-    toggleFullscreen: 'تغییر حالت تمام صفحه',
-    quote: 'نقل قول',
-    left: 'چپ تراز',
-    center: 'وسط تراز',
-    right: 'راست تراز',
-    justify: 'هم‌تراز',
-    print: 'چاپ',
-    outdent: 'کاهش دندانه',
-    indent: 'افزایش دندانه',
-    removeFormat: 'حذف قالب‌بندی',
-    formatting: 'قالب‌بندی',
-    fontSize: 'اندازه قلم',
-    align: 'تراز',
-    hr: 'درج خط افقی',
-    undo: 'عمل قبلی',
-    redo: 'عملی بعدی',
-    header1: 'سرفصل ۱',
-    header2: 'سرفصل ۲',
-    header3: 'سرفصل ۳',
-    header4: 'سرفصل ۴',
-    header5: 'سرفصل ۵',
-    header6: 'سرفصل ۶',
-    paragraph: 'پاراگراف',
-    code: 'کد',
-    size1: 'خیلی کوچک',
-    size2: 'کوچک',
-    size3: 'معمولی',
-    size4: 'متوسط-بزرگ',
-    size5: 'بزرگ',
-    size6: 'خیلی بزرگ',
-    size7: 'بزرگترین',
-    defaultFont: 'قلم پیش‌فرض',
-    viewSource: 'مشاهده منبع'
+    url: 'URL',
+    bold: 'Negrita',
+    italic: 'Itálico',
+    strikethrough: 'Tachado',
+    underline: 'Subrayado',
+    unorderedList: 'Lista Desordenada',
+    orderedList: 'Lista Ordenada',
+    subscript: 'Subíndice',
+    superscript: 'Superíndice',
+    hyperlink: 'Hipervínculo',
+    toggleFullscreen: 'Alternar pantalla completa',
+    quote: 'Cita',
+    left: 'Alineación izquierda',
+    center: 'Alineación centro',
+    right: 'Alineación derecha',
+    justify: 'Justificar alineación',
+    print: 'Imprimir',
+    outdent: 'Disminuir indentación',
+    indent: 'Aumentar indentación',
+    removeFormat: 'Eliminar formato',
+    formatting: 'Formato',
+    fontSize: 'Tamaño de Fuente',
+    align: 'Alinear',
+    hr: 'Insertar línea horizontal',
+    undo: 'Deshacer',
+    redo: 'Rehacer',
+    header1: 'Encabezado 1',
+    header2: 'Encabezado 2',
+    header3: 'Encabezado 3',
+    header4: 'Encabezado 4',
+    header5: 'Encabezado 5',
+    header6: 'Encabezado 6',
+    paragraph: 'Párrafo',
+    code: 'Código',
+    size1: 'Muy pequeño',
+    size2: 'Pequeño',
+    size3: 'Normal',
+    size4: 'Mediano',
+    size5: 'Grande',
+    size6: 'Muy grande',
+    size7: 'Máximo',
+    defaultFont: 'Fuente por defecto',
+    viewSource: 'Ver fuente'
   },
   tree: {
-    noNodes: 'گره‌ای در دسترس نیست',
-    noResults: 'گره‌ای یافت نشد'
+    noNodes: 'Sin nodos disponibles',
+    noResults: 'No se encontraron nodos correspondientes'
   }
 });
 

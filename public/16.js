@@ -1,8 +1,8 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[16],{
 
-/***/ "./node_modules/quasar/lang/hu.js":
+/***/ "./node_modules/quasar/lang/hr.js":
 /*!****************************************!*\
-  !*** ./node_modules/quasar/lang/hu.js ***!
+  !*** ./node_modules/quasar/lang/hr.js ***!
   \****************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -10,95 +10,95 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
-  isoName: 'hu',
-  nativeName: 'Magyar',
+  isoName: 'hr',
+  nativeName: 'Hrvatski jezik',
   label: {
-    clear: 'Törlés',
+    clear: 'Očisti',
     ok: 'OK',
-    cancel: 'Mégsem',
-    close: 'Bezárás',
-    set: 'Beállítás',
-    select: 'Kiválasztás',
-    reset: 'Visszaállítás',
-    remove: 'Eltávolítás',
-    update: 'Módosítás',
-    create: 'Létrehozás',
-    search: 'Keresés',
-    filter: 'Szűrés',
-    refresh: 'Frissítés'
+    cancel: 'Odustani',
+    close: 'Zatvori',
+    set: 'Postavi',
+    select: 'Izaberi',
+    reset: 'Poništi',
+    remove: 'Ukloni',
+    update: 'Ažuriraj',
+    create: 'Dodaj',
+    search: 'Traži',
+    filter: 'Filter',
+    refresh: 'Osvježi'
   },
   date: {
-    days: 'Vasárnap_Hétfő_Kedd_Szerda_Csütörtök_Péntek_Szombat'.split('_'),
-    daysShort: 'Vas_Hét_Ke_Sze_Csü_Pén_Szo'.split('_'),
-    months: 'Január_Február_Március_Április_Május_Június_Július_Augusztus_Szeptember_Október_November_December'.split('_'),
-    monthsShort: 'Jan_Feb_Már_Ápr_Máj_Jún_Júl_Aug_Szep_Okt_Nov_Dec'.split('_'),
+    days: 'Nedjelja_Ponedjeljak_Utorak_Srijeda_Četvrtak_Petak_Subota'.split('_'),
+    daysShort: 'Ned_Pon_Uto_Sri_Čet_Pet_Sub'.split('_'),
+    months: 'Siječanj_Veljača_Ožujak_Travanj_Svibanj_Lipanj_Srpanj_Kolovoz_Rujan_Listopad_Studeni_Prosinac'.split('_'),
+    monthsShort: 'Sij_Velj_Ožu_Tra_Svi_Lip_Srp_Kol_Ruj_Lis_Stu_Pro'.split('_'),
     firstDayOfWeek: 1, // 0-6, 0 - Sunday, 1 Monday, ...
     format24h: true
   },
   table: {
-    noData: 'Nincs elérhető adat',
-    noResults: 'Nincsenek egyező találatok',
-    loading: 'Betöltés...',
+    noData: 'Nema podataka',
+    noResults: 'Nema odgovarajućih zapisa',
+    loading: 'Učitavanje...',
     selectedRecords: function (rows) {
-      return rows === 1
-        ? '1 kiválasztott elem.'
-        : (rows === 0 ? 'Nincs' : rows) + ' kiválasztott elem.'
+      return rows > 1
+        ? rows + ' izabranih redova.'
+        : (rows === 0 ? 'Nema' : '1') + ' izabranih redova.'
     },
-    recordsPerPage: 'Elemek száma oldalanként:',
-    allRows: 'Összes',
+    recordsPerPage: 'Redova po stranici:',
+    allRows: 'Sve',
     pagination: function (start, end, total) {
-      return start + '-' + end + ' / ' + total
+      return start + '-' + end + ' od ' + total
     },
-    columns: 'Oszlopok'
+    columns: 'Stupci'
   },
   editor: {
     url: 'URL',
-    bold: 'Félkövér',
-    italic: 'Dőlt',
-    strikethrough: 'Áthúzott',
-    underline: 'Aláhúzott',
-    unorderedList: 'Felsorolás',
-    orderedList: 'Számozás',
-    subscript: 'Alsó index',
-    superscript: 'Felső index',
-    hyperlink: 'Hivatkozás',
-    toggleFullscreen: 'Teljes képernyő',
-    quote: 'Idézet',
-    left: 'Balra igazítás',
-    center: 'Középre igazítás',
-    right: 'Jobbra igazítás',
-    justify: 'Sorkizárás',
-    print: 'Nyomtatás',
-    outdent: 'Behúzás csökkentése',
-    indent: 'Behúzás növelése',
-    removeFormat: 'Formázás törlése',
-    formatting: 'Formázás',
-    fontSize: 'Betűméret',
-    align: 'Igazítás',
-    hr: 'Vízszintes elválasztó beillesztése',
-    undo: 'Visszavonás',
-    redo: 'Mégis',
-    header1: 'Címsor 1',
-    header2: 'Címsor 2',
-    header3: 'Címsor 3',
-    header4: 'Címsor 4',
-    header5: 'Címsor 5',
-    header6: 'Címsor 6',
-    paragraph: 'Paragrafus',
-    code: 'Kód',
-    size1: 'Nagyon kicsi',
-    size2: 'Kicsi',
-    size3: 'Normál',
-    size4: 'Közepesen nagy',
-    size5: 'Nagy',
-    size6: 'Nagyon nagy',
-    size7: 'Maximális',
-    defaultFont: 'Alapértelmezett betűtípus',
-    viewSource: 'Forrás megtekintése'
+    bold: 'Podebljano',
+    italic: 'Nakošeno',
+    strikethrough: 'Precrtano',
+    underline: 'Podcrtano',
+    unorderedList: 'Označena lista',
+    orderedList: 'Numerirana lista',
+    subscript: 'Potpisano',
+    superscript: 'Natpisano',
+    hyperlink: 'Hiperlink',
+    toggleFullscreen: 'Puni zaslon',
+    quote: 'Citat',
+    left: 'Poravnati ulijevo',
+    center: 'Centrirati',
+    right: 'Poravnati udesno',
+    justify: 'Poravnati obostrano',
+    print: 'Ispis',
+    outdent: 'Smanjiti uvlačenje',
+    indent: 'Povećati uvlačenje',
+    removeFormat: 'Ukloniti formatiranje',
+    formatting: 'Formatirati',
+    fontSize: 'Veličina slova',
+    align: 'Poravnati',
+    hr: 'Ubaciti vodoravno ravnalo',
+    undo: 'Poništiti',
+    redo: 'Vratiti',
+    header1: 'Naslov 1',
+    header2: 'Naslov 2',
+    header3: 'Naslov 3',
+    header4: 'Naslov 4',
+    header5: 'Naslov 5',
+    header6: 'Naslov 6',
+    paragraph: 'Odlomak',
+    code: 'Kod',
+    size1: 'Vrlo malo',
+    size2: 'Malo manje',
+    size3: 'Normalno',
+    size4: 'Srednje',
+    size5: 'Veliko',
+    size6: 'Vrlo veliko',
+    size7: 'Nejveće',
+    defaultFont: 'Zadani font',
+    viewSource: 'Pogledaj izvor'
   },
   tree: {
-    noNodes: 'Nincsenek elérhető elemek',
-    noResults: 'Nincsenek egyező találatok'
+    noNodes: 'Nema nijednog čvora',
+    noResults: 'Nema odgovarajućih čvorova'
   }
 });
 

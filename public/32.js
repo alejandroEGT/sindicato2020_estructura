@@ -1,108 +1,104 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[32],{
 
-/***/ "./node_modules/quasar/lang/ru.js":
+/***/ "./node_modules/quasar/lang/ro.js":
 /*!****************************************!*\
-  !*** ./node_modules/quasar/lang/ru.js ***!
+  !*** ./node_modules/quasar/lang/ro.js ***!
   \****************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-function plurals (n, opts) {
-  return opts[n % 10 === 1 && n % 100 !== 11 ? 0 : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 1 : 2]
-}
-
 /* harmony default export */ __webpack_exports__["default"] = ({
-  isoName: 'ru',
-  nativeName: 'русский',
+  isoName: 'ro',
+  nativeName: 'Română',
   label: {
-    clear: 'Очистить',
+    clear: 'Golește',
     ok: 'OK',
-    cancel: 'Отмена',
-    close: 'Закрыть',
-    set: 'Установить',
-    select: 'Выбрать',
-    reset: 'Сбросить',
-    remove: 'Удалить',
-    update: 'Обновить',
-    create: 'Создать',
-    search: 'Поиск',
-    filter: 'Фильтр',
-    refresh: 'Обновить'
+    cancel: 'Anulează',
+    close: 'Închide',
+    set: 'Setează',
+    select: 'Alege',
+    reset: 'Resetează',
+    remove: 'Elimină',
+    update: 'Actualizează',
+    create: 'Creează',
+    search: 'Caută',
+    filter: 'Filtrează',
+    refresh: 'Actualizează'
   },
   date: {
-    days: 'Воскресенье_Понедельник_Вторник_Среда_Четверг_Пятница_Суббота'.split('_'),
-    daysShort: 'Вс_Пн_Вт_Ср_Чт_Пт_Сб'.split('_'),
-    months: 'Январь_Февраль_Март_Апрель_Май_Июнь_Июль_Август_Сентябрь_Октябрь_Ноябрь_Декабрь'.split('_'),
-    monthsShort: 'Янв_Фев_Мар_Апр_Май_Июн_Июл_Авг_Сен_Окт_Ноя_Дек'.split('_'),
+    days: 'Duminică_Luni_Marți_Miercuri_Joi_Vineri_Sâmbătă'.split('_'),
+    daysShort: 'Dum_Lun_Mar_Mie_Joi_Vin_Sâm'.split('_'),
+    months: 'Ianuarie_Februarie_Martie_Aprilie_Mai_Iunie_Iulie_August_Septembrie_Octombrie_Noiembrie_Decembrie'.split('_'),
+    monthsShort: 'Ian_Feb_Mar_Apr_Mai_Iun_Iul_Aug_Sep_Oct_Nov_Dec'.split('_'),
     firstDayOfWeek: 1, // 0-6, 0 - Sunday, 1 Monday, ...
     format24h: true
   },
   table: {
-    noData: 'Нет данных',
-    noResults: 'Совпадений не найдено',
-    loading: 'Загрузка...',
+    noData: 'Nu sunt date disponibile',
+    noResults: 'Nu am găsit înregistrări care să corespundă',
+    loading: 'Se încarcă...',
     selectedRecords: function (rows) {
-      return rows > 0
-        ? rows + ' ' + plurals(rows, ['строка выбрана', 'строки выбраны', 'строк выбрано']) + '.'
-        : 'Ни одна строка не выбрана.'
+      return rows > 1
+        ? rows + ' înregistrări selectate.'
+        : (rows === 0 ? 'Nici o' : '1') + ' înregistrare selectată.'
     },
-    recordsPerPage: 'Строк на странице:',
-    allRows: 'Все',
+    recordsPerPage: 'Înregistrări pe pagină:',
+    allRows: 'Toate',
     pagination: function (start, end, total) {
-      return start + '-' + end + ' из ' + total
+      return start + '-' + end + ' din ' + total
     },
-    columns: 'Колонки'
+    columns: 'Coloane'
   },
   editor: {
     url: 'URL',
-    bold: 'Полужирный',
-    italic: 'Курсив',
-    strikethrough: 'Зачеркнутый',
-    underline: 'Подчеркнутый',
-    unorderedList: 'Маркированный список',
-    orderedList: 'Нумерованный список',
-    subscript: 'Подстрочный',
-    superscript: 'Надстрочный',
-    hyperlink: 'Гиперссылка',
-    toggleFullscreen: 'Полноэкранный режим',
-    quote: 'Цитата',
-    left: 'Выравнивание по левому краю',
-    center: 'Выравнивание по центру',
-    right: 'Выравнивание по правому краю',
-    justify: 'Выравнивание по ширине',
-    print: 'Печать',
-    outdent: 'Уменьшить отступ',
-    indent: 'Увеличить отступ',
-    removeFormat: 'Удалить форматирование',
-    formatting: 'Форматирование',
-    fontSize: 'Размер шрифта',
-    align: 'Выравнивание',
-    hr: 'Вставить горизонтальную линию',
-    undo: 'Отменить',
-    redo: 'Повторить',
-    header1: 'Заголовок 1',
-    header2: 'Заголовок 2',
-    header3: 'Заголовок 3',
-    header4: 'Заголовок 4',
-    header5: 'Заголовок 5',
-    header6: 'Заголовок 6',
-    paragraph: 'Параграф',
-    code: 'Код',
-    size1: 'Очень маленький',
-    size2: 'Маленький',
-    size3: 'Нормальный',
-    size4: 'Средний',
-    size5: 'Большой',
-    size6: 'Очень большой',
-    size7: 'Огромный',
-    defaultFont: 'Шрифт по умолчанию',
-    viewSource: 'Просмотреть исходный код'
+    bold: 'Îngroșat',
+    italic: 'Înclinat',
+    strikethrough: 'Tăiat',
+    underline: 'Subliniat',
+    unorderedList: 'Listă neordonată',
+    orderedList: 'Listă ordonată',
+    subscript: 'Dedesubt',
+    superscript: 'Deasupra',
+    hyperlink: 'Hyperlink',
+    toggleFullscreen: 'Comută ecran complet',
+    quote: 'Citat',
+    left: 'Aliniere la stânga',
+    center: 'Aliniere la centru',
+    right: 'Aliniere la dreapta',
+    justify: 'Aliniere totală',
+    print: 'Tipărește',
+    outdent: 'Scade spațierea',
+    indent: 'Crește spațierea',
+    removeFormat: 'Îndepărtează formatările',
+    formatting: 'Formatare',
+    fontSize: 'Mărime font',
+    align: 'Aliniază',
+    hr: 'Adaugă linie orizontală',
+    undo: 'Schimbă inapoi',
+    redo: 'Refă',
+    header1: 'Header 1',
+    header2: 'Header 2',
+    header3: 'Header 3',
+    header4: 'Header 4',
+    header5: 'Header 5',
+    header6: 'Header 6',
+    paragraph: 'Paragraf',
+    code: 'Cod',
+    size1: 'Foarte mic',
+    size2: 'Mic',
+    size3: 'Normal',
+    size4: 'Mediu-mare',
+    size5: 'Big',
+    size6: 'Foarte mare',
+    size7: 'Maxim',
+    defaultFont: 'Font implicit',
+    viewSource: 'Vizualizare sursă'
   },
   tree: {
-    noNodes: 'Нет доступных узлов',
-    noResults: 'Совпадений не найдено'
+    noNodes: 'Nu sunt date disponibile',
+    noResults: 'Nu am găsit noduri care să corespundă'
   }
 });
 

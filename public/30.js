@@ -1,29 +1,29 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[30],{
 
-/***/ "./node_modules/quasar/lang/pt.js":
-/*!****************************************!*\
-  !*** ./node_modules/quasar/lang/pt.js ***!
-  \****************************************/
+/***/ "./node_modules/quasar/lang/pt-br.js":
+/*!*******************************************!*\
+  !*** ./node_modules/quasar/lang/pt-br.js ***!
+  \*******************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
-  isoName: 'pt',
-  nativeName: 'Português',
+  isoName: 'pt-br',
+  nativeName: 'Português (BR)',
   label: {
     clear: 'Limpar',
     ok: 'OK',
     cancel: 'Cancelar',
     close: 'Fechar',
-    set: 'Marcar',
-    select: 'Escolher',
-    reset: 'Limpar',
+    set: 'Escolher',
+    select: 'Selecionar',
+    reset: 'Redefinir',
     remove: 'Remover',
     update: 'Atualizar',
     create: 'Criar',
-    search: 'Procurar',
+    search: 'Buscar',
     filter: 'Filtrar',
     refresh: 'Recarregar'
   },
@@ -32,20 +32,20 @@ __webpack_require__.r(__webpack_exports__);
     daysShort: 'Dom_Seg_Ter_Qua_Qui_Sex_Sáb'.split('_'),
     months: 'Janeiro_Fevereiro_Março_Abril_Maio_Junho_Julho_Agosto_Setembro_Outubro_Novembro_Dezembro'.split('_'),
     monthsShort: 'Jan_Fev_Mar_Abr_Mai_Jun_Jul_Ago_Set_Out_Nov_Dez'.split('_'),
-    firstDayOfWeek: 1, // 0-6, 0 - Sunday, 1 Monday, ...
+    firstDayOfWeek: 0, // 0-6, 0 - Sunday, 1 Monday, ...
     format24h: true
   },
   table: {
     noData: 'Sem dados disponíveis',
-    noResults: 'Não foi encontrado nenhum resultado',
-    loading: 'A carregar...',
+    noResults: 'Nenhum dado correspondente encontrado',
+    loading: 'Carregando...',
     selectedRecords: function (rows) {
       return rows > 0
-        ? rows + ' linha' + (rows === 1 ? ' selecionada' : 's selecionadas') + '.'
-        : 'Nenhuma linha selecionada.'
+        ? rows + ' registro' + (rows === 1 ? ' selecionado' : 's selecionados') + '.'
+        : 'Nenhum registro selecionado.'
     },
-    recordsPerPage: 'Linhas por página:',
-    allRows: 'Todas',
+    recordsPerPage: 'Registros por página:',
+    allRows: 'Todos',
     pagination: function (start, end, total) {
       return start + '-' + end + ' de ' + total
     },
@@ -55,14 +55,14 @@ __webpack_require__.r(__webpack_exports__);
     url: 'URL',
     bold: 'Negrito',
     italic: 'Itálico',
-    strikethrough: 'Rasurado',
+    strikethrough: 'Riscado',
     underline: 'Sublinhado',
     unorderedList: 'Lista não-ordenada',
     orderedList: 'Lista ordenada',
     subscript: 'Subscrito',
     superscript: 'Sobrescrito',
     hyperlink: 'Hyperlink',
-    toggleFullscreen: 'Maximizar',
+    toggleFullscreen: 'Tela cheia',
     quote: 'Citação',
     left: 'Alinhado à esquerda',
     center: 'Alinhado ao centro',
@@ -73,9 +73,9 @@ __webpack_require__.r(__webpack_exports__);
     indent: 'Aumentar indentação',
     removeFormat: 'Remover formatação',
     formatting: 'Formatação',
-    fontSize: 'Tamanho do tipo de letra',
+    fontSize: 'Tamanho de fonte',
     align: 'Alinhar',
-    hr: 'Inserir linha horizontal',
+    hr: 'Inserir divisória horizontal',
     undo: 'Desfazer',
     redo: 'Refazer',
     header1: 'Cabeçalho 1',
@@ -93,12 +93,12 @@ __webpack_require__.r(__webpack_exports__);
     size5: 'Grande',
     size6: 'Enorme',
     size7: 'Máximo',
-    defaultFont: 'Tipo de letra padrão',
+    defaultFont: 'Fonte padrão',
     viewSource: 'Exibir fonte'
   },
   tree: {
     noNodes: 'Sem nós disponíveis',
-    noResults: 'Nenhum resultado encontrado'
+    noResults: 'Nenhum nó correspondente encontrado'
   }
 });
 
