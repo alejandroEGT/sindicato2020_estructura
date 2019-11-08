@@ -33,7 +33,7 @@
      						 :loading="loading"
      						 @request="onRequest"
       						  binary-state-sort
-      						  no-results-label="sin datos niggis"
+      						  :no-results-label="'sin datos niggis'"
 						    >
 
 						    <template v-slot:top-right>
