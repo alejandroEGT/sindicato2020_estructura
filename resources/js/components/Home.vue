@@ -5,35 +5,51 @@
         class="my-card text-white"
         style="background: radial-gradient(circle, #35a2ff 0%, #014a88 100%)"
       >
-        <q-card-section>
+        <!-- <q-card-section>
           <div class="text-h6">Bienvenido</div>
-        </q-card-section>
+        </q-card-section>-->
 
         <q-tabs v-model="tab" class="text-white">
-          <q-tab label="Login" name="login" />
-          <q-tab label="Registro" name="registro" />
+          <q-tab class="text-h6" label="Login" name="login" />
+          <q-tab class="text-h6" label="Registro" name="registro" />
         </q-tabs>
 
         <q-tab-panels v-model="tab" animated>
-          <q-tab-panel name="login" 
-          style="background: radial-gradient(circle, #35a2ff 0%, #014a88 100%)">
+          <q-tab-panel
+            name="login"
+            style="background: radial-gradient(circle, #35a2ff 0%, #014a88 100%)"
+          >
             <!-- <q-card-section> -->
             <q-input v-model="email" label="Ingrese su correo" />
             <q-separator />
             <q-input v-model="password" label="Ingrese su contraseña" />
             <q-separator />
             <br />
-            <q-btn class="center" color="primary" @click="login" icon="mail" label="Ingresar" />
+            <q-btn
+              class="content-center"
+              color="primary"
+              @click="login"
+              icon="mail"
+              label="Ingresar"
+            />
             <!--  </q-card-section> -->
           </q-tab-panel>
 
-          <q-tab-panel name="registro"
-          style="background: radial-gradient(circle, #35a2ff 0%, #014a88 100%)">
+          <q-tab-panel
+            name="registro"
+            style="background: radial-gradient(circle, #35a2ff 0%, #014a88 100%)"
+          >
             <q-input v-model="nombre" label="Ingrese su nombre" />
-             <q-input v-model="email" label="Ingrese su correo" />
+            <q-input v-model="email" label="Ingrese su correo" />
             <q-input v-model="password" label="Ingrese su contraseña" />
             <br />
-            <q-btn class="center" color="primary"  icon="mail" label="Registrarse" />
+            <q-btn
+              class="content-center"
+              color="primary"
+              @click="registrar"
+              icon="mail"
+              label="Registrarse"
+            />
           </q-tab-panel>
         </q-tab-panels>
       </q-card>
@@ -46,6 +62,7 @@ export default {
   name: "Media",
   data() {
     return {
+      nombre: "",
       email: "",
       password: "",
       error: false,
@@ -70,6 +87,17 @@ export default {
         redirect: "/index",
         fetchUser: true
       });
+    },
+
+    registrar(){
+      const datos = {
+        'name': this.nombre,
+        'email': this.email,
+        'password': this.password
+      }
+      axios.post('api/auth/register', datos).then((res)=>{
+					console.log(res)
+				});
     }
   }
 };
