@@ -17,4 +17,11 @@ class CuentaController extends Controller
     		return ['estado'=>'success', 'mensaje'=>'Cuenta ingresada'];
     	}
     }
+
+    public function traer_cuenta()
+    {
+    	$listar = Cuenta::select(['id','titulo','descripcion'])->get();
+
+    	return $listar;
+    }
 }

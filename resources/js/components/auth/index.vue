@@ -66,28 +66,6 @@
     </div>
     </div>
 
-
-
-  <div>
-    <!-- <WebCam
-        ref="webcam"
-        :deviceId="deviceId"
-        width="auto"
-        height="100%"
-        @cameras="onCameras"
-        @camera-change="onCameraChange"
-        :isFrontCam="frontCam"
-        :googleKey="googleKey"
-
-         @started="onStarted"
-         @stopped="onStopped"
-        >
-    </WebCam> -->
-
-
-  </div>
-
-
     
     <div class="row justify-center">
       <div class="col-12 col-md-10">
@@ -99,14 +77,13 @@
                       <q-img src="https://cdn.quasar.dev/img/parallax2.jpg">
                         <div class="absolute-bottom">
                           <div class="text-h6">Contabilidad</div>
-                          <div class="text-subtitle2">Cuentas y prestamos</div>
+                          <div class="text-subtitle2">Registro de cuentas y prestamos</div>
                         </div>
                       </q-img>
 
                       <q-card-actions>
-                        <q-btn flat @click="url_crear_cuenta">Crear cuentas</q-btn>
-                        <br>
-                        <q-btn flat @click="url_listar_cuenta">Listar cuentas</q-btn>
+                        <q-btn flat @click="url_modulo_cuenta">Cuentas</q-btn><br>
+                        <q-btn flat @click="url_modulo_prestamos">Prestamos</q-btn>
                         <!-- <q-btn flat>Action 2</q-btn> -->
                       </q-card-actions>
                     </q-card>
@@ -122,7 +99,8 @@
                       </q-img>
 
                       <q-card-actions>
-                        <q-btn flat @click="url_crear_cliente">Crear clientes</q-btn>
+                        <q-btn flat @click="url_modulo_clientes">Clientes</q-btn><br>
+                        <q-btn flat @click="url_modulo_proveedor">Proveedores</q-btn>
 
                         <!-- <q-btn flat>Action 2</q-btn> -->
                       </q-card-actions>
@@ -196,8 +174,18 @@ export default {
         this.$router.push('/registro-clientes');
        },
 
-       url_crear_cuenta(){
-        this.$router.push('/crear-cuenta');
+       url_modulo_cuenta(){
+        this.$router.push('/modulo-cuentas');
+       },
+       url_modulo_prestamos(){
+        this.$router.push('/modulo-prestamos');
+       },
+
+       url_modulo_clientes(){
+        this.$router.push('/modulo-clientes');
+       },
+       url_modulo_proveedor(){
+        this.$router.push('/modulo-proveedor');
        },
 
        url_listar_cuenta(){

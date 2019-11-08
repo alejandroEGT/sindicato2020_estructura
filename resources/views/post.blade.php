@@ -10,6 +10,12 @@
        
         {{-- <link href="{{ mix('css/app.css') }}" type="text/css" rel="stylesheet" /> --}}
         <meta name="csrf-token" value="{{ csrf_token() }}" />
+
+
+        {{-- <script src="https://cdn.jsdelivr.net/npm/quasar@v1.0.0/dist/lang/de.umd.min.js"></script>
+        <script>
+          Quasar.lang.set(Quasar.lang.de)
+        </script> --}}
     </head>
     <body>
         <div id="app">
