@@ -1,108 +1,102 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[39],{
 
-/***/ "./node_modules/quasar/lang/uk.js":
+/***/ "./node_modules/quasar/lang/tr.js":
 /*!****************************************!*\
-  !*** ./node_modules/quasar/lang/uk.js ***!
+  !*** ./node_modules/quasar/lang/tr.js ***!
   \****************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-function plurals (n, opts) {
-  return opts[n % 10 === 1 && n % 100 !== 11 ? 0 : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 1 : 2]
-}
-
 /* harmony default export */ __webpack_exports__["default"] = ({
-  isoName: 'uk',
-  nativeName: 'Українська',
+  isoName: 'tr',
+  nativeName: 'Türkçe',
   label: {
-    clear: 'Очистити',
-    ok: 'OK',
-    cancel: 'Скасувати',
-    close: 'Закрити',
-    set: 'Встановити',
-    select: 'Обрати',
-    reset: 'Скинути',
-    remove: 'Видалити',
-    update: 'Оновити',
-    create: 'Створити',
-    search: 'Пошук',
-    filter: 'Фільтр',
-    refresh: 'Оновити'
+    clear: 'Temizle',
+    ok: 'Tamam',
+    cancel: 'İptal',
+    close: 'Kapat',
+    set: 'Ayarla',
+    select: 'Seç',
+    reset: 'Sıfırla',
+    remove: 'Kaldır',
+    update: 'Güncelle',
+    create: 'Oluştur',
+    search: 'Ara',
+    filter: 'Süz',
+    refresh: 'Yenile'
   },
   date: {
-    days: 'Неділя_Понеділок_Вівторок_Середа_Четвер_П`ятниця_Субота'.split('_'),
-    daysShort: 'Нд_Пн_Вт_Ср_Чт_Пт_Сб'.split('_'),
-    months: 'Січень_Лютий_Березень_Квітень_Травень_Червень_Липень_Серпень_Вересень_Жовтень_Листопад_Грудень'.split('_'),
-    monthsShort: 'Січ_Лют_Бер_Кві_Тра_Чер_Лип_Сер_Вер_Жов_Лис_Гру'.split('_'),
+    days: 'Pazar_Pazartesi_Salı_Çarşamba_Perşembe_Cuma_Cumartesi'.split('_'),
+    daysShort: 'Paz_Pzt_Sal_Çar_Per_Cum_Cmt'.split('_'),
+    months: 'Ocak_Şubat_Mart_Nisan_Mayıs_Haziran_Temmuz_Ağustos_Eylül_Ekim_Kasım_Aralık'.split('_'),
+    monthsShort: 'Oca_Şub_Mar_Nis_May_Haz_Tem_Ağu_Eyl_Eki_Kas_Ara'.split('_'),
     firstDayOfWeek: 1, // 0-6, 0 - Sunday, 1 Monday, ...
     format24h: true
   },
   table: {
-    noData: 'Немає даних',
-    noResults: 'Співпадінь не знайдено',
-    loading: 'Завантаження...',
+    noData: 'Veri yok',
+    noResults: 'Uyuşan kayıt bulunamadı',
+    loading: 'Yükleniyor...',
     selectedRecords: function (rows) {
-      return rows > 0
-        ? rows + ' ' + plurals(rows, ['рядок обраний', 'рядки обрані', 'рядків обрано']) + '.'
-        : 'Жодного рядку не обрано.'
+      return rows + ' seçili kayıt.'
     },
-    recordsPerPage: 'Рядків на сторінці:',
-    allRows: 'Усі',
+    recordsPerPage: 'Sayfa başına kayıt:',
+    allRows: 'Tümü',
     pagination: function (start, end, total) {
-      return start + '-' + end + ' з ' + total
+      return start + '-' + end + ' toplam ' + total
     },
-    columns: 'Колонки'
+    columns: 'Sütunlar'
   },
   editor: {
     url: 'URL',
-    bold: 'Напівжирний',
-    italic: 'Курсив',
-    strikethrough: 'Закреслений',
-    underline: 'Підкреслений',
-    unorderedList: 'Маркований список',
-    orderedList: 'Нумерований список',
-    subscript: 'Підрядковий',
-    superscript: 'Надрядковий',
-    hyperlink: 'Гіперпосилання',
-    toggleFullscreen: 'Повноекранний режим',
-    quote: 'Цитата',
-    left: 'Вирівнювання по лівому краю',
-    center: 'Вирівнювання по центру',
-    right: 'Вирівнювання по правому краю',
-    justify: 'Вирівнювання по ширині',
-    print: 'Друк',
-    outdent: 'Зменшити відтуп',
-    indent: 'Збільшити відступ',
-    removeFormat: 'Видалити форматування',
-    formatting: 'Форматування',
-    fontSize: 'Розмір шрифту',
-    align: 'Вирівнювання',
-    hr: 'Вставити горизонтальну лінію',
-    undo: 'Відмінити',
-    redo: 'Повторити',
-    header1: 'Заголовок 1',
-    header2: 'Заголовок 2',
-    header3: 'Заголовок 3',
-    header4: 'Заголовок 4',
-    header5: 'Заголовок 5',
-    header6: 'Заголовок 6',
-    paragraph: 'Параграф',
-    code: 'Код',
-    size1: 'Дуже маленький',
-    size2: 'Маленький',
-    size3: 'Нормальний',
-    size4: 'Середній',
-    size5: 'Великий',
-    size6: 'Дуже великий',
-    size7: 'Величезний',
-    defaultFont: 'Шрифт за замовчуванням',
-    viewSource: 'Переглянути джерело'
+    bold: 'Kalın',
+    italic: 'Eğik',
+    strikethrough: 'Üstü çizili',
+    underline: 'Altı çizili',
+    unorderedList: 'Sırasız Liste',
+    orderedList: 'Sıralı Liste',
+    subscript: 'Alt betik',
+    superscript: 'Üst betik',
+    hyperlink: 'Köprü',
+    toggleFullscreen: 'Tam ekranı Aç-Kapa',
+    quote: 'Alıntı',
+    left: 'Sola hizala',
+    center: 'Ortala',
+    right: 'Sağa hizala',
+    justify: 'Sığdır',
+    print: 'Yazdır',
+    outdent: 'Girintiyi azalt',
+    indent: 'Girintiyi artır',
+    removeFormat: 'Biçimlendirmeyi kaldır',
+    formatting: 'Biçimliyor',
+    fontSize: 'Yazı Tipi Boyutu',
+    align: 'Hizala',
+    hr: 'Yatay Çizgi Ekle',
+    undo: 'Geri Al',
+    redo: 'Yinele',
+    header1: 'Başlık 1',
+    header2: 'Başlık 2',
+    header3: 'Başlık 3',
+    header4: 'Başlık 4',
+    header5: 'Başlık 5',
+    header6: 'Başlık 6',
+    paragraph: 'Paragraf',
+    code: 'Kod',
+    size1: 'Çok küçük',
+    size2: 'Küçük',
+    size3: 'Normal',
+    size4: 'Orta-geniş',
+    size5: 'Büyük',
+    size6: 'Çok büyük',
+    size7: 'En büyük',
+    defaultFont: 'Varsayılan Yazı Tipi',
+    viewSource: 'Kaynağı Görüntüle'
   },
   tree: {
-    noNodes: 'Немає доступних вузлів',
-    noResults: 'Співпадінь не знайдено'
+    noNodes: 'Düğüm yok',
+    noResults: 'Uyuşan düğüm bulunamadı'
   }
 });
 

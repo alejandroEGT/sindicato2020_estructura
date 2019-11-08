@@ -1,104 +1,104 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[29],{
 
-/***/ "./node_modules/quasar/lang/pt-br.js":
-/*!*******************************************!*\
-  !*** ./node_modules/quasar/lang/pt-br.js ***!
-  \*******************************************/
+/***/ "./node_modules/quasar/lang/pl.js":
+/*!****************************************!*\
+  !*** ./node_modules/quasar/lang/pl.js ***!
+  \****************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
-  isoName: 'pt-br',
-  nativeName: 'Português (BR)',
+  isoName: 'pl',
+  nativeName: 'Polski',
   label: {
-    clear: 'Limpar',
+    clear: 'Wyczyść',
     ok: 'OK',
-    cancel: 'Cancelar',
-    close: 'Fechar',
-    set: 'Escolher',
-    select: 'Selecionar',
-    reset: 'Redefinir',
-    remove: 'Remover',
-    update: 'Atualizar',
-    create: 'Criar',
-    search: 'Buscar',
-    filter: 'Filtrar',
-    refresh: 'Recarregar'
+    cancel: 'Anuluj',
+    close: 'Zamknij',
+    set: 'Ustaw',
+    select: 'Wybierz',
+    reset: 'Zresetuj',
+    remove: 'Usuń',
+    update: 'Zaktualizuj',
+    create: 'Utwórz',
+    search: 'Szukaj',
+    filter: 'Filtruj',
+    refresh: 'Odśwież'
   },
   date: {
-    days: 'Domingo_Segunda-feira_Terça-feira_Quarta-feira_Quinta-feira_Sexta-feira_Sábado'.split('_'),
-    daysShort: 'Dom_Seg_Ter_Qua_Qui_Sex_Sáb'.split('_'),
-    months: 'Janeiro_Fevereiro_Março_Abril_Maio_Junho_Julho_Agosto_Setembro_Outubro_Novembro_Dezembro'.split('_'),
-    monthsShort: 'Jan_Fev_Mar_Abr_Mai_Jun_Jul_Ago_Set_Out_Nov_Dez'.split('_'),
-    firstDayOfWeek: 0, // 0-6, 0 - Sunday, 1 Monday, ...
+    days: 'Niedziela_Poniedziałek_Wtorek_Środa_Czwartek_Piątek_Sobota'.split('_'),
+    daysShort: 'Nd_Pon_Wt_Śr_Czw_Ptk_Sob'.split('_'),
+    months: 'Styczeń_Luty_Marzec_Kwiecień_Maj_Czerwiec_Lipiec_Sierpień_Wrzesień_Październik_Listopad_Grudzień'.split('_'),
+    monthsShort: 'Sty_Lut_Mar_Kwi_Maj_Cze_Lip_Sie_Wrz_Paź_Lis_Gru'.split('_'),
+    firstDayOfWeek: 1, // 0-6, 0 - Sunday, 1 Monday, ...
     format24h: true
   },
   table: {
-    noData: 'Sem dados disponíveis',
-    noResults: 'Nenhum dado correspondente encontrado',
-    loading: 'Carregando...',
+    noData: 'Brak dostępnych danych',
+    noResults: 'Nie znaleziono pasujących wpisów',
+    loading: 'Ładowanie...',
     selectedRecords: function (rows) {
-      return rows > 0
-        ? rows + ' registro' + (rows === 1 ? ' selecionado' : 's selecionados') + '.'
-        : 'Nenhum registro selecionado.'
+      return rows > 1
+        ? rows + ' zaznaczony(ch) wiersz(y).'
+        : (rows === 0 ? 'Brak' : '1') + ' zaznaczony wiersz.'
     },
-    recordsPerPage: 'Registros por página:',
-    allRows: 'Todos',
+    recordsPerPage: 'Wierszy na stronę:',
+    allRows: 'Wszystkie',
     pagination: function (start, end, total) {
-      return start + '-' + end + ' de ' + total
+      return start + '-' + end + ' z ' + total
     },
-    columns: 'Colunas'
+    columns: 'Kolumny'
   },
   editor: {
     url: 'URL',
-    bold: 'Negrito',
-    italic: 'Itálico',
-    strikethrough: 'Riscado',
-    underline: 'Sublinhado',
-    unorderedList: 'Lista não-ordenada',
-    orderedList: 'Lista ordenada',
-    subscript: 'Subscrito',
-    superscript: 'Sobrescrito',
-    hyperlink: 'Hyperlink',
-    toggleFullscreen: 'Tela cheia',
-    quote: 'Citação',
-    left: 'Alinhado à esquerda',
-    center: 'Alinhado ao centro',
-    right: 'Alinhado à direita',
-    justify: 'Justificado',
-    print: 'Imprimir',
-    outdent: 'Diminuir indentação',
-    indent: 'Aumentar indentação',
-    removeFormat: 'Remover formatação',
-    formatting: 'Formatação',
-    fontSize: 'Tamanho de fonte',
-    align: 'Alinhar',
-    hr: 'Inserir divisória horizontal',
-    undo: 'Desfazer',
-    redo: 'Refazer',
-    header1: 'Cabeçalho 1',
-    header2: 'Cabeçalho 2',
-    header3: 'Cabeçalho 3',
-    header4: 'Cabeçalho 4',
-    header5: 'Cabeçalho 5',
-    header6: 'Cabeçalho 6',
-    paragraph: 'Parágrafo',
-    code: 'Código',
-    size1: 'Muito pequeno',
-    size2: 'Pequeno',
-    size3: 'Normal',
-    size4: 'Médio',
-    size5: 'Grande',
-    size6: 'Enorme',
-    size7: 'Máximo',
-    defaultFont: 'Fonte padrão',
-    viewSource: 'Exibir fonte'
+    bold: 'Pogrubienie',
+    italic: 'Kursywa',
+    strikethrough: 'Przekreślenie',
+    underline: 'Podkreślenie',
+    unorderedList: 'Nieuporządkowana lista',
+    orderedList: 'Uporządkowana lista',
+    subscript: 'Indeks dolny',
+    superscript: 'Indeks górny',
+    hyperlink: 'Hiperłącze',
+    toggleFullscreen: 'Przełącz na tryb pełnoekranowy',
+    quote: 'Zacytuj',
+    left: 'Wyrównaj do lewej',
+    center: 'Wyrównaj do środka',
+    right: 'Wyrównaj do prawej',
+    justify: 'Wyjustuj',
+    print: 'Drukuj',
+    outdent: 'Zmniejsz wcięcie',
+    indent: 'Zwiększ wcięcie',
+    removeFormat: 'Usuń formatowanie',
+    formatting: 'Formatowanie',
+    fontSize: 'Rozmiar czcionki',
+    align: 'Wyrównanie',
+    hr: 'Wstaw poziomą linię',
+    undo: 'Cofnij',
+    redo: 'Przywróć',
+    header1: 'Nagłówek 1',
+    header2: 'Nagłówek 2',
+    header3: 'Nagłówek 3',
+    header4: 'Nagłówek 4',
+    header5: 'Nagłówek 5',
+    header6: 'Nagłówek 6',
+    paragraph: 'Paragraf',
+    code: 'Kod',
+    size1: 'Bardzo mała',
+    size2: 'Mała',
+    size3: 'Normalna',
+    size4: 'Średnio-duża',
+    size5: 'Duża',
+    size6: 'Bardzo duża',
+    size7: 'Maksymalna',
+    defaultFont: 'Domyślna czcionka',
+    viewSource: 'Pokaż źródło'
   },
   tree: {
-    noNodes: 'Sem nós disponíveis',
-    noResults: 'Nenhum nó correspondente encontrado'
+    noNodes: 'Brak dostępnych gałęzi',
+    noResults: 'Nie znaleziono pasujących gałęzi'
   }
 });
 

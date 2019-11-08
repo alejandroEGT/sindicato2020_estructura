@@ -1,8 +1,8 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[17],{
 
-/***/ "./node_modules/quasar/lang/id.js":
+/***/ "./node_modules/quasar/lang/hu.js":
 /*!****************************************!*\
-  !*** ./node_modules/quasar/lang/id.js ***!
+  !*** ./node_modules/quasar/lang/hu.js ***!
   \****************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -10,95 +10,95 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
-  isoName: 'id',
-  nativeName: 'Bahasa Indonesia',
+  isoName: 'hu',
+  nativeName: 'Magyar',
   label: {
-    clear: 'Bersihkan',
+    clear: 'Törlés',
     ok: 'OK',
-    cancel: 'Batal',
-    close: 'Tutup',
-    set: 'Set',
-    select: 'Pilih',
-    reset: 'Reset',
-    remove: 'Copot',
-    update: 'Perbarui',
-    create: 'Buat',
-    search: 'Cari',
-    filter: 'Saring',
-    refresh: 'Segarkan'
+    cancel: 'Mégsem',
+    close: 'Bezárás',
+    set: 'Beállítás',
+    select: 'Kiválasztás',
+    reset: 'Visszaállítás',
+    remove: 'Eltávolítás',
+    update: 'Módosítás',
+    create: 'Létrehozás',
+    search: 'Keresés',
+    filter: 'Szűrés',
+    refresh: 'Frissítés'
   },
   date: {
-    days: 'Minggu_Senin_Selasa_Rabu_Kamis_Jum\'at_Sabtu'.split('_'),
-    daysShort: 'Min_Sen_Sel_Rab_Kam_Jum_Sab'.split('_'),
-    months: 'Januari_Februari_Maret_April_Mei_Juni_Juli_Agustus_September_Oktober_November_Desember'.split('_'),
-    monthsShort: 'Jan_Feb_Mar_Apr_Mei_Jun_Jul_Ags_Sep_Okt_Nov_Des'.split('_'),
+    days: 'Vasárnap_Hétfő_Kedd_Szerda_Csütörtök_Péntek_Szombat'.split('_'),
+    daysShort: 'Vas_Hét_Ke_Sze_Csü_Pén_Szo'.split('_'),
+    months: 'Január_Február_Március_Április_Május_Június_Július_Augusztus_Szeptember_Október_November_December'.split('_'),
+    monthsShort: 'Jan_Feb_Már_Ápr_Máj_Jún_Júl_Aug_Szep_Okt_Nov_Dec'.split('_'),
     firstDayOfWeek: 1, // 0-6, 0 - Sunday, 1 Monday, ...
     format24h: true
   },
   table: {
-    noData: 'Tidak ada data tersedia',
-    noResults: 'Tidak ada yang cocok',
-    loading: 'Memuat...',
+    noData: 'Nincs elérhető adat',
+    noResults: 'Nincsenek egyező találatok',
+    loading: 'Betöltés...',
     selectedRecords: function (rows) {
-      return rows > 1
-        ? rows + ' baris terpilih.'
-        : (rows === 0 ? 'tidak ada' : '1') + ' baris terpilih.'
+      return rows === 1
+        ? '1 kiválasztott elem.'
+        : (rows === 0 ? 'Nincs' : rows) + ' kiválasztott elem.'
     },
-    recordsPerPage: 'Baris per halaman:',
-    allRows: 'Semua',
+    recordsPerPage: 'Elemek száma oldalanként:',
+    allRows: 'Összes',
     pagination: function (start, end, total) {
-      return start + '-' + end + ' dari ' + total
+      return start + '-' + end + ' / ' + total
     },
-    columns: 'Kolom'
+    columns: 'Oszlopok'
   },
   editor: {
     url: 'URL',
-    bold: 'Tebal',
-    italic: 'Miring',
-    strikethrough: 'Coret',
-    underline: 'Garis Bawah',
-    unorderedList: 'Daftar tak Tersusun',
-    orderedList: 'Daftar Tersusun',
-    subscript: 'Subscript',
-    superscript: 'Superscript',
-    hyperlink: 'Hyperlink',
-    toggleFullscreen: 'Alihkan Layar Penuh',
-    quote: 'Kutip',
-    left: 'Rata Kiri',
-    center: 'Rata Tengah',
-    right: 'Rata Kanan',
-    justify: 'Rata Sisi',
-    print: 'Cetak',
-    outdent: 'Kurangi Indentasi',
-    indent: 'Tambah indentasi',
-    removeFormat: 'Hilangkan Pemformatan',
-    formatting: 'Pemformatan',
-    fontSize: 'Ukuran Huruf',
-    align: 'Rata',
-    hr: 'Masukkan Aturan Horizontal',
-    undo: 'Urungkan',
-    redo: 'Ulangi',
-    header1: 'Header 1',
-    header2: 'Header 2',
-    header3: 'Header 3',
-    header4: 'Header 4',
-    header5: 'Header 5',
-    header6: 'Header 6',
-    paragraph: 'Paragraf',
-    code: 'Kode',
-    size1: 'Sangat Kecil',
-    size2: 'Agak Kecil',
-    size3: 'Normal',
-    size4: 'Agak Besar',
-    size5: 'Besar',
-    size6: 'Sangat Besar',
-    size7: 'Maksimum',
-    defaultFont: 'Huruf Bawaan',
-    viewSource: 'Lihat sumber'
+    bold: 'Félkövér',
+    italic: 'Dőlt',
+    strikethrough: 'Áthúzott',
+    underline: 'Aláhúzott',
+    unorderedList: 'Felsorolás',
+    orderedList: 'Számozás',
+    subscript: 'Alsó index',
+    superscript: 'Felső index',
+    hyperlink: 'Hivatkozás',
+    toggleFullscreen: 'Teljes képernyő',
+    quote: 'Idézet',
+    left: 'Balra igazítás',
+    center: 'Középre igazítás',
+    right: 'Jobbra igazítás',
+    justify: 'Sorkizárás',
+    print: 'Nyomtatás',
+    outdent: 'Behúzás csökkentése',
+    indent: 'Behúzás növelése',
+    removeFormat: 'Formázás törlése',
+    formatting: 'Formázás',
+    fontSize: 'Betűméret',
+    align: 'Igazítás',
+    hr: 'Vízszintes elválasztó beillesztése',
+    undo: 'Visszavonás',
+    redo: 'Mégis',
+    header1: 'Címsor 1',
+    header2: 'Címsor 2',
+    header3: 'Címsor 3',
+    header4: 'Címsor 4',
+    header5: 'Címsor 5',
+    header6: 'Címsor 6',
+    paragraph: 'Paragrafus',
+    code: 'Kód',
+    size1: 'Nagyon kicsi',
+    size2: 'Kicsi',
+    size3: 'Normál',
+    size4: 'Közepesen nagy',
+    size5: 'Nagy',
+    size6: 'Nagyon nagy',
+    size7: 'Maximális',
+    defaultFont: 'Alapértelmezett betűtípus',
+    viewSource: 'Forrás megtekintése'
   },
   tree: {
-    noNodes: 'Tak ada node tersedia',
-    noResults: 'Tak ditemukan node yang cocok'
+    noNodes: 'Nincsenek elérhető elemek',
+    noResults: 'Nincsenek egyező találatok'
   }
 });
 

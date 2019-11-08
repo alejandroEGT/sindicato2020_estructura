@@ -1,109 +1,111 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[11],{
 
-/***/ "./node_modules/quasar/lang/fi.js":
-/*!****************************************!*\
-  !*** ./node_modules/quasar/lang/fi.js ***!
-  \****************************************/
+/***/ "./node_modules/quasar/lang/fa-ir.js":
+/*!*******************************************!*\
+  !*** ./node_modules/quasar/lang/fa-ir.js ***!
+  \*******************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+const days = 'یکشنبه_دوشنبه_سه‌شنبه_چهارشنبه_پنجشنبه_جمعه_شنبه'.split('_')
+const monthsShort = 'فروردین_اردیبهشت_خرداد_تیر_مرداد_شهریور_مهر_آبان_آذر_دی_بهمن_اسفند'.split('_')
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  isoName: 'fi',
-  nativeName: 'Suomi',
+  isoName: 'fa-ir',
+  nativeName: 'فارسی',
+  rtl: true,
   label: {
-    clear: 'Tyhjennä',
-    ok: 'OK',
-    cancel: 'Peruuta',
-    close: 'Sulje',
-    set: 'Aseta',
-    select: 'Valitse',
-    reset: 'Resetoi',
-    remove: 'Poista',
-    update: 'Päivitä',
-    create: 'Luo',
-    search: 'Etsi',
-    filter: 'Suodata',
-    refresh: 'Päivitä'
+    clear: 'پاک‌سازی',
+    ok: 'قبول',
+    cancel: 'لغو',
+    close: 'بستن',
+    set: 'ثبت',
+    select: 'انتخاب',
+    reset: 'بازنشانی',
+    remove: 'حذف',
+    update: 'بروزرسانی',
+    create: 'ساخت',
+    search: 'جستجو',
+    filter: 'فیلتر',
+    refresh: 'تازه‌سازی'
   },
   date: {
-    days: 'sunnuntai_maanantai_tiistai_keskiviikko_torstai_perjantai_lauantai'.split('_'),
-    daysShort: 'su_ma_ti_ke_to_pe_la'.split('_'),
-    months: 'tammikuu_helmikuu_maaliskuu_huhtikuu_toukokuu_kesäkuu_heinäkuu_elokuu_syyskuu_lokakuu_marraskuu_joulukuu'.split('_'),
-    monthsShort: 'tammi_helmi_maalis_huhti_touko_kesä_heinä_elo_syys_loka_marras_joulu'.split('_'),
-    firstDayOfWeek: 1, // 0-6, 0 - Sunday, 1 Monday, ...
+    days: days,
+    daysShort: 'ی_د_س_چ_پ_ج_ش'.split('_'),
+    months: 'فروردین_اردیبهشت_خرداد_تیر_مرداد_شهریور_مهر_آبان_آذر_دی_بهمن_اسفند'.split('_'),
+    monthsShort: monthsShort,
+    headerTitle: function (date, model) {
+      return days[ date.getDay() ] + '، ' +
+        model.day + ' ' +
+        monthsShort[ model.month - 1 ]
+    },
+    firstDayOfWeek: 6,
     format24h: true
   },
-  pullToRefresh: {
-    pull: 'Vedä alas päivittääksesi',
-    release: 'Vapauta päivittääksesi',
-    refresh: 'Päivitetään...'
-  },
   table: {
-    noData: 'Ei tietoja',
-    noResults: 'Ei tuloksia',
-    loading: 'Ladataan...',
+    noData: 'اطلاعاتی موجود نیست',
+    noResults: 'هیچ موردی یافت نشد',
+    loading: 'در حال بارگذاری ...',
     selectedRecords: function (rows) {
-      return rows === 1
-        ? '1 rivi valittu.'
-        : rows + ' riviä valittu.'
+      return rows === 0 ? 'رکوردی انتخاب نشده' : rows + ' رکورد انتخاب شده'
     },
-    recordsPerPage: 'Rivejä sivulla:',
-    allRows: 'Kaikki',
+    recordsPerPage: 'رکورد در صفحه:',
+    allRows: 'همه',
     pagination: function (start, end, total) {
-      return start + '-' + end + ' / ' + total
+      return start + '-' + end + ' از ' + total
     },
-    columns: 'Sarakkeet'
+    columns: 'ستون'
   },
   editor: {
-    url: 'URL',
-    bold: 'Lihavoitu',
-    italic: 'Kursivoitu',
-    strikethrough: 'Yliviivattu',
-    underline: 'Alleviivattu',
-    unorderedList: 'Järjestämätön Lista',
-    orderedList: 'Järjestetty Lista',
-    subscript: 'Alaindeksi',
-    superscript: 'Yläindeksi',
-    hyperlink: 'Hyperlinkki',
-    toggleFullscreen: 'Vaihda näyttötilaa',
-    quote: 'Lainaus',
-    left: 'Asettele vasemmalle',
-    center: 'Asettele keskelle',
-    right: 'Asettele oikealle',
-    justify: 'Asettele tasaten',
-    print: 'Tulosta',
-    outdent: 'Vähennä sisennystä',
-    indent: 'Kasvata sisennystä',
-    removeFormat: 'Poista muotoilu',
-    formatting: 'Muotoilu',
-    fontSize: 'Fonttikoko',
-    align: 'Asettelu',
-    hr: 'Lisää erotin',
-    undo: 'Kumoa',
-    redo: 'Toista',
-    header1: 'Otsikko 1',
-    header2: 'Otsikko 2',
-    header3: 'Otsikko 3',
-    header4: 'Otsikko 4',
-    header5: 'Otsikko 5',
-    header6: 'Otsikko 6',
-    paragraph: 'Kappale',
-    code: 'Koodi',
-    size1: 'Erittäin pieni',
-    size2: 'Pieni',
-    size3: 'Normaali',
-    size4: 'Isompi',
-    size5: 'Iso',
-    size6: 'Erittäin iso',
-    size7: 'Maksimi',
-    defaultFont: 'Oletusfontti',
-    viewSource: 'Katso lähde'
+    url: 'آدرس',
+    bold: 'کلفت',
+    italic: 'کج',
+    strikethrough: 'خط‌خورده',
+    underline: 'زیرخط',
+    unorderedList: 'فهرست غیرترتیبی',
+    orderedList: 'فهرست ترتیبی',
+    subscript: 'زیرنویس',
+    superscript: 'بالانویس',
+    hyperlink: 'پیوند',
+    toggleFullscreen: 'تغییر حالت تمام صفحه',
+    quote: 'نقل قول',
+    left: 'چپ تراز',
+    center: 'وسط تراز',
+    right: 'راست تراز',
+    justify: 'هم‌تراز',
+    print: 'چاپ',
+    outdent: 'کاهش دندانه',
+    indent: 'افزایش دندانه',
+    removeFormat: 'حذف قالب‌بندی',
+    formatting: 'قالب‌بندی',
+    fontSize: 'اندازه قلم',
+    align: 'تراز',
+    hr: 'درج خط افقی',
+    undo: 'عمل قبلی',
+    redo: 'عملی بعدی',
+    header1: 'سرفصل ۱',
+    header2: 'سرفصل ۲',
+    header3: 'سرفصل ۳',
+    header4: 'سرفصل ۴',
+    header5: 'سرفصل ۵',
+    header6: 'سرفصل ۶',
+    paragraph: 'پاراگراف',
+    code: 'کد',
+    size1: 'خیلی کوچک',
+    size2: 'کوچک',
+    size3: 'معمولی',
+    size4: 'متوسط-بزرگ',
+    size5: 'بزرگ',
+    size6: 'خیلی بزرگ',
+    size7: 'بزرگترین',
+    defaultFont: 'قلم پیش‌فرض',
+    viewSource: 'مشاهده منبع'
   },
   tree: {
-    noNodes: 'Ei solmuja saatavilla',
-    noResults: 'Ei vastaavia solmuja'
+    noNodes: 'گره‌ای در دسترس نیست',
+    noResults: 'گره‌ای یافت نشد'
   }
 });
 

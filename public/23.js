@@ -1,8 +1,8 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[23],{
 
-/***/ "./node_modules/quasar/lang/lv.js":
+/***/ "./node_modules/quasar/lang/lu.js":
 /*!****************************************!*\
-  !*** ./node_modules/quasar/lang/lv.js ***!
+  !*** ./node_modules/quasar/lang/lu.js ***!
   \****************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -10,95 +10,95 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
-  isoName: 'lv',
-  nativeName: 'Latviešu valoda',
+  isoName: 'lu',
+  nativeName: 'Kiluba',
   label: {
-    clear: 'Attīrīt',
+    clear: 'Eidel',
     ok: 'OK',
-    cancel: 'Atcelt',
-    close: 'Aizvērt',
-    set: 'Iestatīt',
-    select: 'Izvēlēties',
-    reset: 'Atiestatīt',
-    remove: 'Noņemt',
-    update: 'Atjaunināt',
-    create: 'Izveidot',
-    search: 'Meklēt',
-    filter: 'Filtēt',
-    refresh: 'Atjaunot'
+    cancel: 'Oofbriechen',
+    close: 'Schléissen',
+    set: 'Setzen',
+    select: 'Auswielen',
+    reset: 'Zerécksetzen',
+    remove: 'Läschen',
+    update: 'Aktualiséieren',
+    create: 'Erstellen',
+    search: 'Sichen',
+    filter: 'Filter',
+    refresh: 'Aktualiséieren'
   },
   date: {
-    days: 'Svētdiena_Pirmdiena_Otrdiena_Trešdiena_Ceturtdiena_Piektdiena_Sestdiena'.split('_'),
-    daysShort: 'Sv_Pi_Ot_Tr_Ce_Pi_Se'.split('_'),
-    months: 'Janvāris_Februāris_Marts_Aprīlis_Maijs_Jūnijs_Jūlijs_Augusts_Septembris_Okrobris_Novembris_Decembris'.split('_'),
-    monthsShort: 'Jan_Feb_Mar_Apr_Mai_Jūn_Jūl_Aug_Sep_Okt_Nov_Dec'.split('_'),
+    days: 'Sonndeg_Méindeg_Dënschdeg_Mëttwoch_Donneschdeg_Freideg_Samschdeg'.split('_'),
+    daysShort: 'So_Mé_Dë_Më_Do_Fr_Sa'.split('_'),
+    months: 'Januar_Februar_März_Abrëll_Mäi_Juni_Juli_August_September_Oktober_November_Dezember'.split('_'),
+    monthsShort: 'Jan_Feb_Mär_Abr_Mäi_Jun_Jul_Aug_Sep_Okt_Nov_Dec'.split('_'),
     firstDayOfWeek: 1, // 0-6, 0 - Sunday, 1 Monday, ...
     format24h: true
   },
   table: {
-    noData: 'Nav datu',
-    noResults: 'Ieraksti nav atrasti',
-    loading: 'Atjaunojas...',
+    noData: 'Keng Donnéen do',
+    noResults: 'Keng Anträg fonnt',
+    loading: 'Luedt...',
     selectedRecords: function (rows) {
       return rows === 1
-        ? '1 izvēlēta rinda.'
-        : (rows === 0 ? 'Nav' : rows) + ' izvēlētas rindas.'
+        ? '1 ausgewielten Zeil.'
+        : (rows === 0 ? 'Keng' : rows) + ' Zeilen ausgewielt.'
     },
-    recordsPerPage: 'Rindas lapā:',
-    allRows: 'Visas',
+    recordsPerPage: 'Zeilen pro Säit:',
+    allRows: 'All',
     pagination: function (start, end, total) {
-      return start + '-' + end + ' no ' + total
+      return start + '-' + end + ' vun ' + total
     },
-    columns: 'Kolonnas'
+    columns: 'Kolonnen'
   },
   editor: {
     url: 'URL',
-    bold: 'Trekns',
-    italic: 'Kursīvs',
-    strikethrough: 'Nosvītrots',
-    underline: 'Apakšsvītra',
-    unorderedList: 'Marķētais saraksts',
-    orderedList: 'Numurētais saraksts',
-    subscript: 'Apakšraksts',
-    superscript: 'Augšraksts',
-    hyperlink: 'Saite',
-    toggleFullscreen: 'Pilnekrāna režīms',
-    quote: 'Citāts',
-    left: 'Izlīdzināt gar kreiso malu',
-    center: 'Centrēt',
-    right: 'Izlīdzināt gar labo malu',
-    justify: 'Izlīdzināt gar abām malām',
-    print: 'Drukāt',
-    outdent: 'Samazināt atkāpi',
-    indent: 'Palielināt atkāpi',
-    removeFormat: 'Noņemt formatējumu',
-    formatting: 'Formatēt',
-    fontSize: 'Fonta izmērs',
-    align: 'Izlīdzināt',
-    hr: 'Ievietot horizontālo līniju',
-    undo: 'Atsaukt',
-    redo: 'Atkārtot',
-    header1: 'Virsraksts 1',
-    header2: 'Virsraksts 2',
-    header3: 'Virsraksts 3',
-    header4: 'Virsraksts 4',
-    header5: 'Virsraksts 5',
-    header6: 'Virsraksts 6',
-    paragraph: 'Rindkopa',
-    code: 'Kods',
-    size1: 'Ļoti mazs',
-    size2: 'Mazs',
-    size3: 'Normāls',
-    size4: 'Vidējs',
-    size5: 'Liels',
-    size6: 'Ļoti liels',
-    size7: 'Maksimāls',
-    defaultFont: 'Fonts pēc noklusējuma',
-    viewSource: 'Skatīt avotu'
+    bold: 'Fett',
+    italic: 'Kursiv',
+    strikethrough: 'Duerchgestrach',
+    underline: 'Ënnerstrach',
+    unorderedList: 'Ongeuerdnet Lëscht',
+    orderedList: 'Geuerdnet Lëscht',
+    subscript: 'déifgestallt',
+    superscript: 'héichgestallt',
+    hyperlink: 'Link',
+    toggleFullscreen: 'Vollbild ëmschalten',
+    quote: 'Zitat',
+    left: 'lenksbündeg',
+    center: 'zentréiert',
+    right: 'riedsbündeg',
+    justify: 'Ausriichten',
+    print: 'Drucken',
+    outdent: 'ausrëcken',
+    indent: 'anrëcken',
+    removeFormat: 'Formatéierung löschen',
+    formatting: 'Formatéiere',
+    fontSize: 'Schrëftgréisst',
+    align: 'Ausriichten',
+    hr: 'Horizontal Linn ansëtzen',
+    undo: 'Réckgängeg',
+    redo: 'Restauréieren',
+    header1: 'Iwwerschrëft 1',
+    header2: 'Iwwerschrëft 2',
+    header3: 'Iwwerschrëft 3',
+    header4: 'Iwwerschrëft 4',
+    header5: 'Iwwerschrëft 5',
+    header6: 'Iwwerschrëft 6',
+    paragraph: 'Paragraphe',
+    code: 'Code',
+    size1: 'Ganz kleng',
+    size2: 'E bëssi kleng',
+    size3: 'Normal',
+    size4: 'Grouss',
+    size5: 'Gréisser',
+    size6: 'Ganz grouss',
+    size7: 'Maximum',
+    defaultFont: 'Standard Schrëft',
+    viewSource: 'Umthombo wokubuka'
   },
   tree: {
-    noNodes: 'Nav pieejami mezgli',
-    noResults: 'Nav atrasti atbilstošie mezgli'
+    noNodes: 'Keng Kniet verfügbar',
+    noResults: 'Keng passend Kniet fonnt'
   }
 });
 

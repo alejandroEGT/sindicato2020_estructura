@@ -1,104 +1,108 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[40],{
 
-/***/ "./node_modules/quasar/lang/vi.js":
+/***/ "./node_modules/quasar/lang/uk.js":
 /*!****************************************!*\
-  !*** ./node_modules/quasar/lang/vi.js ***!
+  !*** ./node_modules/quasar/lang/uk.js ***!
   \****************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+function plurals (n, opts) {
+  return opts[n % 10 === 1 && n % 100 !== 11 ? 0 : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 1 : 2]
+}
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  isoName: 'vi',
-  nativeName: 'Tiếng Việt',
+  isoName: 'uk',
+  nativeName: 'Українська',
   label: {
-    clear: 'Xóa hết',
+    clear: 'Очистити',
     ok: 'OK',
-    cancel: 'Hủy',
-    close: 'Đóng',
-    set: 'Thiết đặt',
-    select: 'Chọn',
-    reset: 'Đặt lại',
-    remove: 'Gỡ bỏ',
-    update: 'Cập nhật',
-    create: 'Tạo',
-    search: 'Tìm kiếm',
-    filter: 'Bộ lọc',
-    refresh: 'Làm mới'
+    cancel: 'Скасувати',
+    close: 'Закрити',
+    set: 'Встановити',
+    select: 'Обрати',
+    reset: 'Скинути',
+    remove: 'Видалити',
+    update: 'Оновити',
+    create: 'Створити',
+    search: 'Пошук',
+    filter: 'Фільтр',
+    refresh: 'Оновити'
   },
   date: {
-    days: 'Chủ Nhật_Thứ Hai_Thứ Ba_Thứ Tư_Thứ Năm_Thứ Sáu_Thứ Bảy'.split('_'),
-    daysShort: 'CN_T2_T3_T4_T5_T6_T7'.split('_'),
-    months: 'Tháng Một_Tháng Hai_Tháng Ba_Tháng Tư_Tháng Năm_Tháng Sáu_Tháng Bảy_Tháng Tám_Tháng Chín_Tháng Mười_Tháng Mười Một_Tháng Mười Hai'.split('_'),
-    monthsShort: 'Th1_Th2_Th3_Th4_Th5_Th6_Th7_Th8_Th9_Th10_Th11_Th12'.split('_'),
+    days: 'Неділя_Понеділок_Вівторок_Середа_Четвер_П`ятниця_Субота'.split('_'),
+    daysShort: 'Нд_Пн_Вт_Ср_Чт_Пт_Сб'.split('_'),
+    months: 'Січень_Лютий_Березень_Квітень_Травень_Червень_Липень_Серпень_Вересень_Жовтень_Листопад_Грудень'.split('_'),
+    monthsShort: 'Січ_Лют_Бер_Кві_Тра_Чер_Лип_Сер_Вер_Жов_Лис_Гру'.split('_'),
     firstDayOfWeek: 1, // 0-6, 0 - Sunday, 1 Monday, ...
-    format24h: false
+    format24h: true
   },
   table: {
-    noData: 'Không có dữ liệu',
-    noResults: 'Không tìm thấy kết quả',
-    loading: 'Đang tải',
+    noData: 'Немає даних',
+    noResults: 'Співпадінь не знайдено',
+    loading: 'Завантаження...',
     selectedRecords: function (rows) {
-      return rows === 1
-        ? '1 hàng đã chọn.'
-        : (rows === 0 ? 'Không có hàng nào' : rows) + ' hàng đã chọn.'
+      return rows > 0
+        ? rows + ' ' + plurals(rows, ['рядок обраний', 'рядки обрані', 'рядків обрано']) + '.'
+        : 'Жодного рядку не обрано.'
     },
-    recordsPerPage: 'Hàng trên mỗi trang:',
-    allRows: 'Tất cả',
+    recordsPerPage: 'Рядків на сторінці:',
+    allRows: 'Усі',
     pagination: function (start, end, total) {
-      return start + '-' + end + ' của ' + total
+      return start + '-' + end + ' з ' + total
     },
-    columns: 'Cột'
+    columns: 'Колонки'
   },
   editor: {
     url: 'URL',
-    bold: 'Đậm',
-    italic: 'Nghiêng',
-    strikethrough: 'Gạch giữa',
-    underline: 'Gạch dưới',
-    unorderedList: 'Danh sách không theo thứ tự',
-    orderedList: 'Danh sách theo thứ tự',
-    subscript: 'Chỉ số dưới',
-    superscript: 'Chỉ số trên',
-    hyperlink: 'Liên kết',
-    toggleFullscreen: 'Điều chỉnh chế độ toàn màn hình',
-    quote: 'Trích dẫn',
-    left: 'Căn trái',
-    center: 'Căn giữa',
-    right: 'Căn phải',
-    justify: 'Căn đều 2 bên',
-    print: 'In',
-    outdent: 'Giảm lề',
-    indent: 'Tăng lề',
-    removeFormat: 'Xóa định dạng',
-    formatting: 'Định dạng',
-    fontSize: 'Kích cỡ phông',
-    align: 'Căn chỉnh',
-    hr: 'Chèn Quy Tắc Ngang',
-    undo: 'Hoàn tác',
-    redo: 'Làm lại',
-    header1: 'Tiêu đề 1',
-    header2: 'Tiêu đề 2',
-    header3: 'Tiêu đề 3',
-    header4: 'Tiêu đề 4',
-    header5: 'Tiêu đề 5',
-    header6: 'Tiêu đề 6',
-    paragraph: 'Đoạn',
-    code: 'Mã',
-    size1: 'Rất nhỏ',
-    size2: 'Nhỏ vừa',
-    size3: 'Thường',
-    size4: 'To vừa',
-    size5: 'To',
-    size6: 'Rất To',
-    size7: 'Tối đa',
-    defaultFont: 'Phông mặc định',
-    viewSource: 'Xem nguồn'
+    bold: 'Напівжирний',
+    italic: 'Курсив',
+    strikethrough: 'Закреслений',
+    underline: 'Підкреслений',
+    unorderedList: 'Маркований список',
+    orderedList: 'Нумерований список',
+    subscript: 'Підрядковий',
+    superscript: 'Надрядковий',
+    hyperlink: 'Гіперпосилання',
+    toggleFullscreen: 'Повноекранний режим',
+    quote: 'Цитата',
+    left: 'Вирівнювання по лівому краю',
+    center: 'Вирівнювання по центру',
+    right: 'Вирівнювання по правому краю',
+    justify: 'Вирівнювання по ширині',
+    print: 'Друк',
+    outdent: 'Зменшити відтуп',
+    indent: 'Збільшити відступ',
+    removeFormat: 'Видалити форматування',
+    formatting: 'Форматування',
+    fontSize: 'Розмір шрифту',
+    align: 'Вирівнювання',
+    hr: 'Вставити горизонтальну лінію',
+    undo: 'Відмінити',
+    redo: 'Повторити',
+    header1: 'Заголовок 1',
+    header2: 'Заголовок 2',
+    header3: 'Заголовок 3',
+    header4: 'Заголовок 4',
+    header5: 'Заголовок 5',
+    header6: 'Заголовок 6',
+    paragraph: 'Параграф',
+    code: 'Код',
+    size1: 'Дуже маленький',
+    size2: 'Маленький',
+    size3: 'Нормальний',
+    size4: 'Середній',
+    size5: 'Великий',
+    size6: 'Дуже великий',
+    size7: 'Величезний',
+    defaultFont: 'Шрифт за замовчуванням',
+    viewSource: 'Переглянути джерело'
   },
   tree: {
-    noNodes: 'Không có nốt nào có sẵn',
-    noResults: 'Không tìm thấy các nốt'
+    noNodes: 'Немає доступних вузлів',
+    noResults: 'Співпадінь не знайдено'
   }
 });
 
