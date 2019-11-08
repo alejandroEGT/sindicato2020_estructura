@@ -1,8 +1,8 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[12],{
 
-/***/ "./node_modules/quasar/lang/fr.js":
+/***/ "./node_modules/quasar/lang/fi.js":
 /*!****************************************!*\
-  !*** ./node_modules/quasar/lang/fr.js ***!
+  !*** ./node_modules/quasar/lang/fi.js ***!
   \****************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -10,95 +10,100 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
-  isoName: 'fr',
-  nativeName: 'Français',
+  isoName: 'fi',
+  nativeName: 'Suomi',
   label: {
-    clear: 'Effacer',
+    clear: 'Tyhjennä',
     ok: 'OK',
-    cancel: 'Annuler',
-    close: 'Fermer',
-    set: 'Régler',
-    select: 'Sélectionner',
-    reset: 'Réinitialiser',
-    remove: 'Supprimer',
-    update: 'Mettre à jour',
-    create: 'Créer',
-    search: 'Rechercher',
-    filter: 'Filtrer',
-    refresh: 'Rafraîchir'
+    cancel: 'Peruuta',
+    close: 'Sulje',
+    set: 'Aseta',
+    select: 'Valitse',
+    reset: 'Resetoi',
+    remove: 'Poista',
+    update: 'Päivitä',
+    create: 'Luo',
+    search: 'Etsi',
+    filter: 'Suodata',
+    refresh: 'Päivitä'
   },
   date: {
-    days: 'Dimanche_Lundi_Mardi_Mercredi_Jeudi_Vendredi_Samedi'.split('_'),
-    daysShort: 'Dim_Lun_Mar_Mer_Jeu_Ven_Sam'.split('_'),
-    months: 'Janvier_Février_Mars_Avril_Mai_Juin_Juillet_Août_Septembre_Octobre_Novembre_Décembre'.split('_'),
-    monthsShort: 'Jan_Fev_Mar_Avr_Mai_Juin_Jui_Aou_Sep_Oct_Nov_Dec'.split('_'),
+    days: 'sunnuntai_maanantai_tiistai_keskiviikko_torstai_perjantai_lauantai'.split('_'),
+    daysShort: 'su_ma_ti_ke_to_pe_la'.split('_'),
+    months: 'tammikuu_helmikuu_maaliskuu_huhtikuu_toukokuu_kesäkuu_heinäkuu_elokuu_syyskuu_lokakuu_marraskuu_joulukuu'.split('_'),
+    monthsShort: 'tammi_helmi_maalis_huhti_touko_kesä_heinä_elo_syys_loka_marras_joulu'.split('_'),
     firstDayOfWeek: 1, // 0-6, 0 - Sunday, 1 Monday, ...
     format24h: true
   },
+  pullToRefresh: {
+    pull: 'Vedä alas päivittääksesi',
+    release: 'Vapauta päivittääksesi',
+    refresh: 'Päivitetään...'
+  },
   table: {
-    noData: 'Aucune donnée à afficher',
-    noResults: 'Aucune donnée trouvée',
-    loading: 'Chargement...',
+    noData: 'Ei tietoja',
+    noResults: 'Ei tuloksia',
+    loading: 'Ladataan...',
     selectedRecords: function (rows) {
-      return rows > 0
-        ? rows + ' ' + (rows === 1 ? 'ligne sélectionnée' : 'lignes sélectionnées') + '.'
-        : 'Aucune ligne sélectionnée.'
+      return rows === 1
+        ? '1 rivi valittu.'
+        : rows + ' riviä valittu.'
     },
-    recordsPerPage: 'Lignes par page :',
-    allRows: 'Tous',
+    recordsPerPage: 'Rivejä sivulla:',
+    allRows: 'Kaikki',
     pagination: function (start, end, total) {
-      return start + '-' + end + ' sur ' + total
+      return start + '-' + end + ' / ' + total
     },
-    columns: 'Colonnes'
+    columns: 'Sarakkeet'
   },
   editor: {
     url: 'URL',
-    bold: 'Gras',
-    italic: 'Italique',
-    strikethrough: 'Barré',
-    underline: 'Souligné',
-    unorderedList: 'Liste non ordonnée',
-    orderedList: 'Liste ordonnée',
-    subscript: 'Indice',
-    superscript: 'Exposant',
-    hyperlink: 'Hyperlien',
-    toggleFullscreen: 'Basculer en plein écran',
-    quote: 'Citation',
-    left: 'Aligner à gauche',
-    center: 'Aligner au centre',
-    right: 'Aligner à droite',
-    justify: 'Justifier',
-    print: 'Imprimer',
-    outdent: "Diminuer l'indentation",
-    indent: "Augmenter l'indentation",
-    removeFormat: 'Supprimer la mise en forme',
-    formatting: 'Mise en forme',
-    fontSize: 'Taille de police',
-    align: 'Aligner',
-    hr: 'Insérer une règle horizontale',
-    undo: 'Annuler',
-    redo: 'Refaire',
-    header1: 'Titre 1',
-    header2: 'Titre 2',
-    header3: 'Titre 3',
-    header4: 'Titre 4',
-    header5: 'Titre 5',
-    header6: 'Titre 6',
-    paragraph: 'Paragraphe',
-    code: 'Code',
-    size1: 'Très petit',
-    size2: 'Petit',
-    size3: 'Normal',
-    size4: 'Moyenne',
-    size5: 'Grand',
-    size6: 'Très grand',
-    size7: 'Maximum',
-    defaultFont: 'Police par défaut',
-    viewSource: 'Voir la source'
+    bold: 'Lihavoitu',
+    italic: 'Kursivoitu',
+    strikethrough: 'Yliviivattu',
+    underline: 'Alleviivattu',
+    unorderedList: 'Järjestämätön Lista',
+    orderedList: 'Järjestetty Lista',
+    subscript: 'Alaindeksi',
+    superscript: 'Yläindeksi',
+    hyperlink: 'Hyperlinkki',
+    toggleFullscreen: 'Vaihda näyttötilaa',
+    quote: 'Lainaus',
+    left: 'Asettele vasemmalle',
+    center: 'Asettele keskelle',
+    right: 'Asettele oikealle',
+    justify: 'Asettele tasaten',
+    print: 'Tulosta',
+    outdent: 'Vähennä sisennystä',
+    indent: 'Kasvata sisennystä',
+    removeFormat: 'Poista muotoilu',
+    formatting: 'Muotoilu',
+    fontSize: 'Fonttikoko',
+    align: 'Asettelu',
+    hr: 'Lisää erotin',
+    undo: 'Kumoa',
+    redo: 'Toista',
+    header1: 'Otsikko 1',
+    header2: 'Otsikko 2',
+    header3: 'Otsikko 3',
+    header4: 'Otsikko 4',
+    header5: 'Otsikko 5',
+    header6: 'Otsikko 6',
+    paragraph: 'Kappale',
+    code: 'Koodi',
+    size1: 'Erittäin pieni',
+    size2: 'Pieni',
+    size3: 'Normaali',
+    size4: 'Isompi',
+    size5: 'Iso',
+    size6: 'Erittäin iso',
+    size7: 'Maksimi',
+    defaultFont: 'Oletusfontti',
+    viewSource: 'Katso lähde'
   },
   tree: {
-    noData: 'Aucun nœud à afficher',
-    noResults: 'Aucun nœud trouvé'
+    noNodes: 'Ei solmuja saatavilla',
+    noResults: 'Ei vastaavia solmuja'
   }
 });
 

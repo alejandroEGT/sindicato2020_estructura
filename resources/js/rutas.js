@@ -1,4 +1,3 @@
-
 import Outer from './components/outer.vue';
 import HomeComponent from './components/Home.vue';
 import CreateComponent from './components/Create.vue';
@@ -66,66 +65,6 @@ const routes = [
         { path: '/index', component: Index, name: 'Index' },
         { path: '/mi-perfil', component: MiPerfil, name: 'miPerfil' },
 
-// <<<<<<< HEAD
-//       { path: '/index', component: Index, name: 'Index' },
-//       { path: '/mi-perfil', component: MiPerfil, name: 'miPerfil' },
-//       { path: '/crear-cuenta', component: crearCuenta, name: 'crearCuenta' },
-//       { path: '/listar-cuenta', component: listarCuenta, name: 'listarCuenta' },
-//       { path: '/crear-prestamo', component: CrearPrestamo, name: 'CrearPrestamo' },
-//       { path: '/listar-prestamo', component: CrearPrestamo, name: 'ListarPrestamo' },
-// =======
-
-//       {
-//         path: '/index',
-//         component: Index,
-//         name: 'Index'
-//       },
-//       {
-//         path: '/mi-perfil',
-//         component: MiPerfil,
-//         name: 'miPerfil'
-//       },
-//       {
-//         path: '/crear-cuenta',
-//         component: crearCuenta,
-//         name: 'crearCuenta'
-//       },
-//       {
-//         path: '/crear-prestamo',
-//         component: CrearPrestamo,
-//         name: 'CrearPrestamo'
-//       },
-//       {
-//         path: '/listar-prestamo',
-//         component: CrearPrestamo,
-//         name: 'ListarPrestamo'
-//       },
-
-//       // clientes empanada
-//       {
-//         path: '/registro-clientes',
-//         component: RegistroClientes,
-//         name: 'RegistroClientes'
-//       },
-//       {
-//         path: '/listar-clientes',
-//         component: ListarClientes,
-//         name: 'ListarClientes'
-//       },
-
-//       // proveedores sumbex
-//       {
-//         path: '/listar-proveedor',
-//         component: ListarProveedor,
-//         name: 'ListarProveedor'
-//       },
-//       {
-//         path: '/registro-proveedor',
-//         component: RegistroProveedor,
-//         name: 'ListarProveedor'
-//       },
-
-// >>>>>>> empa
     ]
   },
 

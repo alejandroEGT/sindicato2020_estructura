@@ -1,8 +1,8 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[13],{
 
-/***/ "./node_modules/quasar/lang/gn.js":
+/***/ "./node_modules/quasar/lang/fr.js":
 /*!****************************************!*\
-  !*** ./node_modules/quasar/lang/gn.js ***!
+  !*** ./node_modules/quasar/lang/fr.js ***!
   \****************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -10,95 +10,95 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
-  isoName: 'gn',
-  nativeName: 'Avañe\'ẽ',
+  isoName: 'fr',
+  nativeName: 'Français',
   label: {
-    clear: 'Mbogue',
-    ok: 'OĨma',
-    cancel: 'Cancelar',
-    close: 'Mboty',
-    set: 'Mohenda',
-    select: 'Poravo',
-    reset: 'MoĨ jey',
-    remove: 'Juka',
-    update: 'Actualisa',
-    create: 'Japo',
-    search: 'Heka',
-    filter: 'Mbogua',
-    refresh: 'Actualisa'
+    clear: 'Effacer',
+    ok: 'OK',
+    cancel: 'Annuler',
+    close: 'Fermer',
+    set: 'Régler',
+    select: 'Sélectionner',
+    reset: 'Réinitialiser',
+    remove: 'Supprimer',
+    update: 'Mettre à jour',
+    create: 'Créer',
+    search: 'Rechercher',
+    filter: 'Filtrer',
+    refresh: 'Rafraîchir'
   },
   date: {
-    days: 'Domingo_Lunes_Martes_Miércoles_Jueves_Viernes_Sábado'.split('_'),
-    daysShort: 'Dom_Lun_Mar_Mié_Jue_Vie_Sáb'.split('_'),
-    months: 'Enero_Febrero_Marzo_Abril_Mayo_Junio_Julio_Agosto_Septiembre_Octubre_Noviembre_Diciembre'.split('_'),
-    monthsShort: 'Ene_Feb_Mar_Abr_May_Jun_Jul_Ago_Sep_Oct_Nov_Dic'.split('_'),
+    days: 'Dimanche_Lundi_Mardi_Mercredi_Jeudi_Vendredi_Samedi'.split('_'),
+    daysShort: 'Dim_Lun_Mar_Mer_Jeu_Ven_Sam'.split('_'),
+    months: 'Janvier_Février_Mars_Avril_Mai_Juin_Juillet_Août_Septembre_Octobre_Novembre_Décembre'.split('_'),
+    monthsShort: 'Jan_Fev_Mar_Avr_Mai_Juin_Jui_Aou_Sep_Oct_Nov_Dec'.split('_'),
     firstDayOfWeek: 1, // 0-6, 0 - Sunday, 1 Monday, ...
     format24h: true
   },
   table: {
-    noData: 'Ni peteĨ mba\'e',
-    noResults: 'Ni peteĨ resultado',
-    loading: 'Era\'arõ...',
+    noData: 'Aucune donnée à afficher',
+    noResults: 'Aucune donnée trouvée',
+    loading: 'Chargement...',
     selectedRecords: function (rows) {
-      return rows > 1
-        ? rows + ' fila selesionada.'
-        : (rows === 0 ? 'Sin' : '1') + ' fila selesionada.'
+      return rows > 0
+        ? rows + ' ' + (rows === 1 ? 'ligne sélectionnée' : 'lignes sélectionnées') + '.'
+        : 'Aucune ligne sélectionnée.'
     },
-    recordsPerPage: 'Fila por páhina:',
-    allRows: 'Entero',
+    recordsPerPage: 'Lignes par page :',
+    allRows: 'Tous',
     pagination: function (start, end, total) {
-      return start + '-' + end + ' de ' + total
+      return start + '-' + end + ' sur ' + total
     },
-    columns: 'Columnakuéra'
+    columns: 'Colonnes'
   },
   editor: {
     url: 'URL',
-    bold: 'Negrita',
-    italic: 'Kursíva',
-    strikethrough: 'Tachado',
-    underline: 'Subrayado',
-    unorderedList: 'Lista Desordenada',
-    orderedList: 'Lista Ordenada',
-    subscript: 'Subíndice',
-    superscript: 'Superíndice',
-    hyperlink: 'Hipervínculo',
-    toggleFullscreen: 'Pantalla kompléta',
-    quote: 'Cita',
-    left: 'Alineación izquierda',
-    center: 'Alineación centro',
-    right: 'Alineación derecha',
-    justify: 'Justificar alineación',
-    print: 'Imprimir',
-    outdent: 'Disminuir indentación',
-    indent: 'Aumentar indentación',
-    removeFormat: 'Eliminar formato',
-    formatting: 'Formato',
-    fontSize: 'Tamaño de Fuente',
-    align: 'Alinear',
-    hr: 'Insertar línea horizontal',
-    undo: 'Deshacer',
-    redo: 'Rehacer',
-    header1: 'Encabezado 1',
-    header2: 'Encabezado 2',
-    header3: 'Encabezado 3',
-    header4: 'Encabezado 4',
-    header5: 'Encabezado 5',
-    header6: 'Encabezado 6',
-    paragraph: 'Párrafo',
-    code: 'Código',
-    size1: 'Muy pequeño',
-    size2: 'Pequeño',
+    bold: 'Gras',
+    italic: 'Italique',
+    strikethrough: 'Barré',
+    underline: 'Souligné',
+    unorderedList: 'Liste non ordonnée',
+    orderedList: 'Liste ordonnée',
+    subscript: 'Indice',
+    superscript: 'Exposant',
+    hyperlink: 'Hyperlien',
+    toggleFullscreen: 'Basculer en plein écran',
+    quote: 'Citation',
+    left: 'Aligner à gauche',
+    center: 'Aligner au centre',
+    right: 'Aligner à droite',
+    justify: 'Justifier',
+    print: 'Imprimer',
+    outdent: "Diminuer l'indentation",
+    indent: "Augmenter l'indentation",
+    removeFormat: 'Supprimer la mise en forme',
+    formatting: 'Mise en forme',
+    fontSize: 'Taille de police',
+    align: 'Aligner',
+    hr: 'Insérer une règle horizontale',
+    undo: 'Annuler',
+    redo: 'Refaire',
+    header1: 'Titre 1',
+    header2: 'Titre 2',
+    header3: 'Titre 3',
+    header4: 'Titre 4',
+    header5: 'Titre 5',
+    header6: 'Titre 6',
+    paragraph: 'Paragraphe',
+    code: 'Code',
+    size1: 'Très petit',
+    size2: 'Petit',
     size3: 'Normal',
-    size4: 'Mediano',
-    size5: 'Grande',
-    size6: 'Muy grande',
-    size7: 'Máximo',
-    defaultFont: 'Fuente por defecto',
-    viewSource: 'View Source'
+    size4: 'Moyenne',
+    size5: 'Grand',
+    size6: 'Très grand',
+    size7: 'Maximum',
+    defaultFont: 'Police par défaut',
+    viewSource: 'Voir la source'
   },
   tree: {
-    noNodes: 'Sin nodos disponibles',
-    noResults: 'No se encontraron nodos correspondientes'
+    noData: 'Aucun nœud à afficher',
+    noResults: 'Aucun nœud trouvé'
   }
 });
 

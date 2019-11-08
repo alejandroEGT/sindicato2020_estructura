@@ -86,9 +86,20 @@
               <q-btn
                 :loading="loading2"
                 color="primary"
-                @click="simulateProgress(2)"
+                @click="simulateProgress(2),url_listado_clientes()"
                 icon-right="table_chart"
                 label="tabla"
+              >
+                <template v-slot:loading>
+                  <q-spinner-facebook />
+                </template>
+              </q-btn>
+              <q-btn
+                :loading="loading3"
+                color="red"
+                @click="simulateProgress(3), url_volver()"
+                icon-right="settings_backup_restore"
+                label="volver"
               >
                 <template v-slot:loading>
                   <q-spinner-facebook />
