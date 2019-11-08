@@ -14,6 +14,7 @@ import Auth from "./components/auth/auth.vue";
 import Index from './components/auth/index.vue';
 import MiPerfil from './components/auth/perfil.vue';
 import crearCuenta from './components/auth/cuentas/crearCuenta.vue';
+import RegistroProveedor from './components/auth/proveedores/registro.vue';
 
 const routes = [
   {
@@ -57,6 +58,7 @@ const routes = [
       { path: '/crear-cuenta', component: crearCuenta, name: 'crearCuenta' },
       { path: '/crear-prestamo', component: CrearPrestamo, name: 'CrearPrestamo' },
       { path: '/listar-prestamo', component: CrearPrestamo, name: 'ListarPrestamo' },
+      { path: '/proveedores', component: RegistroProveedor, name: 'Proveedores' },
     ]
   },
   // {
