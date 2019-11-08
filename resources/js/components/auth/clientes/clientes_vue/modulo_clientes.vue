@@ -1,5 +1,5 @@
 <template>
 	<div>
-		Inicio modulo clientes
+		Inicio modulo clientes 2
 	</div>
 </template>
