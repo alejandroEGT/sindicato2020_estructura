@@ -24,7 +24,6 @@
 
                 <div class="col-12 col-md-2">
                   <q-btn
-                    @click="url_crear_cuenta"
                     color="primary"
                     class="block"
                     icon="create"
@@ -49,5 +48,4 @@ export default {
     }
   }
 };
-</script>
 </script>
