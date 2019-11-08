@@ -21,7 +21,12 @@ const app = new Vue(Vue.util.extend({ router })).$mount('#app');*/
 require('./bootstrap');
 
 window.Vue = require('vue');
+
 import Rutas from './rutas.js';
+import routes_alejandro from './routes/alejandro.js'
+import routes_bryanv from './routes/bryanv.js'
+import routes_empa from './routes/empa.js'
+import routes_sumbex from './routes/sumbex.js'
 
 import VueRouter from 'vue-router';
 Vue.use(VueRouter);
@@ -45,22 +50,35 @@ import "quasar-extras/mdi"
 import "quasar-extras/ionicons"
 import "quasar-extras/roboto-font"
 import "quasar-extras/animate"
-// import langEs from 'quasar/lang/es'
 import Quasar, * as All from 'quasar/dist/quasar.umd'
 
 require('quasar/dist/quasar.css');
+
+import langDe from 'quasar/dist/lang/es.umd.min.js'
 
 Vue.use(Quasar, {
     components: All,
     directives: All,
     plugins: All,
     animations: All,
-    // lang: langEs
+    lang: langDe
 })
 
+import Vue from 'vue';
+import VueI18n from 'vue-i18n';
+Vue.use(VueI18n);
 
 
-const router = new VueRouter({ /*mode: 'history',*/ routes: Rutas});
+const router = new VueRouter({
+  routes: [
+    ...Rutas,
+    ...routes_alejandro,
+    ...routes_bryanv,
+    ...routes_empa,
+    ...routes_sumbex
+  ],
+  //mode: 'history'
+});
 Vue.router = router;
 
 App.router = Vue.router;
