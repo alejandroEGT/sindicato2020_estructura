@@ -2,7 +2,7 @@
    <template>
   <div  v-if="$auth.check()">
     
-     <q-bar dark class="bg-black text-white">
+     <q-bar dark class="bg-primary text-white">
       
       <div class="col text-center text-weight-bold">
 
