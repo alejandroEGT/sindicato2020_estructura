@@ -1,8 +1,8 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[18],{
 
-/***/ "./node_modules/quasar/lang/it.js":
+/***/ "./node_modules/quasar/lang/id.js":
 /*!****************************************!*\
-  !*** ./node_modules/quasar/lang/it.js ***!
+  !*** ./node_modules/quasar/lang/id.js ***!
   \****************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -10,95 +10,95 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
-  isoName: 'it',
-  nativeName: 'Italiano',
+  isoName: 'id',
+  nativeName: 'Bahasa Indonesia',
   label: {
-    clear: 'Pulisci',
+    clear: 'Bersihkan',
     ok: 'OK',
-    cancel: 'Annulla',
-    close: 'Chiudi',
-    set: 'Imposta',
-    select: 'Seleziona',
-    reset: 'Ripristina',
-    remove: 'Rimuovi',
-    update: 'Aggiorna',
-    create: 'Crea',
-    search: 'Cerca',
-    filter: 'Filtra',
-    refresh: 'Aggiorna'
+    cancel: 'Batal',
+    close: 'Tutup',
+    set: 'Set',
+    select: 'Pilih',
+    reset: 'Reset',
+    remove: 'Copot',
+    update: 'Perbarui',
+    create: 'Buat',
+    search: 'Cari',
+    filter: 'Saring',
+    refresh: 'Segarkan'
   },
   date: {
-    days: 'Domenica_Lunedì_Martedì_Mercoledì_Giovedì_Venerdì_Sabato'.split('_'),
-    daysShort: 'Dom_Lun_Mar_Mer_Gio_Ven_Sab'.split('_'),
-    months: 'Gennaio_Febbraio_Marzo_Aprile_Maggio_Giugno_Luglio_Agosto_Settembre_Ottobre_Novembre_Dicembre'.split('_'),
-    monthsShort: 'Gen_Feb_Mar_Apr_Mag_Giu_Lug_Ago_Set_Ott_Nov_Dic'.split('_'),
+    days: 'Minggu_Senin_Selasa_Rabu_Kamis_Jum\'at_Sabtu'.split('_'),
+    daysShort: 'Min_Sen_Sel_Rab_Kam_Jum_Sab'.split('_'),
+    months: 'Januari_Februari_Maret_April_Mei_Juni_Juli_Agustus_September_Oktober_November_Desember'.split('_'),
+    monthsShort: 'Jan_Feb_Mar_Apr_Mei_Jun_Jul_Ags_Sep_Okt_Nov_Des'.split('_'),
     firstDayOfWeek: 1, // 0-6, 0 - Sunday, 1 Monday, ...
     format24h: true
   },
   table: {
-    noData: 'Nessun dato disponibile',
-    noResults: 'Nessuna corrispondenza trovata',
-    loading: 'Caricamento...',
+    noData: 'Tidak ada data tersedia',
+    noResults: 'Tidak ada yang cocok',
+    loading: 'Memuat...',
     selectedRecords: function (rows) {
-      return rows > 0
-        ? rows + ' ' + (rows === 1 ? 'riga selezionata' : 'righe selezionate') + '.'
-        : 'Nessuna riga selezionata.'
+      return rows > 1
+        ? rows + ' baris terpilih.'
+        : (rows === 0 ? 'tidak ada' : '1') + ' baris terpilih.'
     },
-    recordsPerPage: 'Righe per pagina:',
-    allRows: 'Tutte',
+    recordsPerPage: 'Baris per halaman:',
+    allRows: 'Semua',
     pagination: function (start, end, total) {
-      return start + '-' + end + ' di ' + total
+      return start + '-' + end + ' dari ' + total
     },
-    columns: 'Colonne'
+    columns: 'Kolom'
   },
   editor: {
     url: 'URL',
-    bold: 'Grassetto',
-    italic: 'Corsivo',
-    strikethrough: 'Barrato',
-    underline: 'Sottolineato',
-    unorderedList: 'Lista non ordinata',
-    orderedList: 'Lista ordinata',
-    subscript: 'Pedice',
-    superscript: 'Apice',
+    bold: 'Tebal',
+    italic: 'Miring',
+    strikethrough: 'Coret',
+    underline: 'Garis Bawah',
+    unorderedList: 'Daftar tak Tersusun',
+    orderedList: 'Daftar Tersusun',
+    subscript: 'Subscript',
+    superscript: 'Superscript',
     hyperlink: 'Hyperlink',
-    toggleFullscreen: 'Fullscreen on/off',
-    quote: 'Citazione',
-    left: 'A sinistra',
-    center: 'Centra',
-    right: 'A destra',
-    justify: 'Giustificato',
-    print: 'Stampa',
-    outdent: 'Diminuisci identazione',
-    indent: 'Aumenta identazione',
-    removeFormat: 'Rimuovi formattazione',
-    formatting: 'Formattazione',
-    fontSize: 'Dimensione del font',
-    align: 'Allinea',
-    hr: 'Inserisci righello orizzontale',
-    undo: 'Indietro',
-    redo: 'Avanti',
-    header1: 'Intestazione 1',
-    header2: 'Intestazione 2',
-    header3: 'Intestazione 3',
-    header4: 'Intestazione 4',
-    header5: 'Intestazione 5',
-    header6: 'Intestazione 6',
-    paragraph: 'Paragrafo',
-    code: 'Codice',
-    size1: 'Molto piccolo',
-    size2: 'Piccolo',
-    size3: 'Normale',
-    size4: 'Medio-largo',
-    size5: 'Grande',
-    size6: 'Molto grande',
-    size7: 'Massimo',
-    defaultFont: 'Font predefinito',
-    viewSource: 'Vedi la fonte'
+    toggleFullscreen: 'Alihkan Layar Penuh',
+    quote: 'Kutip',
+    left: 'Rata Kiri',
+    center: 'Rata Tengah',
+    right: 'Rata Kanan',
+    justify: 'Rata Sisi',
+    print: 'Cetak',
+    outdent: 'Kurangi Indentasi',
+    indent: 'Tambah indentasi',
+    removeFormat: 'Hilangkan Pemformatan',
+    formatting: 'Pemformatan',
+    fontSize: 'Ukuran Huruf',
+    align: 'Rata',
+    hr: 'Masukkan Aturan Horizontal',
+    undo: 'Urungkan',
+    redo: 'Ulangi',
+    header1: 'Header 1',
+    header2: 'Header 2',
+    header3: 'Header 3',
+    header4: 'Header 4',
+    header5: 'Header 5',
+    header6: 'Header 6',
+    paragraph: 'Paragraf',
+    code: 'Kode',
+    size1: 'Sangat Kecil',
+    size2: 'Agak Kecil',
+    size3: 'Normal',
+    size4: 'Agak Besar',
+    size5: 'Besar',
+    size6: 'Sangat Besar',
+    size7: 'Maksimum',
+    defaultFont: 'Huruf Bawaan',
+    viewSource: 'Lihat sumber'
   },
   tree: {
-    noData: 'Nessun nodo disponibile',
-    noResults: 'Nessuna corrispondenza trovata'
+    noNodes: 'Tak ada node tersedia',
+    noResults: 'Tak ditemukan node yang cocok'
   }
 });
 

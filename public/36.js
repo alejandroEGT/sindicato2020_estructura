@@ -1,8 +1,8 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[36],{
 
-/***/ "./node_modules/quasar/lang/sv.js":
+/***/ "./node_modules/quasar/lang/sr.js":
 /*!****************************************!*\
-  !*** ./node_modules/quasar/lang/sv.js ***!
+  !*** ./node_modules/quasar/lang/sr.js ***!
   \****************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -10,95 +10,95 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
-  isoName: 'sv',
-  nativeName: 'Svenska',
+  isoName: 'sr',
+  nativeName: 'српски језик',
   label: {
-    clear: 'Rensa',
+    clear: 'Obriši',
     ok: 'OK',
-    cancel: 'Avbryt',
-    close: 'Stäng',
-    set: 'Sätt',
-    select: 'Välj',
-    reset: 'Nollställ',
-    remove: 'Ta bort',
-    update: 'Uppdatera',
-    create: 'Skapa',
-    search: 'Sök',
-    filter: 'Filtrera',
-    refresh: 'Uppdatera'
+    cancel: 'Odustani',
+    close: 'Zatvori',
+    set: 'Postavi',
+    select: 'Izaberi',
+    reset: 'Poništi',
+    remove: 'Ukloni',
+    update: 'Ažuriraj',
+    create: 'Dodaj',
+    search: 'Traži',
+    filter: 'Filter',
+    refresh: 'Osveži'
   },
   date: {
-    days: 'Söndag_Måndag_Tisdag_Onsdag_Torsdag_Fredag_Lördag'.split('_'),
-    daysShort: 'Sön_Mån_Tis_Ons_Tor_Fre_Lör'.split('_'),
-    months: 'Januari_Februari_Mars_April_Maj_Juni_Juli_Augusti_September_Oktober_November_December'.split('_'),
-    monthsShort: 'Jan_Feb_Mar_Apr_Maj_Jun_Jul_Aug_Sep_Okt_Nov_Dec'.split('_'),
+    days: 'Nedelja_Ponedeljak_Utorak_Sreda_Četvrtak_Petak_Subota'.split('_'),
+    daysShort: 'Ned_Pon_Uto_Sre_Čet_Pet_Sub'.split('_'),
+    months: 'Januar_Februar_Mart_April_Maj_Jun_Jul_Avgust_Septembar_Oktobar_Novembar_Decembar'.split('_'),
+    monthsShort: 'Jan_Feb_Mar_Apr_Maj_Jun_Jul_Avg_Sep_Okt_Nov_Dec'.split('_'),
     firstDayOfWeek: 1, // 0-6, 0 - Sunday, 1 Monday, ...
     format24h: true
   },
   table: {
-    noData: 'Ingen data tillgänglig',
-    noResults: 'Inget resultat matchar',
-    loading: 'Laddar...',
+    noData: 'Nema podataka',
+    noResults: 'Nema odgovarajućih zapisa',
+    loading: 'Učitavanje...',
     selectedRecords: function (rows) {
-      return rows === 1
-        ? '1 vald rad.'
-        : (rows === 0 ? 'Inga' : rows) + ' valda rader.'
+      return rows > 1
+        ? rows + ' izabranih redova.'
+        : (rows === 0 ? 'Nema' : '1') + ' izabranih redova.'
     },
-    recordsPerPage: 'Rader per sida:',
-    allRows: 'Alla',
+    recordsPerPage: 'Redova po stranici:',
+    allRows: 'Sve',
     pagination: function (start, end, total) {
-      return start + '-' + end + ' av ' + total
+      return start + '-' + end + ' od ' + total
     },
-    columns: 'Kolumner'
+    columns: 'Kolone'
   },
   editor: {
     url: 'URL',
-    bold: 'Fet',
-    italic: 'Kursiv',
-    strikethrough: 'Genomstruken',
-    underline: 'Understruken',
-    unorderedList: 'Punktlista',
-    orderedList: 'Numrerad lista',
-    subscript: 'Nedsänkt',
-    superscript: 'Upphöjt',
-    hyperlink: 'Länk',
-    toggleFullscreen: 'Växla helskärm',
+    bold: 'Podebljano',
+    italic: 'Nakošeno',
+    strikethrough: 'Precrtano',
+    underline: 'Podcrtano',
+    unorderedList: 'Označena lista',
+    orderedList: 'Numerisana lista',
+    subscript: 'Potpisano',
+    superscript: 'Natpisano',
+    hyperlink: 'Hiperlink',
+    toggleFullscreen: 'Ceo ekran',
     quote: 'Citat',
-    left: 'Vänsterjustera',
-    center: 'Centrera',
-    right: 'Högerjustera',
-    justify: 'Justera',
-    print: 'Skriv ut',
-    outdent: 'Minska indrag',
-    indent: 'Öka indrag',
-    removeFormat: 'Ta bort formatering',
-    formatting: 'Formatering',
-    fontSize: 'Teckenstorlek',
-    align: 'Justera',
-    hr: 'Infoga vågrät linje',
-    undo: 'Ångra',
-    redo: 'Gör om',
-    header1: 'Rubrik 1',
-    header2: 'Rubrik 2',
-    header3: 'Rubrik 3',
-    header4: 'Rubrik 4',
-    header5: 'Rubrik 5',
-    header6: 'Rubrik 6',
-    paragraph: 'Stycke',
+    left: 'Poravnati ulevo',
+    center: 'Centrirati',
+    right: 'Poravnati udesno',
+    justify: 'Poravnati obostrano',
+    print: 'Ispis',
+    outdent: 'Smanjiti uvlačenje',
+    indent: 'Povećati uvlačenje',
+    removeFormat: 'Ukloniti formatiranje',
+    formatting: 'Formatirati',
+    fontSize: 'Veličina slova',
+    align: 'Poravnati',
+    hr: 'Ubaciti vodoravni lenjir',
+    undo: 'Poništiti',
+    redo: 'Vratiti',
+    header1: 'Naslov 1',
+    header2: 'Naslov 2',
+    header3: 'Naslov 3',
+    header4: 'Naslov 4',
+    header5: 'Naslov 5',
+    header6: 'Naslov 6',
+    paragraph: 'Odlomak',
     code: 'Kod',
-    size1: 'Väldigt liten',
-    size2: 'Liten',
-    size3: 'Normal',
-    size4: 'Större än normal',
-    size5: 'Stor',
-    size6: 'Väldigt stor',
-    size7: 'Maximalt stor',
-    defaultFont: 'Standardteckensnitt',
-    viewSource: 'Visa källa'
+    size1: 'Najmanje',
+    size2: 'Manje',
+    size3: 'Normalno',
+    size4: 'Srednje Veliko',
+    size5: 'Veliko',
+    size6: 'Već',
+    size7: 'Najveće',
+    defaultFont: 'Zadani font',
+    viewSource: 'Погледај извор'
   },
   tree: {
-    noNodes: 'Inga noder tillgängliga',
-    noResults: 'Inga noder matchar'
+    noNodes: 'Nema nijednog čvora',
+    noResults: 'Nema odgovarajućih čvorova'
   }
 });
 

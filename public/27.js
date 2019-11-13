@@ -1,104 +1,105 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[27],{
 
-/***/ "./node_modules/quasar/lang/nl.js":
-/*!****************************************!*\
-  !*** ./node_modules/quasar/lang/nl.js ***!
-  \****************************************/
+/***/ "./node_modules/quasar/lang/nb-no.js":
+/*!*******************************************!*\
+  !*** ./node_modules/quasar/lang/nb-no.js ***!
+  \*******************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
-  isoName: 'nl',
-  nativeName: 'Nederlands',
+  isoName: 'nb-no',
+  nativeName: 'Norsk',
   label: {
-    clear: 'Wis',
+    clear: 'Tøm',
     ok: 'OK',
-    cancel: 'Annuleer',
-    close: 'Sluit',
-    set: 'Pas toe',
-    select: 'Selecteer',
-    reset: 'Herinitialiseren',
-    remove: 'Verwijder',
-    update: 'Update',
-    create: 'Maak aan',
-    search: 'Zoek',
+    cancel: 'Avbryt',
+    close: 'Lukk',
+    set: 'Bruk',
+    select: 'Velg',
+    reset: 'Nullstill',
+    remove: 'Slett',
+    update: 'Oppdater',
+    create: 'Lag',
+    search: 'Søk',
     filter: 'Filter',
-    refresh: 'Ververs'
+    refresh: 'Oppdater'
   },
   date: {
-    days: 'Zondag_Maandag_Dinsdag_Woensdag_Donderdag_Vrijdag_Zaterdag'.split('_'),
-    daysShort: 'Zo_Ma_Di_Wo_Do_Vr_Za'.split('_'),
-    months: 'Januari_Februari_Maart_April_Mei_Juni_Juli_Augustus_September_Oktober_November_December'.split('_'),
-    monthsShort: 'Jan_Feb_Mrt_Apr_Mei_Jun_Jul_Aug_Sep_Okt_Nov_Dec'.split('_'),
+    days: 'Søndag_Mandag_Tirsdag_Onsdag_Torsdag_Fredag_Lørdag'.split('_'),
+    daysShort: 'Søn_Man_Tir_Ons_Tor_Fre_Lør'.split('_'),
+    months: 'Januar_Februar_Mars_April_Mai_Juni_Juli_August_September_Oktober_November_Desember'.split('_'),
+    monthsShort: 'Jan_Feb_Mar_Apr_Mai_Jun_Jul_Aug_Sep_Okt_Nov_Des'.split('_'),
     firstDayOfWeek: 1, // 0-6, 0 - Sunday, 1 Monday, ...
     format24h: true
   },
   table: {
-    noData: 'Geen gegevens beschikbaar',
-    noResults: 'Geen records gevonden',
-    loading: 'Laden...',
+    noData: 'Ingen data tilgjengelig',
+    noResults: 'Ingen treff i data funnet',
+    loading: 'Laster...',
+    row: 'rad',
     selectedRecords: function (rows) {
-      return rows === 1
-        ? '1 record geselecteerd.'
-        : (rows === 0 ? 'Geen' : rows) + ' geselecteerde records.'
+      return rows > 0
+        ? rows + ' row' + (rows === 1 ? '' : 's') + ' valgt.'
+        : 'Ingen valgte rader.'
     },
-    recordsPerPage: 'Records per pagina:',
+    recordsPerPage: 'Rader pr side:',
     allRows: 'Alle',
     pagination: function (start, end, total) {
-      return start + '-' + end + ' van ' + total
+      return start + '-' + end + ' av ' + total
     },
-    columns: 'Kolommen'
+    columns: 'Kolonner'
   },
   editor: {
     url: 'URL',
-    bold: 'Vet',
-    italic: 'Cursief',
-    strikethrough: 'Doorstrepen',
-    underline: 'Onderstrepen',
-    unorderedList: 'Ongeordende lijst',
-    orderedList: 'Geordende lijst ',
-    subscript: 'Onderschrift',
-    superscript: 'Bovenschrift',
-    hyperlink: 'Hyperlink',
-    toggleFullscreen: 'Volledig scherm',
-    quote: 'Citaat',
-    left: 'Links uitlijnen',
-    center: 'Centreren',
-    right: 'Rechts uitlijnen',
-    justify: 'Uitvullen',
-    print: 'Afdrukken',
-    outdent: 'Minder inspringen',
-    indent: 'Meer inspringen',
-    removeFormat: 'Opmaak verwijderen',
-    formatting: 'Opmaak',
-    fontSize: 'Tekengrootte',
-    align: 'Uitlijnen',
-    hr: 'Horizontale lijn invoegen',
-    undo: 'Herstel',
-    redo: 'Opnieuw',
-    header1: 'Kop 1',
-    header2: 'Kop 2',
-    header3: 'Kop 3',
-    header4: 'Kop 4',
-    header5: 'Kop 5',
-    header6: 'Kop 6',
-    paragraph: 'Paragraaf',
-    code: 'Code',
-    size1: 'Heel klein',
-    size2: 'Klein',
-    size3: 'Normaal',
-    size4: 'Medium',
-    size5: 'Groot',
-    size6: 'Heel groot',
+    bold: 'Fet',
+    italic: 'Kursiv',
+    strikethrough: 'Gjennomstreking',
+    underline: 'Understrek',
+    unorderedList: 'Uordnet liste',
+    orderedList: 'Ordnet liste',
+    subscript: 'Senket skrift',
+    superscript: 'Hevet skrift',
+    hyperlink: 'Lenke',
+    toggleFullscreen: 'Av/på fullskjerm',
+    quote: 'Sitat',
+    left: 'Venstrestill',
+    center: 'Sentrer',
+    right: 'Høyrestill',
+    justify: 'Tilpasset bredde',
+    print: 'Skriv ut',
+    outdent: 'Midre innrykk',
+    indent: 'Større innrykk',
+    removeFormat: 'Fjern formatering',
+    formatting: 'Formatering',
+    fontSize: 'Fontstørrelse',
+    align: 'Stilling',
+    hr: 'Sett inn horisontal linje',
+    undo: 'Angre',
+    redo: 'Gjenta',
+    header1: 'Overskrift 1',
+    header2: 'Overskrift 2',
+    header3: 'Overskrift 3',
+    header4: 'Overskrift 4',
+    header5: 'Overskrift 5',
+    header6: 'Overskrift 6',
+    paragraph: 'Avsnitt',
+    code: 'Kode',
+    size1: 'Veldig liten',
+    size2: 'Liten',
+    size3: 'Normal',
+    size4: 'Medium-stor',
+    size5: 'Stor',
+    size6: 'Veldig stor',
     size7: 'Maximum',
-    defaultFont: 'Standaard lettertype',
-    viewSource: 'Bekijk bron'
+    defaultFont: 'Normal font',
+    viewSource: 'Se kilde'
   },
   tree: {
-    noNodes: 'Geen nodes beschikbaar',
-    noResults: 'Geen overeenkomstige nodes gevonden'
+    noNodes: 'Ingen noder tilgjengelig',
+    noResults: 'Ingen treff i noder funnet'
   }
 });
 

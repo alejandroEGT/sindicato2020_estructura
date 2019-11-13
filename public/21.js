@@ -1,104 +1,104 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[21],{
 
-/***/ "./node_modules/quasar/lang/ko-kr.js":
-/*!*******************************************!*\
-  !*** ./node_modules/quasar/lang/ko-kr.js ***!
-  \*******************************************/
+/***/ "./node_modules/quasar/lang/km.js":
+/*!****************************************!*\
+  !*** ./node_modules/quasar/lang/km.js ***!
+  \****************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
-  isoName: 'ko-kr',
-  nativeName: '한국어',
+  isoName: 'km',
+  nativeName: 'ខ្មែរ',
   label: {
-    clear: '초기화',
-    ok: '확인',
-    cancel: '취소',
-    close: '닫기',
-    set: '설정',
-    select: '선택',
-    reset: '초기화',
-    remove: '삭제',
-    update: '업데이트',
-    create: '생성',
-    search: '검색',
-    filter: '필터',
-    refresh: '새로 고침'
+    clear: 'សម្អាត',
+    ok: 'យល់ព្រម',
+    cancel: 'បោះបង់',
+    close: 'បិទ',
+    set: 'កំណត់',
+    select: 'ជ្រើសរើស',
+    reset: 'កំណត់ឡើងវិញ',
+    remove: 'លុប',
+    update: 'កែប្រែ',
+    create: 'បង្កើត',
+    search: 'ស្វែងរក',
+    filter: 'ច្រោះ',
+    refresh: 'ធ្វើឲ្យថ្មី'
   },
   date: {
-    days: '일요일_월요일_화요일_수요일_목요일_금요일_토요일'.split('_'),
-    daysShort: '일_월_화_수_목_금_토'.split('_'),
-    months: '1월_2월_3월_4월_5월_6월_7월_8월_9월_10월_11월_12월'.split('_'),
-    monthsShort: '1월_2월_3월_4월_5월_6월_7월_8월_9월_10월_11월_12월'.split('_'),
-    firstDayOfWeek: 0, // 0-6, 0 - Sunday, 1 Monday, ...
+    days: 'អាទិត្យ_ចន្ទ_អង្គារ_ពុធ_ព្រហស្បតិ៍_សុក្រ_សៅរ៍'.split('_'),
+    daysShort: 'អទ_ចន_អង_ពុ_ព្រ_សុ_សរ'.split('_'),
+    months: 'មករា_កុម្ភៈ_មីនា_មេសា_ឧសភា_មិថុនា_កក្កដា_សីហា_កញ្ញា_តុលា_វិច្ឆិកា_ធ្នូ'.split('_'),
+    monthsShort: 'មករា_កុម្ភៈ_មីនា_មេសា_ឧសភា_មិថុនា_កក្កដា_សីហា_កញ្ញា_តុលា_វិច្ឆិកា_ធ្នូ'.split('_'),
+    firstDayOfWeek: 1, // 0-6, 0 - Sunday, 1 Monday, ...
     format24h: false
   },
   table: {
-    noData: '데이터가 없습니다.',
-    noResults: '결과가 없습니다.',
-    loading: '로드 중...',
+    noData: 'គ្មានទិន្ន័យ',
+    noResults: 'គ្មានទិន្ន័យដូច',
+    loading: 'កំពុងផ្ទេរទិន្នន័យ...',
     selectedRecords: function (rows) {
-      return rows > 0
-        ? rows + ' 개가 선택 되었습니다.'
-        : '선택된 항목이 없습니다.'
+      return rows === 1
+        ? '1 ជួរដេកត្រូវបានជ្រើសរើស'
+        : (rows === 0 ? 'មិនមាន' : rows) + ' ជួរដេកត្រូវបានជ្រើសរើស'
     },
-    recordsPerPage: '페이지 당 개수:',
-    allRows: '전체',
+    recordsPerPage: 'ជួរដេកក្នុងមួយទំព័រ:',
+    allRows: 'ទាំងអស់',
     pagination: function (start, end, total) {
-      return total + ' 중 ' + start + '-' + end
+      return start + '-' + end + ' នៃ ' + total
     },
-    columns: '열'
+    columns: 'ជួរឈរ'
   },
   editor: {
     url: 'URL',
-    bold: '굵게',
-    italic: '이탤릭',
-    strikethrough: '취소선',
-    underline: '밑줄',
-    unorderedList: '정렬되지 않은 목록',
-    orderedList: '순서 목록',
-    subscript: '아래 첨자',
-    superscript: '위 첨자',
-    hyperlink: '링크',
-    toggleFullscreen: '전체 화면',
-    quote: '따옴표',
-    left: '왼쪽 정렬',
-    center: '가운데 정렬',
-    right: '오른쪽 정렬',
-    justify: '정렬',
-    print: '출력',
-    outdent: '들여 쓰기 감소',
-    indent: '들여 쓰기 증가',
-    removeFormat: '포맷팅 제거',
-    formatting: '포맷팅',
-    fontSize: '폰트 크기',
-    align: '정렬',
-    hr: '가로 룰 삽입',
-    undo: '되돌리기',
-    redo: '다시 하기',
-    header1: '헤더 1',
-    header2: '헤더 2',
-    header3: '헤더 3',
-    header4: '헤더 4',
-    header5: '헤더 5',
-    header6: '헤더 6',
-    paragraph: '절',
-    code: '코드',
-    size1: '아주 작음',
-    size2: '작음',
-    size3: '보통',
-    size4: '약간 크게',
-    size5: '크게',
-    size6: '아주 크게',
-    size7: '최대',
-    defaultFont: '기본 폰트',
-    viewSource: '소스보기'
+    bold: 'ដិត',
+    italic: 'ទ្រេត',
+    strikethrough: 'បន្ទាត់ឆ្នូតកណ្តាល',
+    underline: 'បន្ទាត់ពីក្រោម',
+    unorderedList: 'បញ្ជីគ្មានលំដាប់',
+    orderedList: 'បញ្ជីមានលំដាប់',
+    subscript: 'សន្ទស្សន៍ខាងក្រោម',
+    superscript: 'សន្ទស្សន៍ខាងលើ',
+    hyperlink: 'តំណភ្ជាប់',
+    toggleFullscreen: 'ប្តូរអេក្រង់ពេញ',
+    quote: 'សម្រង់',
+    left: 'តម្រឹមឆ្វេង',
+    center: 'តម្រឹមកណ្តាល',
+    right: 'តម្រឹមស្តាំ',
+    justify: 'តម្រឹមសងខាង',
+    print: 'បោះពុម្ភ',
+    outdent: 'បន្ថយចូលបន្ទាត់',
+    indent: 'បន្ថែមចូលបន្ទាត់',
+    removeFormat: 'លុបទ្រង់ទ្រាយ',
+    formatting: 'ទ្រង់ទ្រាយ',
+    fontSize: 'ទំហំអក្សរ',
+    align: 'តម្រឹម',
+    hr: 'បញ្ចូលបន្ទាត់ផ្តេក',
+    undo: 'មិនធ្វើវិញ',
+    redo: 'ធ្វើវិញ',
+    header1: 'ចំណងជើង 1',
+    header2: 'ចំណងជើង 2',
+    header3: 'ចំណងជើង 3',
+    header4: 'ចំណងជើង 4',
+    header5: 'ចំណងជើង 5',
+    header6: 'ចំណងជើង 6',
+    paragraph: 'កថាខណ្ឌ',
+    code: 'កូដ',
+    size1: 'តូចណាស់',
+    size2: 'តូចបន្តិច',
+    size3: 'ធម្មតា',
+    size4: 'ធំមធ្យម',
+    size5: 'ធំ',
+    size6: 'ធំណាស់',
+    size7: 'អតិបរិមា',
+    defaultFont: 'ពុម្ពអក្សរដើម',
+    viewSource: 'មើលប្រភព។'
   },
   tree: {
-    noNodes: '가능한 항목이 없습니다',
-    noResults: '항목을 찾을 수 없습니다'
+    noNodes: 'គ្មានទិន្នន័យ',
+    noResults: 'គ្មានទិន្ន័យដូច'
   }
 });
 

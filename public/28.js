@@ -1,8 +1,8 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[28],{
 
-/***/ "./node_modules/quasar/lang/pl.js":
+/***/ "./node_modules/quasar/lang/nl.js":
 /*!****************************************!*\
-  !*** ./node_modules/quasar/lang/pl.js ***!
+  !*** ./node_modules/quasar/lang/nl.js ***!
   \****************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -10,95 +10,95 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
-  isoName: 'pl',
-  nativeName: 'Polski',
+  isoName: 'nl',
+  nativeName: 'Nederlands',
   label: {
-    clear: 'Wyczyść',
+    clear: 'Wis',
     ok: 'OK',
-    cancel: 'Anuluj',
-    close: 'Zamknij',
-    set: 'Ustaw',
-    select: 'Wybierz',
-    reset: 'Zresetuj',
-    remove: 'Usuń',
-    update: 'Zaktualizuj',
-    create: 'Utwórz',
-    search: 'Szukaj',
-    filter: 'Filtruj',
-    refresh: 'Odśwież'
+    cancel: 'Annuleer',
+    close: 'Sluit',
+    set: 'Pas toe',
+    select: 'Selecteer',
+    reset: 'Herinitialiseren',
+    remove: 'Verwijder',
+    update: 'Update',
+    create: 'Maak aan',
+    search: 'Zoek',
+    filter: 'Filter',
+    refresh: 'Ververs'
   },
   date: {
-    days: 'Niedziela_Poniedziałek_Wtorek_Środa_Czwartek_Piątek_Sobota'.split('_'),
-    daysShort: 'Nd_Pon_Wt_Śr_Czw_Ptk_Sob'.split('_'),
-    months: 'Styczeń_Luty_Marzec_Kwiecień_Maj_Czerwiec_Lipiec_Sierpień_Wrzesień_Październik_Listopad_Grudzień'.split('_'),
-    monthsShort: 'Sty_Lut_Mar_Kwi_Maj_Cze_Lip_Sie_Wrz_Paź_Lis_Gru'.split('_'),
+    days: 'Zondag_Maandag_Dinsdag_Woensdag_Donderdag_Vrijdag_Zaterdag'.split('_'),
+    daysShort: 'Zo_Ma_Di_Wo_Do_Vr_Za'.split('_'),
+    months: 'Januari_Februari_Maart_April_Mei_Juni_Juli_Augustus_September_Oktober_November_December'.split('_'),
+    monthsShort: 'Jan_Feb_Mrt_Apr_Mei_Jun_Jul_Aug_Sep_Okt_Nov_Dec'.split('_'),
     firstDayOfWeek: 1, // 0-6, 0 - Sunday, 1 Monday, ...
     format24h: true
   },
   table: {
-    noData: 'Brak dostępnych danych',
-    noResults: 'Nie znaleziono pasujących wpisów',
-    loading: 'Ładowanie...',
+    noData: 'Geen gegevens beschikbaar',
+    noResults: 'Geen records gevonden',
+    loading: 'Laden...',
     selectedRecords: function (rows) {
-      return rows > 1
-        ? rows + ' zaznaczony(ch) wiersz(y).'
-        : (rows === 0 ? 'Brak' : '1') + ' zaznaczony wiersz.'
+      return rows === 1
+        ? '1 record geselecteerd.'
+        : (rows === 0 ? 'Geen' : rows) + ' geselecteerde records.'
     },
-    recordsPerPage: 'Wierszy na stronę:',
-    allRows: 'Wszystkie',
+    recordsPerPage: 'Records per pagina:',
+    allRows: 'Alle',
     pagination: function (start, end, total) {
-      return start + '-' + end + ' z ' + total
+      return start + '-' + end + ' van ' + total
     },
-    columns: 'Kolumny'
+    columns: 'Kolommen'
   },
   editor: {
     url: 'URL',
-    bold: 'Pogrubienie',
-    italic: 'Kursywa',
-    strikethrough: 'Przekreślenie',
-    underline: 'Podkreślenie',
-    unorderedList: 'Nieuporządkowana lista',
-    orderedList: 'Uporządkowana lista',
-    subscript: 'Indeks dolny',
-    superscript: 'Indeks górny',
-    hyperlink: 'Hiperłącze',
-    toggleFullscreen: 'Przełącz na tryb pełnoekranowy',
-    quote: 'Zacytuj',
-    left: 'Wyrównaj do lewej',
-    center: 'Wyrównaj do środka',
-    right: 'Wyrównaj do prawej',
-    justify: 'Wyjustuj',
-    print: 'Drukuj',
-    outdent: 'Zmniejsz wcięcie',
-    indent: 'Zwiększ wcięcie',
-    removeFormat: 'Usuń formatowanie',
-    formatting: 'Formatowanie',
-    fontSize: 'Rozmiar czcionki',
-    align: 'Wyrównanie',
-    hr: 'Wstaw poziomą linię',
-    undo: 'Cofnij',
-    redo: 'Przywróć',
-    header1: 'Nagłówek 1',
-    header2: 'Nagłówek 2',
-    header3: 'Nagłówek 3',
-    header4: 'Nagłówek 4',
-    header5: 'Nagłówek 5',
-    header6: 'Nagłówek 6',
-    paragraph: 'Paragraf',
-    code: 'Kod',
-    size1: 'Bardzo mała',
-    size2: 'Mała',
-    size3: 'Normalna',
-    size4: 'Średnio-duża',
-    size5: 'Duża',
-    size6: 'Bardzo duża',
-    size7: 'Maksymalna',
-    defaultFont: 'Domyślna czcionka',
-    viewSource: 'Pokaż źródło'
+    bold: 'Vet',
+    italic: 'Cursief',
+    strikethrough: 'Doorstrepen',
+    underline: 'Onderstrepen',
+    unorderedList: 'Ongeordende lijst',
+    orderedList: 'Geordende lijst ',
+    subscript: 'Onderschrift',
+    superscript: 'Bovenschrift',
+    hyperlink: 'Hyperlink',
+    toggleFullscreen: 'Volledig scherm',
+    quote: 'Citaat',
+    left: 'Links uitlijnen',
+    center: 'Centreren',
+    right: 'Rechts uitlijnen',
+    justify: 'Uitvullen',
+    print: 'Afdrukken',
+    outdent: 'Minder inspringen',
+    indent: 'Meer inspringen',
+    removeFormat: 'Opmaak verwijderen',
+    formatting: 'Opmaak',
+    fontSize: 'Tekengrootte',
+    align: 'Uitlijnen',
+    hr: 'Horizontale lijn invoegen',
+    undo: 'Herstel',
+    redo: 'Opnieuw',
+    header1: 'Kop 1',
+    header2: 'Kop 2',
+    header3: 'Kop 3',
+    header4: 'Kop 4',
+    header5: 'Kop 5',
+    header6: 'Kop 6',
+    paragraph: 'Paragraaf',
+    code: 'Code',
+    size1: 'Heel klein',
+    size2: 'Klein',
+    size3: 'Normaal',
+    size4: 'Medium',
+    size5: 'Groot',
+    size6: 'Heel groot',
+    size7: 'Maximum',
+    defaultFont: 'Standaard lettertype',
+    viewSource: 'Bekijk bron'
   },
   tree: {
-    noNodes: 'Brak dostępnych gałęzi',
-    noResults: 'Nie znaleziono pasujących gałęzi'
+    noNodes: 'Geen nodes beschikbaar',
+    noResults: 'Geen overeenkomstige nodes gevonden'
   }
 });
 

@@ -1,107 +1,104 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[41],{
 
-/***/ "./node_modules/quasar/lang/zh-hans.js":
-/*!*********************************************!*\
-  !*** ./node_modules/quasar/lang/zh-hans.js ***!
-  \*********************************************/
+/***/ "./node_modules/quasar/lang/vi.js":
+/*!****************************************!*\
+  !*** ./node_modules/quasar/lang/vi.js ***!
+  \****************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
-  isoName: 'zh-hans',
-  nativeName: '中文(简体)',
+  isoName: 'vi',
+  nativeName: 'Tiếng Việt',
   label: {
-    clear: '清空',
-    ok: '确定',
-    cancel: '取消',
-    close: '关闭',
-    set: '设置',
-    select: '选择',
-    reset: '重置',
-    remove: '移除',
-    update: '更新',
-    create: '创建',
-    search: '搜索',
-    filter: '过滤',
-    refresh: '刷新'
+    clear: 'Xóa hết',
+    ok: 'OK',
+    cancel: 'Hủy',
+    close: 'Đóng',
+    set: 'Thiết đặt',
+    select: 'Chọn',
+    reset: 'Đặt lại',
+    remove: 'Gỡ bỏ',
+    update: 'Cập nhật',
+    create: 'Tạo',
+    search: 'Tìm kiếm',
+    filter: 'Bộ lọc',
+    refresh: 'Làm mới'
   },
   date: {
-    days: '星期日_星期一_星期二_星期三_星期四_星期五_星期六'.split('_'),
-    daysShort: '周日_周一_周二_周三_周四_周五_周六'.split('_'),
-    months: '一月_二月_三月_四月_五月_六月_七月_八月_九月_十月_十一月_十二月'.split('_'),
-    monthsShort: '一月_二月_三月_四月_五月_六月_七月_八月_九月_十月_十一月_十二月'.split('_'),
-    headerTitle: function (date) {
-      return new Intl.DateTimeFormat('zh-hans', {
-        weekday: 'short', month: 'short', day: 'numeric'
-      }).format(date)
-    },
-    firstDayOfWeek: 0, // 0-6, 0 - Sunday, 1 Monday, ...
+    days: 'Chủ Nhật_Thứ Hai_Thứ Ba_Thứ Tư_Thứ Năm_Thứ Sáu_Thứ Bảy'.split('_'),
+    daysShort: 'CN_T2_T3_T4_T5_T6_T7'.split('_'),
+    months: 'Tháng Một_Tháng Hai_Tháng Ba_Tháng Tư_Tháng Năm_Tháng Sáu_Tháng Bảy_Tháng Tám_Tháng Chín_Tháng Mười_Tháng Mười Một_Tháng Mười Hai'.split('_'),
+    monthsShort: 'Th1_Th2_Th3_Th4_Th5_Th6_Th7_Th8_Th9_Th10_Th11_Th12'.split('_'),
+    firstDayOfWeek: 1, // 0-6, 0 - Sunday, 1 Monday, ...
     format24h: false
   },
   table: {
-    noData: '没有可用数据',
-    noResults: '找不到匹配的数据',
-    loading: '正在加载...',
+    noData: 'Không có dữ liệu',
+    noResults: 'Không tìm thấy kết quả',
+    loading: 'Đang tải',
     selectedRecords: function (rows) {
-      return '已选择' + rows + '行'
+      return rows === 1
+        ? '1 hàng đã chọn.'
+        : (rows === 0 ? 'Không có hàng nào' : rows) + ' hàng đã chọn.'
     },
-    recordsPerPage: '每页的行数:',
-    allRows: '全部',
+    recordsPerPage: 'Hàng trên mỗi trang:',
+    allRows: 'Tất cả',
     pagination: function (start, end, total) {
-      return start + '-' + end + ' / ' + total
+      return start + '-' + end + ' của ' + total
     },
-    columns: '列'
+    columns: 'Cột'
   },
   editor: {
     url: 'URL',
-    bold: '粗体',
-    italic: '斜体',
-    strikethrough: '删除线',
-    underline: '下划线',
-    unorderedList: '无序列表',
-    orderedList: '有序列表',
-    subscript: '下标',
-    superscript: '上标',
-    hyperlink: '超链接',
-    toggleFullscreen: '全屏切换',
-    quote: '引号',
-    left: '左对齐',
-    center: '居中对齐',
-    right: '右对齐',
-    justify: '两端对齐',
-    print: '打印',
-    outdent: '减少缩进',
-    indent: '增加缩进',
-    removeFormat: '清除样式',
-    formatting: '格式化',
-    fontSize: '字体大小',
-    align: '对齐',
-    hr: '插入水平线',
-    undo: '撤消',
-    redo: '重做',
-    header1: '标题一',
-    header2: '标题二',
-    header3: '标题三',
-    header4: '标题四',
-    header5: '标题五',
-    header6: '标题六',
-    paragraph: '段落',
-    code: '代码',
-    size1: '非常小',
-    size2: '比较小',
-    size3: '正常',
-    size4: '中等偏大',
-    size5: '大',
-    size6: '非常大',
-    size7: '超级大',
-    defaultFont: '默认字体',
-    viewSource: '查看资料'
+    bold: 'Đậm',
+    italic: 'Nghiêng',
+    strikethrough: 'Gạch giữa',
+    underline: 'Gạch dưới',
+    unorderedList: 'Danh sách không theo thứ tự',
+    orderedList: 'Danh sách theo thứ tự',
+    subscript: 'Chỉ số dưới',
+    superscript: 'Chỉ số trên',
+    hyperlink: 'Liên kết',
+    toggleFullscreen: 'Điều chỉnh chế độ toàn màn hình',
+    quote: 'Trích dẫn',
+    left: 'Căn trái',
+    center: 'Căn giữa',
+    right: 'Căn phải',
+    justify: 'Căn đều 2 bên',
+    print: 'In',
+    outdent: 'Giảm lề',
+    indent: 'Tăng lề',
+    removeFormat: 'Xóa định dạng',
+    formatting: 'Định dạng',
+    fontSize: 'Kích cỡ phông',
+    align: 'Căn chỉnh',
+    hr: 'Chèn Quy Tắc Ngang',
+    undo: 'Hoàn tác',
+    redo: 'Làm lại',
+    header1: 'Tiêu đề 1',
+    header2: 'Tiêu đề 2',
+    header3: 'Tiêu đề 3',
+    header4: 'Tiêu đề 4',
+    header5: 'Tiêu đề 5',
+    header6: 'Tiêu đề 6',
+    paragraph: 'Đoạn',
+    code: 'Mã',
+    size1: 'Rất nhỏ',
+    size2: 'Nhỏ vừa',
+    size3: 'Thường',
+    size4: 'To vừa',
+    size5: 'To',
+    size6: 'Rất To',
+    size7: 'Tối đa',
+    defaultFont: 'Phông mặc định',
+    viewSource: 'Xem nguồn'
   },
   tree: {
-    noNodes: '没有可用节点',
-    noResults: '找不到匹配的节点'
+    noNodes: 'Không có nốt nào có sẵn',
+    noResults: 'Không tìm thấy các nốt'
   }
 });
 

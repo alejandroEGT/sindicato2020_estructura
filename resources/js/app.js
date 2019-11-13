@@ -69,6 +69,10 @@ import VueI18n from 'vue-i18n';
 Vue.use(VueI18n);
 
 
+import VueFriendlyIframe from 'vue-friendly-iframe';
+
+Vue.component('vue-friendly-iframe', VueFriendlyIframe);
+
 const router = new VueRouter({
   routes: [
     ...Rutas,
@@ -77,7 +81,7 @@ const router = new VueRouter({
     ...routes_empa,
     ...routes_sumbex
   ],
-  //mode: 'history'
+  // mode: 'history'
 });
 Vue.router = router;
 

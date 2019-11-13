@@ -1,8 +1,8 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[24],{
 
-/***/ "./node_modules/quasar/lang/ml.js":
+/***/ "./node_modules/quasar/lang/lv.js":
 /*!****************************************!*\
-  !*** ./node_modules/quasar/lang/ml.js ***!
+  !*** ./node_modules/quasar/lang/lv.js ***!
   \****************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -10,99 +10,95 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
-  isoName: 'ml',
-  nativeName: 'മലയാളം',
+  isoName: 'lv',
+  nativeName: 'Latviešu valoda',
   label: {
-    clear: 'നീക്കുക',
-    ok: 'ശരി',
-    cancel: 'ഉപേക്ഷിക്കുക',
-    close: 'അടയ്ക്കുക',
-    set: 'സജ്ജമാക്കുക',
-    select: 'തിരഞ്ഞെടുക്കുക',
-    reset: 'പുനഃസജ്ജമാക്കുക',
-    remove: 'നീക്കംചെയ്യുക',
-    update: 'അപ്ഡേറ്റ്',
-    create: 'സൃഷ്ടിക്കുക',
-    search: 'തിരയുക',
-    filter: 'അരിക്കുക',
-    refresh: 'പുതുക്കുക'
+    clear: 'Attīrīt',
+    ok: 'OK',
+    cancel: 'Atcelt',
+    close: 'Aizvērt',
+    set: 'Iestatīt',
+    select: 'Izvēlēties',
+    reset: 'Atiestatīt',
+    remove: 'Noņemt',
+    update: 'Atjaunināt',
+    create: 'Izveidot',
+    search: 'Meklēt',
+    filter: 'Filtēt',
+    refresh: 'Atjaunot'
   },
   date: {
-    days: 'ഞായർ_തിങ്കൾ_ചൊവ്വ_ബുധൻ_വ്യാഴം_വെള്ളി_ശനി'.split('_'),
-    daysShort: 'ഞായർ_തിങ്കൾ_ചൊവ്വ_ബുധൻ_വ്യാഴം_വെള്ളി_ശനി'.split('_'),
-    months: 'ജനുവരി_ഫെബ്രുവരി_മാർച്ച്_ഏപ്രിൽ_മേയ്_ജൂൺ_ജൂലൈ_ഓഗസ്റ്റ്_സെപ്റ്റംബർ_ഒക്ടോബർ_നവംബർ_ഡിസംബർ'.split(
-      '_'
-    ),
-    monthsShort: 'ജനു_ഫെബ്രു_മാർ_ഏപ്രി_മേയ്_ജൂൺ_ജൂലൈ_ഓഗ_സെപ്_ഒക്_നവ_ഡിസ'.split(
-      '_'
-    ),
+    days: 'Svētdiena_Pirmdiena_Otrdiena_Trešdiena_Ceturtdiena_Piektdiena_Sestdiena'.split('_'),
+    daysShort: 'Sv_Pi_Ot_Tr_Ce_Pi_Se'.split('_'),
+    months: 'Janvāris_Februāris_Marts_Aprīlis_Maijs_Jūnijs_Jūlijs_Augusts_Septembris_Okrobris_Novembris_Decembris'.split('_'),
+    monthsShort: 'Jan_Feb_Mar_Apr_Mai_Jūn_Jūl_Aug_Sep_Okt_Nov_Dec'.split('_'),
     firstDayOfWeek: 1, // 0-6, 0 - Sunday, 1 Monday, ...
-    format24h: false
+    format24h: true
   },
   table: {
-    noData: 'ഡാറ്റ ലഭ്യമല്ല',
-    noResults: 'പൊരുത്തമുള്ള റെക്കോർഡുകളൊന്നും കണ്ടെത്തിയില്ല',
-    loading: 'ലോഡ് ചെയ്യുന്നു...',
+    noData: 'Nav datu',
+    noResults: 'Ieraksti nav atrasti',
+    loading: 'Atjaunojas...',
     selectedRecords: function (rows) {
       return rows === 1
-        ? 'ഒരു റെക്കോർഡ് തിരഞ്ഞെടുത്തു.'
-        : (rows === 0 ? 'റെക്കോര്ഡുകളൊന്നും തിരഞ്ഞെടുത്തിട്ടില്ല' : rows + ' റെക്കോർഡുകൾ തിരഞ്ഞെടുത്തു.')
+        ? '1 izvēlēta rinda.'
+        : (rows === 0 ? 'Nav' : rows) + ' izvēlētas rindas.'
     },
-    recordsPerPage: 'ഓരോ പേജിലും റെക്കോർഡുകൾ:',
-    allRows: 'എല്ലാം',
+    recordsPerPage: 'Rindas lapā:',
+    allRows: 'Visas',
     pagination: function (start, end, total) {
-      return start + '-' + end + ' മൊത്തം ' + total + ' ൽ നിന്നും'
+      return start + '-' + end + ' no ' + total
     },
-    columns: 'നിരകൾ'
+    columns: 'Kolonnas'
   },
   editor: {
-    url: 'യുആർഎൽ',
-    bold: 'ബോൾഡ്',
-    italic: 'ഇറ്റാലിക്',
-    strikethrough: 'മധ്യത്തിൽ വര',
-    underline: 'അടിവര',
-    unorderedList: 'ക്രമമില്ലാത്ത പട്ടിക',
-    orderedList: 'ക്രമമുള്ള ലിസ്റ്റ്',
-    subscript: 'സബ്സ്ക്രിപ്റ്റ്',
-    superscript: 'സൂപ്പർസ്ക്രിപ്റ്റ്',
-    hyperlink: 'ഹൈപ്പർലിങ്ക്',
-    toggleFullscreen: 'ഫുൾസ്ക്രീൻ ടോഗിൾ ചെയ്യുക',
-    quote: 'ഉദ്ധരിക്കുക',
-    left: 'ഇടത്തേക്ക്',
-    center: 'മധ്യഭാഗത്ത് ',
-    right: 'വലത്തേക്ക്',
-    justify: 'ജസ്റ്റിഫൈ',
-    print: 'പ്രിന്റ്',
-    outdent: 'ഇൻഡെൻറേഷൻ കുറയ്ക്കുക ',
-    indent: 'ഇൻഡെൻറേഷൻ വർദ്ധിപ്പിക്കുക',
-    removeFormat: 'ഫോർമാറ്റിംഗ് നീക്കം ചെയ്യുക',
-    formatting: 'ഫോർമാറ്റിംഗ്',
-    fontSize: 'അക്ഷര വലിപ്പം',
-    align: 'വിന്യസിക്കുക',
-    hr: 'തിരശ്ചീന റൂൾ ഇൻസേർട്ട് ചെയ്യുക',
-    undo: 'പൂർവാവസ്ഥയിലാക്കുക',
-    redo: 'വീണ്ടും ചെയ്യുക',
-    header1: 'ഹെഡ്ഡർ 1',
-    header2: 'ഹെഡ്ഡർ 2',
-    header3: 'ഹെഡ്ഡർ 3',
-    header4: 'ഹെഡ്ഡർ 4',
-    header5: 'ഹെഡ്ഡർ 5',
-    header6: 'ഹെഡ്ഡർ 6',
-    paragraph: 'ഖണ്ഡിക',
-    code: 'കോഡ്',
-    size1: 'വളരെ ചെറുത്',
-    size2: 'അൽപ്പം ചെറുത്',
-    size3: 'സാധാരണ',
-    size4: 'മീഡിയം-വലുത്',
-    size5: 'വലുത്',
-    size6: 'വളരെ വലുത്',
-    size7: 'പരമാവധി',
-    defaultFont: 'ഡിഫാൾട്ട് ഫോണ്ട്',
-    viewSource: 'ഉറവിടം കാണുക'
+    url: 'URL',
+    bold: 'Trekns',
+    italic: 'Kursīvs',
+    strikethrough: 'Nosvītrots',
+    underline: 'Apakšsvītra',
+    unorderedList: 'Marķētais saraksts',
+    orderedList: 'Numurētais saraksts',
+    subscript: 'Apakšraksts',
+    superscript: 'Augšraksts',
+    hyperlink: 'Saite',
+    toggleFullscreen: 'Pilnekrāna režīms',
+    quote: 'Citāts',
+    left: 'Izlīdzināt gar kreiso malu',
+    center: 'Centrēt',
+    right: 'Izlīdzināt gar labo malu',
+    justify: 'Izlīdzināt gar abām malām',
+    print: 'Drukāt',
+    outdent: 'Samazināt atkāpi',
+    indent: 'Palielināt atkāpi',
+    removeFormat: 'Noņemt formatējumu',
+    formatting: 'Formatēt',
+    fontSize: 'Fonta izmērs',
+    align: 'Izlīdzināt',
+    hr: 'Ievietot horizontālo līniju',
+    undo: 'Atsaukt',
+    redo: 'Atkārtot',
+    header1: 'Virsraksts 1',
+    header2: 'Virsraksts 2',
+    header3: 'Virsraksts 3',
+    header4: 'Virsraksts 4',
+    header5: 'Virsraksts 5',
+    header6: 'Virsraksts 6',
+    paragraph: 'Rindkopa',
+    code: 'Kods',
+    size1: 'Ļoti mazs',
+    size2: 'Mazs',
+    size3: 'Normāls',
+    size4: 'Vidējs',
+    size5: 'Liels',
+    size6: 'Ļoti liels',
+    size7: 'Maksimāls',
+    defaultFont: 'Fonts pēc noklusējuma',
+    viewSource: 'Skatīt avotu'
   },
   tree: {
-    noNodes: 'നോഡുകൾ ലഭ്യമല്ല',
-    noResults: 'പൊരുത്തപ്പെടുന്ന നോഡുകളൊന്നും കണ്ടെത്തിയില്ല'
+    noNodes: 'Nav pieejami mezgli',
+    noResults: 'Nav atrasti atbilstošie mezgli'
   }
 });
 
