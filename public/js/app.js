@@ -1,50 +1,6 @@
 /******/ (function(modules) { // webpackBootstrap
-/******/ 	// install a JSONP callback for chunk loading
-/******/ 	function webpackJsonpCallback(data) {
-/******/ 		var chunkIds = data[0];
-/******/ 		var moreModules = data[1];
-/******/
-/******/
-/******/ 		// add "moreModules" to the modules object,
-/******/ 		// then flag all "chunkIds" as loaded and fire callback
-/******/ 		var moduleId, chunkId, i = 0, resolves = [];
-/******/ 		for(;i < chunkIds.length; i++) {
-/******/ 			chunkId = chunkIds[i];
-/******/ 			if(Object.prototype.hasOwnProperty.call(installedChunks, chunkId) && installedChunks[chunkId]) {
-/******/ 				resolves.push(installedChunks[chunkId][0]);
-/******/ 			}
-/******/ 			installedChunks[chunkId] = 0;
-/******/ 		}
-/******/ 		for(moduleId in moreModules) {
-/******/ 			if(Object.prototype.hasOwnProperty.call(moreModules, moduleId)) {
-/******/ 				modules[moduleId] = moreModules[moduleId];
-/******/ 			}
-/******/ 		}
-/******/ 		if(parentJsonpFunction) parentJsonpFunction(data);
-/******/
-/******/ 		while(resolves.length) {
-/******/ 			resolves.shift()();
-/******/ 		}
-/******/
-/******/ 	};
-/******/
-/******/
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
-/******/
-/******/ 	// object to store loaded and loading chunks
-/******/ 	// undefined = chunk not loaded, null = chunk preloaded/prefetched
-/******/ 	// Promise = chunk loading, 0 = chunk loaded
-/******/ 	var installedChunks = {
-/******/ 		"/js/app": 0
-/******/ 	};
-/******/
-/******/
-/******/
-/******/ 	// script path function
-/******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({}[chunkId]||chunkId) + ".js"
-/******/ 	}
 /******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
@@ -70,67 +26,6 @@
 /******/ 		return module.exports;
 /******/ 	}
 /******/
-/******/ 	// This file contains only the entry chunk.
-/******/ 	// The chunk loading function for additional chunks
-/******/ 	__webpack_require__.e = function requireEnsure(chunkId) {
-/******/ 		var promises = [];
-/******/
-/******/
-/******/ 		// JSONP chunk loading for javascript
-/******/
-/******/ 		var installedChunkData = installedChunks[chunkId];
-/******/ 		if(installedChunkData !== 0) { // 0 means "already installed".
-/******/
-/******/ 			// a Promise means "currently loading".
-/******/ 			if(installedChunkData) {
-/******/ 				promises.push(installedChunkData[2]);
-/******/ 			} else {
-/******/ 				// setup Promise in chunk cache
-/******/ 				var promise = new Promise(function(resolve, reject) {
-/******/ 					installedChunkData = installedChunks[chunkId] = [resolve, reject];
-/******/ 				});
-/******/ 				promises.push(installedChunkData[2] = promise);
-/******/
-/******/ 				// start chunk loading
-/******/ 				var script = document.createElement('script');
-/******/ 				var onScriptComplete;
-/******/
-/******/ 				script.charset = 'utf-8';
-/******/ 				script.timeout = 120;
-/******/ 				if (__webpack_require__.nc) {
-/******/ 					script.setAttribute("nonce", __webpack_require__.nc);
-/******/ 				}
-/******/ 				script.src = jsonpScriptSrc(chunkId);
-/******/
-/******/ 				// create error before stack unwound to get useful stacktrace later
-/******/ 				var error = new Error();
-/******/ 				onScriptComplete = function (event) {
-/******/ 					// avoid mem leaks in IE.
-/******/ 					script.onerror = script.onload = null;
-/******/ 					clearTimeout(timeout);
-/******/ 					var chunk = installedChunks[chunkId];
-/******/ 					if(chunk !== 0) {
-/******/ 						if(chunk) {
-/******/ 							var errorType = event && (event.type === 'load' ? 'missing' : event.type);
-/******/ 							var realSrc = event && event.target && event.target.src;
-/******/ 							error.message = 'Loading chunk ' + chunkId + ' failed.\n(' + errorType + ': ' + realSrc + ')';
-/******/ 							error.name = 'ChunkLoadError';
-/******/ 							error.type = errorType;
-/******/ 							error.request = realSrc;
-/******/ 							chunk[1](error);
-/******/ 						}
-/******/ 						installedChunks[chunkId] = undefined;
-/******/ 					}
-/******/ 				};
-/******/ 				var timeout = setTimeout(function(){
-/******/ 					onScriptComplete({ type: 'timeout', target: script });
-/******/ 				}, 120000);
-/******/ 				script.onerror = script.onload = onScriptComplete;
-/******/ 				document.head.appendChild(script);
-/******/ 			}
-/******/ 		}
-/******/ 		return Promise.all(promises);
-/******/ 	};
 /******/
 /******/ 	// expose the modules object (__webpack_modules__)
 /******/ 	__webpack_require__.m = modules;
@@ -183,16 +78,6 @@
 /******/
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "/";
-/******/
-/******/ 	// on error function for async loading
-/******/ 	__webpack_require__.oe = function(err) { console.error(err); throw err; };
-/******/
-/******/ 	var jsonpArray = window["webpackJsonp"] = window["webpackJsonp"] || [];
-/******/ 	var oldJsonpFunction = jsonpArray.push.bind(jsonpArray);
-/******/ 	jsonpArray.push = webpackJsonpCallback;
-/******/ 	jsonpArray = jsonpArray.slice();
-/******/ 	for(var i = 0; i < jsonpArray.length; i++) webpackJsonpCallback(jsonpArray[i]);
-/******/ 	var parentJsonpFunction = oldJsonpFunction;
 /******/
 /******/
 /******/ 	// Load entry module and return exports
@@ -3696,6 +3581,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+<<<<<<< HEAD
 /***/ "./node_modules/babel-loader/lib/index.js?!./resources/js/components/auth/clientes/clientes_js/listarClientes.js?vue&type=script&lang=js&":
 /*!************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./resources/js/components/auth/clientes/clientes_js/listarClientes.js?vue&type=script&lang=js& ***!
@@ -3945,6 +3831,8 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+=======
+>>>>>>> alejandro
 /***/ "./node_modules/babel-loader/lib/index.js?!./resources/js/components/auth/cuentas/cuentas_js/crear_cuentas.js?vue&type=script&lang=js&":
 /*!*********************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./resources/js/components/auth/cuentas/cuentas_js/crear_cuentas.js?vue&type=script&lang=js& ***!
@@ -3957,14 +3845,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      model: null,
       nombreCuenta: null,
       descripcionCuenta: null,
       accept: false,
       text: '',
       ph: '',
+      fixed: false,
       dense: false,
       nombre: '',
-      descripcion: ''
+      descripcion: '',
+      options: ['Google', 'Facebook', 'Twitter', 'Apple', 'Oracle'],
+      cuenta_id: '',
+      nombre_s: '',
+      descripcion_s: ''
     };
   },
   methods: {
@@ -3993,9 +3887,112 @@ __webpack_require__.r(__webpack_exports__);
       this.nombreCuenta = null;
       this.descripcionCuenta = null;
       this.accept = false;
+    },
+    traer: function traer() {
+      var _this2 = this;
+
+      axios.get('api/traer_cuenta').then(function (res) {
+        _this2.options = res.data;
+      });
+    },
+    guardar_subcuenta: function guardar_subcuenta() {
+      var _this3 = this;
+
+      var data = {
+        'nombre': this.nombre_s,
+        'descripcion': this.descripcion_s,
+        'cuenta_id': this.cuenta_id.id
+      };
+      axios.post('api/ingresar_subcuenta', data).then(function (res) {
+        // this.options = res.data;
+        if (res.data.estado == 'success') {
+          _this3.$q.notify({
+            color: "green-4",
+            textColor: "white",
+            icon: "cloud_done",
+            message: "Subcuenta creada"
+          });
+        }
+      });
     }
   },
-  crear: function crear() {}
+  created: function created() {
+    this.traer();
+  },
+  mounted: function mounted() {// this.traer();
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./resources/js/components/auth/cuentas/cuentas_js/formulario.js?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./resources/js/components/auth/cuentas/cuentas_js/formulario.js?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      cuenta_id: null,
+      loading2: false,
+      fecha: '',
+      codigo: '',
+      descripcion: '',
+      monto: '',
+      file: null,
+      options: [],
+      tipo_monto_id: '',
+      subcuenta: '',
+      subcuentas: []
+    };
+  },
+  mounted: function mounted() {
+    this.traer();
+  },
+  created: function created() {},
+  methods: {
+    traer: function traer() {
+      var _this = this;
+
+      axios.get('api/traer_cuenta').then(function (res) {
+        _this.options = res.data; // this.loading = false;
+        // this.original = res.data;
+        // this.data = res.data;
+      });
+    },
+    change_cuenta: function change_cuenta(dos) {
+      var _this2 = this;
+
+      this["loading".concat(dos)] = true;
+      axios.get('api/traer_subcuenta/' + this.cuenta_id.id).then(function (res) {
+        if (res.data.estado == 'success') {
+          _this2.subcuentas = res.data.lista;
+          _this2["loading".concat(dos)] = false;
+        }
+      });
+    },
+    guardar: function guardar() {
+      var data = new FormData();
+      data.append('cuenta_id', this.cuenta_id.id);
+      data.append('fecha', this.fecha);
+      data.append('codigo', this.codigo);
+      data.append('descripcion', this.descripcion);
+      data.append('sub_cuenta_id', this.subcuenta.id);
+      data.append('tipo_monto_id', this.tipo_monto_id.id);
+      data.append('archivo', this.file);
+      data.append('monto', this.monto);
+      console.log(data);
+      axios.post('api/insertar_cuenta_detalle', data).then(function (res) {
+        if (res.data.estado == 'success') {// this.subcuentas = res.data.lista;
+          // this[`loading2`] = false
+        }
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -4011,47 +4008,143 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var quasar_lang_index_json__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! quasar/lang/index.json */ "./node_modules/quasar/lang/index.json");
 var quasar_lang_index_json__WEBPACK_IMPORTED_MODULE_0___namespace = /*#__PURE__*/__webpack_require__.t(/*! quasar/lang/index.json */ "./node_modules/quasar/lang/index.json", 1);
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
-
-function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
-
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      view_tabla: false,
       selected: [],
+      fixed: false,
+      cuenta_id: '',
+      options: [],
       columns: [{
         name: 'id',
         align: 'center',
         label: 'Id',
         field: 'id',
-        sortable: true
+        sortable: true,
+        headerClasses: 'bg-primary text-white'
       }, {
-        name: 'nombre',
-        label: 'Nombre',
+        name: 'titulo',
+        align: 'center',
+        label: 'Titulo',
         field: 'titulo',
-        sortable: true
+        sortable: true,
+        headerClasses: 'bg-primary text-white'
+      }, {
+        name: 'fecha',
+        align: 'center',
+        label: 'Fecha',
+        field: 'fecha',
+        sortable: true,
+        headerClasses: 'bg-primary text-white'
+      }, {
+        name: 'archivo',
+        align: 'center',
+        label: 'Archivo',
+        field: 'archivo',
+        sortable: true,
+        headerClasses: 'bg-primary text-white'
       }, {
         name: 'descripcion',
+        align: 'center',
         label: 'Descripcion',
-        field: 'descripcion'
+        field: 'descripcion',
+        headerClasses: 'bg-primary text-white'
+      }, {
+        name: 'ingreso',
+        align: 'center',
+        label: 'Ingreso',
+        field: 'monto_ingreso',
+        sortable: true,
+        headerClasses: 'bg-primary text-white'
+      }, {
+        name: 'egreso',
+        align: 'center',
+        label: 'Egreso',
+        field: 'monto_egreso',
+        sortable: true,
+        headerClasses: 'bg-primary text-white'
+      } // { name: 'view', label: 'View', field: 'view', sortable: true ,  headerClasses: 'bg-primary text-white'},
+      ],
+      mes: '',
+      meses: [{
+        'id': '1',
+        'label': 'Enero'
+      }, {
+        'id': '2',
+        'label': 'Febrero'
+      }, {
+        'id': '3',
+        'label': 'Marzo'
+      }, {
+        'id': '4',
+        'label': 'Abril'
+      }, {
+        'id': '5',
+        'label': 'Mayo'
+      }, {
+        'id': '6',
+        'label': 'Junio'
+      }, {
+        'id': '7',
+        'label': 'Julio'
+      }, {
+        'id': '8',
+        'label': 'Agosto'
+      }, {
+        'id': '9',
+        'label': 'Septiembre'
+      }, {
+        'id': '10',
+        'label': 'Octubre'
+      }, {
+        'id': '11',
+        'label': 'Noviembre'
+      }, {
+        'id': '12',
+        'label': 'Diciembre'
       }],
-      pagination: {
-        sortBy: 'name',
-        descending: false,
-        page: 1,
-        rowsPerPage: 3,
-        rowsNumber: 10
-      },
-      data: [],
-      original: [],
-      lang: this.$q.lang.isoName,
-      filter: '',
-      loading: false
+      anio: '',
+      anios: [{
+        'id': '2019',
+        'label': '2019'
+      }, {
+        'id': '2020',
+        'label': '2020'
+      }, {
+        'id': '2021',
+        'label': '2021'
+      }, {
+        'id': '2022',
+        'label': '2022'
+      }],
+      tabla: [],
+      ingresos: 0,
+      egresos: 0,
+      columns_resumen: [{
+        name: 'name',
+        required: true,
+        label: 'Resumen',
+        align: 'left',
+        field: function field(row) {
+          return row.name;
+        },
+        format: function format(val) {
+          return "".concat(val);
+        },
+        sortable: true,
+        classes: 'bg-grey-2 ellipsis',
+        style: 'max-width: 100px',
+        headerClasses: 'bg-primary text-white'
+      }, {
+        name: 'valor',
+        align: 'center',
+        label: 'Valor',
+        field: 'valor',
+        sortable: true
+      }],
+      data_resumen: []
     };
   },
   methods: {
@@ -4062,129 +4155,142 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       var _this = this;
 
       axios.get('api/traer_cuenta').then(function (res) {
-        _this.loading = false;
-        _this.original = res.data;
+        _this.options = res.data; // this.loading = false;
+        // this.original = res.data;
+        // this.data = res.data;
       });
     },
-    onRequest: function onRequest(props) {
+    listar: function listar() {
       var _this2 = this;
 
-      var _props$pagination = props.pagination,
-          page = _props$pagination.page,
-          rowsPerPage = _props$pagination.rowsPerPage,
-          rowsNumber = _props$pagination.rowsNumber,
-          sortBy = _props$pagination.sortBy,
-          descending = _props$pagination.descending;
-      var filter = props.filter;
-      this.loading = true; // emulate server
+      axios.get('api/listar_cuenta_detalle/' + this.mes.id + '/' + this.anio.id + '/' + this.cuenta_id.id).then(function (res) {
+        if (res.data.estado == 'success') {
+          _this2.tabla = res.data.lista;
+          var sumar_i = 0;
+          var sumar_e = 0;
 
-      setTimeout(function () {
-        var _this2$data;
-
-        // update rowsCount with appropriate value
-        _this2.pagination.rowsNumber = _this2.getRowsNumberCount(filter); // get all rows if "All" (0) is selected
-
-        var fetchCount = rowsPerPage === 0 ? rowsNumber : rowsPerPage; // calculate starting row of data
-
-        var startRow = (page - 1) * rowsPerPage; // fetch data from "server"
-
-        var returnedData = _this2.fetchFromServer(startRow, fetchCount, filter, sortBy, descending); // clear out existing data and add new
-
-
-        (_this2$data = _this2.data).splice.apply(_this2$data, [0, _this2.data.length].concat(_toConsumableArray(returnedData))); // don't forget to update local pagination object
-
-
-        _this2.pagination.page = page;
-        _this2.pagination.rowsPerPage = rowsPerPage;
-        _this2.pagination.sortBy = sortBy;
-        _this2.pagination.descending = descending; // ...and turn of loading indicator
-
-        _this2.loading = false;
-      }, 1500);
-    },
-    fetchFromServer: function fetchFromServer(startRow, count, filter, sortBy, descending) {
-      var data = [];
-
-      if (!filter) {
-        data = this.original.slice(startRow, startRow + count);
-      } else {
-        var found = 0;
-
-        for (var index = startRow, items = 0; index < this.original.length && items < count; ++index) {
-          var row = this.original[index]; // match filter?
-
-          if (!row['titulo'].includes(filter)) {
-            // get a different row, until one is found
-            continue;
+          for (var i = 0; i < _this2.tabla.length; i++) {
+            sumar_i += Number(_this2.tabla[i].monto_ingreso);
+            sumar_e += Number(_this2.tabla[i].monto_egreso);
           }
 
-          ++found;
-
-          if (found >= startRow) {
-            data.push(row);
-            ++items;
-          }
-        }
-      } // handle sortBy
-
-
-      if (sortBy) {
-        data.sort(function (a, b) {
-          var x = descending ? b : a;
-          var y = descending ? a : b;
-
-          if (sortBy === 'desc') {
-            // string sort
-            return x[sortBy] > y[sortBy] ? 1 : x[sortBy] < y[sortBy] ? -1 : 0;
-          } else {
-            // numeric sort
-            return parseFloat(x[sortBy]) - parseFloat(y[sortBy]);
-          }
-        });
-      }
-
-      return data;
-    },
-    // emulate 'SELECT count(*) FROM ...WHERE...'
-    getRowsNumberCount: function getRowsNumberCount(filter) {
-      if (!filter) {
-        return this.original.length;
-      }
-
-      var count = 0;
-      this.original.forEach(function (treat) {
-        if (treat['titulo'].includes(filter)) {
-          ++count;
+          _this2.ingresos = sumar_i;
+          _this2.egresos = sumar_e;
+          _this2.data_resumen = [{
+            name: 'Ingreso',
+            valor: sumar_i
+          }, {
+            name: 'Egreso',
+            valor: sumar_e
+          }, {
+            name: 'Total mensual',
+            valor: sumar_i - sumar_e
+          }];
+          _this2.view_tabla = true; // this[`loading${dos}`] = false
+        } else {
+          _this2.view_tabla = false;
         }
       });
-      return count;
-    }
-  },
-  watch: {
-    lang: function lang(_lang) {
-      var _this3 = this;
+    },
+    limpiar: function limpiar() {
+      this.tabla = [];
+      this.view_tabla = false;
+    },
+    ruta: function ruta(_ruta) {
+      this.$router.push(_ruta);
+    } // onRequest (props) {
+    //    // this.data = [];
+    //   let { page, rowsPerPage, rowsNumber, sortBy, descending } = props.pagination
+    //   let filter = props.filter
+    //   this.loading = true
+    //   // emulate server
+    //   setTimeout(() => {
+    //     // update rowsCount with appropriate value
+    //     this.pagination.rowsNumber = this.getRowsNumberCount(filter)
+    //     // get all rows if "All" (0) is selected
+    //     let fetchCount = rowsPerPage === 0 ? rowsNumber : rowsPerPage
+    //     // calculate starting row of data
+    //     let startRow = (page - 1) * rowsPerPage
+    //     // fetch data from "server"
+    //     let returnedData = this.fetchFromServer(startRow, fetchCount, filter, sortBy, descending)
+    //     // clear out existing data and add new
+    //     this.data.splice(0, this.data.length, ...returnedData)
+    //     // don't forget to update local pagination object
+    //     this.pagination.page = page
+    //     this.pagination.rowsPerPage = rowsPerPage
+    //     this.pagination.sortBy = sortBy
+    //     this.pagination.descending = descending
+    //     // ...and turn of loading indicator
+    //     this.loading = false
+    //   }, 1500)
+    // },
+    // fetchFromServer (startRow, count, filter, sortBy, descending) {
+    //   let data = []
+    //   if (!filter) {
+    //     data = this.original.slice(startRow, startRow + count)
+    //   }
+    //   else {
+    //     let found = 0
+    //     for (let index = startRow, items = 0; index < this.original.length && items < count; ++index) {
+    //       let row = this.original[index]
+    //       // match filter?
+    //       if (!row['titulo'].includes(filter)) {
+    //         // get a different row, until one is found
+    //         continue
+    //       }
+    //       ++found
+    //       if (found >= startRow) {
+    //         data.push(row)
+    //         ++items
+    //       }
+    //     }
+    //   }
+    //   // handle sortBy
+    //   if (sortBy) {
+    //     data.sort((a, b) => {
+    //       let x = descending ? b : a
+    //       let y = descending ? a : b
+    //       if (sortBy === 'desc') {
+    //         // string sort
+    //         return x[sortBy] > y[sortBy] ? 1 : x[sortBy] < y[sortBy] ? -1 : 0
+    //       }
+    //       else {
+    //         // numeric sort
+    //         return parseFloat(x[sortBy]) - parseFloat(y[sortBy])
+    //       }
+    //     })
+    //   }
+    //   return data
+    // },
+    // // emulate 'SELECT count(*) FROM ...WHERE...'
+    // getRowsNumberCount (filter) {
+    //   if (!filter) {
+    //     return this.original.length
+    //   }
+    //   let count = 0
+    //   this.original.forEach((treat) => {
+    //     if (treat['titulo'].includes(filter)) {
+    //       ++count
+    //     }
+    //   })
+    //   return count
+    // }
 
-      // dynamic import, so loading on demand only
-      __webpack_require__("./node_modules/quasar/lang lazy recursive ^\\.\\/.*$")("./".concat(_lang)).then(function (lang) {
-        _this3.$q.lang.set(lang["default"]);
-      });
-    }
   },
-  created: function created() {
-    this.langOptions = quasar_lang_index_json__WEBPACK_IMPORTED_MODULE_0__.map(function (lang) {
-      return {
-        label: lang.nativeName,
-        value: lang.isoName
-      };
-    });
-    this.traer();
+  watch: {// lang (lang) {
+    //   // dynamic import, so loading on demand only
+    //   import(`quasar/lang/${lang}`).then(lang => {
+    //     this.$q.lang.set(lang.default)
+    //   })
+    // }
   },
+  created: function created() {},
   mounted: function mounted() {
     // get initial data from server (1st page)
-    this.onRequest({
-      pagination: this.pagination,
-      filter: undefined
-    });
+    this.traer(); // this.onRequest({
+    //   pagination: this.pagination,
+    //   filter: undefined
+    // })
   }
 });
 
@@ -4210,6 +4316,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     url_listar_cuenta: function url_listar_cuenta() {
       this.$router.push('/listar-cuenta');
+    },
+    url_formulario_cuenta: function url_formulario_cuenta() {
+      this.$router.push('/formulario-cuenta');
     }
   }
 });
@@ -10255,7 +10364,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\na:link\r\n{\r\ntext-decoration:none;\n}\r\n", ""]);
+exports.push([module.i, "\na:link\n{\ntext-decoration:none;\n}\n", ""]);
 
 // exports
 
@@ -44070,12 +44179,21 @@ if(false) {}
       }
       else if (document.location.href.indexOf('-extension://') > -1) {
         browser.bex = true;
+<<<<<<< HEAD
       }
       else if (window.Capacitor !== void 0) {
         browser.capacitor = true;
         browser.nativeMobile = true;
         browser.nativeMobileWrapper = 'capacitor';
       }
+=======
+      }
+      else if (window.Capacitor !== void 0) {
+        browser.capacitor = true;
+        browser.nativeMobile = true;
+        browser.nativeMobileWrapper = 'capacitor';
+      }
+>>>>>>> alejandro
       else if (window._cordovaNative !== void 0 || window.cordova !== void 0) {
         browser.cordova = true;
         browser.nativeMobile = true;
@@ -46872,12 +46990,21 @@ if(false) {}
               document.removeEventListener('keyup', onClickCleanup, passiveCapture);
               this$1.$el !== void 0 && this$1.$el.removeEventListener('blur', onClickCleanup, passiveCapture);
             };
+<<<<<<< HEAD
 
             document.addEventListener('keydown', stopAndPrevent, true);
             document.addEventListener('keyup', onClickCleanup, passiveCapture);
             this.$el.addEventListener('blur', onClickCleanup, passiveCapture);
           }
 
+=======
+
+            document.addEventListener('keydown', stopAndPrevent, true);
+            document.addEventListener('keyup', onClickCleanup, passiveCapture);
+            this.$el.addEventListener('blur', onClickCleanup, passiveCapture);
+          }
+
+>>>>>>> alejandro
           this.hasRouterLink === true && stopAndPrevent(e);
         }
 
@@ -46923,6 +47050,7 @@ if(false) {}
           touchTarget = e.target;
           touchTarget.addEventListener('touchcancel', this.__onPressEnd, passiveCapture);
           touchTarget.addEventListener('touchend', this.__onPressEnd, passiveCapture);
+<<<<<<< HEAD
         }
 
         this.$emit('touchstart', e);
@@ -46960,6 +47088,45 @@ if(false) {}
         this.__cleanup();
       },
 
+=======
+        }
+
+        this.$emit('touchstart', e);
+      },
+
+      __onMousedown: function __onMousedown (e) {
+        if (mouseTarget !== this.$el) {
+          mouseTarget !== void 0 && this.__cleanup();
+
+          mouseTarget = this.$el;
+          document.addEventListener('mouseup', this.__onPressEnd, passiveCapture);
+        }
+
+        this.$emit('mousedown', e);
+      },
+
+      __onPressEnd: function __onPressEnd (e) {
+        if (e !== void 0 && e.type === 'keyup') {
+          if (keyboardTarget === this.$el && [13, 32].includes(e.keyCode) === true) {
+            // for click trigger
+            var evt = new MouseEvent('click', e);
+            evt.qKeyEvent = true;
+            e.defaultPrevented === true && evt.preventDefault();
+            this.$el.dispatchEvent(evt);
+
+            stopAndPrevent(e);
+
+            // for ripple
+            e.qKeyEvent = true;
+          }
+
+          this.$emit('keyup', e);
+        }
+
+        this.__cleanup();
+      },
+
+>>>>>>> alejandro
       __cleanup: function __cleanup () {
         if (
           (touchTarget === this.$el || mouseTarget === this.$el) &&
@@ -56122,6 +56289,7 @@ if(false) {}
           function (res) {
             if (index !== this$1.validateIndex) {
               return true
+<<<<<<< HEAD
             }
 
             if (res === void 0 || Array.isArray(res) === false || res.length === 0) {
@@ -56129,6 +56297,15 @@ if(false) {}
               return true
             }
 
+=======
+            }
+
+            if (res === void 0 || Array.isArray(res) === false || res.length === 0) {
+              update(false);
+              return true
+            }
+
+>>>>>>> alejandro
             var msg = res.find(function (r) { return r === false || typeof r === 'string'; });
             update(msg !== void 0, msg);
             return msg === void 0
@@ -56741,6 +56918,7 @@ if(false) {}
 
           maskMarked = maskMarked.slice(0, padPos) + pad + maskMarked.slice(padPos);
         }
+<<<<<<< HEAD
 
         return maskMarked
       },
@@ -56752,6 +56930,19 @@ if(false) {}
           this.mask.length > 0 &&
           ['text', 'search', 'url', 'tel', 'password'].includes(this.type);
 
+=======
+
+        return maskMarked
+      },
+
+      __updateMaskInternals: function __updateMaskInternals () {
+        var this$1 = this;
+
+        this.hasMask = this.mask !== void 0 &&
+          this.mask.length > 0 &&
+          ['text', 'search', 'url', 'tel', 'password'].includes(this.type);
+
+>>>>>>> alejandro
         if (this.hasMask === false) {
           this.computedUnmask = void 0;
           this.maskMarked = '';
@@ -57086,9 +57277,15 @@ if(false) {}
         }
 
         var mask = this.computedMask;
+<<<<<<< HEAD
 
         var valIndex = 0, output = '';
 
+=======
+
+        var valIndex = 0, output = '';
+
+>>>>>>> alejandro
         for (var maskIndex = 0; maskIndex < mask.length; maskIndex++) {
           var
             valChar = val[valIndex],
@@ -57641,6 +57838,7 @@ if(false) {}
         if (this.scrollTarget !== void 0) {
           this.scrollTarget.removeEventListener('scroll', this.hide, passive$1);
           this.scrollTarget = void 0;
+<<<<<<< HEAD
         }
         window.removeEventListener('scroll', this.updatePosition, passive$1);
       },
@@ -57654,9 +57852,27 @@ if(false) {}
           if (this.noParentEvent === true || this.scrollTarget !== window) {
             window.addEventListener('scroll', this.updatePosition, passive$1);
           }
+=======
+>>>>>>> alejandro
+        }
+        window.removeEventListener('scroll', this.updatePosition, passive$1);
+      },
+
+<<<<<<< HEAD
+=======
+      __configureScrollTarget: function __configureScrollTarget () {
+        if (this.anchorEl !== void 0) {
+          this.scrollTarget = getScrollTarget(this.anchorEl);
+          if (this.noParentEvent !== true) {
+            this.scrollTarget.addEventListener('scroll', this.hide, passive$1);
+          }
+          if (this.noParentEvent === true || this.scrollTarget !== window) {
+            window.addEventListener('scroll', this.updatePosition, passive$1);
+          }
         }
       },
 
+>>>>>>> alejandro
       __renderPortal: function __renderPortal (h) {
         return h('transition', {
           props: { name: this.transition }
@@ -63222,6 +63438,7 @@ if(false) {}
           this.__updateType(width, this.$q.screen.height, this.parsedBreakpoint);
         }
       },
+<<<<<<< HEAD
 
       '$q.screen.height': function $q_screen_height (height) {
         if (this.$refs.popup.showing !== true) {
@@ -63229,6 +63446,15 @@ if(false) {}
         }
       },
 
+=======
+
+      '$q.screen.height': function $q_screen_height (height) {
+        if (this.$refs.popup.showing !== true) {
+          this.__updateType(this.$q.screen.width, height, this.parsedBreakpoint);
+        }
+      },
+
+>>>>>>> alejandro
       breakpoint: function breakpoint (breakpoint$1) {
         if (this.$refs.popup.showing !== true) {
           this.__updateType(this.$q.screen.width, this.$q.screen.height, parseInt(breakpoint$1, 10));
@@ -64617,6 +64843,7 @@ if(false) {}
       if (parent === window) {
         details.scrollStart = window.pageXOffset || window.scrollX || document.body.scrollLeft || 0;
         details.scrollViewSize += window.innerWidth;
+<<<<<<< HEAD
       }
       else {
         details.scrollStart = parentCalc.scrollLeft;
@@ -64633,6 +64860,24 @@ if(false) {}
         details.scrollStart = parentCalc.scrollTop;
         details.scrollViewSize += parentCalc.clientHeight;
       }
+=======
+      }
+      else {
+        details.scrollStart = parentCalc.scrollLeft;
+        details.scrollViewSize += parentCalc.clientWidth;
+      }
+      details.scrollMaxSize = parentCalc.scrollWidth;
+    }
+    else {
+      if (parent === window) {
+        details.scrollStart = window.pageYOffset || window.scrollY || document.body.scrollTop || 0;
+        details.scrollViewSize += window.innerHeight;
+      }
+      else {
+        details.scrollStart = parentCalc.scrollTop;
+        details.scrollViewSize += parentCalc.clientHeight;
+      }
+>>>>>>> alejandro
       details.scrollMaxSize = parentCalc.scrollHeight;
     }
 
@@ -64682,6 +64927,7 @@ if(false) {}
     else {
       parent[horizontal === true ? 'scrollLeft' : 'scrollTop'] = scroll;
     }
+<<<<<<< HEAD
   }
 
   function sumSize (sizeAgg, size, from, to) {
@@ -64704,6 +64950,30 @@ if(false) {}
     return total
   }
 
+=======
+  }
+
+  function sumSize (sizeAgg, size, from, to) {
+    if (from >= to) { return 0 }
+
+    var
+      lastTo = size.length,
+      fromAgg = Math.floor(from / aggBucketSize),
+      toAgg = Math.floor((to - 1) / aggBucketSize) + 1;
+
+    var total = sizeAgg.slice(fromAgg, toAgg).reduce(sumFn, 0);
+
+    if (from % aggBucketSize !== 0) {
+      total -= size.slice(fromAgg * aggBucketSize, from).reduce(sumFn, 0);
+    }
+    if (to % aggBucketSize !== 0 && to !== lastTo) {
+      total -= size.slice(to, toAgg * aggBucketSize).reduce(sumFn, 0);
+    }
+
+    return total
+  }
+
+>>>>>>> alejandro
   var commonVirtScrollProps = {
     virtualScrollSliceSize: {
       type: Number,
@@ -65570,6 +65840,7 @@ if(false) {}
         // keyboard search when not having use-input
         if (optionsLength > 0 && this.useInput !== true && e.keyCode >= 48 && e.keyCode <= 90) {
           this.menu !== true && this.showPopup(e);
+<<<<<<< HEAD
 
           // clear search buffer if expired
           if (this.searchBuffer === void 0 || this.searchBufferExp < Date.now()) {
@@ -65599,6 +65870,37 @@ if(false) {}
             ))
           }
 
+=======
+
+          // clear search buffer if expired
+          if (this.searchBuffer === void 0 || this.searchBufferExp < Date.now()) {
+            this.searchBuffer = '';
+          }
+
+          var
+            char = String.fromCharCode(e.keyCode).toLocaleLowerCase(),
+            keyRepeat = this.searchBuffer.length === 1 && this.searchBuffer[0] === char;
+
+          this.searchBufferExp = Date.now() + 1500;
+          if (keyRepeat === false) {
+            this.searchBuffer += char;
+          }
+
+          var searchRe = new RegExp('^' + this.searchBuffer.split('').join('.*'), 'i');
+
+          var index$1 = this.optionIndex;
+
+          if (keyRepeat === true || searchRe.test(this.__getOptionLabel(this.options[index$1])) !== true) {
+            do {
+              index$1 = normalizeToInterval(index$1 + 1, -1, optionsLength - 1);
+            }
+            while (index$1 !== this.optionIndex && (
+              this.__isDisabled(this.options[index$1]) === true ||
+              searchRe.test(this.__getOptionLabel(this.options[index$1])) !== true
+            ))
+          }
+
+>>>>>>> alejandro
           if (this.optionIndex !== index$1) {
             this.$nextTick(function () {
               this$1.setOptionIndex(index$1);
@@ -65686,12 +65988,21 @@ if(false) {}
               ? this.$refs.menu.__portal.$el
               : void 0
           )
+<<<<<<< HEAD
       },
 
       __getVirtualScrollTarget: function __getVirtualScrollTarget () {
         return this.__getVirtualScrollEl()
       },
 
+=======
+      },
+
+      __getVirtualScrollTarget: function __getVirtualScrollTarget () {
+        return this.__getVirtualScrollEl()
+      },
+
+>>>>>>> alejandro
       __getSelection: function __getSelection (h, fromDialog) {
         var this$1 = this;
         var obj;
@@ -66139,6 +66450,7 @@ if(false) {}
         this.$emit('blur', e);
         this.__resetInputValue();
       },
+<<<<<<< HEAD
 
       __onDialogShow: function __onDialogShow () {
         var el = document.activeElement;
@@ -66156,6 +66468,25 @@ if(false) {}
           return
         }
 
+=======
+
+      __onDialogShow: function __onDialogShow () {
+        var el = document.activeElement;
+        // IE can have null document.activeElement
+        if (
+          (el === null || el.id !== this.targetUid) &&
+          this.$refs.target !== el
+        ) {
+          this.$refs.target.focus();
+        }
+      },
+
+      __closeMenu: function __closeMenu () {
+        if (this.dialog === true) {
+          return
+        }
+
+>>>>>>> alejandro
         if (this.menu === true) {
           this.menu = false;
         }
@@ -66179,6 +66510,7 @@ if(false) {}
         else {
           this.__focus();
         }
+<<<<<<< HEAD
 
         if (this.$listeners.filter !== void 0) {
           this.filter(this.inputValue);
@@ -66193,6 +66525,22 @@ if(false) {}
         this.__closeMenu();
       },
 
+=======
+
+        if (this.$listeners.filter !== void 0) {
+          this.filter(this.inputValue);
+        }
+        else if (this.noOptions !== true || this.$scopedSlots['no-option'] !== void 0) {
+          this.menu = true;
+        }
+      },
+
+      hidePopup: function hidePopup () {
+        this.dialog = false;
+        this.__closeMenu();
+      },
+
+>>>>>>> alejandro
       __resetInputValue: function __resetInputValue () {
         this.useInput === true && this.updateInputValue(
           this.multiple !== true && this.fillInput === true && this.innerValue.length > 0
@@ -75152,6 +75500,7 @@ if(false) {}
 
 /***/ }),
 
+<<<<<<< HEAD
 /***/ "./node_modules/quasar/lang lazy recursive ^\\.\\/.*$":
 /*!*****************************************************************!*\
   !*** ./node_modules/quasar/lang lazy ^\.\/.*$ namespace object ***!
@@ -75635,6 +75984,8 @@ module.exports = webpackAsyncContext;
 
 /***/ }),
 
+=======
+>>>>>>> alejandro
 /***/ "./node_modules/quasar/lang/index.json":
 /*!*********************************************!*\
   !*** ./node_modules/quasar/lang/index.json ***!
@@ -76588,6 +76939,586 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 "use strict";
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(o){return typeof o}:function(o){return o&&"function"==typeof Symbol&&o.constructor===Symbol&&o!==Symbol.prototype?"symbol":typeof o};!function(){function o(e,t){if(!o.installed){if(o.installed=!0,!t)return void console.error("You have to install axios");e.axios=t,Object.defineProperties(e.prototype,{axios:{get:function(){return t}},$http:{get:function(){return t}}})}}"object"==( false?undefined:_typeof(exports))?module.exports=o: true?!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function(){return o}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)):undefined}();
+
+/***/ }),
+
+/***/ "./node_modules/vue-friendly-iframe/dist/vue-friendly-iframe.js":
+/*!**********************************************************************!*\
+  !*** ./node_modules/vue-friendly-iframe/dist/vue-friendly-iframe.js ***!
+  \**********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/*!
+ * vue-friendly-iframe v0.16.0 (https://github.com/officert/vue-friendly-iframe)
+ * (c) 2019 Tim Officer
+ * Released under the MIT License.
+ */
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(true)
+		module.exports = factory();
+	else { var i, a; }
+})(typeof self !== 'undefined' ? self : this, function() {
+return /******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _FriendlyIframe = __webpack_require__(1);
+
+var _FriendlyIframe2 = _interopRequireDefault(_FriendlyIframe);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = _FriendlyIframe2.default;
+module.exports = exports['default'];
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(2)(
+  /* script */
+  __webpack_require__(3),
+  /* template */
+  __webpack_require__(9),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports) {
+
+// this module is a runtime utility for cleaner component module output and will
+// be included in the final webpack user bundle
+
+module.exports = function normalizeComponent (
+  rawScriptExports,
+  compiledTemplate,
+  scopeId,
+  cssModules
+) {
+  var esModule
+  var scriptExports = rawScriptExports = rawScriptExports || {}
+
+  // ES6 modules interop
+  var type = typeof rawScriptExports.default
+  if (type === 'object' || type === 'function') {
+    esModule = rawScriptExports
+    scriptExports = rawScriptExports.default
+  }
+
+  // Vue.extend constructor export interop
+  var options = typeof scriptExports === 'function'
+    ? scriptExports.options
+    : scriptExports
+
+  // render functions
+  if (compiledTemplate) {
+    options.render = compiledTemplate.render
+    options.staticRenderFns = compiledTemplate.staticRenderFns
+  }
+
+  // scopedId
+  if (scopeId) {
+    options._scopeId = scopeId
+  }
+
+  // inject cssModules
+  if (cssModules) {
+    var computed = Object.create(options.computed || null)
+    Object.keys(cssModules).forEach(function (key) {
+      var module = cssModules[key]
+      computed[key] = function () { return module }
+    })
+    options.computed = computed
+  }
+
+  return {
+    esModule: esModule,
+    exports: scriptExports,
+    options: options
+  }
+}
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _v = __webpack_require__(4);
+
+var _v2 = _interopRequireDefault(_v);
+
+var _utils = __webpack_require__(8);
+
+var _utils2 = _interopRequireDefault(_utils);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function generateGuid() {
+  return (0, _v2.default)();
+}
+
+exports.default = {
+  name: 'friendly-iframe',
+  props: {
+    src: {
+      type: String,
+      required: true
+    },
+    crossorigin: {
+      type: String,
+      required: false,
+      default: 'anonymous'
+    },
+    target: {
+      type: String,
+      required: false,
+      default: '_parent'
+    },
+    className: {
+      type: String,
+      required: false
+    },
+    frameborder: {
+      type: String,
+      required: false
+    },
+    gesture: {
+      type: String,
+      required: false
+    },
+    allow: {
+      type: String,
+      required: false
+    },
+    allowfullscreen: {
+      type: String,
+      required: false
+    },
+    scrolling: {
+      type: String,
+      required: false
+    }
+  },
+  data: function data() {
+    return {
+      iframeEl: null,
+      iframeLoadedMessage: 'IFRAME_LOADED_' + generateGuid(),
+      iframeOnReadyStateChangeMessage: 'IFRAME_ON_READ_STATE_CHANGE_' + generateGuid()
+    };
+  },
+
+  computed: {},
+  watch: {
+    src: function src() {
+      this.reinitIframe(this);
+    }
+  },
+  methods: {
+    removeIframe: function removeIframe() {
+      while (this.$el.firstChild) {
+        this.$el.removeChild(this.$el.firstChild);
+      }
+    },
+    setIframeUrl: function setIframeUrl() {
+      var iframeDoc = this.iframeEl.contentWindow.document;
+      iframeDoc.open().write('\n          <body onload="window.location.href=\'' + this.src + '\'; parent.postMessage(\'' + this.iframeLoadedMessage + '\', \'*\')"></body>\n          <script>\n            window.document.onreadystatechange = function () {\n              if(window.document.readyState === \'complete\') {\n                parent.postMessage(\'' + this.iframeOnReadyStateChangeMessage + '\', \'*\')\n              }\n            };\n          </script>\n          ');
+
+      iframeDoc.close();
+    },
+
+    reinitIframe: _utils2.default.debounce(function (vm) {
+      vm.removeIframe();
+      vm.initIframe();
+    }, 200),
+    initIframe: function initIframe() {
+      this.iframeEl = document.createElement('iframe');
+      this.iframeEl.setAttribute('iframe-src', this.src);
+      this.iframeEl.setAttribute('crossorigin', this.crossorigin);
+      this.iframeEl.setAttribute('target', this.target);
+      this.iframeEl.setAttribute('style', 'visibility: hidden; position: absolute; top: -99999px');
+      if (this.className) this.iframeEl.setAttribute('class', this.className);
+      if (this.class) this.iframeEl.setAttribute('class', this.class);
+      if (this.frameborder) this.iframeEl.setAttribute('frameborder', this.frameborder);
+      if (this.gesture) this.iframeEl.setAttribute('gesture', this.gesture);
+      if (this.allow) this.iframeEl.setAttribute('allow', this.allow);
+      if (this.allowfullscreen) this.iframeEl.setAttribute('allowfullscreen', this.allowfullscreen);
+      if (this.scrolling) this.iframeEl.setAttribute('scrolling', this.scrolling);
+
+      this.$el.appendChild(this.iframeEl);
+
+      this.setIframeUrl();
+    },
+    listenForEvents: function listenForEvents() {
+      var _this = this;
+
+      var eventMethod = window.addEventListener ? 'addEventListener' : 'attachEvent';
+      var eventer = window[eventMethod];
+      var messageEvent = eventMethod === 'attachEvent' ? 'onmessage' : 'message';
+
+      eventer(messageEvent, function (event) {
+        if (event.data === _this.iframeLoadedMessage) {
+          _this.$emit('iframe-load');
+
+          _this.iframeEl.setAttribute('style', 'visibility: visible;');
+        }
+
+        if (event.data === _this.iframeOnReadyStateChangeMessage) {
+          _this.$emit('document-load');
+
+          _this.$emit('load');
+        }
+      }, false);
+    }
+  },
+  mounted: function mounted() {
+    this.listenForEvents();
+
+    this.initIframe();
+  }
+};
+module.exports = exports['default'];
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var rng = __webpack_require__(5);
+var bytesToUuid = __webpack_require__(7);
+
+// **`v1()` - Generate time-based UUID**
+//
+// Inspired by https://github.com/LiosK/UUID.js
+// and http://docs.python.org/library/uuid.html
+
+// random #'s we need to init node and clockseq
+var _seedBytes = rng();
+
+// Per 4.5, create and 48-bit node id, (47 random bits + multicast bit = 1)
+var _nodeId = [
+  _seedBytes[0] | 0x01,
+  _seedBytes[1], _seedBytes[2], _seedBytes[3], _seedBytes[4], _seedBytes[5]
+];
+
+// Per 4.2.2, randomize (14 bit) clockseq
+var _clockseq = (_seedBytes[6] << 8 | _seedBytes[7]) & 0x3fff;
+
+// Previous uuid creation time
+var _lastMSecs = 0, _lastNSecs = 0;
+
+// See https://github.com/broofa/node-uuid for API details
+function v1(options, buf, offset) {
+  var i = buf && offset || 0;
+  var b = buf || [];
+
+  options = options || {};
+
+  var clockseq = options.clockseq !== undefined ? options.clockseq : _clockseq;
+
+  // UUID timestamps are 100 nano-second units since the Gregorian epoch,
+  // (1582-10-15 00:00).  JSNumbers aren't precise enough for this, so
+  // time is handled internally as 'msecs' (integer milliseconds) and 'nsecs'
+  // (100-nanoseconds offset from msecs) since unix epoch, 1970-01-01 00:00.
+  var msecs = options.msecs !== undefined ? options.msecs : new Date().getTime();
+
+  // Per 4.2.1.2, use count of uuid's generated during the current clock
+  // cycle to simulate higher resolution clock
+  var nsecs = options.nsecs !== undefined ? options.nsecs : _lastNSecs + 1;
+
+  // Time since last uuid creation (in msecs)
+  var dt = (msecs - _lastMSecs) + (nsecs - _lastNSecs)/10000;
+
+  // Per 4.2.1.2, Bump clockseq on clock regression
+  if (dt < 0 && options.clockseq === undefined) {
+    clockseq = clockseq + 1 & 0x3fff;
+  }
+
+  // Reset nsecs if clock regresses (new clockseq) or we've moved onto a new
+  // time interval
+  if ((dt < 0 || msecs > _lastMSecs) && options.nsecs === undefined) {
+    nsecs = 0;
+  }
+
+  // Per 4.2.1.2 Throw error if too many uuids are requested
+  if (nsecs >= 10000) {
+    throw new Error('uuid.v1(): Can\'t create more than 10M uuids/sec');
+  }
+
+  _lastMSecs = msecs;
+  _lastNSecs = nsecs;
+  _clockseq = clockseq;
+
+  // Per 4.1.4 - Convert from unix epoch to Gregorian epoch
+  msecs += 12219292800000;
+
+  // `time_low`
+  var tl = ((msecs & 0xfffffff) * 10000 + nsecs) % 0x100000000;
+  b[i++] = tl >>> 24 & 0xff;
+  b[i++] = tl >>> 16 & 0xff;
+  b[i++] = tl >>> 8 & 0xff;
+  b[i++] = tl & 0xff;
+
+  // `time_mid`
+  var tmh = (msecs / 0x100000000 * 10000) & 0xfffffff;
+  b[i++] = tmh >>> 8 & 0xff;
+  b[i++] = tmh & 0xff;
+
+  // `time_high_and_version`
+  b[i++] = tmh >>> 24 & 0xf | 0x10; // include version
+  b[i++] = tmh >>> 16 & 0xff;
+
+  // `clock_seq_hi_and_reserved` (Per 4.2.2 - include variant)
+  b[i++] = clockseq >>> 8 | 0x80;
+
+  // `clock_seq_low`
+  b[i++] = clockseq & 0xff;
+
+  // `node`
+  var node = options.node || _nodeId;
+  for (var n = 0; n < 6; ++n) {
+    b[i + n] = node[n];
+  }
+
+  return buf ? buf : bytesToUuid(b);
+}
+
+module.exports = v1;
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(global) {// Unique ID creation requires a high quality random # generator.  In the
+// browser this is a little complicated due to unknown quality of Math.random()
+// and inconsistent support for the `crypto` API.  We do the best we can via
+// feature-detection
+var rng;
+
+var crypto = global.crypto || global.msCrypto; // for IE 11
+if (crypto && crypto.getRandomValues) {
+  // WHATWG crypto RNG - http://wiki.whatwg.org/wiki/Crypto
+  var rnds8 = new Uint8Array(16); // eslint-disable-line no-undef
+  rng = function whatwgRNG() {
+    crypto.getRandomValues(rnds8);
+    return rnds8;
+  };
+}
+
+if (!rng) {
+  // Math.random()-based (RNG)
+  //
+  // If all else fails, use Math.random().  It's fast, but is of unspecified
+  // quality.
+  var rnds = new Array(16);
+  rng = function() {
+    for (var i = 0, r; i < 16; i++) {
+      if ((i & 0x03) === 0) r = Math.random() * 0x100000000;
+      rnds[i] = r >>> ((i & 0x03) << 3) & 0xff;
+    }
+
+    return rnds;
+  };
+}
+
+module.exports = rng;
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports) {
+
+/**
+ * Convert array of 16 byte values to UUID string format of the form:
+ * XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
+ */
+var byteToHex = [];
+for (var i = 0; i < 256; ++i) {
+  byteToHex[i] = (i + 0x100).toString(16).substr(1);
+}
+
+function bytesToUuid(buf, offset) {
+  var i = offset || 0;
+  var bth = byteToHex;
+  return bth[buf[i++]] + bth[buf[i++]] +
+          bth[buf[i++]] + bth[buf[i++]] + '-' +
+          bth[buf[i++]] + bth[buf[i++]] + '-' +
+          bth[buf[i++]] + bth[buf[i++]] + '-' +
+          bth[buf[i++]] + bth[buf[i++]] + '-' +
+          bth[buf[i++]] + bth[buf[i++]] +
+          bth[buf[i++]] + bth[buf[i++]] +
+          bth[buf[i++]] + bth[buf[i++]];
+}
+
+module.exports = bytesToUuid;
+
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+function debounce(func, wait, immediate) {
+  var timeout = void 0;
+
+  return function () {
+    var context = this;
+
+    var args = arguments;
+
+    var later = function later() {
+      timeout = null;
+      if (!immediate) func.apply(context, args);
+    };
+
+    var callNow = immediate && !timeout;
+
+    clearTimeout(timeout);
+
+    timeout = setTimeout(later, wait);
+
+    if (callNow) func.apply(context, args);
+  };
+}
+
+exports.default = {
+  debounce: debounce
+};
+module.exports = exports["default"];
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "vue-friendly-iframe"
+  })
+},staticRenderFns: []}
+
+/***/ })
+/******/ ]);
+});
 
 /***/ }),
 
@@ -80602,28 +81533,452 @@ var render = function() {
                           }
                         }),
                         _vm._v(" "),
-                        _c("div", { staticClass: "row justify-center" }, [
+                        _c("div", { staticClass: "row justify-left" }, [
                           _c(
                             "div",
                             { staticClass: "col-2" },
                             [
                               _c("q-btn", {
                                 attrs: {
-                                  label: "Crear",
+                                  label: "Crear cuenta",
                                   type: "submit",
                                   color: "primary"
                                 }
                               })
                             ],
                             1
-                          )
+                          ),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "row justify-center" }, [
+                            _c(
+                              "div",
+                              { staticClass: "col-2" },
+                              [
+                                _c("q-btn", {
+                                  attrs: {
+                                    label: "subCuenta",
+                                    color: "purple"
+                                  },
+                                  on: {
+                                    click: function($event) {
+                                      _vm.fixed = true
+                                    }
+                                  }
+                                })
+                              ],
+                              1
+                            )
+                          ])
                         ])
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "q-dialog",
+                      {
+                        attrs: {
+                          "full-width": "",
+                          "no-backdrop-dismiss": true
+                        },
+                        model: {
+                          value: _vm.fixed,
+                          callback: function($$v) {
+                            _vm.fixed = $$v
+                          },
+                          expression: "fixed"
+                        }
+                      },
+                      [
+                        _c(
+                          "q-card",
+                          [
+                            _c("q-card-section", [
+                              _c("div", { staticClass: "text-h6" }, [
+                                _vm._v("Crear subcuenta")
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("q-separator"),
+                            _vm._v(" "),
+                            _c(
+                              "q-card-section",
+                              {
+                                staticClass: "scroll",
+                                staticStyle: { "max-height": "100vh" }
+                              },
+                              [
+                                _c("q-select", {
+                                  attrs: {
+                                    standout: "bg-primary text-white",
+                                    options: _vm.options,
+                                    label: "Seleccione cuenta",
+                                    "option-label": "titulo",
+                                    "option-value": "id"
+                                  },
+                                  model: {
+                                    value: _vm.cuenta_id,
+                                    callback: function($$v) {
+                                      _vm.cuenta_id = $$v
+                                    },
+                                    expression: "cuenta_id"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("q-input", {
+                                  attrs: {
+                                    outlined: "",
+                                    label: "Nombre de subcuenta",
+                                    "stack-label": "",
+                                    type: "text"
+                                  },
+                                  model: {
+                                    value: _vm.nombre_s,
+                                    callback: function($$v) {
+                                      _vm.nombre_s = $$v
+                                    },
+                                    expression: "nombre_s"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("q-input", {
+                                  attrs: {
+                                    outlined: "",
+                                    label: "Descripcion de la subcuenta",
+                                    "stack-label": "",
+                                    type: "textarea"
+                                  },
+                                  model: {
+                                    value: _vm.descripcion_s,
+                                    callback: function($$v) {
+                                      _vm.descripcion_s = $$v
+                                    },
+                                    expression: "descripcion_s"
+                                  }
+                                })
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c("q-separator"),
+                            _vm._v(" "),
+                            _c(
+                              "q-card-actions",
+                              { attrs: { align: "right" } },
+                              [
+                                _c("q-btn", {
+                                  attrs: {
+                                    flat: "",
+                                    label: "Crear",
+                                    color: "primary"
+                                  },
+                                  on: { click: _vm.guardar_subcuenta }
+                                }),
+                                _vm._v(" "),
+                                _c("q-btn", {
+                                  directives: [
+                                    {
+                                      name: "close-popup",
+                                      rawName: "v-close-popup"
+                                    }
+                                  ],
+                                  attrs: {
+                                    flat: "",
+                                    label: "Cerrar",
+                                    color: "black"
+                                  }
+                                })
+                              ],
+                              1
+                            )
+                          ],
+                          1
+                        )
                       ],
                       1
                     )
                   ],
                   1
                 )
+              ])
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/cuentas/cuentas_vue/formulario.vue?vue&type=template&id=3f2b5d42&":
+/*!**************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/auth/cuentas/cuentas_vue/formulario.vue?vue&type=template&id=3f2b5d42& ***!
+  \**************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("br"),
+    _vm._v(" "),
+    _c("div", { staticClass: "row justify-center" }, [
+      _c(
+        "div",
+        { staticClass: "col-8" },
+        [
+          _c(
+            "q-card",
+            { staticClass: "my-card" },
+            [
+              _c("q-card-section", { staticClass: "bg-primary text-white" }, [
+                _c("div", { staticClass: "text-h6" }, [
+                  _vm._v("Cuentas/formulario")
+                ])
+              ]),
+              _vm._v(" "),
+              _c("q-separator"),
+              _vm._v(" "),
+              _c("dir", { staticClass: "q-pa-md" }, [
+                _c("div", { staticClass: "row q-col-gutter-md" }, [
+                  _c(
+                    "div",
+                    { staticClass: "col-12 col-md-8" },
+                    [
+                      _c("q-select", {
+                        attrs: {
+                          standout: "bg-primary text-white",
+                          options: _vm.options,
+                          label: "Seleccione cuenta",
+                          "option-label": function(item) {
+                            return item === null
+                              ? "Null value"
+                              : item.titulo + " - " + item.descripcion
+                          },
+                          "option-value": "id"
+                        },
+                        on: {
+                          input: function($event) {
+                            return _vm.change_cuenta(2)
+                          }
+                        },
+                        model: {
+                          value: _vm.cuenta_id,
+                          callback: function($$v) {
+                            _vm.cuenta_id = $$v
+                          },
+                          expression: "cuenta_id"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "col-12 col-md-4" },
+                    [
+                      _c("q-select", {
+                        attrs: {
+                          loading: _vm.loading2,
+                          standout: "bg-primary text-white",
+                          options: _vm.subcuentas,
+                          label: "Seleccione sub cuenta",
+                          "option-label": "titulo",
+                          "option-value": "id"
+                        },
+                        model: {
+                          value: _vm.subcuenta,
+                          callback: function($$v) {
+                            _vm.subcuenta = $$v
+                          },
+                          expression: "subcuenta"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ]),
+                _vm._v(" "),
+                _c("hr"),
+                _vm._v(" "),
+                _c("div", { staticClass: "row q-col-gutter-md" }, [
+                  _c(
+                    "div",
+                    { staticClass: "col-12 col-md-3" },
+                    [
+                      _c("q-input", {
+                        attrs: {
+                          outlined: "",
+                          label: "Fecha",
+                          "stack-label": "",
+                          type: "date"
+                        },
+                        model: {
+                          value: _vm.fecha,
+                          callback: function($$v) {
+                            _vm.fecha = $$v
+                          },
+                          expression: "fecha"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "col-12 col-md-3" },
+                    [
+                      _c("q-input", {
+                        attrs: {
+                          outlined: "",
+                          label: "Codigo o identificador",
+                          "stack-label": "",
+                          type: "text"
+                        },
+                        model: {
+                          value: _vm.codigo,
+                          callback: function($$v) {
+                            _vm.codigo = $$v
+                          },
+                          expression: "codigo"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "col-12 col-md-3" },
+                    [
+                      _c("q-select", {
+                        attrs: {
+                          standout: "bg-primary text-white",
+                          options: [
+                            { id: "1", label: "Ingreso" },
+                            { id: "2", label: "Egreso" }
+                          ],
+                          label: "tipo de monto",
+                          "option-label": "label",
+                          "option-value": "id"
+                        },
+                        model: {
+                          value: _vm.tipo_monto_id,
+                          callback: function($$v) {
+                            _vm.tipo_monto_id = $$v
+                          },
+                          expression: "tipo_monto_id"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "col-12 col-md-3" },
+                    [
+                      _c("q-input", {
+                        attrs: {
+                          outlined: "",
+                          label: "Monto",
+                          "stack-label": "",
+                          type: "numeric"
+                        },
+                        model: {
+                          value: _vm.monto,
+                          callback: function($$v) {
+                            _vm.monto = $$v
+                          },
+                          expression: "monto"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ]),
+                _vm._v(" "),
+                _c("br"),
+                _vm._v(" "),
+                _c("div", { staticClass: "row q-col-gutter-md" }, [
+                  _c(
+                    "div",
+                    { staticClass: "col-12 col-md-12" },
+                    [
+                      _c("q-input", {
+                        attrs: {
+                          outlined: "",
+                          label: "Descripcion de cuenta",
+                          "stack-label": "",
+                          type: "textarea"
+                        },
+                        model: {
+                          value: _vm.descripcion,
+                          callback: function($$v) {
+                            _vm.descripcion = $$v
+                          },
+                          expression: "descripcion"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ]),
+                _vm._v(" "),
+                _c("br"),
+                _vm._v(" "),
+                _c("div", { staticClass: "column" }, [
+                  _c(
+                    "div",
+                    { staticClass: "col self-start" },
+                    [
+                      _c("q-input", {
+                        attrs: { type: "file" },
+                        on: {
+                          input: function(val) {
+                            _vm.file = val[0]
+                          }
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "col self-end" },
+                    [
+                      _c("q-btn", {
+                        attrs: {
+                          color: "primary",
+                          label: "guardar",
+                          icon: "create"
+                        },
+                        on: { click: _vm.guardar }
+                      })
+                    ],
+                    1
+                  )
+                ])
               ])
             ],
             1
@@ -80662,20 +82017,104 @@ var render = function() {
     _c("div", { staticClass: "row justify-center" }, [
       _c(
         "div",
+<<<<<<< HEAD
         { staticClass: "col-8" },
+=======
+        { staticClass: "col-10" },
+>>>>>>> alejandro
         [
           _c(
             "q-card",
             { staticClass: "my-card" },
             [
               _c("q-card-section", { staticClass: "bg-primary text-white" }, [
+<<<<<<< HEAD
                 _c("div", { staticClass: "text-h6" }, [
                   _vm._v("Cuentas/listar cuenta")
+=======
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-12 col-md-9" }, [
+                    _c("div", { staticClass: "text-h6" }, [
+                      _vm._v("Cuentas/listar cuenta")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "col-12 col-md-2" },
+                    [
+                      _c(
+                        "q-btn-dropdown",
+                        {
+                          attrs: {
+                            color: "primary",
+                            icon: "build",
+                            label: "Opciones"
+                          }
+                        },
+                        [
+                          _c(
+                            "q-list",
+                            [
+                              _c(
+                                "q-item",
+                                {
+                                  directives: [
+                                    {
+                                      name: "close-popup",
+                                      rawName: "v-close-popup"
+                                    }
+                                  ],
+                                  attrs: { clickable: "" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.ruta()
+                                    }
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "q-item-section",
+                                    [
+                                      _c("q-avatar", {
+                                        attrs: {
+                                          icon: "monetization_on",
+                                          color: "primary",
+                                          "text-color": "white"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "q-item-section",
+                                    [
+                                      _c("q-item-label", [
+                                        _vm._v("Inicio y cierre mensual")
+                                      ])
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+>>>>>>> alejandro
                 ])
               ]),
               _vm._v(" "),
               _c("q-separator"),
               _vm._v(" "),
+<<<<<<< HEAD
               _c("div", { staticClass: "col-6" }, [
                 _c(
                   "div",
@@ -80781,6 +82220,444 @@ var render = function() {
                   2
                 )
               ])
+=======
+              _c(
+                "div",
+                { staticClass: "col-6" },
+                [
+                  [
+                    _c(
+                      "div",
+                      { staticClass: "q-pa-md" },
+                      [
+                        _c("div", { staticClass: "row q-col-gutter-md" }, [
+                          _c(
+                            "div",
+                            { staticClass: "col-12 col-md-6" },
+                            [
+                              _c("q-select", {
+                                attrs: {
+                                  standout: "bg-primary text-white",
+                                  options: _vm.options,
+                                  label: "Seleccione cuenta",
+                                  "option-label": "titulo",
+                                  "option-value": "id"
+                                },
+                                model: {
+                                  value: _vm.cuenta_id,
+                                  callback: function($$v) {
+                                    _vm.cuenta_id = $$v
+                                  },
+                                  expression: "cuenta_id"
+                                }
+                              })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "col-12 col-md-3" },
+                            [
+                              _c("q-select", {
+                                attrs: {
+                                  standout: "bg-primary text-white",
+                                  options: _vm.anios,
+                                  label: "Seleccione año",
+                                  "option-label": "label",
+                                  "option-value": "id"
+                                },
+                                model: {
+                                  value: _vm.anio,
+                                  callback: function($$v) {
+                                    _vm.anio = $$v
+                                  },
+                                  expression: "anio"
+                                }
+                              })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "col-12 col-md-3" },
+                            [
+                              _c("q-select", {
+                                attrs: {
+                                  standout: "bg-primary text-white",
+                                  options: _vm.meses,
+                                  label: "Seleccione mes",
+                                  "option-label": "label",
+                                  "option-value": "id"
+                                },
+                                model: {
+                                  value: _vm.mes,
+                                  callback: function($$v) {
+                                    _vm.mes = $$v
+                                  },
+                                  expression: "mes"
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "q-list",
+                          _vm._l(_vm.selected, function(s) {
+                            return _c("q-item", { key: s.id }, [
+                              _vm._v(
+                                "\n\t\t\t\t\t\t      " +
+                                  _vm._s(s.name) +
+                                  "\n\t\t\t\t\t\t    "
+                              )
+                            ])
+                          }),
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "row justify-center" }, [
+                          _c(
+                            "div",
+                            { staticClass: "col-2 col-md-2" },
+                            [
+                              _c("q-btn", {
+                                attrs: { label: "Buscar", icon: "search" },
+                                on: { click: _vm.listar }
+                              })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "col-2 col-md-2" },
+                            [
+                              _c("q-btn", {
+                                attrs: { label: "Limpiar", icon: "clear" },
+                                on: { click: _vm.limpiar }
+                              })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "col-2 col-md-2" },
+                            [
+                              _c("q-btn", {
+                                attrs: {
+                                  label: "Volver",
+                                  icon: "keyboard_backspace"
+                                },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.ruta("/modulo-cuentas")
+                                  }
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        ])
+                      ],
+                      1
+                    )
+                  ],
+                  _vm._v(" "),
+                  _vm.view_tabla
+                    ? _c(
+                        "div",
+                        [
+                          _c(
+                            "div",
+                            { staticClass: "q-pa-md" },
+                            [
+                              _c("q-table", {
+                                staticClass: "my-sticky-header-table",
+                                attrs: {
+                                  title:
+                                    _vm.cuenta_id.titulo +
+                                    ", " +
+                                    _vm.mes.label +
+                                    " del " +
+                                    _vm.anio.label,
+                                  data: _vm.tabla,
+                                  columns: _vm.columns,
+                                  separator: "cell",
+                                  "row-key": "name",
+                                  flat: "",
+                                  bordered: ""
+                                },
+                                scopedSlots: _vm._u(
+                                  [
+                                    {
+                                      key: "body",
+                                      fn: function(props) {
+                                        return [
+                                          _c(
+                                            "q-tr",
+                                            { attrs: { props: props } },
+                                            [
+                                              _c(
+                                                "q-td",
+                                                {
+                                                  key: "id",
+                                                  attrs: { props: props }
+                                                },
+                                                [_vm._v(_vm._s(props.row.id))]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "q-td",
+                                                {
+                                                  key: "titulo",
+                                                  attrs: { props: props }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(props.row.titulo)
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "q-td",
+                                                {
+                                                  key: "fecha",
+                                                  attrs: { props: props }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(props.row.fecha)
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "q-td",
+                                                {
+                                                  key: "archivo",
+                                                  attrs: { props: props }
+                                                },
+                                                [
+                                                  _c("q-btn", {
+                                                    attrs: {
+                                                      flat: "",
+                                                      icon: "file_copy"
+                                                    },
+                                                    on: {
+                                                      click: function($event) {
+                                                        _vm.fixed = true
+                                                      }
+                                                    }
+                                                  }),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "q-dialog",
+                                                    {
+                                                      attrs: {
+                                                        "full-width": "",
+                                                        "full-height": "",
+                                                        "no-backdrop-dismiss": true
+                                                      },
+                                                      model: {
+                                                        value: _vm.fixed,
+                                                        callback: function(
+                                                          $$v
+                                                        ) {
+                                                          _vm.fixed = $$v
+                                                        },
+                                                        expression: "fixed"
+                                                      }
+                                                    },
+                                                    [
+                                                      _c(
+                                                        "q-card",
+                                                        [
+                                                          _c("q-card-section", [
+                                                            _c(
+                                                              "div",
+                                                              {
+                                                                staticClass:
+                                                                  "row"
+                                                              },
+                                                              [
+                                                                _c(
+                                                                  "div",
+                                                                  {
+                                                                    staticClass:
+                                                                      "col-10 col-md-11"
+                                                                  },
+                                                                  [
+                                                                    _c(
+                                                                      "div",
+                                                                      {
+                                                                        staticClass:
+                                                                          "text-h6"
+                                                                      },
+                                                                      [
+                                                                        _vm._v(
+                                                                          "Archivo"
+                                                                        )
+                                                                      ]
+                                                                    )
+                                                                  ]
+                                                                ),
+                                                                _vm._v(" "),
+                                                                _c(
+                                                                  "div",
+                                                                  {
+                                                                    staticClass:
+                                                                      "col-10 col-md-1"
+                                                                  },
+                                                                  [
+                                                                    _c(
+                                                                      "q-btn",
+                                                                      {
+                                                                        directives: [
+                                                                          {
+                                                                            name:
+                                                                              "close-popup",
+                                                                            rawName:
+                                                                              "v-close-popup"
+                                                                          }
+                                                                        ],
+                                                                        attrs: {
+                                                                          label:
+                                                                            "Volver",
+                                                                          icon:
+                                                                            "keyboard_backspace",
+                                                                          flat:
+                                                                            ""
+                                                                        }
+                                                                      }
+                                                                    )
+                                                                  ],
+                                                                  1
+                                                                )
+                                                              ]
+                                                            )
+                                                          ]),
+                                                          _vm._v(" "),
+                                                          _c("iframe", {
+                                                            staticStyle: {
+                                                              height: "100%",
+                                                              width: "100%"
+                                                            },
+                                                            attrs: {
+                                                              src:
+                                                                "../" +
+                                                                props.row
+                                                                  .archivo,
+                                                              frameborder: "0",
+                                                              allowfullscreen:
+                                                                ""
+                                                            }
+                                                          })
+                                                        ],
+                                                        1
+                                                      )
+                                                    ],
+                                                    1
+                                                  )
+                                                ],
+                                                1
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "q-td",
+                                                {
+                                                  key: "descripcion",
+                                                  attrs: { props: props }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      props.row.descripcion
+                                                    )
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "q-td",
+                                                {
+                                                  key: "ingreso",
+                                                  attrs: { props: props }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      props.row.monto_ingreso
+                                                    )
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "q-td",
+                                                {
+                                                  key: "egreso",
+                                                  attrs: { props: props }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      props.row.monto_egreso
+                                                    )
+                                                  )
+                                                ]
+                                              )
+                                            ],
+                                            1
+                                          )
+                                        ]
+                                      }
+                                    }
+                                  ],
+                                  null,
+                                  false,
+                                  3289779628
+                                )
+                              })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          [
+                            _c("div", { staticClass: "q-pa-md" }, [
+                              _c("div", { staticClass: "row" }, [
+                                _c(
+                                  "div",
+                                  { attrs: { clas: "col-12 col-5" } },
+                                  [
+                                    _c("q-table", {
+                                      attrs: {
+                                        data: _vm.data_resumen,
+                                        columns: _vm.columns_resumen,
+                                        "row-key": "name",
+                                        "hide-bottom": ""
+                                      }
+                                    })
+                                  ],
+                                  1
+                                )
+                              ])
+                            ])
+                          ]
+                        ],
+                        2
+                      )
+                    : _vm._e()
+                ],
+                2
+              )
+>>>>>>> alejandro
             ],
             1
           )
@@ -80859,6 +82736,23 @@ var render = function() {
                           label: "Listar cuentas"
                         },
                         on: { click: _vm.url_listar_cuenta }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "col-12 col-md-2" },
+                    [
+                      _c("q-btn", {
+                        staticClass: "block",
+                        attrs: {
+                          color: "primary",
+                          icon: "attach_file",
+                          label: "Formulario"
+                        },
+                        on: { click: _vm.url_formulario_cuenta }
                       })
                     ],
                     1
@@ -96881,6 +98775,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_18___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_18__);
 /* harmony import */ var vue_i18n__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! vue-i18n */ "./node_modules/vue-i18n/dist/vue-i18n.esm.js");
+/* harmony import */ var vue_friendly_iframe__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! vue-friendly-iframe */ "./node_modules/vue-friendly-iframe/dist/vue-friendly-iframe.js");
+/* harmony import */ var vue_friendly_iframe__WEBPACK_IMPORTED_MODULE_20___default = /*#__PURE__*/__webpack_require__.n(vue_friendly_iframe__WEBPACK_IMPORTED_MODULE_20__);
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
@@ -96945,8 +98841,10 @@ vue__WEBPACK_IMPORTED_MODULE_18___default.a.use(quasar_dist_quasar_umd__WEBPACK_
 
 
 vue__WEBPACK_IMPORTED_MODULE_18___default.a.use(vue_i18n__WEBPACK_IMPORTED_MODULE_19__["default"]);
+
+vue__WEBPACK_IMPORTED_MODULE_18___default.a.component('vue-friendly-iframe', vue_friendly_iframe__WEBPACK_IMPORTED_MODULE_20___default.a);
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_5__["default"]({
-  routes: [].concat(_toConsumableArray(_rutas_js__WEBPACK_IMPORTED_MODULE_0__["default"]), _toConsumableArray(_routes_alejandro_js__WEBPACK_IMPORTED_MODULE_1__["default"]), _toConsumableArray(_routes_bryanv_js__WEBPACK_IMPORTED_MODULE_2__["default"]), _toConsumableArray(_routes_empa_js__WEBPACK_IMPORTED_MODULE_3__["default"]), _toConsumableArray(_routes_sumbex_js__WEBPACK_IMPORTED_MODULE_4__["default"])) //mode: 'history'
+  routes: [].concat(_toConsumableArray(_rutas_js__WEBPACK_IMPORTED_MODULE_0__["default"]), _toConsumableArray(_routes_alejandro_js__WEBPACK_IMPORTED_MODULE_1__["default"]), _toConsumableArray(_routes_bryanv_js__WEBPACK_IMPORTED_MODULE_2__["default"]), _toConsumableArray(_routes_empa_js__WEBPACK_IMPORTED_MODULE_3__["default"]), _toConsumableArray(_routes_sumbex_js__WEBPACK_IMPORTED_MODULE_4__["default"])) // mode: 'history'
 
 });
 vue__WEBPACK_IMPORTED_MODULE_18___default.a.router = router;
@@ -97600,6 +99498,20 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/auth/cuentas/cuentas_js/formulario.js?vue&type=script&lang=js&":
+/*!************************************************************************************************!*\
+  !*** ./resources/js/components/auth/cuentas/cuentas_js/formulario.js?vue&type=script&lang=js& ***!
+  \************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_formulario_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!./formulario.js?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./resources/js/components/auth/cuentas/cuentas_js/formulario.js?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_formulario_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/auth/cuentas/cuentas_js/listar_cuentas.js?vue&type=script&lang=js&":
 /*!****************************************************************************************************!*\
   !*** ./resources/js/components/auth/cuentas/cuentas_js/listar_cuentas.js?vue&type=script&lang=js& ***!
@@ -97678,6 +99590,61 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_crear_cuenta_vue_vue_type_template_id_5c01bba6___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_crear_cuenta_vue_vue_type_template_id_5c01bba6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/auth/cuentas/cuentas_vue/formulario.vue":
+/*!*************************************************************************!*\
+  !*** ./resources/js/components/auth/cuentas/cuentas_vue/formulario.vue ***!
+  \*************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _formulario_vue_vue_type_template_id_3f2b5d42___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./formulario.vue?vue&type=template&id=3f2b5d42& */ "./resources/js/components/auth/cuentas/cuentas_vue/formulario.vue?vue&type=template&id=3f2b5d42&");
+/* harmony import */ var _cuentas_js_formulario_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../cuentas_js/formulario.js?vue&type=script&lang=js& */ "./resources/js/components/auth/cuentas/cuentas_js/formulario.js?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _cuentas_js_formulario_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _formulario_vue_vue_type_template_id_3f2b5d42___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _formulario_vue_vue_type_template_id_3f2b5d42___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/auth/cuentas/cuentas_vue/formulario.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/auth/cuentas/cuentas_vue/formulario.vue?vue&type=template&id=3f2b5d42&":
+/*!********************************************************************************************************!*\
+  !*** ./resources/js/components/auth/cuentas/cuentas_vue/formulario.vue?vue&type=template&id=3f2b5d42& ***!
+  \********************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_formulario_vue_vue_type_template_id_3f2b5d42___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./formulario.vue?vue&type=template&id=3f2b5d42& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/cuentas/cuentas_vue/formulario.vue?vue&type=template&id=3f2b5d42&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_formulario_vue_vue_type_template_id_3f2b5d42___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_formulario_vue_vue_type_template_id_3f2b5d42___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -98175,7 +100142,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_auth_cuentas_cuentas_vue_modulo_cuentas_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/auth/cuentas/cuentas_vue/modulo_cuentas.vue */ "./resources/js/components/auth/cuentas/cuentas_vue/modulo_cuentas.vue");
 /* harmony import */ var _components_auth_cuentas_cuentas_vue_crear_cuenta_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/auth/cuentas/cuentas_vue/crear_cuenta.vue */ "./resources/js/components/auth/cuentas/cuentas_vue/crear_cuenta.vue");
 /* harmony import */ var _components_auth_cuentas_cuentas_vue_listar_cuenta_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/auth/cuentas/cuentas_vue/listar_cuenta.vue */ "./resources/js/components/auth/cuentas/cuentas_vue/listar_cuenta.vue");
+/* harmony import */ var _components_auth_cuentas_cuentas_vue_formulario_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/auth/cuentas/cuentas_vue/formulario.vue */ "./resources/js/components/auth/cuentas/cuentas_vue/formulario.vue");
  //loged
+
 
 
 
@@ -98203,6 +100172,10 @@ var routes_empa = [{
     path: '/listar-cuenta',
     component: _components_auth_cuentas_cuentas_vue_listar_cuenta_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
     name: 'ListarCuenta'
+  }, {
+    path: '/formulario-cuenta',
+    component: _components_auth_cuentas_cuentas_vue_formulario_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
+    name: 'Formulario'
   }]
 }, {
   path: '/404',
@@ -98459,7 +100432,7 @@ var routes = [{
   path: '*',
   hidden: true,
   redirect: {
-    path: '/404'
+    path: '/'
   }
 }];
 /* harmony default export */ __webpack_exports__["default"] = (routes);
@@ -98484,8 +100457,13 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+<<<<<<< HEAD
 __webpack_require__(/*! C:\Users\david\Desktop\Proyectos NeoFox\neofox_contable\resources\js\app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! C:\Users\david\Desktop\Proyectos NeoFox\neofox_contable\resources\sass\app.scss */"./resources/sass/app.scss");
+=======
+__webpack_require__(/*! /Users/alejandroesteban/Desktop/proyectos2019/template_vue_laravel_2019/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/alejandroesteban/Desktop/proyectos2019/template_vue_laravel_2019/resources/sass/app.scss */"./resources/sass/app.scss");
+>>>>>>> alejandro
 
 
 /***/ })

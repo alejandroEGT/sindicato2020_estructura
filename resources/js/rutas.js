@@ -77,7 +77,7 @@ const routes = [
 {
     path: '*',
     hidden: true,
-    redirect: { path: '/404' }
+    redirect: { path: '/' }
 } 
 
 ];
