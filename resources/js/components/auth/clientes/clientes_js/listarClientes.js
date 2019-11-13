@@ -1,136 +1,102 @@
 export default {
     data() {
         return {
-            separator: 'vertical',
+            separator: 'cell',
+            loading: false,
+            filter: '',
+            campoUpd: '',
+            errores: [ ],
 
+            visibleColumns: [
+                'id',
+                'fecha_nacimiento',
+                'rut',
+                'nombres',
+                'apellido_paterno',
+                'apellido_materno',
+                'opcion'
+            ],
             columns: [
-                {
-                    name: 'desc',
-                    required: true,
-                    label: 'Dessert (100g serving)',
-                    align: 'left',
-                    field: row => row.name,
-                    format: val => `${val}`,
-                    sortable: true
-                },
-                { name: 'calories', align: 'center', label: 'Calories', field: 'calories', sortable: true },
-                { name: 'fat', label: 'Fat (g)', field: 'fat', sortable: true },
-                { name: 'carbs', label: 'Carbs (g)', field: 'carbs' },
-                { name: 'protein', label: 'Protein (g)', field: 'protein' },
-                { name: 'sodium', label: 'Sodium (mg)', field: 'sodium' },
-                { name: 'calcium', label: 'Calcium (%)', field: 'calcium', sortable: true, sort: (a, b) => parseInt(a, 10) - parseInt(b, 10) },
-                { name: 'iron', label: 'Iron (%)', field: 'iron', sortable: true, sort: (a, b) => parseInt(a, 10) - parseInt(b, 10) }
+                { name: 'id', align: 'center', label: 'id', field: 'id', sortable: true },
+                { name: 'fecha_nacimiento', align: 'center', label: 'Fecha de Nacimiento', field: 'fecha_nacimiento', sortable: true },
+                { name: 'rut', align: 'center', label: 'Rut', field: 'rut', sortable: true },
+                { name: 'nombres', align: 'center', label: 'Nombres', field: 'nombres', sortable: true },
+                { name: 'apellido_paterno', align: 'center', label: 'Apellido Paterno', field: 'apellido_paterno', sortable: true },
+                { name: 'apellido_materno', align: 'center', label: 'Apellido Materno', field: 'apellido_materno', sortable: true },
+                { name: 'opcion', align: 'center', label: 'Opcion', field: 'opcion', sortable: true },
+
             ],
-            data: [
-                {
-                    name: 'Frozen Yogurt',
-                    calories: 159,
-                    fat: 6.0,
-                    carbs: 24,
-                    protein: 4.0,
-                    sodium: 87,
-                    calcium: '14%',
-                    iron: '1%'
-                },
-                {
-                    name: 'Ice cream sandwich',
-                    calories: 237,
-                    fat: 9.0,
-                    carbs: 37,
-                    protein: 4.3,
-                    sodium: 129,
-                    calcium: '8%',
-                    iron: '1%'
-                },
-                {
-                    name: 'Eclair',
-                    calories: 262,
-                    fat: 16.0,
-                    carbs: 23,
-                    protein: 6.0,
-                    sodium: 337,
-                    calcium: '6%',
-                    iron: '7%'
-                },
-                {
-                    name: 'Cupcake',
-                    calories: 305,
-                    fat: 3.7,
-                    carbs: 67,
-                    protein: 4.3,
-                    sodium: 413,
-                    calcium: '3%',
-                    iron: '8%'
-                },
-                {
-                    name: 'Gingerbread',
-                    calories: 356,
-                    fat: 16.0,
-                    carbs: 49,
-                    protein: 3.9,
-                    sodium: 327,
-                    calcium: '7%',
-                    iron: '16%'
-                },
-                {
-                    name: 'Jelly bean',
-                    calories: 375,
-                    fat: 0.0,
-                    carbs: 94,
-                    protein: 0.0,
-                    sodium: 50,
-                    calcium: '0%',
-                    iron: '0%'
-                },
-                {
-                    name: 'Lollipop',
-                    calories: 392,
-                    fat: 0.2,
-                    carbs: 98,
-                    protein: 0,
-                    sodium: 38,
-                    calcium: '0%',
-                    iron: '2%'
-                },
-                {
-                    name: 'Honeycomb',
-                    calories: 408,
-                    fat: 3.2,
-                    carbs: 87,
-                    protein: 6.5,
-                    sodium: 562,
-                    calcium: '0%',
-                    iron: '45%'
-                },
-                {
-                    name: 'Donut',
-                    calories: 452,
-                    fat: 25.0,
-                    carbs: 51,
-                    protein: 4.9,
-                    sodium: 326,
-                    calcium: '2%',
-                    iron: '22%'
-                },
-                {
-                    name: 'KitKat',
-                    calories: 518,
-                    fat: 26.0,
-                    carbs: 65,
-                    protein: 7,
-                    sodium: 54,
-                    calcium: '12%',
-                    iron: '6%'
-                }
-            ],
+            listarClientes: [],
 
         }
     },
-    
+
     methods: {
         url_volver2() {
             this.$router.push('/modulo-clientes');
         },
+        url_registro() {
+            this.$router.push('/registro-clientes');
+        },
 
-    }
+        traer_clientes() {
+            this.loading = true;
+            axios.get('api/listar_cliente').then((res) => {
+                this.listarClientes = res.data[0];
+                this.loading = false;
+            })
+                .catch(error => {
+                    alert(error);
+                    this.loading = false
+                })
+        },
+
+        actualizar_dato(id, campo, input) {
+            const data = {
+                'id': id,
+                'campo': campo,
+                'input': input,
+            }
+            //   console.log(data);
+            //   return false;
+            this.loading = true;
+            axios.post('api/actualizar_campo_cliente', data).then((response) => {
+                if (response.data.estado == 'success') {
+                    this.$q.notify({
+                      color: "green-4",
+                      textColor: "white",
+                      icon: "cloud_done",
+                      message: response.data.mensaje
+                    });
+                    this.campoUpd = '';
+                    this.loading = false
+                    this.traer_clientes();
+                }
+                if (response.data.estado == 'failed_v') {
+                    this.errores = response.data.mensaje;
+                    this.campoUpd = '';
+                    this.loading = false;
+                  }
+                })
+                .catch(error => {
+                    // alert("El Campo no puede quedar vacio.");
+                    alert(error);
+                    this.loading = false;
+                })
+        },
+
+        onRefresh() {
+            this.loading = true;
+            this.traer_clientes();
+            setTimeout(() => {
+                this.loading = false;
+            }, 5000)
+        },
+
+    },
+
+    mounted() {
+        this.traer_clientes();
+    },
+
 }

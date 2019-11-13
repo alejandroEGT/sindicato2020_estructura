@@ -3708,156 +3708,126 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      separator: 'vertical',
+      separator: 'cell',
+      loading: false,
+      filter: '',
+      campoUpd: '',
+      errores: [],
+      visibleColumns: ['id', 'fecha_nacimiento', 'rut', 'nombres', 'apellido_paterno', 'apellido_materno', 'opcion'],
       columns: [{
-        name: 'desc',
-        required: true,
-        label: 'Dessert (100g serving)',
-        align: 'left',
-        field: function field(row) {
-          return row.name;
-        },
-        format: function format(val) {
-          return "".concat(val);
-        },
-        sortable: true
-      }, {
-        name: 'calories',
+        name: 'id',
         align: 'center',
-        label: 'Calories',
-        field: 'calories',
+        label: 'id',
+        field: 'id',
         sortable: true
       }, {
-        name: 'fat',
-        label: 'Fat (g)',
-        field: 'fat',
+        name: 'fecha_nacimiento',
+        align: 'center',
+        label: 'Fecha de Nacimiento',
+        field: 'fecha_nacimiento',
         sortable: true
       }, {
-        name: 'carbs',
-        label: 'Carbs (g)',
-        field: 'carbs'
+        name: 'rut',
+        align: 'center',
+        label: 'Rut',
+        field: 'rut',
+        sortable: true
       }, {
-        name: 'protein',
-        label: 'Protein (g)',
-        field: 'protein'
+        name: 'nombres',
+        align: 'center',
+        label: 'Nombres',
+        field: 'nombres',
+        sortable: true
       }, {
-        name: 'sodium',
-        label: 'Sodium (mg)',
-        field: 'sodium'
+        name: 'apellido_paterno',
+        align: 'center',
+        label: 'Apellido Paterno',
+        field: 'apellido_paterno',
+        sortable: true
       }, {
-        name: 'calcium',
-        label: 'Calcium (%)',
-        field: 'calcium',
-        sortable: true,
-        sort: function sort(a, b) {
-          return parseInt(a, 10) - parseInt(b, 10);
-        }
+        name: 'apellido_materno',
+        align: 'center',
+        label: 'Apellido Materno',
+        field: 'apellido_materno',
+        sortable: true
       }, {
-        name: 'iron',
-        label: 'Iron (%)',
-        field: 'iron',
-        sortable: true,
-        sort: function sort(a, b) {
-          return parseInt(a, 10) - parseInt(b, 10);
-        }
+        name: 'opcion',
+        align: 'center',
+        label: 'Opcion',
+        field: 'opcion',
+        sortable: true
       }],
-      data: [{
-        name: 'Frozen Yogurt',
-        calories: 159,
-        fat: 6.0,
-        carbs: 24,
-        protein: 4.0,
-        sodium: 87,
-        calcium: '14%',
-        iron: '1%'
-      }, {
-        name: 'Ice cream sandwich',
-        calories: 237,
-        fat: 9.0,
-        carbs: 37,
-        protein: 4.3,
-        sodium: 129,
-        calcium: '8%',
-        iron: '1%'
-      }, {
-        name: 'Eclair',
-        calories: 262,
-        fat: 16.0,
-        carbs: 23,
-        protein: 6.0,
-        sodium: 337,
-        calcium: '6%',
-        iron: '7%'
-      }, {
-        name: 'Cupcake',
-        calories: 305,
-        fat: 3.7,
-        carbs: 67,
-        protein: 4.3,
-        sodium: 413,
-        calcium: '3%',
-        iron: '8%'
-      }, {
-        name: 'Gingerbread',
-        calories: 356,
-        fat: 16.0,
-        carbs: 49,
-        protein: 3.9,
-        sodium: 327,
-        calcium: '7%',
-        iron: '16%'
-      }, {
-        name: 'Jelly bean',
-        calories: 375,
-        fat: 0.0,
-        carbs: 94,
-        protein: 0.0,
-        sodium: 50,
-        calcium: '0%',
-        iron: '0%'
-      }, {
-        name: 'Lollipop',
-        calories: 392,
-        fat: 0.2,
-        carbs: 98,
-        protein: 0,
-        sodium: 38,
-        calcium: '0%',
-        iron: '2%'
-      }, {
-        name: 'Honeycomb',
-        calories: 408,
-        fat: 3.2,
-        carbs: 87,
-        protein: 6.5,
-        sodium: 562,
-        calcium: '0%',
-        iron: '45%'
-      }, {
-        name: 'Donut',
-        calories: 452,
-        fat: 25.0,
-        carbs: 51,
-        protein: 4.9,
-        sodium: 326,
-        calcium: '2%',
-        iron: '22%'
-      }, {
-        name: 'KitKat',
-        calories: 518,
-        fat: 26.0,
-        carbs: 65,
-        protein: 7,
-        sodium: 54,
-        calcium: '12%',
-        iron: '6%'
-      }]
+      listarClientes: []
     };
   },
   methods: {
     url_volver2: function url_volver2() {
       this.$router.push('/modulo-clientes');
+    },
+    url_registro: function url_registro() {
+      this.$router.push('/registro-clientes');
+    },
+    traer_clientes: function traer_clientes() {
+      var _this = this;
+
+      this.loading = true;
+      axios.get('api/listar_cliente').then(function (res) {
+        _this.listarClientes = res.data[0];
+        _this.loading = false;
+      })["catch"](function (error) {
+        alert(error);
+        _this.loading = false;
+      });
+    },
+    actualizar_dato: function actualizar_dato(id, campo, input) {
+      var _this2 = this;
+
+      var data = {
+        'id': id,
+        'campo': campo,
+        'input': input
+      }; //   console.log(data);
+      //   return false;
+
+      this.loading = true;
+      axios.post('api/actualizar_campo_cliente', data).then(function (response) {
+        if (response.data.estado == 'success') {
+          _this2.$q.notify({
+            color: "green-4",
+            textColor: "white",
+            icon: "cloud_done",
+            message: response.data.mensaje
+          });
+
+          _this2.campoUpd = '';
+          _this2.loading = false;
+
+          _this2.traer_clientes();
+        }
+
+        if (response.data.estado == 'failed_v') {
+          _this2.errores = response.data.mensaje;
+          _this2.campoUpd = '';
+          _this2.loading = false;
+        }
+      })["catch"](function (error) {
+        // alert("El Campo no puede quedar vacio.");
+        alert(error);
+        _this2.loading = false;
+      });
+    },
+    onRefresh: function onRefresh() {
+      var _this3 = this;
+
+      this.loading = true;
+      this.traer_clientes();
+      setTimeout(function () {
+        _this3.loading = false;
+      }, 5000);
     }
+  },
+  mounted: function mounted() {
+    this.traer_clientes();
   }
 });
 
@@ -3883,6 +3853,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     url_listado_clientes: function url_listado_clientes() {
       this.$router.push('/listar-clientes');
+    },
+    url_index: function url_index() {
+      this.$router.push('/index');
     }
   }
 });
@@ -3898,6 +3871,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3910,7 +3886,8 @@ __webpack_require__.r(__webpack_exports__);
       rut: '',
       nombres: '',
       aPaterno: '',
-      aMaterno: ''
+      aMaterno: '',
+      errores: []
     };
   },
   methods: {
@@ -3930,6 +3907,38 @@ __webpack_require__.r(__webpack_exports__);
     },
     url_listado_clientes: function url_listado_clientes() {
       this.$router.push('/listar-clientes');
+    },
+    registrar_clientes: function registrar_clientes() {
+      var _this2 = this;
+
+      var data = {
+        'fecha_nacimiento': this.fechaNac,
+        'rut': this.rut,
+        'nombres': this.nombres,
+        'apellido_paterno': this.aPaterno,
+        'apellido_materno': this.aMaterno
+      };
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('api/crear_cliente', data).then(function (response) {
+        if (response.data.estado == 'success') {
+          _this2.$q.notify({
+            color: "green-4",
+            textColor: "white",
+            icon: "cloud_done",
+            message: "Cliente Registrado con exito!"
+          });
+
+          _this2.fechaNac = '';
+          _this2.rut = '';
+          _this2.nombres = '';
+          _this2.aPaterno = '';
+          _this2.aMaterno = '';
+          _this2.errores = '';
+        }
+
+        if (response.data.estado == 'failed_v') {
+          _this2.errores = response.data.mensaje;
+        }
+      });
     }
   }
 });
@@ -10284,7 +10293,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".titulo{\r\ncolor: #ffffff;\r\nbackground: #bdc3c7;  /* fallback for old browsers */  /* Chrome 10-25, Safari 5.1-6 */\r\nbackground: -webkit-gradient(linear, left top, right top, from(#2c3e50), to(#bdc3c7));\r\nbackground: linear-gradient(to right, #2c3e50, #bdc3c7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */\n}", ""]);
+exports.push([module.i, ".titulo{\r\ncolor: #ffffff;\r\nbackground: #bdc3c7;  /* fallback for old browsers */  /* Chrome 10-25, Safari 5.1-6 */\r\nbackground: -webkit-gradient(linear, left top, right top, from(#2c3e50), to(#bdc3c7));\r\nbackground: linear-gradient(to right, #2c3e50, #bdc3c7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */\n}\r\n", ""]);
 
 // exports
 
@@ -10303,7 +10312,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "ul{list-style:none;}\r\n/* Rules for sizing the icon. */\n.material-icons.md-18 { font-size: 18px;\n}\n.material-icons.md-24 { font-size: 24px;\n}\n.material-icons.md-36 { font-size: 36px;\n}\n.material-icons.md-48 { font-size: 48px;\n}\r\n\r\n/* Rules for using icons as black on a light background. */\n.material-icons.md-dark { color: rgba(0, 0, 0, 0.54);\n}\n.material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26);\n}\r\n\r\n/* Rules for using icons as white on a dark background. */\n.material-icons.md-light { color: rgba(255, 255, 255, 1);\n}\n.material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3);\n}", ""]);
 
 // exports
 
@@ -78981,65 +78990,1047 @@ var render = function() {
     "div",
     { staticClass: "q-pa-md" },
     [
-      _c("div", { staticClass: "row justify-between" }, [
-        _c(
-          "div",
-          { staticClass: "col-12 col-md-8" },
-          [
-            _c("q-option-group", {
-              staticClass: "q-mb-md",
-              attrs: {
-                inline: "",
-                options: [
-                  { label: "Horizontal (default)", value: "horizontal" },
-                  { label: "Vertical", value: "vertical" },
-                  { label: "Cell", value: "cell" },
-                  { label: "None", value: "none" }
-                ]
-              },
-              model: {
-                value: _vm.separator,
-                callback: function($$v) {
-                  _vm.separator = $$v
+      _c(
+        "div",
+        { staticClass: "row justify-between" },
+        [
+          _c(
+            "div",
+            { staticClass: "col-12 col-md-8" },
+            [
+              _c("q-option-group", {
+                staticClass: "q-mb-md",
+                attrs: {
+                  inline: "",
+                  options: [
+                    { label: "Casilla", value: "cell" },
+                    { label: "Horizontal", value: "horizontal" },
+                    { label: "Vertical", value: "vertical" },
+                    { label: "Ninguno", value: "none" }
+                  ]
                 },
-                expression: "separator"
-              }
-            })
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "col-12 col-md-4" },
-          [
-            _c("q-btn", {
-              attrs: {
-                color: "red",
-                "icon-right": "settings_backup_restore",
-                label: "volver"
-              },
-              on: {
-                click: function($event) {
-                  return _vm.url_volver2()
+                model: {
+                  value: _vm.separator,
+                  callback: function($$v) {
+                    _vm.separator = $$v
+                  },
+                  expression: "separator"
                 }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("q-btn", {
+            staticClass: "q-mb-md",
+            attrs: { label: "Refrescar", color: "primary" },
+            on: { click: _vm.onRefresh }
+          }),
+          _vm._v(" "),
+          _c("q-btn", {
+            staticClass: "q-mb-md",
+            attrs: {
+              label: "Formulario",
+              "icon-right": "person_add",
+              color: "green"
+            },
+            on: {
+              click: function($event) {
+                return _vm.url_registro()
               }
-            })
-          ],
-          1
-        )
-      ]),
+            }
+          }),
+          _vm._v(" "),
+          _c("q-btn", {
+            staticClass: "q-mb-md",
+            attrs: {
+              label: "Volver",
+              "icon-right": "settings_backup_restore",
+              color: "red"
+            },
+            on: {
+              click: function($event) {
+                return _vm.url_volver2()
+              }
+            }
+          })
+        ],
+        1
+      ),
       _vm._v(" "),
       _c("q-table", {
         attrs: {
-          title: "Treats",
-          data: _vm.data,
+          title: "Listado de Clientes",
+          data: _vm.listarClientes,
           columns: _vm.columns,
           "row-key": "name",
           separator: _vm.separator,
-          "rows-per-page-label": "Cantidad:"
-        }
-      })
+          "rows-per-page-label": "Cantidad:",
+          loading: _vm.loading,
+          "loading-label": "Cargando",
+          filter: _vm.filter,
+          "no-data-label": "Aun no hay datos para mostrar.",
+          "no-results-label": "No se han encontrado resultados.",
+          "visible-columns": _vm.visibleColumns,
+          "rows-per-page-options": [5, 10, 15, 30, 50, 100, 0]
+        },
+        scopedSlots: _vm._u([
+          {
+            key: "top-left",
+            fn: function(props) {
+              return [
+                _c("q-space"),
+                _vm._v(" "),
+                _vm.$q.screen.gt.xs
+                  ? _c(
+                      "div",
+                      { staticClass: "col" },
+                      [
+                        _c("q-toggle", {
+                          attrs: { val: "id", label: "ID" },
+                          model: {
+                            value: _vm.visibleColumns,
+                            callback: function($$v) {
+                              _vm.visibleColumns = $$v
+                            },
+                            expression: "visibleColumns"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("q-toggle", {
+                          attrs: {
+                            val: "fecha_nacimiento",
+                            label: "Fecha de Nacimiento"
+                          },
+                          model: {
+                            value: _vm.visibleColumns,
+                            callback: function($$v) {
+                              _vm.visibleColumns = $$v
+                            },
+                            expression: "visibleColumns"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("q-toggle", {
+                          attrs: { val: "rut", label: "Rut" },
+                          model: {
+                            value: _vm.visibleColumns,
+                            callback: function($$v) {
+                              _vm.visibleColumns = $$v
+                            },
+                            expression: "visibleColumns"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("q-toggle", {
+                          attrs: { val: "nombres", label: "Nombres" },
+                          model: {
+                            value: _vm.visibleColumns,
+                            callback: function($$v) {
+                              _vm.visibleColumns = $$v
+                            },
+                            expression: "visibleColumns"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("q-toggle", {
+                          attrs: {
+                            val: "apellido_paterno",
+                            label: "Apellido Paterno"
+                          },
+                          model: {
+                            value: _vm.visibleColumns,
+                            callback: function($$v) {
+                              _vm.visibleColumns = $$v
+                            },
+                            expression: "visibleColumns"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("q-toggle", {
+                          attrs: {
+                            val: "apellido_materno",
+                            label: "Apellido Materno"
+                          },
+                          model: {
+                            value: _vm.visibleColumns,
+                            callback: function($$v) {
+                              _vm.visibleColumns = $$v
+                            },
+                            expression: "visibleColumns"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("q-btn", {
+                          staticClass: "q-ml-md",
+                          attrs: {
+                            flat: "",
+                            round: "",
+                            dense: "",
+                            icon: props.inFullscreen
+                              ? "fullscreen_exit"
+                              : "fullscreen"
+                          },
+                          on: { click: props.toggleFullscreen }
+                        })
+                      ],
+                      1
+                    )
+                  : _c("q-select", {
+                      staticStyle: { "min-width": "150px" },
+                      attrs: {
+                        multiple: "",
+                        borderless: "",
+                        dense: "",
+                        "options-dense": "",
+                        "display-value": _vm.$q.lang.table.columns,
+                        "emit-value": "",
+                        "map-options": "",
+                        options: _vm.columns,
+                        "option-value": "name"
+                      },
+                      model: {
+                        value: _vm.visibleColumns,
+                        callback: function($$v) {
+                          _vm.visibleColumns = $$v
+                        },
+                        expression: "visibleColumns"
+                      }
+                    })
+              ]
+            }
+          },
+          {
+            key: "top-right",
+            fn: function() {
+              return [
+                _c("q-input", {
+                  attrs: {
+                    borderless: "",
+                    dense: "",
+                    debounce: "300",
+                    placeholder: "Buscar"
+                  },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "append",
+                      fn: function() {
+                        return [_c("q-icon", { attrs: { name: "search" } })]
+                      },
+                      proxy: true
+                    }
+                  ]),
+                  model: {
+                    value: _vm.filter,
+                    callback: function($$v) {
+                      _vm.filter = $$v
+                    },
+                    expression: "filter"
+                  }
+                })
+              ]
+            },
+            proxy: true
+          },
+          {
+            key: "body",
+            fn: function(props) {
+              return [
+                _c(
+                  "q-tr",
+                  { attrs: { props: props } },
+                  [
+                    _c("q-td", { key: "id", attrs: { props: props } }, [
+                      _vm._v(_vm._s(props.row.id))
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "q-td",
+                      { key: "fecha_nacimiento", attrs: { props: props } },
+                      [
+                        _vm._v(
+                          "\n          " +
+                            _vm._s(props.row.fecha_nacimiento) +
+                            "\n          "
+                        ),
+                        _c("q-popup-edit", {
+                          attrs: {
+                            title: "Modificar Fecha de Nacimiento",
+                            validate: function(val) {
+                              return val.length >= 3
+                            }
+                          },
+                          scopedSlots: _vm._u(
+                            [
+                              {
+                                key: "default",
+                                fn: function(ref) {
+                                  var initialValue = ref.initialValue
+                                  var validate = ref.validate
+                                  var set = ref.set
+                                  var cancel = ref.cancel
+                                  return [
+                                    _c("q-input", {
+                                      attrs: {
+                                        type: "date",
+                                        dense: "",
+                                        autofocus: "",
+                                        counter: "",
+                                        rules: [
+                                          function(val) {
+                                            return (
+                                              validate(_vm.campoUpd) ||
+                                              "Minimo 10 caracteres."
+                                            )
+                                          }
+                                        ]
+                                      },
+                                      on: {
+                                        keyup: function($event) {
+                                          if (
+                                            !$event.type.indexOf("key") &&
+                                            _vm._k(
+                                              $event.keyCode,
+                                              "enter",
+                                              13,
+                                              $event.key,
+                                              "Enter"
+                                            )
+                                          ) {
+                                            return null
+                                          }
+                                          $event.stopPropagation()
+                                        }
+                                      },
+                                      scopedSlots: _vm._u(
+                                        [
+                                          {
+                                            key: "after",
+                                            fn: function() {
+                                              return [
+                                                _c("q-btn", {
+                                                  attrs: {
+                                                    color: "red",
+                                                    round: "",
+                                                    dense: "",
+                                                    flat: "",
+                                                    icon: "edit",
+                                                    disable:
+                                                      validate(_vm.campoUpd) ===
+                                                        false ||
+                                                      initialValue ===
+                                                        "dd-mm-aaaa"
+                                                  },
+                                                  on: {
+                                                    click: [
+                                                      function($event) {
+                                                        return _vm.actualizar_dato(
+                                                          props.row.id,
+                                                          "fecha_nacimiento",
+                                                          _vm.campoUpd
+                                                        )
+                                                      },
+                                                      function($event) {
+                                                        $event.stopPropagation()
+                                                        return set($event)
+                                                      }
+                                                    ]
+                                                  }
+                                                }),
+                                                _vm._v(" "),
+                                                _c("q-btn", {
+                                                  attrs: {
+                                                    flat: "",
+                                                    dense: "",
+                                                    color: "negative",
+                                                    icon: "cancel"
+                                                  },
+                                                  on: {
+                                                    click: function($event) {
+                                                      $event.stopPropagation()
+                                                      return cancel($event)
+                                                    }
+                                                  }
+                                                })
+                                              ]
+                                            },
+                                            proxy: true
+                                          }
+                                        ],
+                                        null,
+                                        true
+                                      ),
+                                      model: {
+                                        value: _vm.campoUpd,
+                                        callback: function($$v) {
+                                          _vm.campoUpd = $$v
+                                        },
+                                        expression: "campoUpd"
+                                      }
+                                    })
+                                  ]
+                                }
+                              }
+                            ],
+                            null,
+                            true
+                          ),
+                          model: {
+                            value: props.row.fecha_nacimiento,
+                            callback: function($$v) {
+                              _vm.$set(props.row, "fecha_nacimiento", $$v)
+                            },
+                            expression: "props.row.fecha_nacimiento"
+                          }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "q-td",
+                      { key: "rut", attrs: { props: props } },
+                      [
+                        _vm._v(
+                          "\n          " +
+                            _vm._s(props.row.rut) +
+                            "\n          "
+                        ),
+                        _c("q-popup-edit", {
+                          attrs: {
+                            title: "Modificar Rut",
+                            validate: function(val) {
+                              return val.length >= 2
+                            }
+                          },
+                          scopedSlots: _vm._u(
+                            [
+                              {
+                                key: "default",
+                                fn: function(ref) {
+                                  var initialValue = ref.initialValue
+                                  var validate = ref.validate
+                                  var set = ref.set
+                                  var cancel = ref.cancel
+                                  return [
+                                    _c("q-input", {
+                                      attrs: {
+                                        type: "text",
+                                        maxlength: "20",
+                                        dense: "",
+                                        autofocus: "",
+                                        counter: "",
+                                        rules: [
+                                          function(val) {
+                                            return (
+                                              validate(_vm.campoUpd) ||
+                                              "Minimo 2 caracteres."
+                                            )
+                                          }
+                                        ]
+                                      },
+                                      on: {
+                                        keyup: function($event) {
+                                          if (
+                                            !$event.type.indexOf("key") &&
+                                            _vm._k(
+                                              $event.keyCode,
+                                              "enter",
+                                              13,
+                                              $event.key,
+                                              "Enter"
+                                            )
+                                          ) {
+                                            return null
+                                          }
+                                          $event.stopPropagation()
+                                        }
+                                      },
+                                      scopedSlots: _vm._u(
+                                        [
+                                          {
+                                            key: "after",
+                                            fn: function() {
+                                              return [
+                                                _c("q-btn", {
+                                                  attrs: {
+                                                    color: "red",
+                                                    round: "",
+                                                    dense: "",
+                                                    flat: "",
+                                                    icon: "edit",
+                                                    disable:
+                                                      validate(_vm.campoUpd) ===
+                                                        false ||
+                                                      initialValue === ""
+                                                  },
+                                                  on: {
+                                                    click: [
+                                                      function($event) {
+                                                        return _vm.actualizar_dato(
+                                                          props.row.id,
+                                                          "rut",
+                                                          _vm.campoUpd
+                                                        )
+                                                      },
+                                                      function($event) {
+                                                        $event.stopPropagation()
+                                                        return set($event)
+                                                      }
+                                                    ]
+                                                  }
+                                                }),
+                                                _vm._v(" "),
+                                                _c("q-btn", {
+                                                  attrs: {
+                                                    flat: "",
+                                                    dense: "",
+                                                    color: "negative",
+                                                    icon: "cancel"
+                                                  },
+                                                  on: {
+                                                    click: function($event) {
+                                                      $event.stopPropagation()
+                                                      return cancel($event)
+                                                    }
+                                                  }
+                                                })
+                                              ]
+                                            },
+                                            proxy: true
+                                          }
+                                        ],
+                                        null,
+                                        true
+                                      ),
+                                      model: {
+                                        value: _vm.campoUpd,
+                                        callback: function($$v) {
+                                          _vm.campoUpd = $$v
+                                        },
+                                        expression: "campoUpd"
+                                      }
+                                    })
+                                  ]
+                                }
+                              }
+                            ],
+                            null,
+                            true
+                          ),
+                          model: {
+                            value: props.row.rut,
+                            callback: function($$v) {
+                              _vm.$set(props.row, "rut", $$v)
+                            },
+                            expression: "props.row.rut"
+                          }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "q-td",
+                      { key: "nombres", attrs: { props: props } },
+                      [
+                        _vm._v(
+                          "\n          " +
+                            _vm._s(props.row.nombres) +
+                            "\n          "
+                        ),
+                        _c("q-popup-edit", {
+                          attrs: {
+                            title: "Modificar Nombres",
+                            validate: function(val) {
+                              return val.length >= 3
+                            }
+                          },
+                          scopedSlots: _vm._u(
+                            [
+                              {
+                                key: "default",
+                                fn: function(ref) {
+                                  var initialValue = ref.initialValue
+                                  var validate = ref.validate
+                                  var set = ref.set
+                                  var cancel = ref.cancel
+                                  return [
+                                    _c("q-input", {
+                                      attrs: {
+                                        type: "text",
+                                        maxlength: "50",
+                                        dense: "",
+                                        autofocus: "",
+                                        counter: "",
+                                        rules: [
+                                          function(val) {
+                                            return (
+                                              validate(_vm.campoUpd) ||
+                                              "Minimo 3 caracteres."
+                                            )
+                                          }
+                                        ]
+                                      },
+                                      on: {
+                                        keyup: function($event) {
+                                          if (
+                                            !$event.type.indexOf("key") &&
+                                            _vm._k(
+                                              $event.keyCode,
+                                              "enter",
+                                              13,
+                                              $event.key,
+                                              "Enter"
+                                            )
+                                          ) {
+                                            return null
+                                          }
+                                          $event.stopPropagation()
+                                        }
+                                      },
+                                      scopedSlots: _vm._u(
+                                        [
+                                          {
+                                            key: "after",
+                                            fn: function() {
+                                              return [
+                                                _c("q-btn", {
+                                                  attrs: {
+                                                    color: "red",
+                                                    round: "",
+                                                    dense: "",
+                                                    flat: "",
+                                                    icon: "edit",
+                                                    disable:
+                                                      validate(_vm.campoUpd) ===
+                                                        false ||
+                                                      initialValue === ""
+                                                  },
+                                                  on: {
+                                                    click: [
+                                                      function($event) {
+                                                        return _vm.actualizar_dato(
+                                                          props.row.id,
+                                                          "nombres",
+                                                          _vm.campoUpd
+                                                        )
+                                                      },
+                                                      function($event) {
+                                                        $event.stopPropagation()
+                                                        return set($event)
+                                                      }
+                                                    ]
+                                                  }
+                                                }),
+                                                _vm._v(" "),
+                                                _c("q-btn", {
+                                                  attrs: {
+                                                    flat: "",
+                                                    dense: "",
+                                                    color: "negative",
+                                                    icon: "cancel"
+                                                  },
+                                                  on: {
+                                                    click: function($event) {
+                                                      $event.stopPropagation()
+                                                      return cancel($event)
+                                                    }
+                                                  }
+                                                })
+                                              ]
+                                            },
+                                            proxy: true
+                                          }
+                                        ],
+                                        null,
+                                        true
+                                      ),
+                                      model: {
+                                        value: _vm.campoUpd,
+                                        callback: function($$v) {
+                                          _vm.campoUpd = $$v
+                                        },
+                                        expression: "campoUpd"
+                                      }
+                                    })
+                                  ]
+                                }
+                              }
+                            ],
+                            null,
+                            true
+                          ),
+                          model: {
+                            value: props.row.nombres,
+                            callback: function($$v) {
+                              _vm.$set(props.row, "nombres", $$v)
+                            },
+                            expression: "props.row.nombres"
+                          }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "q-td",
+                      { key: "apellido_paterno", attrs: { props: props } },
+                      [
+                        _vm._v(
+                          "\n          " +
+                            _vm._s(props.row.apellido_paterno) +
+                            "\n          "
+                        ),
+                        _c("q-popup-edit", {
+                          attrs: {
+                            title: "Modificar Apellido Paterno",
+                            validate: function(val) {
+                              return val.length >= 3
+                            }
+                          },
+                          scopedSlots: _vm._u(
+                            [
+                              {
+                                key: "default",
+                                fn: function(ref) {
+                                  var initialValue = ref.initialValue
+                                  var validate = ref.validate
+                                  var set = ref.set
+                                  var cancel = ref.cancel
+                                  return [
+                                    _c("q-input", {
+                                      attrs: {
+                                        type: "text",
+                                        maxlength: "50",
+                                        dense: "",
+                                        autofocus: "",
+                                        counter: "",
+                                        rules: [
+                                          function(val) {
+                                            return (
+                                              validate(_vm.campoUpd) ||
+                                              "Minimo 3 caracteres."
+                                            )
+                                          }
+                                        ]
+                                      },
+                                      on: {
+                                        keyup: function($event) {
+                                          if (
+                                            !$event.type.indexOf("key") &&
+                                            _vm._k(
+                                              $event.keyCode,
+                                              "enter",
+                                              13,
+                                              $event.key,
+                                              "Enter"
+                                            )
+                                          ) {
+                                            return null
+                                          }
+                                          $event.stopPropagation()
+                                        }
+                                      },
+                                      scopedSlots: _vm._u(
+                                        [
+                                          {
+                                            key: "after",
+                                            fn: function() {
+                                              return [
+                                                _c("q-btn", {
+                                                  attrs: {
+                                                    color: "red",
+                                                    round: "",
+                                                    dense: "",
+                                                    flat: "",
+                                                    icon: "edit",
+                                                    disable:
+                                                      validate(_vm.campoUpd) ===
+                                                        false ||
+                                                      initialValue === ""
+                                                  },
+                                                  on: {
+                                                    click: [
+                                                      function($event) {
+                                                        return _vm.actualizar_dato(
+                                                          props.row.id,
+                                                          "apellido_paterno",
+                                                          _vm.campoUpd
+                                                        )
+                                                      },
+                                                      function($event) {
+                                                        $event.stopPropagation()
+                                                        return set($event)
+                                                      }
+                                                    ]
+                                                  }
+                                                }),
+                                                _vm._v(" "),
+                                                _c("q-btn", {
+                                                  attrs: {
+                                                    flat: "",
+                                                    dense: "",
+                                                    color: "negative",
+                                                    icon: "cancel"
+                                                  },
+                                                  on: {
+                                                    click: function($event) {
+                                                      $event.stopPropagation()
+                                                      return cancel($event)
+                                                    }
+                                                  }
+                                                })
+                                              ]
+                                            },
+                                            proxy: true
+                                          }
+                                        ],
+                                        null,
+                                        true
+                                      ),
+                                      model: {
+                                        value: _vm.campoUpd,
+                                        callback: function($$v) {
+                                          _vm.campoUpd = $$v
+                                        },
+                                        expression: "campoUpd"
+                                      }
+                                    })
+                                  ]
+                                }
+                              }
+                            ],
+                            null,
+                            true
+                          ),
+                          model: {
+                            value: props.row.apellido_paterno,
+                            callback: function($$v) {
+                              _vm.$set(props.row, "apellido_paterno", $$v)
+                            },
+                            expression: "props.row.apellido_paterno"
+                          }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "q-td",
+                      { key: "apellido_materno", attrs: { props: props } },
+                      [
+                        _vm._v(
+                          "\n          " +
+                            _vm._s(props.row.apellido_materno) +
+                            "\n          "
+                        ),
+                        _c("q-popup-edit", {
+                          attrs: {
+                            title: "Modificar Apellido Materno",
+                            validate: function(val) {
+                              return val.length >= 3
+                            }
+                          },
+                          scopedSlots: _vm._u(
+                            [
+                              {
+                                key: "default",
+                                fn: function(ref) {
+                                  var initialValue = ref.initialValue
+                                  var validate = ref.validate
+                                  var set = ref.set
+                                  var cancel = ref.cancel
+                                  return [
+                                    _c("q-input", {
+                                      attrs: {
+                                        type: "text",
+                                        maxlength: "50",
+                                        dense: "",
+                                        autofocus: "",
+                                        counter: "",
+                                        rules: [
+                                          function(val) {
+                                            return (
+                                              validate(_vm.campoUpd) ||
+                                              "Minimo 3 caracteres."
+                                            )
+                                          }
+                                        ]
+                                      },
+                                      on: {
+                                        keyup: function($event) {
+                                          if (
+                                            !$event.type.indexOf("key") &&
+                                            _vm._k(
+                                              $event.keyCode,
+                                              "enter",
+                                              13,
+                                              $event.key,
+                                              "Enter"
+                                            )
+                                          ) {
+                                            return null
+                                          }
+                                          $event.stopPropagation()
+                                        }
+                                      },
+                                      scopedSlots: _vm._u(
+                                        [
+                                          {
+                                            key: "after",
+                                            fn: function() {
+                                              return [
+                                                _c("q-btn", {
+                                                  attrs: {
+                                                    color: "red",
+                                                    round: "",
+                                                    dense: "",
+                                                    flat: "",
+                                                    icon: "edit",
+                                                    disable:
+                                                      validate(_vm.campoUpd) ===
+                                                        false ||
+                                                      initialValue === ""
+                                                  },
+                                                  on: {
+                                                    click: [
+                                                      function($event) {
+                                                        return _vm.actualizar_dato(
+                                                          props.row.id,
+                                                          "apellido_materno",
+                                                          _vm.campoUpd
+                                                        )
+                                                      },
+                                                      function($event) {
+                                                        $event.stopPropagation()
+                                                        return set($event)
+                                                      }
+                                                    ]
+                                                  }
+                                                }),
+                                                _vm._v(" "),
+                                                _c("q-btn", {
+                                                  attrs: {
+                                                    flat: "",
+                                                    dense: "",
+                                                    color: "negative",
+                                                    icon: "cancel"
+                                                  },
+                                                  on: {
+                                                    click: function($event) {
+                                                      $event.stopPropagation()
+                                                      return cancel($event)
+                                                    }
+                                                  }
+                                                })
+                                              ]
+                                            },
+                                            proxy: true
+                                          }
+                                        ],
+                                        null,
+                                        true
+                                      ),
+                                      model: {
+                                        value: _vm.campoUpd,
+                                        callback: function($$v) {
+                                          _vm.campoUpd = $$v
+                                        },
+                                        expression: "campoUpd"
+                                      }
+                                    })
+                                  ]
+                                }
+                              }
+                            ],
+                            null,
+                            true
+                          ),
+                          model: {
+                            value: props.row.apellido_materno,
+                            callback: function($$v) {
+                              _vm.$set(props.row, "apellido_materno", $$v)
+                            },
+                            expression: "props.row.apellido_materno"
+                          }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "q-td",
+                      { key: "opcion", attrs: { props: props } },
+                      [
+                        _c("q-btn", {
+                          attrs: { color: "red", label: "Eliminar" }
+                        })
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ]
+            }
+          }
+        ])
+      }),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "q-pa-md q-gutter-sm" },
+        _vm._l(_vm.errores, function(e) {
+          return _c(
+            "ul",
+            { key: e[0] },
+            [
+              _c(
+                "q-banner",
+                {
+                  staticClass: "bg-orange text-white",
+                  attrs: { "inline-actions": "", rounded: "" },
+                  scopedSlots: _vm._u(
+                    [
+                      {
+                        key: "action",
+                        fn: function() {
+                          return [
+                            _c("q-btn", {
+                              attrs: {
+                                flat: "",
+                                color: "white",
+                                label: "Advertencia!",
+                                disabled: ""
+                              }
+                            })
+                          ]
+                        },
+                        proxy: true
+                      }
+                    ],
+                    null,
+                    true
+                  )
+                },
+                [
+                  _c("li", [
+                    _c("i", { staticClass: "material-icons md-24" }, [
+                      _vm._v("info")
+                    ]),
+                    _vm._v(
+                      "\n                " + _vm._s(e[0]) + "\n              "
+                    )
+                  ])
+                ]
+              )
+            ],
+            1
+          )
+        }),
+        0
+      )
     ],
     1
   )
@@ -79086,22 +80077,32 @@ var render = function() {
                 _c("q-separator"),
                 _vm._v(" "),
                 _c(
-                  "div",
-                  { staticClass: "row justify-center" },
+                  "q-card-actions",
+                  { staticClass: "q-col-gutter-md text-center" },
                   [
                     _c(
-                      "q-card-actions",
+                      "div",
+                      { staticClass: "col-12 col-md-4" },
                       [
                         _c("q-btn", {
+                          staticClass: "full-width",
                           attrs: {
                             color: "blue",
                             "icon-right": "person_add",
                             label: "Registro de Clientes"
                           },
                           on: { click: _vm.url_registro_clientes }
-                        }),
-                        _vm._v(" "),
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "col-12 col-md-4" },
+                      [
                         _c("q-btn", {
+                          staticClass: "full-width",
                           attrs: {
                             color: "blue",
                             "icon-right": "format_list_numbered",
@@ -79111,9 +80112,25 @@ var render = function() {
                         })
                       ],
                       1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "col-12 col-md-4" },
+                      [
+                        _c("q-btn", {
+                          staticClass: "full-width",
+                          attrs: {
+                            color: "red",
+                            "icon-right": "settings_backup_restore",
+                            label: "Volver"
+                          },
+                          on: { click: _vm.url_index }
+                        })
+                      ],
+                      1
                     )
-                  ],
-                  1
+                  ]
                 )
               ],
               1
@@ -79178,6 +80195,8 @@ var render = function() {
                           _c("q-input", {
                             attrs: {
                               outlined: "",
+                              counter: "",
+                              maxlength: "10",
                               label: "Ingrese fecha de nacimiento",
                               "stack-label": "",
                               type: "date"
@@ -79201,10 +80220,26 @@ var render = function() {
                           _c("q-input", {
                             attrs: {
                               outlined: "",
+                              counter: "",
+                              maxlength: "20",
                               label: "Ingrese rut del cliente",
                               "stack-label": "",
                               type: "text",
-                              hint: "El rut debe ser sin punto ni guion"
+                              hint: "El rut debe ser sin punto ni guion",
+                              rules: [
+                                function(val) {
+                                  return (
+                                    val.length <= 20 ||
+                                    "El maximo da caracteres es de 20"
+                                  )
+                                },
+                                function(val) {
+                                  return (
+                                    val.length >= 2 ||
+                                    "El minimo de caracteres es de 2"
+                                  )
+                                }
+                              ]
                             },
                             model: {
                               value: _vm.rut,
@@ -79225,9 +80260,25 @@ var render = function() {
                           _c("q-input", {
                             attrs: {
                               outlined: "",
+                              counter: "",
+                              maxlength: "50",
                               label: "Ingrese nombres",
                               "stack-label": "",
-                              type: "text"
+                              type: "text",
+                              rules: [
+                                function(val) {
+                                  return (
+                                    val.length <= 50 ||
+                                    "El maximo da caracteres es de 50"
+                                  )
+                                },
+                                function(val) {
+                                  return (
+                                    val.length >= 3 ||
+                                    "El minimo de caracteres es de 3"
+                                  )
+                                }
+                              ]
                             },
                             model: {
                               value: _vm.nombres,
@@ -79248,9 +80299,25 @@ var render = function() {
                           _c("q-input", {
                             attrs: {
                               outlined: "",
+                              counter: "",
+                              maxlength: "50",
                               label: "Ingrese apellido paterno",
                               "stack-label": "",
-                              type: "text"
+                              type: "text",
+                              rules: [
+                                function(val) {
+                                  return (
+                                    val.length <= 50 ||
+                                    "El maximo da caracteres es de 50"
+                                  )
+                                },
+                                function(val) {
+                                  return (
+                                    val.length >= 3 ||
+                                    "El minimo de caracteres es de 3"
+                                  )
+                                }
+                              ]
                             },
                             model: {
                               value: _vm.aPaterno,
@@ -79271,9 +80338,25 @@ var render = function() {
                           _c("q-input", {
                             attrs: {
                               outlined: "",
+                              counter: "",
+                              maxlength: "50",
                               label: "Ingrese apellido materno",
                               "stack-label": "",
-                              type: "text"
+                              type: "text",
+                              rules: [
+                                function(val) {
+                                  return (
+                                    val.length <= 50 ||
+                                    "El maximo da caracteres es de 50"
+                                  )
+                                },
+                                function(val) {
+                                  return (
+                                    val.length >= 3 ||
+                                    "El minimo de caracteres es de 3"
+                                  )
+                                }
+                              ]
                             },
                             model: {
                               value: _vm.aMaterno,
@@ -79305,7 +80388,7 @@ var render = function() {
                       },
                       on: {
                         click: function($event) {
-                          return _vm.simulateProgress(1)
+                          _vm.simulateProgress(1), _vm.registrar_clientes()
                         }
                       },
                       scopedSlots: _vm._u([
@@ -79369,6 +80452,62 @@ var render = function() {
                 )
               ],
               1
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "q-pa-md q-gutter-sm" },
+              _vm._l(_vm.errores, function(e) {
+                return _c(
+                  "ul",
+                  { key: e[0] },
+                  [
+                    _c(
+                      "q-banner",
+                      {
+                        staticClass: "bg-orange text-white",
+                        attrs: { "inline-actions": "", rounded: "" },
+                        scopedSlots: _vm._u(
+                          [
+                            {
+                              key: "action",
+                              fn: function() {
+                                return [
+                                  _c("q-btn", {
+                                    attrs: {
+                                      flat: "",
+                                      color: "white",
+                                      label: "Advertencia!",
+                                      disabled: ""
+                                    }
+                                  })
+                                ]
+                              },
+                              proxy: true
+                            }
+                          ],
+                          null,
+                          true
+                        )
+                      },
+                      [
+                        _c("li", [
+                          _c("i", { staticClass: "material-icons md-24" }, [
+                            _vm._v("info")
+                          ]),
+                          _vm._v(
+                            "\n                " +
+                              _vm._s(e[0]) +
+                              "\n              "
+                          )
+                        ])
+                      ]
+                    )
+                  ],
+                  1
+                )
+              }),
+              0
             )
           ],
           1
@@ -96252,7 +97391,7 @@ __webpack_require__.r(__webpack_exports__);
 /*!******************************************************************************************************!*\
   !*** ./resources/js/components/auth/clientes/clientes_js/moduloClientes.js?vue&type=script&lang=js& ***!
   \******************************************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -96337,15 +97476,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!********************************************************************************!*\
   !*** ./resources/js/components/auth/clientes/clientes_vue/modulo_clientes.vue ***!
   \********************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modulo_clientes_vue_vue_type_template_id_5127b84d___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modulo_clientes.vue?vue&type=template&id=5127b84d& */ "./resources/js/components/auth/clientes/clientes_vue/modulo_clientes.vue?vue&type=template&id=5127b84d&");
 /* harmony import */ var _clientes_js_moduloClientes_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../clientes_js/moduloClientes.js?vue&type=script&lang=js& */ "./resources/js/components/auth/clientes/clientes_js/moduloClientes.js?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _clientes_js_moduloClientes_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _clientes_js_moduloClientes_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _clientes_css_moduloClientes_css_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../clientes_css/moduloClientes.css?vue&type=style&index=0&lang=css& */ "./resources/js/components/auth/clientes/clientes_css/moduloClientes.css?vue&type=style&index=0&lang=css&");
+/* empty/unused harmony star reexport *//* harmony import */ var _clientes_css_moduloClientes_css_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../clientes_css/moduloClientes.css?vue&type=style&index=0&lang=css& */ "./resources/js/components/auth/clientes/clientes_css/moduloClientes.css?vue&type=style&index=0&lang=css&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
