@@ -80,40 +80,42 @@ export default {
             // this.data = res.data;
         });
       },
-      listar(){
-          
-          axios.get('api/listar_cuenta_detalle/'+this.mes.id+'/'+this.anio.id+'/'+this.cuenta_id.id).then((res)=>{
-              if (res.data.estado=='success') {
-                 this.tabla = res.data.lista;
-                var sumar_i= 0;
-                var sumar_e = 0;
-                this.tabla.map(function (value, key) {
-                  sumar_i = value.monto_ingreso + sumar_i;
-                  sumar_e = value.monto_egreso + sumar_e;
-                 });
+    listar() {
+
+      axios.get('api/listar_cuenta_detalle/' + this.mes.id + '/' + this.anio.id + '/' + this.cuenta_id.id).then((res) => {
+        if (res.data.estado == 'success') {
+          this.tabla = res.data.lista;
+          var sumar_i = 0;
+          var sumar_e = 0;
+
+          for (var i = 0; i < this.tabla.length; i++) {
+            sumar_i += Number(this.tabla[i].monto_ingreso);
+            sumar_e += Number(this.tabla[i].monto_egreso);
+          }
 
 
-                this.ingresos = sumar_i;
-                this.egresos = sumar_e;
-                this.data_resumen =[
-                  {
-                    name:'Ingreso', valor:sumar_i
-                  },
-                  {
-                    name: 'Egreso', valor: sumar_e
-                  },
-                  {
-                    name: 'Total mensual', valor: (sumar_i - sumar_e)
-                  }
-                ];
-                this.view_tabla = true;
-                 // this[`loading${dos}`] = false
-              }else{
-                this.view_tabla = false;
-              }
-              
-            });
-      },
+
+          this.ingresos = sumar_i;
+          this.egresos = sumar_e;
+          this.data_resumen = [
+            {
+              name: 'Ingreso', valor: sumar_i
+            },
+            {
+              name: 'Egreso', valor: sumar_e
+            },
+            {
+              name: 'Total mensual', valor: (sumar_i - sumar_e)
+            }
+          ];
+          this.view_tabla = true;
+          // this[`loading${dos}`] = false
+        } else {
+          this.view_tabla = false;
+        }
+
+      });
+    },
 
       limpiar(){
         this.tabla = [];

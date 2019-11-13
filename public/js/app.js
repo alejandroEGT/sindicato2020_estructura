@@ -3917,10 +3917,10 @@ var quasar_lang_index_json__WEBPACK_IMPORTED_MODULE_0___namespace = /*#__PURE__*
           var sumar_i = 0;
           var sumar_e = 0;
 
-          _this2.tabla.map(function (value, key) {
-            sumar_i = value.monto_ingreso + sumar_i;
-            sumar_e = value.monto_egreso + sumar_e;
-          });
+          for (var i = 0; i < _this2.tabla.length; i++) {
+            sumar_i += Number(_this2.tabla[i].monto_ingreso);
+            sumar_e += Number(_this2.tabla[i].monto_egreso);
+          }
 
           _this2.ingresos = sumar_i;
           _this2.egresos = sumar_e;
