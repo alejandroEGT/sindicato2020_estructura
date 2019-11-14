@@ -14,14 +14,86 @@
            
                     <q-btn-dropdown color="primary" icon="build" label="Opciones">
                       <q-list>
-                        <q-item clickable v-close-popup @click="ruta()">
+                        <q-item clickable @click="modal_ic = true" >
                           <q-item-section>
-                            
                              <q-avatar icon="monetization_on" color="primary" text-color="white" />
-                              </q-item-section>
+                          </q-item-section>
                               <q-item-section>
                        
                                <q-item-label >Inicio y cierre mensual</q-item-label>
+                                <!-- full-width full-height -->
+                                <q-dialog full-width v-model="modal_ic" :no-backdrop-dismiss="true">
+                              <!-- <vue-friendly-iframe :src="'../'+props.row.archivo"></vue-friendly-iframe> -->
+                            
+                                  <q-card>
+                                  <q-card-section>
+                                    <div class="row">
+                                      <div class="col-10 col-md-11">
+                                          <div class="text-h6">Archivo</div>
+                                      </div>
+                                      <div class="col-10 col-md-1">
+                                        <q-btn label="Volver" icon="keyboard_backspace" flat v-close-popup />
+                                          <!-- <q-btn class="text-right" flat v-close-popup round dense icon="close" /> -->
+                                      </div>
+                                    </div>
+                                    
+                                  </q-card-section>
+
+                                  <div>
+                                    
+                                        <div class="q-pa-md">
+                                          <div class="row q-col-gutter-md">
+                                            <div class="col-12 col-md-2">
+                                              <q-select 
+                                                standout="bg-primary text-white" 
+                                                v-model="cuenta_id" 
+                                                :options="options" 
+                                                label="Seleccione cuenta"
+                                                option-label="titulo"
+                                                option-value="id"
+                                                />
+                                            </div>
+                                            <div class="col-12 col-md-2">
+                                              <q-select 
+                                                standout="bg-primary text-white" 
+                                                v-model="anio" 
+                                                :options="anios" 
+                                                label="Seleccione año"
+                                                option-label="label"
+                                                option-value="id"
+                                                />
+                                            </div>
+                                            <div class="col-12 col-md-2">
+                                              <q-select 
+                                                standout="bg-primary text-white" 
+                                                v-model="mes" 
+                                                :options="meses" 
+                                                label="Seleccione mes"
+                                                option-label="label"
+                                                option-value="id"
+                                                />
+                                            </div>
+                                            <div class="col-12 col-md-2">
+                                              <q-input v-model="monto_inicio" label="Monto inicial" />
+                                            </div>
+                                            <div class="col-12 col-md-2">
+                                              <q-btn label="Calcular" />
+                                            </div>
+                                            <div class="col-12 col-md-2">
+                                              <q-btn @click="ingresar_inicio_mes" label="Guardar" />
+                                            </div>
+                                          </div>
+                                        </div>
+
+                                  
+
+
+                                  </div>
+                                  
+                     
+
+                                </q-card>
+                              </q-dialog>
                           
                           </q-item-section>
                         </q-item>
@@ -172,7 +244,7 @@
 
             <template>
               <div class="q-pa-md">
-                <div class="row">
+                <div class="row q-col-gutter-md">
                    <div clas="col-12 col-5">
                      <q-table
                         :data="data_resumen"
@@ -181,6 +253,29 @@
                         hide-bottom
                         
                       />
+                   </div>  
+                   <div clas="col-12 col-5">
+                     <q-table
+                        :data="data_acumulado"
+                        :columns="columns_acumulado"
+                        row-key="name"
+                        hide-bottom  
+                      >
+                          <template v-slot:body="props">
+                          <q-tr :props="props">
+                            <q-td key="name" :props="props">Arrastre</q-td>
+                            <q-td key="valor" :props="props">{{ monto_inicio }}</q-td>
+                          </q-tr>
+                           <q-tr :props="props">
+                            <q-td key="name" :props="props">Monto del mes</q-td>
+                            <q-td key="valor" :props="props">{{(ingresos-egresos)}}</q-td>
+                          </q-tr>
+                          <q-tr :props="props">
+                            <q-td key="name" :props="props">Total acumulado</q-td>
+                            <q-td key="valor" :props="props">{{ monto_inicio +(ingresos-egresos)}}</q-td>
+                          </q-tr>
+                          </template>
+                     </q-table>
                    </div>   
                 </div>
               </div>
@@ -189,7 +284,7 @@
             
            </div>
 
-          <!-- {{ ingresos +' - '+egresos + ' = '+ (ingresos-egresos) }} -->
+          {{ ingresos +' - '+egresos + ' = '+ (ingresos-egresos) }}
           
      
           </div>
