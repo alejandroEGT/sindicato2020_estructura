@@ -37,15 +37,16 @@ class Cliente extends Model
                                     'apellido_paterno',
                                     'apellido_materno',
                                 ])
+                                    ->where('activo', 'S')
                                     ->orderby('id', 'asc')
                                     ->get();
         if (count($listar) > 0) {
-          foreach ($listar as $key) {
-            $key->fecha_nacimiento =  Carbon::parse($key->fecha_nacimiento)->format('d-m-Y');
-            $key->nombres = ucwords($key->nombres);
-            $key->apellido_paterno = ucfirst($key->apellido_paterno);
-            $key->apellido_materno = ucfirst($key->apellido_materno);
-          }
+            foreach ($listar as $key) {
+                $key->fecha_nacimiento =  Carbon::parse($key->fecha_nacimiento)->format('d-m-Y');
+                $key->nombres = ucwords($key->nombres);
+                $key->apellido_paterno = ucfirst($key->apellido_paterno);
+                $key->apellido_materno = ucfirst($key->apellido_materno);
+            }
             return
         [
           'respuesta' => true,
@@ -200,6 +201,16 @@ class Cliente extends Model
                       return ['estado'=>'failed', 'mensaje'=>'A ocurrido un error al igreso de datos.'];
                   }
                   break;
+
+                case 'activo':
+                  $modificar->activo = $request->input;
+
+                  if ($modificar->save()) {
+                      return ['estado'=>'success', 'mensaje'=>'cliente eliminado con exito.'];
+                  } else {
+                      return ['estado'=>'failed', 'mensaje'=>'A ocurrido un error al eliminar el cliente.'];
+                  }
+                  break;
                 
                 default:
                   return null;
@@ -212,4 +223,19 @@ class Cliente extends Model
             return $validarDatos;
         }
     }
+
+    protected function eliminar_cliente($request)
+    {
+        $eliminar=$this::find($request->id);
+        $eliminar->activo = 'N';
+
+        if($eliminar->save()){
+          {
+            return ['estado'=>'success', 'mensaje'=>'Cliente Eliminado con exito!.'];
+        } 
+            return ['estado'=>'failed', 'mensaje'=>'A ocurrido un error al eliminar el cliente.'];
+        }
+        
+    }
+
 }

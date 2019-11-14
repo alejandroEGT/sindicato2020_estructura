@@ -73,4 +73,8 @@ class ClienteController extends Controller
     public function actualizar_campo_cliente(Request $datos){
         return Cliente::modificar_campo_cliente($datos);
     }
+
+    public function eliminar_cliente(Request $datos){
+        return Cliente::eliminar_cliente($datos);
+    }
 }

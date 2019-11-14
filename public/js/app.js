@@ -3581,7 +3581,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-<<<<<<< HEAD
 /***/ "./node_modules/babel-loader/lib/index.js?!./resources/js/components/auth/clientes/clientes_js/listarClientes.js?vue&type=script&lang=js&":
 /*!************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./resources/js/components/auth/clientes/clientes_js/listarClientes.js?vue&type=script&lang=js& ***!
@@ -3596,47 +3595,55 @@ __webpack_require__.r(__webpack_exports__);
     return {
       separator: 'cell',
       loading: false,
+      confirm: false,
       filter: '',
       campoUpd: '',
       errores: [],
       visibleColumns: ['id', 'fecha_nacimiento', 'rut', 'nombres', 'apellido_paterno', 'apellido_materno', 'opcion'],
-      columns: [{
+      clientes: [{
+        classes: 'ellipsis',
         name: 'id',
         align: 'center',
         label: 'id',
         field: 'id',
         sortable: true
       }, {
+        classes: 'ellipsis',
         name: 'fecha_nacimiento',
         align: 'center',
         label: 'Fecha de Nacimiento',
         field: 'fecha_nacimiento',
         sortable: true
       }, {
+        classes: 'ellipsis',
         name: 'rut',
         align: 'center',
         label: 'Rut',
         field: 'rut',
         sortable: true
       }, {
+        classes: 'ellipsis',
         name: 'nombres',
         align: 'center',
         label: 'Nombres',
         field: 'nombres',
         sortable: true
       }, {
+        classes: 'ellipsis',
         name: 'apellido_paterno',
         align: 'center',
         label: 'Apellido Paterno',
         field: 'apellido_paterno',
         sortable: true
       }, {
+        classes: 'ellipsis',
         name: 'apellido_materno',
         align: 'center',
         label: 'Apellido Materno',
         field: 'apellido_materno',
         sortable: true
       }, {
+        classes: 'ellipsis',
         name: 'opcion',
         align: 'center',
         label: 'Opcion',
@@ -3672,9 +3679,7 @@ __webpack_require__.r(__webpack_exports__);
         'id': id,
         'campo': campo,
         'input': input
-      }; //   console.log(data);
-      //   return false;
-
+      };
       this.loading = true;
       axios.post('api/actualizar_campo_cliente', data).then(function (response) {
         if (response.data.estado == 'success') {
@@ -3702,13 +3707,35 @@ __webpack_require__.r(__webpack_exports__);
         _this2.loading = false;
       });
     },
-    onRefresh: function onRefresh() {
+    eliminar_cliente_estado: function eliminar_cliente_estado(id) {
       var _this3 = this;
+
+      var data = {
+        'id': id
+      };
+      this.loading = true;
+      axios.post('api/eliminar_cliente', data).then(function (response) {
+        if (response.data.estado == 'success') {
+          _this3.$q.notify({
+            color: "green-4",
+            textColor: "white",
+            icon: "delete_forever",
+            message: response.data.mensaje
+          });
+
+          _this3.loading = false;
+
+          _this3.traer_clientes();
+        }
+      });
+    },
+    onRefresh: function onRefresh() {
+      var _this4 = this;
 
       this.loading = true;
       this.traer_clientes();
       setTimeout(function () {
-        _this3.loading = false;
+        _this4.loading = false;
       }, 5000);
     }
   },
@@ -3831,8 +3858,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-=======
->>>>>>> alejandro
 /***/ "./node_modules/babel-loader/lib/index.js?!./resources/js/components/auth/cuentas/cuentas_js/crear_cuentas.js?vue&type=script&lang=js&":
 /*!*********************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./resources/js/components/auth/cuentas/cuentas_js/crear_cuentas.js?vue&type=script&lang=js& ***!
@@ -10364,7 +10389,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\na:link\n{\ntext-decoration:none;\n}\n", ""]);
+exports.push([module.i, "\na:link\r\n{\r\ntext-decoration:none;\n}\r\n", ""]);
 
 // exports
 
@@ -10383,7 +10408,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "\n.my-sticky-header-table\r\n  /* max height is important */\r\n  .q-table__middle{\r\n    max-height: 500px;\n}\n.q-table__top,\r\n  .q-table__bottom,\r\n  thead tr:first-child th{\r\n    /* bg color is important for th; just specify one */\r\n    background-color: #027be3;\r\n    color: #ffffff;\n}\n.fondo{\r\n    background-color: #ffffff;\n}\nthead tr th{\r\n    position: -webkit-sticky;\r\n    position: sticky;\r\n    z-index: 1;\n}\nthead tr:first-child th{\r\n    top: 0;\n}\r\n  /* this is when the loading indicator appears */\n.q-table--loading thead tr:last-child th{\r\n    /* height of all previous header rows */\r\n    top: 48px;\n}", ""]);
 
 // exports
 
@@ -44179,21 +44204,12 @@ if(false) {}
       }
       else if (document.location.href.indexOf('-extension://') > -1) {
         browser.bex = true;
-<<<<<<< HEAD
       }
       else if (window.Capacitor !== void 0) {
         browser.capacitor = true;
         browser.nativeMobile = true;
         browser.nativeMobileWrapper = 'capacitor';
       }
-=======
-      }
-      else if (window.Capacitor !== void 0) {
-        browser.capacitor = true;
-        browser.nativeMobile = true;
-        browser.nativeMobileWrapper = 'capacitor';
-      }
->>>>>>> alejandro
       else if (window._cordovaNative !== void 0 || window.cordova !== void 0) {
         browser.cordova = true;
         browser.nativeMobile = true;
@@ -46990,21 +47006,12 @@ if(false) {}
               document.removeEventListener('keyup', onClickCleanup, passiveCapture);
               this$1.$el !== void 0 && this$1.$el.removeEventListener('blur', onClickCleanup, passiveCapture);
             };
-<<<<<<< HEAD
 
             document.addEventListener('keydown', stopAndPrevent, true);
             document.addEventListener('keyup', onClickCleanup, passiveCapture);
             this.$el.addEventListener('blur', onClickCleanup, passiveCapture);
           }
 
-=======
-
-            document.addEventListener('keydown', stopAndPrevent, true);
-            document.addEventListener('keyup', onClickCleanup, passiveCapture);
-            this.$el.addEventListener('blur', onClickCleanup, passiveCapture);
-          }
-
->>>>>>> alejandro
           this.hasRouterLink === true && stopAndPrevent(e);
         }
 
@@ -47050,7 +47057,6 @@ if(false) {}
           touchTarget = e.target;
           touchTarget.addEventListener('touchcancel', this.__onPressEnd, passiveCapture);
           touchTarget.addEventListener('touchend', this.__onPressEnd, passiveCapture);
-<<<<<<< HEAD
         }
 
         this.$emit('touchstart', e);
@@ -47088,45 +47094,6 @@ if(false) {}
         this.__cleanup();
       },
 
-=======
-        }
-
-        this.$emit('touchstart', e);
-      },
-
-      __onMousedown: function __onMousedown (e) {
-        if (mouseTarget !== this.$el) {
-          mouseTarget !== void 0 && this.__cleanup();
-
-          mouseTarget = this.$el;
-          document.addEventListener('mouseup', this.__onPressEnd, passiveCapture);
-        }
-
-        this.$emit('mousedown', e);
-      },
-
-      __onPressEnd: function __onPressEnd (e) {
-        if (e !== void 0 && e.type === 'keyup') {
-          if (keyboardTarget === this.$el && [13, 32].includes(e.keyCode) === true) {
-            // for click trigger
-            var evt = new MouseEvent('click', e);
-            evt.qKeyEvent = true;
-            e.defaultPrevented === true && evt.preventDefault();
-            this.$el.dispatchEvent(evt);
-
-            stopAndPrevent(e);
-
-            // for ripple
-            e.qKeyEvent = true;
-          }
-
-          this.$emit('keyup', e);
-        }
-
-        this.__cleanup();
-      },
-
->>>>>>> alejandro
       __cleanup: function __cleanup () {
         if (
           (touchTarget === this.$el || mouseTarget === this.$el) &&
@@ -56289,7 +56256,6 @@ if(false) {}
           function (res) {
             if (index !== this$1.validateIndex) {
               return true
-<<<<<<< HEAD
             }
 
             if (res === void 0 || Array.isArray(res) === false || res.length === 0) {
@@ -56297,15 +56263,6 @@ if(false) {}
               return true
             }
 
-=======
-            }
-
-            if (res === void 0 || Array.isArray(res) === false || res.length === 0) {
-              update(false);
-              return true
-            }
-
->>>>>>> alejandro
             var msg = res.find(function (r) { return r === false || typeof r === 'string'; });
             update(msg !== void 0, msg);
             return msg === void 0
@@ -56918,7 +56875,6 @@ if(false) {}
 
           maskMarked = maskMarked.slice(0, padPos) + pad + maskMarked.slice(padPos);
         }
-<<<<<<< HEAD
 
         return maskMarked
       },
@@ -56930,19 +56886,6 @@ if(false) {}
           this.mask.length > 0 &&
           ['text', 'search', 'url', 'tel', 'password'].includes(this.type);
 
-=======
-
-        return maskMarked
-      },
-
-      __updateMaskInternals: function __updateMaskInternals () {
-        var this$1 = this;
-
-        this.hasMask = this.mask !== void 0 &&
-          this.mask.length > 0 &&
-          ['text', 'search', 'url', 'tel', 'password'].includes(this.type);
-
->>>>>>> alejandro
         if (this.hasMask === false) {
           this.computedUnmask = void 0;
           this.maskMarked = '';
@@ -57277,15 +57220,9 @@ if(false) {}
         }
 
         var mask = this.computedMask;
-<<<<<<< HEAD
 
         var valIndex = 0, output = '';
 
-=======
-
-        var valIndex = 0, output = '';
-
->>>>>>> alejandro
         for (var maskIndex = 0; maskIndex < mask.length; maskIndex++) {
           var
             valChar = val[valIndex],
@@ -57838,7 +57775,6 @@ if(false) {}
         if (this.scrollTarget !== void 0) {
           this.scrollTarget.removeEventListener('scroll', this.hide, passive$1);
           this.scrollTarget = void 0;
-<<<<<<< HEAD
         }
         window.removeEventListener('scroll', this.updatePosition, passive$1);
       },
@@ -57852,27 +57788,9 @@ if(false) {}
           if (this.noParentEvent === true || this.scrollTarget !== window) {
             window.addEventListener('scroll', this.updatePosition, passive$1);
           }
-=======
->>>>>>> alejandro
-        }
-        window.removeEventListener('scroll', this.updatePosition, passive$1);
-      },
-
-<<<<<<< HEAD
-=======
-      __configureScrollTarget: function __configureScrollTarget () {
-        if (this.anchorEl !== void 0) {
-          this.scrollTarget = getScrollTarget(this.anchorEl);
-          if (this.noParentEvent !== true) {
-            this.scrollTarget.addEventListener('scroll', this.hide, passive$1);
-          }
-          if (this.noParentEvent === true || this.scrollTarget !== window) {
-            window.addEventListener('scroll', this.updatePosition, passive$1);
-          }
         }
       },
 
->>>>>>> alejandro
       __renderPortal: function __renderPortal (h) {
         return h('transition', {
           props: { name: this.transition }
@@ -63438,7 +63356,6 @@ if(false) {}
           this.__updateType(width, this.$q.screen.height, this.parsedBreakpoint);
         }
       },
-<<<<<<< HEAD
 
       '$q.screen.height': function $q_screen_height (height) {
         if (this.$refs.popup.showing !== true) {
@@ -63446,15 +63363,6 @@ if(false) {}
         }
       },
 
-=======
-
-      '$q.screen.height': function $q_screen_height (height) {
-        if (this.$refs.popup.showing !== true) {
-          this.__updateType(this.$q.screen.width, height, this.parsedBreakpoint);
-        }
-      },
-
->>>>>>> alejandro
       breakpoint: function breakpoint (breakpoint$1) {
         if (this.$refs.popup.showing !== true) {
           this.__updateType(this.$q.screen.width, this.$q.screen.height, parseInt(breakpoint$1, 10));
@@ -64843,7 +64751,6 @@ if(false) {}
       if (parent === window) {
         details.scrollStart = window.pageXOffset || window.scrollX || document.body.scrollLeft || 0;
         details.scrollViewSize += window.innerWidth;
-<<<<<<< HEAD
       }
       else {
         details.scrollStart = parentCalc.scrollLeft;
@@ -64860,24 +64767,6 @@ if(false) {}
         details.scrollStart = parentCalc.scrollTop;
         details.scrollViewSize += parentCalc.clientHeight;
       }
-=======
-      }
-      else {
-        details.scrollStart = parentCalc.scrollLeft;
-        details.scrollViewSize += parentCalc.clientWidth;
-      }
-      details.scrollMaxSize = parentCalc.scrollWidth;
-    }
-    else {
-      if (parent === window) {
-        details.scrollStart = window.pageYOffset || window.scrollY || document.body.scrollTop || 0;
-        details.scrollViewSize += window.innerHeight;
-      }
-      else {
-        details.scrollStart = parentCalc.scrollTop;
-        details.scrollViewSize += parentCalc.clientHeight;
-      }
->>>>>>> alejandro
       details.scrollMaxSize = parentCalc.scrollHeight;
     }
 
@@ -64927,7 +64816,6 @@ if(false) {}
     else {
       parent[horizontal === true ? 'scrollLeft' : 'scrollTop'] = scroll;
     }
-<<<<<<< HEAD
   }
 
   function sumSize (sizeAgg, size, from, to) {
@@ -64950,30 +64838,6 @@ if(false) {}
     return total
   }
 
-=======
-  }
-
-  function sumSize (sizeAgg, size, from, to) {
-    if (from >= to) { return 0 }
-
-    var
-      lastTo = size.length,
-      fromAgg = Math.floor(from / aggBucketSize),
-      toAgg = Math.floor((to - 1) / aggBucketSize) + 1;
-
-    var total = sizeAgg.slice(fromAgg, toAgg).reduce(sumFn, 0);
-
-    if (from % aggBucketSize !== 0) {
-      total -= size.slice(fromAgg * aggBucketSize, from).reduce(sumFn, 0);
-    }
-    if (to % aggBucketSize !== 0 && to !== lastTo) {
-      total -= size.slice(to, toAgg * aggBucketSize).reduce(sumFn, 0);
-    }
-
-    return total
-  }
-
->>>>>>> alejandro
   var commonVirtScrollProps = {
     virtualScrollSliceSize: {
       type: Number,
@@ -65840,7 +65704,6 @@ if(false) {}
         // keyboard search when not having use-input
         if (optionsLength > 0 && this.useInput !== true && e.keyCode >= 48 && e.keyCode <= 90) {
           this.menu !== true && this.showPopup(e);
-<<<<<<< HEAD
 
           // clear search buffer if expired
           if (this.searchBuffer === void 0 || this.searchBufferExp < Date.now()) {
@@ -65870,37 +65733,6 @@ if(false) {}
             ))
           }
 
-=======
-
-          // clear search buffer if expired
-          if (this.searchBuffer === void 0 || this.searchBufferExp < Date.now()) {
-            this.searchBuffer = '';
-          }
-
-          var
-            char = String.fromCharCode(e.keyCode).toLocaleLowerCase(),
-            keyRepeat = this.searchBuffer.length === 1 && this.searchBuffer[0] === char;
-
-          this.searchBufferExp = Date.now() + 1500;
-          if (keyRepeat === false) {
-            this.searchBuffer += char;
-          }
-
-          var searchRe = new RegExp('^' + this.searchBuffer.split('').join('.*'), 'i');
-
-          var index$1 = this.optionIndex;
-
-          if (keyRepeat === true || searchRe.test(this.__getOptionLabel(this.options[index$1])) !== true) {
-            do {
-              index$1 = normalizeToInterval(index$1 + 1, -1, optionsLength - 1);
-            }
-            while (index$1 !== this.optionIndex && (
-              this.__isDisabled(this.options[index$1]) === true ||
-              searchRe.test(this.__getOptionLabel(this.options[index$1])) !== true
-            ))
-          }
-
->>>>>>> alejandro
           if (this.optionIndex !== index$1) {
             this.$nextTick(function () {
               this$1.setOptionIndex(index$1);
@@ -65988,21 +65820,12 @@ if(false) {}
               ? this.$refs.menu.__portal.$el
               : void 0
           )
-<<<<<<< HEAD
       },
 
       __getVirtualScrollTarget: function __getVirtualScrollTarget () {
         return this.__getVirtualScrollEl()
       },
 
-=======
-      },
-
-      __getVirtualScrollTarget: function __getVirtualScrollTarget () {
-        return this.__getVirtualScrollEl()
-      },
-
->>>>>>> alejandro
       __getSelection: function __getSelection (h, fromDialog) {
         var this$1 = this;
         var obj;
@@ -66450,7 +66273,6 @@ if(false) {}
         this.$emit('blur', e);
         this.__resetInputValue();
       },
-<<<<<<< HEAD
 
       __onDialogShow: function __onDialogShow () {
         var el = document.activeElement;
@@ -66468,25 +66290,6 @@ if(false) {}
           return
         }
 
-=======
-
-      __onDialogShow: function __onDialogShow () {
-        var el = document.activeElement;
-        // IE can have null document.activeElement
-        if (
-          (el === null || el.id !== this.targetUid) &&
-          this.$refs.target !== el
-        ) {
-          this.$refs.target.focus();
-        }
-      },
-
-      __closeMenu: function __closeMenu () {
-        if (this.dialog === true) {
-          return
-        }
-
->>>>>>> alejandro
         if (this.menu === true) {
           this.menu = false;
         }
@@ -66510,7 +66313,6 @@ if(false) {}
         else {
           this.__focus();
         }
-<<<<<<< HEAD
 
         if (this.$listeners.filter !== void 0) {
           this.filter(this.inputValue);
@@ -66525,22 +66327,6 @@ if(false) {}
         this.__closeMenu();
       },
 
-=======
-
-        if (this.$listeners.filter !== void 0) {
-          this.filter(this.inputValue);
-        }
-        else if (this.noOptions !== true || this.$scopedSlots['no-option'] !== void 0) {
-          this.menu = true;
-        }
-      },
-
-      hidePopup: function hidePopup () {
-        this.dialog = false;
-        this.__closeMenu();
-      },
-
->>>>>>> alejandro
       __resetInputValue: function __resetInputValue () {
         this.useInput === true && this.updateInputValue(
           this.multiple !== true && this.fillInput === true && this.innerValue.length > 0
@@ -75500,492 +75286,6 @@ if(false) {}
 
 /***/ }),
 
-<<<<<<< HEAD
-/***/ "./node_modules/quasar/lang lazy recursive ^\\.\\/.*$":
-/*!*****************************************************************!*\
-  !*** ./node_modules/quasar/lang lazy ^\.\/.*$ namespace object ***!
-  \*****************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var map = {
-	"./": [
-		"./node_modules/quasar/lang/index.json",
-		3
-	],
-	"./ar": [
-		"./node_modules/quasar/lang/ar.js",
-		9,
-		0
-	],
-	"./ar.js": [
-		"./node_modules/quasar/lang/ar.js",
-		9,
-		0
-	],
-	"./bg": [
-		"./node_modules/quasar/lang/bg.js",
-		9,
-		1
-	],
-	"./bg.js": [
-		"./node_modules/quasar/lang/bg.js",
-		9,
-		1
-	],
-	"./ca": [
-		"./node_modules/quasar/lang/ca.js",
-		9,
-		2
-	],
-	"./ca.js": [
-		"./node_modules/quasar/lang/ca.js",
-		9,
-		2
-	],
-	"./cs": [
-		"./node_modules/quasar/lang/cs.js",
-		9,
-		3
-	],
-	"./cs.js": [
-		"./node_modules/quasar/lang/cs.js",
-		9,
-		3
-	],
-	"./da": [
-		"./node_modules/quasar/lang/da.js",
-		9,
-		4
-	],
-	"./da.js": [
-		"./node_modules/quasar/lang/da.js",
-		9,
-		4
-	],
-	"./de": [
-		"./node_modules/quasar/lang/de.js",
-		9,
-		5
-	],
-	"./de.js": [
-		"./node_modules/quasar/lang/de.js",
-		9,
-		5
-	],
-	"./el": [
-		"./node_modules/quasar/lang/el.js",
-		9,
-		6
-	],
-	"./el.js": [
-		"./node_modules/quasar/lang/el.js",
-		9,
-		6
-	],
-	"./en-gb": [
-		"./node_modules/quasar/lang/en-gb.js",
-		9,
-		7
-	],
-	"./en-gb.js": [
-		"./node_modules/quasar/lang/en-gb.js",
-		9,
-		7
-	],
-	"./en-us": [
-		"./node_modules/quasar/lang/en-us.js",
-		9,
-		8
-	],
-	"./en-us.js": [
-		"./node_modules/quasar/lang/en-us.js",
-		9,
-		8
-	],
-	"./eo": [
-		"./node_modules/quasar/lang/eo.js",
-		9,
-		9
-	],
-	"./eo.js": [
-		"./node_modules/quasar/lang/eo.js",
-		9,
-		9
-	],
-	"./es": [
-		"./node_modules/quasar/lang/es.js",
-		9,
-		10
-	],
-	"./es.js": [
-		"./node_modules/quasar/lang/es.js",
-		9,
-		10
-	],
-	"./fa-ir": [
-		"./node_modules/quasar/lang/fa-ir.js",
-		9,
-		11
-	],
-	"./fa-ir.js": [
-		"./node_modules/quasar/lang/fa-ir.js",
-		9,
-		11
-	],
-	"./fi": [
-		"./node_modules/quasar/lang/fi.js",
-		9,
-		12
-	],
-	"./fi.js": [
-		"./node_modules/quasar/lang/fi.js",
-		9,
-		12
-	],
-	"./fr": [
-		"./node_modules/quasar/lang/fr.js",
-		9,
-		13
-	],
-	"./fr.js": [
-		"./node_modules/quasar/lang/fr.js",
-		9,
-		13
-	],
-	"./gn": [
-		"./node_modules/quasar/lang/gn.js",
-		9,
-		14
-	],
-	"./gn.js": [
-		"./node_modules/quasar/lang/gn.js",
-		9,
-		14
-	],
-	"./he": [
-		"./node_modules/quasar/lang/he.js",
-		9,
-		15
-	],
-	"./he.js": [
-		"./node_modules/quasar/lang/he.js",
-		9,
-		15
-	],
-	"./hr": [
-		"./node_modules/quasar/lang/hr.js",
-		9,
-		16
-	],
-	"./hr.js": [
-		"./node_modules/quasar/lang/hr.js",
-		9,
-		16
-	],
-	"./hu": [
-		"./node_modules/quasar/lang/hu.js",
-		9,
-		17
-	],
-	"./hu.js": [
-		"./node_modules/quasar/lang/hu.js",
-		9,
-		17
-	],
-	"./id": [
-		"./node_modules/quasar/lang/id.js",
-		9,
-		18
-	],
-	"./id.js": [
-		"./node_modules/quasar/lang/id.js",
-		9,
-		18
-	],
-	"./index": [
-		"./node_modules/quasar/lang/index.json",
-		3
-	],
-	"./index.json": [
-		"./node_modules/quasar/lang/index.json",
-		3
-	],
-	"./it": [
-		"./node_modules/quasar/lang/it.js",
-		9,
-		19
-	],
-	"./it.js": [
-		"./node_modules/quasar/lang/it.js",
-		9,
-		19
-	],
-	"./ja": [
-		"./node_modules/quasar/lang/ja.js",
-		9,
-		20
-	],
-	"./ja.js": [
-		"./node_modules/quasar/lang/ja.js",
-		9,
-		20
-	],
-	"./km": [
-		"./node_modules/quasar/lang/km.js",
-		9,
-		21
-	],
-	"./km.js": [
-		"./node_modules/quasar/lang/km.js",
-		9,
-		21
-	],
-	"./ko-kr": [
-		"./node_modules/quasar/lang/ko-kr.js",
-		9,
-		22
-	],
-	"./ko-kr.js": [
-		"./node_modules/quasar/lang/ko-kr.js",
-		9,
-		22
-	],
-	"./lu": [
-		"./node_modules/quasar/lang/lu.js",
-		9,
-		23
-	],
-	"./lu.js": [
-		"./node_modules/quasar/lang/lu.js",
-		9,
-		23
-	],
-	"./lv": [
-		"./node_modules/quasar/lang/lv.js",
-		9,
-		24
-	],
-	"./lv.js": [
-		"./node_modules/quasar/lang/lv.js",
-		9,
-		24
-	],
-	"./ml": [
-		"./node_modules/quasar/lang/ml.js",
-		9,
-		25
-	],
-	"./ml.js": [
-		"./node_modules/quasar/lang/ml.js",
-		9,
-		25
-	],
-	"./ms": [
-		"./node_modules/quasar/lang/ms.js",
-		9,
-		26
-	],
-	"./ms.js": [
-		"./node_modules/quasar/lang/ms.js",
-		9,
-		26
-	],
-	"./nb-no": [
-		"./node_modules/quasar/lang/nb-no.js",
-		9,
-		27
-	],
-	"./nb-no.js": [
-		"./node_modules/quasar/lang/nb-no.js",
-		9,
-		27
-	],
-	"./nl": [
-		"./node_modules/quasar/lang/nl.js",
-		9,
-		28
-	],
-	"./nl.js": [
-		"./node_modules/quasar/lang/nl.js",
-		9,
-		28
-	],
-	"./pl": [
-		"./node_modules/quasar/lang/pl.js",
-		9,
-		29
-	],
-	"./pl.js": [
-		"./node_modules/quasar/lang/pl.js",
-		9,
-		29
-	],
-	"./pt": [
-		"./node_modules/quasar/lang/pt.js",
-		9,
-		31
-	],
-	"./pt-br": [
-		"./node_modules/quasar/lang/pt-br.js",
-		9,
-		30
-	],
-	"./pt-br.js": [
-		"./node_modules/quasar/lang/pt-br.js",
-		9,
-		30
-	],
-	"./pt.js": [
-		"./node_modules/quasar/lang/pt.js",
-		9,
-		31
-	],
-	"./ro": [
-		"./node_modules/quasar/lang/ro.js",
-		9,
-		32
-	],
-	"./ro.js": [
-		"./node_modules/quasar/lang/ro.js",
-		9,
-		32
-	],
-	"./ru": [
-		"./node_modules/quasar/lang/ru.js",
-		9,
-		33
-	],
-	"./ru.js": [
-		"./node_modules/quasar/lang/ru.js",
-		9,
-		33
-	],
-	"./sk": [
-		"./node_modules/quasar/lang/sk.js",
-		9,
-		34
-	],
-	"./sk.js": [
-		"./node_modules/quasar/lang/sk.js",
-		9,
-		34
-	],
-	"./sl": [
-		"./node_modules/quasar/lang/sl.js",
-		9,
-		35
-	],
-	"./sl.js": [
-		"./node_modules/quasar/lang/sl.js",
-		9,
-		35
-	],
-	"./sr": [
-		"./node_modules/quasar/lang/sr.js",
-		9,
-		36
-	],
-	"./sr.js": [
-		"./node_modules/quasar/lang/sr.js",
-		9,
-		36
-	],
-	"./sv": [
-		"./node_modules/quasar/lang/sv.js",
-		9,
-		37
-	],
-	"./sv.js": [
-		"./node_modules/quasar/lang/sv.js",
-		9,
-		37
-	],
-	"./th": [
-		"./node_modules/quasar/lang/th.js",
-		9,
-		38
-	],
-	"./th.js": [
-		"./node_modules/quasar/lang/th.js",
-		9,
-		38
-	],
-	"./tr": [
-		"./node_modules/quasar/lang/tr.js",
-		9,
-		39
-	],
-	"./tr.js": [
-		"./node_modules/quasar/lang/tr.js",
-		9,
-		39
-	],
-	"./uk": [
-		"./node_modules/quasar/lang/uk.js",
-		9,
-		40
-	],
-	"./uk.js": [
-		"./node_modules/quasar/lang/uk.js",
-		9,
-		40
-	],
-	"./vi": [
-		"./node_modules/quasar/lang/vi.js",
-		9,
-		41
-	],
-	"./vi.js": [
-		"./node_modules/quasar/lang/vi.js",
-		9,
-		41
-	],
-	"./zh-hans": [
-		"./node_modules/quasar/lang/zh-hans.js",
-		9,
-		42
-	],
-	"./zh-hans.js": [
-		"./node_modules/quasar/lang/zh-hans.js",
-		9,
-		42
-	],
-	"./zh-hant": [
-		"./node_modules/quasar/lang/zh-hant.js",
-		9,
-		43
-	],
-	"./zh-hant.js": [
-		"./node_modules/quasar/lang/zh-hant.js",
-		9,
-		43
-	]
-};
-function webpackAsyncContext(req) {
-	if(!__webpack_require__.o(map, req)) {
-		return Promise.resolve().then(function() {
-			var e = new Error("Cannot find module '" + req + "'");
-			e.code = 'MODULE_NOT_FOUND';
-			throw e;
-		});
-	}
-
-	var ids = map[req], id = ids[0];
-	return Promise.all(ids.slice(2).map(__webpack_require__.e)).then(function() {
-		return __webpack_require__.t(id, ids[1])
-	});
-}
-webpackAsyncContext.keys = function webpackAsyncContextKeys() {
-	return Object.keys(map);
-};
-webpackAsyncContext.id = "./node_modules/quasar/lang lazy recursive ^\\.\\/.*$";
-module.exports = webpackAsyncContext;
-
-/***/ }),
-
-=======
->>>>>>> alejandro
 /***/ "./node_modules/quasar/lang/index.json":
 /*!*********************************************!*\
   !*** ./node_modules/quasar/lang/index.json ***!
@@ -79921,204 +79221,120 @@ var render = function() {
     "div",
     { staticClass: "q-pa-md" },
     [
-      _c(
-        "div",
-        { staticClass: "row justify-between" },
-        [
-          _c(
-            "div",
-            { staticClass: "col-12 col-md-8" },
-            [
-              _c("q-option-group", {
-                staticClass: "q-mb-md",
-                attrs: {
-                  inline: "",
-                  options: [
-                    { label: "Casilla", value: "cell" },
-                    { label: "Horizontal", value: "horizontal" },
-                    { label: "Vertical", value: "vertical" },
-                    { label: "Ninguno", value: "none" }
+      [
+        _c(
+          "q-banner",
+          {
+            staticClass: "bg-grey-3",
+            attrs: { "inline-actions": "" },
+            scopedSlots: _vm._u([
+              {
+                key: "avatar",
+                fn: function() {
+                  return [
+                    _c("q-icon", {
+                      attrs: { name: "account_circle", color: "primary" }
+                    })
                   ]
                 },
-                model: {
-                  value: _vm.separator,
-                  callback: function($$v) {
-                    _vm.separator = $$v
-                  },
-                  expression: "separator"
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c("q-btn", {
-            staticClass: "q-mb-md",
-            attrs: { label: "Refrescar", color: "primary" },
-            on: { click: _vm.onRefresh }
-          }),
-          _vm._v(" "),
-          _c("q-btn", {
-            staticClass: "q-mb-md",
-            attrs: {
-              label: "Formulario",
-              "icon-right": "person_add",
-              color: "green"
-            },
-            on: {
-              click: function($event) {
-                return _vm.url_registro()
+                proxy: true
+              },
+              {
+                key: "action",
+                fn: function() {
+                  return [
+                    _c("q-btn", {
+                      staticClass: "q-mb-md",
+                      attrs: {
+                        flat: "",
+                        label: "Refrescar",
+                        "icon-right": "refresh",
+                        color: "primary"
+                      },
+                      on: {
+                        click: function($event) {
+                          return _vm.onRefresh()
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("q-btn", {
+                      staticClass: "q-mb-md",
+                      attrs: {
+                        flat: "",
+                        label: "Formulario",
+                        "icon-right": "person_add",
+                        color: "green"
+                      },
+                      on: {
+                        click: function($event) {
+                          return _vm.url_registro()
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("q-btn", {
+                      staticClass: "q-mb-md",
+                      attrs: {
+                        flat: "",
+                        label: "Volver",
+                        "icon-right": "settings_backup_restore",
+                        color: "red"
+                      },
+                      on: {
+                        click: function($event) {
+                          return _vm.url_volver2()
+                        }
+                      }
+                    })
+                  ]
+                },
+                proxy: true
               }
-            }
-          }),
-          _vm._v(" "),
-          _c("q-btn", {
-            staticClass: "q-mb-md",
-            attrs: {
-              label: "Volver",
-              "icon-right": "settings_backup_restore",
-              color: "red"
-            },
-            on: {
-              click: function($event) {
-                return _vm.url_volver2()
-              }
-            }
-          })
-        ],
-        1
-      ),
+            ])
+          },
+          [_vm._v("\n          LISTADO DE CLIENTES\n          ")]
+        )
+      ],
+      _vm._v(" "),
+      _c("div", { staticClass: "q-pa-sm" }),
       _vm._v(" "),
       _c("q-table", {
+        staticClass: "my-sticky-header-table",
         attrs: {
           title: "Listado de Clientes",
-          data: _vm.listarClientes,
-          columns: _vm.columns,
-          "row-key": "name",
-          separator: _vm.separator,
-          "rows-per-page-label": "Cantidad:",
-          loading: _vm.loading,
-          "loading-label": "Cargando",
-          filter: _vm.filter,
           "no-data-label": "Aun no hay datos para mostrar.",
           "no-results-label": "No se han encontrado resultados.",
+          "rows-per-page-label": "Cantidad:",
+          "loading-label": "Cargando",
+          "row-key": "name",
+          data: _vm.listarClientes,
+          columns: _vm.clientes,
+          separator: _vm.separator,
+          loading: _vm.loading,
+          filter: _vm.filter,
           "visible-columns": _vm.visibleColumns,
           "rows-per-page-options": [5, 10, 15, 30, 50, 100, 0]
         },
         scopedSlots: _vm._u([
           {
-            key: "top-left",
+            key: "top",
             fn: function(props) {
               return [
                 _c("q-space"),
                 _vm._v(" "),
-                _vm.$q.screen.gt.xs
-                  ? _c(
-                      "div",
-                      { staticClass: "col" },
-                      [
-                        _c("q-toggle", {
-                          attrs: { val: "id", label: "ID" },
-                          model: {
-                            value: _vm.visibleColumns,
-                            callback: function($$v) {
-                              _vm.visibleColumns = $$v
-                            },
-                            expression: "visibleColumns"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("q-toggle", {
-                          attrs: {
-                            val: "fecha_nacimiento",
-                            label: "Fecha de Nacimiento"
-                          },
-                          model: {
-                            value: _vm.visibleColumns,
-                            callback: function($$v) {
-                              _vm.visibleColumns = $$v
-                            },
-                            expression: "visibleColumns"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("q-toggle", {
-                          attrs: { val: "rut", label: "Rut" },
-                          model: {
-                            value: _vm.visibleColumns,
-                            callback: function($$v) {
-                              _vm.visibleColumns = $$v
-                            },
-                            expression: "visibleColumns"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("q-toggle", {
-                          attrs: { val: "nombres", label: "Nombres" },
-                          model: {
-                            value: _vm.visibleColumns,
-                            callback: function($$v) {
-                              _vm.visibleColumns = $$v
-                            },
-                            expression: "visibleColumns"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("q-toggle", {
-                          attrs: {
-                            val: "apellido_paterno",
-                            label: "Apellido Paterno"
-                          },
-                          model: {
-                            value: _vm.visibleColumns,
-                            callback: function($$v) {
-                              _vm.visibleColumns = $$v
-                            },
-                            expression: "visibleColumns"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("q-toggle", {
-                          attrs: {
-                            val: "apellido_materno",
-                            label: "Apellido Materno"
-                          },
-                          model: {
-                            value: _vm.visibleColumns,
-                            callback: function($$v) {
-                              _vm.visibleColumns = $$v
-                            },
-                            expression: "visibleColumns"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("q-btn", {
-                          staticClass: "q-ml-md",
-                          attrs: {
-                            flat: "",
-                            round: "",
-                            dense: "",
-                            icon: props.inFullscreen
-                              ? "fullscreen_exit"
-                              : "fullscreen"
-                          },
-                          on: { click: props.toggleFullscreen }
-                        })
-                      ],
-                      1
-                    )
-                  : _c("q-select", {
-                      staticStyle: { "min-width": "150px" },
+                _c(
+                  "div",
+                  { staticClass: "col" },
+                  [
+                    _c("q-toggle", {
                       attrs: {
-                        multiple: "",
-                        borderless: "",
-                        dense: "",
-                        "options-dense": "",
-                        "display-value": _vm.$q.lang.table.columns,
-                        "emit-value": "",
-                        "map-options": "",
-                        options: _vm.columns,
-                        "option-value": "name"
+                        "left-label": "",
+                        color: "green",
+                        "checked-icon": "check",
+                        "unchecked-icon": "clear",
+                        val: "id",
+                        label: "ID"
                       },
                       model: {
                         value: _vm.visibleColumns,
@@ -80127,41 +79343,170 @@ var render = function() {
                         },
                         expression: "visibleColumns"
                       }
-                    })
+                    }),
+                    _vm._v(" "),
+                    _c("q-toggle", {
+                      attrs: {
+                        "left-label": "",
+                        color: "green",
+                        "checked-icon": "check",
+                        "unchecked-icon": "clear",
+                        val: "fecha_nacimiento",
+                        label: "Fecha de Nacimiento"
+                      },
+                      model: {
+                        value: _vm.visibleColumns,
+                        callback: function($$v) {
+                          _vm.visibleColumns = $$v
+                        },
+                        expression: "visibleColumns"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("q-toggle", {
+                      attrs: {
+                        "left-label": "",
+                        color: "green",
+                        "checked-icon": "check",
+                        "unchecked-icon": "clear",
+                        val: "rut",
+                        label: "Rut"
+                      },
+                      model: {
+                        value: _vm.visibleColumns,
+                        callback: function($$v) {
+                          _vm.visibleColumns = $$v
+                        },
+                        expression: "visibleColumns"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("q-toggle", {
+                      attrs: {
+                        "left-label": "",
+                        color: "green",
+                        "checked-icon": "check",
+                        "unchecked-icon": "clear",
+                        val: "nombres",
+                        label: "Nombres"
+                      },
+                      model: {
+                        value: _vm.visibleColumns,
+                        callback: function($$v) {
+                          _vm.visibleColumns = $$v
+                        },
+                        expression: "visibleColumns"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("q-toggle", {
+                      attrs: {
+                        "left-label": "",
+                        color: "green",
+                        "checked-icon": "check",
+                        "unchecked-icon": "clear",
+                        val: "apellido_paterno",
+                        label: "Apellido Paterno"
+                      },
+                      model: {
+                        value: _vm.visibleColumns,
+                        callback: function($$v) {
+                          _vm.visibleColumns = $$v
+                        },
+                        expression: "visibleColumns"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("q-toggle", {
+                      attrs: {
+                        "left-label": "",
+                        color: "green",
+                        "checked-icon": "check",
+                        "unchecked-icon": "clear",
+                        val: "apellido_materno",
+                        label: "Apellido Materno"
+                      },
+                      model: {
+                        value: _vm.visibleColumns,
+                        callback: function($$v) {
+                          _vm.visibleColumns = $$v
+                        },
+                        expression: "visibleColumns"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("q-btn", {
+                      staticClass: "q-ml-md",
+                      attrs: {
+                        flat: "",
+                        round: "",
+                        dense: "",
+                        icon: props.inFullscreen
+                          ? "fullscreen_exit"
+                          : "fullscreen"
+                      },
+                      on: { click: props.toggleFullscreen }
+                    }),
+                    _vm._v(" "),
+                    _c("label", [_vm._v("Pantalla Completa")]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row justify-end" }, [
+                      _c(
+                        "div",
+                        { staticClass: "col-12 col-md-4" },
+                        [
+                          _c("q-input", {
+                            staticClass: "q-ml-md",
+                            attrs: {
+                              dark: "",
+                              borderless: "",
+                              "input-class": "text-right",
+                              placeholder: "Buscar"
+                            },
+                            scopedSlots: _vm._u(
+                              [
+                                {
+                                  key: "append",
+                                  fn: function() {
+                                    return [
+                                      _vm.filter === ""
+                                        ? _c("q-icon", {
+                                            attrs: { name: "search" }
+                                          })
+                                        : _c("q-icon", {
+                                            staticClass: "cursor-pointer",
+                                            attrs: { name: "clear" },
+                                            on: {
+                                              click: function($event) {
+                                                _vm.filter = ""
+                                              }
+                                            }
+                                          })
+                                    ]
+                                  },
+                                  proxy: true
+                                }
+                              ],
+                              null,
+                              true
+                            ),
+                            model: {
+                              value: _vm.filter,
+                              callback: function($$v) {
+                                _vm.filter = $$v
+                              },
+                              expression: "filter"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    ])
+                  ],
+                  1
+                )
               ]
             }
-          },
-          {
-            key: "top-right",
-            fn: function() {
-              return [
-                _c("q-input", {
-                  attrs: {
-                    borderless: "",
-                    dense: "",
-                    debounce: "300",
-                    placeholder: "Buscar"
-                  },
-                  scopedSlots: _vm._u([
-                    {
-                      key: "append",
-                      fn: function() {
-                        return [_c("q-icon", { attrs: { name: "search" } })]
-                      },
-                      proxy: true
-                    }
-                  ]),
-                  model: {
-                    value: _vm.filter,
-                    callback: function($$v) {
-                      _vm.filter = $$v
-                    },
-                    expression: "filter"
-                  }
-                })
-              ]
-            },
-            proxy: true
           },
           {
             key: "body",
@@ -80171,9 +79516,16 @@ var render = function() {
                   "q-tr",
                   { attrs: { props: props } },
                   [
-                    _c("q-td", { key: "id", attrs: { props: props } }, [
-                      _vm._v(_vm._s(props.row.id))
-                    ]),
+                    _c(
+                      "q-td",
+                      { key: "id", attrs: { props: props } },
+                      [
+                        _c("q-badge", { attrs: { color: "green" } }, [
+                          _vm._v(_vm._s(props.row.id))
+                        ])
+                      ],
+                      1
+                    ),
                     _vm._v(" "),
                     _c(
                       "q-td",
@@ -80895,8 +80247,104 @@ var render = function() {
                       { key: "opcion", attrs: { props: props } },
                       [
                         _c("q-btn", {
-                          attrs: { color: "red", label: "Eliminar" }
-                        })
+                          attrs: { label: "Eliminar", color: "red" },
+                          on: {
+                            click: function($event) {
+                              _vm.confirm = true
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "q-dialog",
+                          {
+                            attrs: { persistent: "" },
+                            model: {
+                              value: _vm.confirm,
+                              callback: function($$v) {
+                                _vm.confirm = $$v
+                              },
+                              expression: "confirm"
+                            }
+                          },
+                          [
+                            _c(
+                              "q-card",
+                              [
+                                _c(
+                                  "q-card-section",
+                                  { staticClass: "row items-center" },
+                                  [
+                                    _c("q-avatar", {
+                                      attrs: {
+                                        icon: "delete",
+                                        color: "primary",
+                                        "text-color": "white"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("span", { staticClass: "q-ml-sm" }, [
+                                      _vm._v(
+                                        "¿Esta seguro que desea eliminar al cliente, " +
+                                          _vm._s(props.row.nombres) +
+                                          " " +
+                                          _vm._s(props.row.apellido_paterno) +
+                                          " " +
+                                          _vm._s(props.row.apellido_materno) +
+                                          "?"
+                                      )
+                                    ])
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "q-card-actions",
+                                  { attrs: { align: "right" } },
+                                  [
+                                    _c("q-btn", {
+                                      directives: [
+                                        {
+                                          name: "close-popup",
+                                          rawName: "v-close-popup"
+                                        }
+                                      ],
+                                      attrs: {
+                                        flat: "",
+                                        label: "Cancel",
+                                        color: "red"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("q-btn", {
+                                      directives: [
+                                        {
+                                          name: "close-popup",
+                                          rawName: "v-close-popup"
+                                        }
+                                      ],
+                                      attrs: {
+                                        flat: "",
+                                        label: "Aceptar",
+                                        color: "green"
+                                      },
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.eliminar_cliente_estado(
+                                            props.row.id
+                                          )
+                                        }
+                                      }
+                                    })
+                                  ],
+                                  1
+                                )
+                              ],
+                              1
+                            )
+                          ],
+                          1
+                        )
                       ],
                       1
                     )
@@ -80909,61 +80357,54 @@ var render = function() {
         ])
       }),
       _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "q-pa-md q-gutter-sm" },
-        _vm._l(_vm.errores, function(e) {
-          return _c(
-            "ul",
-            { key: e[0] },
-            [
-              _c(
-                "q-banner",
-                {
-                  staticClass: "bg-orange text-white",
-                  attrs: { "inline-actions": "", rounded: "" },
-                  scopedSlots: _vm._u(
-                    [
-                      {
-                        key: "action",
-                        fn: function() {
-                          return [
-                            _c("q-btn", {
-                              attrs: {
-                                flat: "",
-                                color: "white",
-                                label: "Advertencia!",
-                                disabled: ""
-                              }
-                            })
-                          ]
-                        },
-                        proxy: true
-                      }
-                    ],
-                    null,
-                    true
-                  )
-                },
-                [
-                  _c("li", [
-                    _c("i", { staticClass: "material-icons md-24" }, [
-                      _vm._v("info")
-                    ]),
-                    _vm._v(
-                      "\n                " + _vm._s(e[0]) + "\n              "
-                    )
-                  ])
-                ]
-              )
-            ],
-            1
-          )
-        }),
-        0
-      )
+      _vm._l(_vm.errores, function(e) {
+        return _c(
+          "ul",
+          { key: e[0] },
+          [
+            _c(
+              "q-banner",
+              {
+                staticClass: "bg-orange text-white",
+                attrs: { "inline-actions": "" },
+                scopedSlots: _vm._u(
+                  [
+                    {
+                      key: "action",
+                      fn: function() {
+                        return [
+                          _c("q-btn", {
+                            attrs: {
+                              flat: "",
+                              color: "white",
+                              label: "Advertencia!",
+                              disabled: ""
+                            }
+                          })
+                        ]
+                      },
+                      proxy: true
+                    }
+                  ],
+                  null,
+                  true
+                )
+              },
+              [
+                _c("li", [
+                  _c("i", { staticClass: "material-icons md-24" }, [
+                    _vm._v("info")
+                  ]),
+                  _vm._v("\n            " + _vm._s(e[0]) + "\n          ")
+                ])
+              ]
+            )
+          ],
+          1
+        )
+      })
     ],
-    1
+    2
   )
 }
 var staticRenderFns = []
@@ -82017,21 +81458,13 @@ var render = function() {
     _c("div", { staticClass: "row justify-center" }, [
       _c(
         "div",
-<<<<<<< HEAD
-        { staticClass: "col-8" },
-=======
         { staticClass: "col-10" },
->>>>>>> alejandro
         [
           _c(
             "q-card",
             { staticClass: "my-card" },
             [
               _c("q-card-section", { staticClass: "bg-primary text-white" }, [
-<<<<<<< HEAD
-                _c("div", { staticClass: "text-h6" }, [
-                  _vm._v("Cuentas/listar cuenta")
-=======
                 _c("div", { staticClass: "row" }, [
                   _c("div", { staticClass: "col-12 col-md-9" }, [
                     _c("div", { staticClass: "text-h6" }, [
@@ -82108,119 +81541,11 @@ var render = function() {
                     ],
                     1
                   )
->>>>>>> alejandro
                 ])
               ]),
               _vm._v(" "),
               _c("q-separator"),
               _vm._v(" "),
-<<<<<<< HEAD
-              _c("div", { staticClass: "col-6" }, [
-                _c(
-                  "div",
-                  { staticClass: "q-pa-md" },
-                  [
-                    [
-                      _c(
-                        "div",
-                        { staticClass: "q-pa-md" },
-                        [
-                          _c("q-table", {
-                            attrs: {
-                              title: "Listado",
-                              data: _vm.data,
-                              columns: _vm.columns,
-                              "row-key": "id",
-                              selection: "single",
-                              selected: _vm.selected,
-                              "rows-per-page-label": "Cantidad:",
-                              "no-data-label": "Sin datos",
-                              "no-results-label": "sin resultados",
-                              pagination: _vm.pagination,
-                              filter: _vm.filter,
-                              loading: _vm.loading,
-                              "binary-state-sort": "",
-                              "no-results-label": "sin datos niggis"
-                            },
-                            on: {
-                              "update:selected": function($event) {
-                                _vm.selected = $event
-                              },
-                              "update:pagination": function($event) {
-                                _vm.pagination = $event
-                              },
-                              request: _vm.onRequest
-                            },
-                            scopedSlots: _vm._u([
-                              {
-                                key: "top-right",
-                                fn: function() {
-                                  return [
-                                    _c("q-input", {
-                                      attrs: {
-                                        borderless: "",
-                                        dense: "",
-                                        debounce: "300",
-                                        placeholder: "Buscar por nombre.."
-                                      },
-                                      scopedSlots: _vm._u([
-                                        {
-                                          key: "append",
-                                          fn: function() {
-                                            return [
-                                              _c("q-icon", {
-                                                attrs: { name: "search" }
-                                              })
-                                            ]
-                                          },
-                                          proxy: true
-                                        }
-                                      ]),
-                                      model: {
-                                        value: _vm.filter,
-                                        callback: function($$v) {
-                                          _vm.filter = $$v
-                                        },
-                                        expression: "filter"
-                                      }
-                                    })
-                                  ]
-                                },
-                                proxy: true
-                              }
-                            ])
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "q-list",
-                            _vm._l(_vm.selected, function(s) {
-                              return _c("q-item", { key: s.id }, [
-                                _vm._v(
-                                  "\n\t\t\t\t\t\t      " +
-                                    _vm._s(s.name) +
-                                    "\n\t\t\t\t\t\t    "
-                                )
-                              ])
-                            }),
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "q-mt-md" }, [
-                            _vm._v(
-                              "\n\t\t\t\t\t\t      Selected: " +
-                                _vm._s(JSON.stringify(_vm.selected)) +
-                                "\n\t\t\t\t\t\t    "
-                            )
-                          ])
-                        ],
-                        1
-                      )
-                    ]
-                  ],
-                  2
-                )
-              ])
-=======
               _c(
                 "div",
                 { staticClass: "col-6" },
@@ -82657,7 +81982,6 @@ var render = function() {
                 ],
                 2
               )
->>>>>>> alejandro
             ],
             1
           )
@@ -100457,13 +99781,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
 __webpack_require__(/*! C:\Users\david\Desktop\Proyectos NeoFox\neofox_contable\resources\js\app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! C:\Users\david\Desktop\Proyectos NeoFox\neofox_contable\resources\sass\app.scss */"./resources/sass/app.scss");
-=======
-__webpack_require__(/*! /Users/alejandroesteban/Desktop/proyectos2019/template_vue_laravel_2019/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/alejandroesteban/Desktop/proyectos2019/template_vue_laravel_2019/resources/sass/app.scss */"./resources/sass/app.scss");
->>>>>>> alejandro
 
 
 /***/ })

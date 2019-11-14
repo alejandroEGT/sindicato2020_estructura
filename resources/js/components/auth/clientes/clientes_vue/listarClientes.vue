@@ -1,71 +1,125 @@
 
 <template>
   <div class="q-pa-md">
-    <div class="row justify-between">
-      <!-- diseño de casillas -->
-      <div class="col-12 col-md-8">
-        <q-option-group
-          v-model="separator"
-          inline
-          class="q-mb-md"
-          :options="[
-                { label: 'Casilla', value: 'cell' },
-                { label: 'Horizontal', value: 'horizontal' },
-                { label: 'Vertical', value: 'vertical' },
-                { label: 'Ninguno', value: 'none' },
-              ]"
-        />
-      </div>
 
-      <!-- boton refrescar -->
-      <q-btn label="Refrescar" color="primary" @click="onRefresh" class="q-mb-md" />
+    <template>
+          <q-banner inline-actions class="bg-grey-3">
+            <template v-slot:avatar>
+              <q-icon name="account_circle" color="primary" />
+            </template>
+            LISTADO DE CLIENTES
+            <template v-slot:action>
+              <!-- boton refrescar -->
+              <q-btn
+                flat
+                label="Refrescar"
+                icon-right="refresh"
+                color="primary"
+                @click="onRefresh()"
+                class="q-mb-md"
+              />
+  
+              <!-- boton Formulario -->
+              <q-btn
+                flat
+                label="Formulario"
+                icon-right="person_add"
+                color="green"
+                @click="url_registro()"
+                class="q-mb-md"
+              />
+  
+              <!-- boton volver -->
+              <q-btn
+                flat
+                label="Volver"
+                icon-right="settings_backup_restore"
+                color="red"
+                @click="url_volver2()"
+                class="q-mb-md"
+              />
+            </template>
+          </q-banner>
+    </template>
 
-      <!-- boton Formulario -->
-      <q-btn
-        label="Formulario"
-        icon-right="person_add"
-        color="green"
-        @click="url_registro()"
-        class="q-mb-md"
-      />
-
-      <!-- boton volver -->
-      <q-btn
-        label="Volver"
-        icon-right="settings_backup_restore"
-        color="red"
-        @click="url_volver2()"
-        class="q-mb-md"
-      />
-    </div>
+    <div class="q-pa-sm"></div>
 
     <!-- propiedades de la tabla -->
     <q-table
       title="Listado de Clientes"
-      :data="listarClientes"
-      :columns="columns"
-      row-key="name"
-      :separator="separator"
-      rows-per-page-label="Cantidad:"
-      :loading="loading"
-      loading-label="Cargando"
-      :filter="filter"
       no-data-label="Aun no hay datos para mostrar."
       no-results-label="No se han encontrado resultados."
+      rows-per-page-label="Cantidad:"
+      loading-label="Cargando"
+      row-key="name"
+      :data="listarClientes"
+      :columns="clientes"
+      :separator="separator"
+      :loading="loading"
+      :filter="filter"
       :visible-columns="visibleColumns"
       :rows-per-page-options="[5,10,15,30,50,100,0]"
+      class="my-sticky-header-table"
     >
       <!-- funciones especiales -->
-      <template v-slot:top-left="props">
+      <template v-slot:top="props">
         <q-space />
         <!-- filtro de datos -->
-        <div v-if="$q.screen.gt.xs" class="col">
-          <q-toggle v-model="visibleColumns" val="id" label="ID" />
-          <q-toggle v-model="visibleColumns" val="fecha_nacimiento" label="Fecha de Nacimiento" />
-          <q-toggle v-model="visibleColumns" val="rut" label="Rut" />
-          <q-toggle v-model="visibleColumns" val="nombres" label="Nombres" />
-          <q-toggle v-model="visibleColumns" val="apellido_paterno" label="Apellido Paterno" />
-          <q-toggle v-model="visibleColumns" val="apellido_materno" label="Apellido Materno" />
+        <div class="col">
+          <q-toggle
+            v-model="visibleColumns"
+            left-label
+            color="green"
+            checked-icon="check"
+            unchecked-icon="clear"
+            val="id"
+            label="ID"
+          />
+          <q-toggle
+            v-model="visibleColumns"
+            left-label
+            color="green"
+            checked-icon="check"
+            unchecked-icon="clear"
+            val="fecha_nacimiento"
+            label="Fecha de Nacimiento"
+          />
+          <q-toggle
+            v-model="visibleColumns"
+            left-label
+            color="green"
+            checked-icon="check"
+            unchecked-icon="clear"
+            val="rut"
+            label="Rut"
+          />
+          <q-toggle
+            v-model="visibleColumns"
+            left-label
+            color="green"
+            checked-icon="check"
+            unchecked-icon="clear"
+            val="nombres"
+            label="Nombres"
+          />
+          <q-toggle
+            v-model="visibleColumns"
+            left-label
+            color="green"
+            checked-icon="check"
+            unchecked-icon="clear"
+            val="apellido_paterno"
+            label="Apellido Paterno"
+          />
+          <q-toggle
+            v-model="visibleColumns"
+            left-label
+            color="green"
+            checked-icon="check"
+            unchecked-icon="clear"
+            val="apellido_materno"
+            label="Apellido Materno"
+          />
           <!-- full screen -->
           <q-btn
             flat
@@ -75,38 +129,33 @@
             @click="props.toggleFullscreen"
             class="q-ml-md"
           />
+          <label>Pantalla Completa</label>
+
+          <div class="row justify-end">
+            <div class="col-12 col-md-4">
+              <q-input
+                dark
+                borderless
+                input-class="text-right"
+                v-model="filter"
+                placeholder="Buscar"
+                class="q-ml-md"
+              >
+                <template v-slot:append>
+                  <q-icon v-if="filter === ''" name="search" />
+                  <q-icon v-else name="clear" class="cursor-pointer" @click="filter = ''" />
+                </template>
+              </q-input>
+            </div>
+          </div>
         </div>
-
-        <!-- columnas visibles -->
-        <q-select
-          v-else
-          v-model="visibleColumns"
-          multiple
-          borderless
-          dense
-          options-dense
-          :display-value="$q.lang.table.columns"
-          emit-value
-          map-options
-          :options="columns"
-          option-value="name"
-          style="min-width: 150px"
-        />
       </template>
 
-      <!-- buscador -->
-      <template v-slot:top-right>
-        <q-input borderless dense debounce="300" v-model="filter" placeholder="Buscar">
-          <template v-slot:append>
-            <q-icon name="search"></q-icon>
-          </template>
-        </q-input>
-      </template>
-
-      <!-- contenido tabla -->
       <template v-slot:body="props">
         <q-tr :props="props">
-          <q-td key="id" :props="props">{{props.row.id}}</q-td>
+          <q-td key="id" :props="props">
+            <q-badge color="green">{{props.row.id}}</q-badge>
+          </q-td>
 
           <q-td key="fecha_nacimiento" :props="props">
             {{props.row.fecha_nacimiento}}
@@ -298,28 +347,52 @@
           </q-td>
 
           <q-td key="opcion" :props="props">
-            <q-btn color="red" label="Eliminar" />
+            <q-btn label="Eliminar" color="red" @click="confirm = true" />
+            <q-dialog v-model="confirm" persistent>
+              <q-card>
+                <q-card-section class="row items-center">
+                  <q-avatar icon="delete" color="primary" text-color="white" />
+                  <span
+                    class="q-ml-sm"
+                  >¿Esta seguro que desea eliminar al cliente, {{props.row.nombres}} {{props.row.apellido_paterno}} {{props.row.apellido_materno}}?</span>
+                </q-card-section>
+
+                <q-card-actions align="right">
+                  <q-btn flat label="Cancel" color="red" v-close-popup />
+                  <q-btn
+                    flat
+                    label="Aceptar"
+                    color="green"
+                    v-close-popup
+                    @click="eliminar_cliente_estado(props.row.id)"
+                  />
+                </q-card-actions>
+              </q-card>
+            </q-dialog>
           </q-td>
         </q-tr>
       </template>
     </q-table>
-    
-      <!-- alertas -->
-          <div class="q-pa-md q-gutter-sm">
-            <ul v-for="e in errores" :key="e[0]">
-              <q-banner inline-actions rounded class="bg-orange text-white">
-                <li>
-                  <i class="material-icons md-24">info</i>
-                  {{e[0]}}
-                </li>
-                <template v-slot:action>
-                  <q-btn flat color="white" label="Advertencia!" disabled />
-                </template>
-              </q-banner>
-            </ul>
-          </div>
+
+    <!-- alertas -->
+      <template>
+        <ul v-for="e in errores" :key="e[0]">
+          <q-banner inline-actions class="bg-orange text-white">
+            <li>
+              <i class="material-icons md-24">info</i>
+              {{e[0]}}
+            </li>
+            <template v-slot:action>
+              <q-btn flat color="white" label="Advertencia!" disabled />
+            </template>
+          </q-banner>
+        </ul>
+      </template>
+  
   </div>
 </template>
 
+
 <script src="../clientes_js/listarClientes.js"></script>
 <style src="../clientes_css/listarClientes.css"></style>
+
