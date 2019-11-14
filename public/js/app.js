@@ -10431,7 +10431,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\na:link\r\n{\r\ntext-decoration:none;\n}\r\n", ""]);
+exports.push([module.i, "\na:link\n{\ntext-decoration:none;\n}\n", ""]);
 
 // exports
 
@@ -10469,7 +10469,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".titulo{\r\ncolor: #ffffff;\r\nbackground: #bdc3c7;  /* fallback for old browsers */  /* Chrome 10-25, Safari 5.1-6 */\r\nbackground: -webkit-gradient(linear, left top, right top, from(#2c3e50), to(#bdc3c7));\r\nbackground: linear-gradient(to right, #2c3e50, #bdc3c7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */\n}", ""]);
+exports.push([module.i, ".titulo{\ncolor: #ffffff;\nbackground: #bdc3c7;  /* fallback for old browsers */  /* Chrome 10-25, Safari 5.1-6 */\nbackground: -webkit-gradient(linear, left top, right top, from(#2c3e50), to(#bdc3c7));\nbackground: linear-gradient(to right, #2c3e50, #bdc3c7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */\n}", ""]);
 
 // exports
 
@@ -97936,8 +97936,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\bryan\Desktop\Proyectos\neofox_contable\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\bryan\Desktop\Proyectos\neofox_contable\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/alejandroesteban/Desktop/proyectos2019/template_vue_laravel_2019/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/alejandroesteban/Desktop/proyectos2019/template_vue_laravel_2019/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
