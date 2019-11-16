@@ -5,6 +5,7 @@ import Auth from "../components/auth/auth.vue";
 import ModuloCuentas from "../components/auth/cuentas/cuentas_vue/modulo_cuentas.vue";
 import CrearCuenta from "../components/auth/cuentas/cuentas_vue/crear_cuenta.vue";
 import ListarCuenta from "../components/auth/cuentas/cuentas_vue/listar_cuenta.vue";
+import Formulario from "../components/auth/cuentas/cuentas_vue/formulario.vue"
 
 
 let routes_empa = [
@@ -21,6 +22,7 @@ let routes_empa = [
         //aqui las rutas con permiso de auth
         { path: '/crear-cuenta', component: CrearCuenta, name: 'CrearCuenta' },
         { path: '/listar-cuenta', component: ListarCuenta, name: 'ListarCuenta' },
+        { path: '/formulario-cuenta', component: Formulario, name: 'Formulario' },
     ]
 },
 {
