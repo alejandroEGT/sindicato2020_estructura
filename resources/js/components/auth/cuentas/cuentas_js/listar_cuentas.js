@@ -8,7 +8,7 @@ export default {
       arrastre:0,
       view_tabla:false,
       selected: [],
-      fixed:false,
+      fixed:[],
       modal_ic:false,
       cuenta_id: '',
       options:[],
@@ -21,7 +21,7 @@ export default {
         { name: 'descripcion', align: 'center',label: 'Descripcion', field: 'descripcion',  headerClasses: 'bg-primary text-white' },
         { name: 'ingreso', align: 'center',label: 'Ingreso', field: 'monto_ingreso', sortable: true ,  headerClasses: 'bg-primary text-white'},
         { name: 'egreso', align: 'center',label: 'Egreso', field: 'monto_egreso', sortable: true,  headerClasses: 'bg-primary text-white' },
-        // { name: 'view', label: 'View', field: 'view', sortable: true ,  headerClasses: 'bg-primary text-white'},
+        { name: 'view', label: 'View', field: 'view', sortable: true ,  headerClasses: 'bg-primary text-white'},
         
       ],
       mes:'',
@@ -87,7 +87,13 @@ export default {
       ],
       data_acumulado: [
         {name:'', valor:''},
-      ]
+      ],
+
+      //variables para editar
+      e_fecha: '',
+      e_descripcion: '',
+      e_ingreso :'',
+      e_egreso :''
     }
   },
   methods: {
@@ -122,13 +128,13 @@ export default {
           this.egresos = sumar_e;
           this.data_resumen = [
             {
-              name: 'Ingreso', valor: sumar_i
+              name: 'Ingreso', valor: this.formatPrice(sumar_i)
             },
             {
-              name: 'Egreso', valor: sumar_e
+              name: 'Egreso', valor: this.formatPrice(sumar_e)
             },
             {
-              name: 'Total mensual', valor: (sumar_i - sumar_e)
+              name: 'Total mensual', valor: this.formatPrice(sumar_i - sumar_e)
             }
           ];
 
@@ -182,6 +188,75 @@ export default {
     },
     ruta(ruta){
         this.$router.push(ruta);
+    },
+  
+    show(component) {
+      console.log(this.$refs);
+      this.$refs[''+component+''].show()
+    },
+
+    // following method is REQUIRED
+    // (don't change its name --> "hide")
+    hide() {
+      this.$refs.dialog.hide()
+    },
+
+    onDialogHide() {
+      // required to be emitted
+      // when QDialog emits "hide" event
+      this.$emit('hide')
+    },
+
+    formatPrice(value) {
+      let val = (value / 1).toFixed(0).replace('.', ',')
+      return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+    },
+
+    llenar_inputs(fecha, descripcion, monto_ingreso, monto_egreso){
+
+      this.e_fecha = fecha;
+      this.e_descripcion = descripcion;
+      this.e_ingreso = monto_ingreso;
+      this.e_egreso = monto_egreso;
+
+      this.file=null;
+
+    },
+
+    editar(id, nombre, valor) {
+      // console.log(id,
+      //   nombre,
+      //   valor);
+      const data = new FormData();
+      data.append('id', id);
+      data.append('nombre',nombre);
+      data.append('valor',valor);
+      axios.post('api/actualizar_cuenta_detalle', data).then((res) => {
+        if (res.data.estado == 'success') {
+          this.$q.notify({
+            color: "green-4",
+            textColor: "white",
+            icon: "cloud_done",
+            message: ""+res.data.mensaje+""
+          });
+        }
+      });
+    },
+    editar_archivo(id, nombre){
+      const data = new FormData();
+      data.append('id', id);
+      data.append('nombre', nombre);
+      data.append('valor', this.file);
+      axios.post('api/actualizar_cuenta_detalle_archivo', data).then((res) => {
+        if (res.data.estado == 'success') {
+          this.$q.notify({
+            color: "green-4",
+            textColor: "white",
+            icon: "cloud_done",
+            message: "" + res.data.mensaje + ""
+          });
+        }
+      });
     }
 
 
