@@ -4,9 +4,12 @@ import languages from 'quasar/lang/index.json'
 export default {
   data () {
     return {
+      monto_inicio:'',
+      arrastre:0,
       view_tabla:false,
       selected: [],
       fixed:false,
+      modal_ic:false,
       cuenta_id: '',
       options:[],
       columns: [
@@ -52,7 +55,7 @@ export default {
         {
           name: 'name',
           required: true,
-          label: 'Resumen',
+          label: 'Resumen del mes',
           align: 'left',
           field: row => row.name,
           format: val => `${val}`,
@@ -64,7 +67,27 @@ export default {
         { name: 'valor', align: 'center', label: 'Valor', field: 'valor', sortable: true },
         
       ],
-      data_resumen: [ ]
+      data_resumen: [ ],
+
+      columns_acumulado: [
+        {
+          name: 'name',
+          required: true,
+          label: 'Resumen acumulado',
+          align: 'left',
+          field: row => row.name,
+          format: val => `${val}`,
+          sortable: true,
+          classes: 'bg-grey-2 ellipsis',
+          style: 'max-width: 100px',
+          headerClasses: 'bg-primary text-white'
+        },
+        { name: 'valor', align: 'center', label: 'Valor', field: 'valor', sortable: true },
+
+      ],
+      data_acumulado: [
+        {name:'', valor:''},
+      ]
     }
   },
   methods: {
@@ -108,6 +131,8 @@ export default {
               name: 'Total mensual', valor: (sumar_i - sumar_e)
             }
           ];
+
+          this.traer_inicio_mensual(this.mes.id,this.anio.id,this.cuenta_id.id);
           this.view_tabla = true;
           // this[`loading${dos}`] = false
         } else {
@@ -117,107 +142,51 @@ export default {
       });
     },
 
-      limpiar(){
+    ingresar_inicio_mes(){
+        const data = {
+        'cuenta_id': this.cuenta_id.id,
+        'anio': this.anio.id,
+        'mes': this.mes.id,
+        'monto_inicio':  this.monto_inicio
+        };
+        axios.post('api/ini_cie_ingresar', data).then((res) => {
+          if (res.data.estado == 'success') {
+            this.$q.notify({
+              color: "green-4",
+              textColor: "white",
+              icon: "cloud_done",
+              message: "" + res.data.mensaje + ""
+            });
+          }else{
+            
+              this.$q.notify({
+                color: "red-4",
+                textColor: "white",
+                icon: "cloud_done",
+                message: ""+res.data.mensaje+""
+              });
+            
+          }
+        });
+    },
+    traer_inicio_mensual(mes, anio, cuenta){
+      axios.get('api/traer_inicio_mensual/'+mes+'/'+anio+'/'+cuenta).then((res) => {
+        this.monto_inicio = res.data.inicio_mensual;
+      
+        });
+    },
+
+    limpiar(){
         this.tabla = [];
         this.view_tabla = false;
-      },
-      ruta(ruta){
+    },
+    ruta(ruta){
         this.$router.push(ruta);
-      }
+    }
 
 
 
-    // onRequest (props) {
-
-    //    // this.data = [];
-    //   let { page, rowsPerPage, rowsNumber, sortBy, descending } = props.pagination
-    //   let filter = props.filter
-
-    //   this.loading = true
-
-    //   // emulate server
-    //   setTimeout(() => {
-    //     // update rowsCount with appropriate value
-    //     this.pagination.rowsNumber = this.getRowsNumberCount(filter)
-
-    //     // get all rows if "All" (0) is selected
-    //     let fetchCount = rowsPerPage === 0 ? rowsNumber : rowsPerPage
-
-    //     // calculate starting row of data
-    //     let startRow = (page - 1) * rowsPerPage
-
-    //     // fetch data from "server"
-    //     let returnedData = this.fetchFromServer(startRow, fetchCount, filter, sortBy, descending)
-
-    //     // clear out existing data and add new
-    //     this.data.splice(0, this.data.length, ...returnedData)
-
-    //     // don't forget to update local pagination object
-    //     this.pagination.page = page
-    //     this.pagination.rowsPerPage = rowsPerPage
-    //     this.pagination.sortBy = sortBy
-    //     this.pagination.descending = descending
-
-    //     // ...and turn of loading indicator
-    //     this.loading = false
-    //   }, 1500)
-    // },
-
-    // fetchFromServer (startRow, count, filter, sortBy, descending) {
-    //   let data = []
-
-    //   if (!filter) {
-    //     data = this.original.slice(startRow, startRow + count)
-    //   }
-    //   else {
-    //     let found = 0
-    //     for (let index = startRow, items = 0; index < this.original.length && items < count; ++index) {
-    //       let row = this.original[index]
-    //       // match filter?
-    //       if (!row['titulo'].includes(filter)) {
-    //         // get a different row, until one is found
-    //         continue
-    //       }
-    //       ++found
-    //       if (found >= startRow) {
-    //         data.push(row)
-    //         ++items
-    //       }
-    //     }
-    //   }
-
-    //   // handle sortBy
-    //   if (sortBy) {
-    //     data.sort((a, b) => {
-    //       let x = descending ? b : a
-    //       let y = descending ? a : b
-    //       if (sortBy === 'desc') {
-    //         // string sort
-    //         return x[sortBy] > y[sortBy] ? 1 : x[sortBy] < y[sortBy] ? -1 : 0
-    //       }
-    //       else {
-    //         // numeric sort
-    //         return parseFloat(x[sortBy]) - parseFloat(y[sortBy])
-    //       }
-    //     })
-    //   }
-
-    //   return data
-    // },
-
-    // // emulate 'SELECT count(*) FROM ...WHERE...'
-    // getRowsNumberCount (filter) {
-    //   if (!filter) {
-    //     return this.original.length
-    //   }
-    //   let count = 0
-    //   this.original.forEach((treat) => {
-    //     if (treat['titulo'].includes(filter)) {
-    //       ++count
-    //     }
-    //   })
-    //   return count
-    // }
+    
   },
   watch: {
     // lang (lang) {
