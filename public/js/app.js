@@ -3581,6 +3581,83 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      step: 1
+    };
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./resources/js/components/auth/clientes/clientes_js/listarClientes.js?vue&type=script&lang=js&":
 /*!************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./resources/js/components/auth/clientes/clientes_js/listarClientes.js?vue&type=script&lang=js& ***!
@@ -83213,7 +83290,134 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_vm._v("\n\tinicio modulo prestamos\n")])
+  return _c(
+    "div",
+    { staticClass: "q-pa-md" },
+    [
+      _c(
+        "q-stepper",
+        {
+          ref: "stepper",
+          attrs: { color: "primary", animated: "" },
+          scopedSlots: _vm._u([
+            {
+              key: "navigation",
+              fn: function() {
+                return [
+                  _c(
+                    "q-stepper-navigation",
+                    [
+                      _c("q-btn", {
+                        attrs: {
+                          color: "primary",
+                          label: _vm.step === 4 ? "Finish" : "Continue"
+                        },
+                        on: {
+                          click: function($event) {
+                            return _vm.$refs.stepper.next()
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.step > 1
+                        ? _c("q-btn", {
+                            staticClass: "q-ml-sm",
+                            attrs: {
+                              flat: "",
+                              color: "primary",
+                              label: "Back"
+                            },
+                            on: {
+                              click: function($event) {
+                                return _vm.$refs.stepper.previous()
+                              }
+                            }
+                          })
+                        : _vm._e()
+                    ],
+                    1
+                  )
+                ]
+              },
+              proxy: true
+            }
+          ]),
+          model: {
+            value: _vm.step,
+            callback: function($$v) {
+              _vm.step = $$v
+            },
+            expression: "step"
+          }
+        },
+        [
+          _c(
+            "q-step",
+            {
+              attrs: {
+                name: 1,
+                title: "Select campaign settings",
+                icon: "settings",
+                done: _vm.step > 1
+              }
+            },
+            [
+              _vm._v(
+                "\n        For each ad campaign that you create, you can control how much you're willing to\n        spend on clicks and conversions, which networks and geographical locations you want\n        your ads to show on, and more.\n      "
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "q-step",
+            {
+              attrs: {
+                name: 2,
+                title: "Create an ad group",
+                caption: "Optional",
+                icon: "create_new_folder",
+                done: _vm.step > 2
+              }
+            },
+            [
+              _vm._v(
+                "\n        An ad group contains one or more ads which target a shared set of keywords.\n      "
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "q-step",
+            {
+              attrs: {
+                name: 3,
+                title: "Ad template",
+                icon: "assignment",
+                disable: ""
+              }
+            },
+            [
+              _vm._v(
+                "\n        This step won't show up because it is disabled.\n      "
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "q-step",
+            { attrs: { name: 4, title: "Create an ad", icon: "add_comment" } },
+            [
+              _vm._v(
+                "\n        Try out different ad text to see what brings in the most customers, and learn how to\n        enhance your ads using features like ad extensions. If you run into any problems with\n        your ads, find out how to tell if they're running and how to resolve approval issues.\n      "
+              )
+            ]
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -99659,15 +99863,17 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modulo_prestamos_vue_vue_type_template_id_f62203b4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modulo_prestamos.vue?vue&type=template&id=f62203b4& */ "./resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.vue?vue&type=template&id=f62203b4&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _modulo_prestamos_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modulo_prestamos.vue?vue&type=script&lang=js& */ "./resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
-var script = {}
+
+
 
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
-  script,
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _modulo_prestamos_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _modulo_prestamos_vue_vue_type_template_id_f62203b4___WEBPACK_IMPORTED_MODULE_0__["render"],
   _modulo_prestamos_vue_vue_type_template_id_f62203b4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
@@ -99681,6 +99887,20 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 if (false) { var api; }
 component.options.__file = "resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************!*\
+  !*** ./resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_modulo_prestamos_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./modulo_prestamos.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_modulo_prestamos_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
