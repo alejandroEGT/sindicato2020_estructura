@@ -11,6 +11,9 @@
 	Route::get('listar_cuenta_detalle/{mes}/{anio}/{cuenta}','CuentadescripcionController@listar');
 	Route::post('ini_cie_ingresar','InicioCierreController@ingresar');
 	Route::get('traer_inicio_mensual/{mes}/{anio}/{cuenta}','InicioCierreController@traer_inicio_mensual');
+	Route::post('actualizar_cuenta_detalle','CuentadescripcionController@actualizar');
+    Route::post('actualizar_cuenta_detalle_archivo','CuentadescripcionController@actualizar_archivo');
+	 
 	
 
 	

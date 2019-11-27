@@ -91,7 +91,7 @@ class CuentadescripcionController extends Controller
     }
 
 
-      protected function guardarArchivo($archivo, $ruta)
+    protected function guardarArchivo($archivo, $ruta)
     {
     	try{
 	        $filenameext = $archivo->getClientOriginalName();
@@ -110,5 +110,81 @@ class CuentadescripcionController extends Controller
 	    }catch (\Throwable $t) {
     			return ['estado' =>  'failed', 'mensaje' => 'error al guardar el archivo, posiblemente este dañado o no exista.'];
 		}
-    }
+	}
+	
+	public function actualizar(Request $r)
+	{
+		
+		$cd = Cuentadescripcion::find($r->id);
+
+
+		switch ($r->nombre) {
+		
+			case 'fecha':
+					$cd->fecha = $r->valor;
+					if ($cd->save()) {
+						return ['estado' => 'success', 'mensaje'=>'Fecha actualizada'];
+					}
+					return ['estado'=>'failed', 'mensaje'=>'Error al actualizar'];
+			break;
+			case 'archivo':
+				# code...
+			break;
+			case 'descripcion':
+				$cd->descripcion = $r->valor;
+					if ($cd->save()) {
+						return ['estado' => 'success', 'mensaje'=>'Descripcion actualizada'];
+					}
+					return ['estado'=>'failed', 'mensaje'=>'Error al actualizar'];
+			break;
+			case 'ingreso':
+				$cd->monto_ingreso = $r->valor;
+					if ($cd->save()) {
+						return ['estado' => 'success', 'mensaje'=>'Monto ingreso actualizado'];
+					}
+					return ['estado'=>'failed', 'mensaje'=>'Error al actualizar'];
+			break;
+			case 'egreso':
+				$cd->monto_egreso = $r->valor;
+					if ($cd->save()) {
+						return ['estado' => 'success', 'mensaje'=>'Monto egreso actualizado'];
+					}
+					return ['estado'=>'failed', 'mensaje'=>'Error al actualizar'];
+			break;
+			case 'codigo':
+				# code...
+			break;
+			
+			default:
+				# code...
+				break;
+		}
+	}
+
+	public function actualizar_archivo(Request $r){
+
+		$cd = Cuentadescripcion::find($r->id);
+
+		if ($cd) {
+			$archivo = $this->guardarArchivo($r->valor,'archivos_cuenta/');
+
+			if ($archivo['estado'] == 'success') {
+				if ($cd->archivo == '--') { // si no hay archivo
+					$cd->archivo = 'storage/'.$archivo['archivo'];
+					if ($cd->save()) {
+						return ['estado'=>'success','mensaje'=>'Archivo subido'];
+					}
+				}else{
+					$ruta = substr($cd->archivo, 8);
+					$borrar = Storage::delete($ruta);
+					$cd->archivo = 'storage/'.$archivo['archivo'];
+					if ($cd->save()) {
+					
+						return ['estado'=>'success','mensaje'=>'Archivo subido'];
+					}
+				}
+			}
+		}
+
+	}
 }

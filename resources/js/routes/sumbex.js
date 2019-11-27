@@ -4,6 +4,7 @@ import NotFound from '../components/404.vue'
 
 import Auth from "../components/auth/auth.vue";
 import ModuloProveedores from "../components/auth/proveedores/proveedores_vue/modulo_proveedor.vue";
+import RegistroProveedor from "../components/auth/proveedores/proveedores_vue/registro_proveedores.vue";
 
 let routes_sumbex = [
 
@@ -16,6 +17,7 @@ let routes_sumbex = [
     meta: { auth: true },
     children: [
         { path: '/modulo-proveedor', component: ModuloProveedores, name: 'ModuloProveedores' },
+        { path: '/ingreso_proveedor', component: RegistroProveedor, name: 'RegistroProveedor' },
         //aqui las rutas con permiso de auth
     ]
 },
