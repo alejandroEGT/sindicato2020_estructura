@@ -82,7 +82,7 @@ class CuentadescripcionController extends Controller
 							where 
 							    extract('month' from CAST(cd.fecha AS DATE)) = $mes and
 							    extract('year' from CAST(cd.fecha AS DATE)) = $anio and
-							    cd.cuenta_id = $cuenta");
+							    cd.cuenta_id = $cuenta and cd.activo = 'S'");
     	if (count($list) > 0) {
     		return ['estado'=>'success', 'lista' => $list];
     	}else{
@@ -186,5 +186,21 @@ class CuentadescripcionController extends Controller
 			}
 		}
 
+	}
+
+	public function eliminar_cuenta_detalle($id)
+	{
+		$cd = Cuentadescripcion::find($id);
+		$cd->activo = 'N'; // borrado logico
+		if($cd->save()){
+			return [
+				'estado'=>'success',
+				'mensaje'=>'Item borrado con exito'
+			];
+		}
+		return [
+				'estado'=>'failed',
+				'mensaje'=>'Error al borrar'
+			];
 	}
 }

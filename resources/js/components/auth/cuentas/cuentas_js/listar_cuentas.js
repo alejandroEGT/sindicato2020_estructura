@@ -163,6 +163,8 @@ export default {
               icon: "cloud_done",
               message: "" + res.data.mensaje + ""
             });
+
+            this.listar();
           }else{
             
               this.$q.notify({
@@ -197,9 +199,13 @@ export default {
 
     // following method is REQUIRED
     // (don't change its name --> "hide")
-    hide() {
-      this.$refs.dialog.hide()
+    hide(component){
+      this.$refs['' + component + ''].hide()
     },
+
+    // hide() {
+    //   this.$refs.dialog.hide()
+    // },
 
     onDialogHide() {
       // required to be emitted
@@ -256,6 +262,22 @@ export default {
             message: "" + res.data.mensaje + ""
           });
         }
+      });
+    },
+
+    eliminar(id, component){
+      axios.get('api/eliminar_cuenta_detalle/'+id).then((res)=>{
+          if(res.data.estado=='success'){
+            this.$q.notify({
+              color: "green-4",
+              textColor: "white",
+              icon: "cloud_done",
+              message: "" + res.data.mensaje + ""
+            });
+            this.hide(component);
+            this.listar();
+            
+          }
       });
     }
 

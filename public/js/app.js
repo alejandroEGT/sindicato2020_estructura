@@ -3309,6 +3309,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 // import { WebCam } from 'vue-cam-vision'
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -3369,6 +3391,12 @@ __webpack_require__.r(__webpack_exports__);
     },
     url_listar_cuenta: function url_listar_cuenta() {
       this.$router.push('/listar-cuenta');
+    },
+    url_modulo_Liquidaciones: function url_modulo_Liquidaciones() {
+      this.$router.push('/modulo-liquidaciones');
+    },
+    url_modulo_reunion: function url_modulo_reunion() {
+      this.$router.push('/modulo-reunion');
     } // async onCapture () {
     //   this.img = await this.$refs.webcam.capture()
     // },
@@ -4149,6 +4177,8 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     guardar: function guardar() {
+      var _this3 = this;
+
       var data = new FormData();
       data.append('cuenta_id', this.cuenta_id.id);
       data.append('fecha', this.fecha);
@@ -4160,10 +4190,27 @@ __webpack_require__.r(__webpack_exports__);
       data.append('monto', this.monto);
       console.log(data);
       axios.post('api/insertar_cuenta_detalle', data).then(function (res) {
-        if (res.data.estado == 'success') {// this.subcuentas = res.data.lista;
-          // this[`loading2`] = false
+        if (res.data.estado == 'success') {
+          _this3.$q.notify({
+            color: "green-4",
+            textColor: "white",
+            icon: "cloud_done",
+            message: "" + res.data.mensaje + ""
+          });
+
+          _this3.limpiar_mdelos();
         }
       });
+    },
+    limpiar_mdelos: function limpiar_mdelos() {
+      this.cuenta_id = null;
+      this.fecha = '';
+      this.codigo = '';
+      this.descripcion = '';
+      this.subcuenta = '';
+      this.tipo_monto_id = '';
+      this.file = null;
+      this.monto = '';
     }
   }
 });
@@ -4424,6 +4471,8 @@ var quasar_lang_index_json__WEBPACK_IMPORTED_MODULE_0___namespace = /*#__PURE__*
             icon: "cloud_done",
             message: "" + res.data.mensaje + ""
           });
+
+          _this3.listar();
         } else {
           _this3.$q.notify({
             color: "red-4",
@@ -4454,9 +4503,12 @@ var quasar_lang_index_json__WEBPACK_IMPORTED_MODULE_0___namespace = /*#__PURE__*
     },
     // following method is REQUIRED
     // (don't change its name --> "hide")
-    hide: function hide() {
-      this.$refs.dialog.hide();
+    hide: function hide(component) {
+      this.$refs['' + component + ''].hide();
     },
+    // hide() {
+    //   this.$refs.dialog.hide()
+    // },
     onDialogHide: function onDialogHide() {
       // required to be emitted
       // when QDialog emits "hide" event
@@ -4509,6 +4561,24 @@ var quasar_lang_index_json__WEBPACK_IMPORTED_MODULE_0___namespace = /*#__PURE__*
             icon: "cloud_done",
             message: "" + res.data.mensaje + ""
           });
+        }
+      });
+    },
+    eliminar: function eliminar(id, component) {
+      var _this7 = this;
+
+      axios.get('api/eliminar_cuenta_detalle/' + id).then(function (res) {
+        if (res.data.estado == 'success') {
+          _this7.$q.notify({
+            color: "green-4",
+            textColor: "white",
+            icon: "cloud_done",
+            message: "" + res.data.mensaje + ""
+          });
+
+          _this7.hide(component);
+
+          _this7.listar();
         }
       });
     }
@@ -81865,6 +81935,62 @@ var render = function() {
                                                                               1
                                                                             )
                                                                           ]
+                                                                        ),
+                                                                        _vm._v(
+                                                                          " "
+                                                                        ),
+                                                                        _c(
+                                                                          "hr"
+                                                                        ),
+                                                                        _vm._v(
+                                                                          " "
+                                                                        ),
+                                                                        _c(
+                                                                          "div",
+                                                                          {
+                                                                            staticClass:
+                                                                              "row q-col-gutter-md"
+                                                                          },
+                                                                          [
+                                                                            _c(
+                                                                              "div",
+                                                                              {
+                                                                                staticClass:
+                                                                                  "col-8"
+                                                                              },
+                                                                              [
+                                                                                _c(
+                                                                                  "q-btn",
+                                                                                  {
+                                                                                    attrs: {
+                                                                                      label:
+                                                                                        "Eliminar",
+                                                                                      icon:
+                                                                                        "delete",
+                                                                                      color:
+                                                                                        "red"
+                                                                                    },
+                                                                                    on: {
+                                                                                      click: function(
+                                                                                        $event
+                                                                                      ) {
+                                                                                        return _vm.eliminar(
+                                                                                          props
+                                                                                            .row
+                                                                                            .id,
+                                                                                          "edit" +
+                                                                                            props
+                                                                                              .row
+                                                                                              .__index
+                                                                                        )
+                                                                                      }
+                                                                                    }
+                                                                                  }
+                                                                                )
+                                                                              ],
+                                                                              1
+                                                                            )
+                                                                          ]
                                                                         )
                                                                       ]
                                                                     )
@@ -81893,7 +82019,7 @@ var render = function() {
                                   ],
                                   null,
                                   false,
-                                  2144636192
+                                  3165669489
                                 )
                               })
                             ],
@@ -82361,7 +82487,7 @@ var render = function() {
         _c("div", { staticClass: "row q-col-gutter-md" }, [
           _c(
             "div",
-            { staticClass: "col-12 col-md-3" },
+            { staticClass: "col-12 col-md-6" },
             [
               _c(
                 "q-card",
@@ -82405,6 +82531,16 @@ var render = function() {
                           on: { click: _vm.url_modulo_prestamos }
                         },
                         [_vm._v("Prestamos")]
+                      ),
+                      _c("br"),
+                      _vm._v(" "),
+                      _c(
+                        "q-btn",
+                        {
+                          attrs: { flat: "" },
+                          on: { click: _vm.url_modulo_Liquidaciones }
+                        },
+                        [_vm._v("Liquidaciones")]
                       )
                     ],
                     1
@@ -82418,7 +82554,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "div",
-            { staticClass: "col-12 col-md-3" },
+            { staticClass: "col-12 col-md-6" },
             [
               _c(
                 "q-card",
@@ -82472,10 +82608,86 @@ var render = function() {
             ],
             1
           )
+        ]),
+        _vm._v(" "),
+        _c("div", [
+          _c(
+            "div",
+            { staticClass: "col-12 col-md-6" },
+            [
+              _c(
+                "q-card",
+                { staticClass: "my-card" },
+                [
+                  _c(
+                    "q-img",
+                    {
+                      attrs: { src: "https://cdn.quasar.dev/img/parallax2.jpg" }
+                    },
+                    [
+                      _c("div", { staticClass: "absolute-bottom" }, [
+                        _c("div", { staticClass: "text-h6" }, [
+                          _vm._v("Gestión y Administración")
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "text-subtitle2" }, [
+                          _vm._v(
+                            "Registro de reuniones, monitoreo de tareas administrativas"
+                          )
+                        ])
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "q-card-actions",
+                    [
+                      _c(
+                        "q-btn",
+                        {
+                          attrs: { flat: "" },
+                          on: { click: _vm.url_modulo_reunion }
+                        },
+                        [_vm._v("Reuniones")]
+                      ),
+                      _c("br")
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
         ])
       ])
     ])
   ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/liquidaciones/liquidaciones_vue/modulo_liquidaciones.vue?vue&type=template&id=28ced3e2&":
+/*!************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/auth/liquidaciones/liquidaciones_vue/modulo_liquidaciones.vue?vue&type=template&id=28ced3e2& ***!
+  \************************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [_vm._v("\n    modulo-liquidaciones\n")])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -99587,6 +99799,59 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/auth/liquidaciones/liquidaciones_vue/modulo_liquidaciones.vue":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/components/auth/liquidaciones/liquidaciones_vue/modulo_liquidaciones.vue ***!
+  \***********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _modulo_liquidaciones_vue_vue_type_template_id_28ced3e2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modulo_liquidaciones.vue?vue&type=template&id=28ced3e2& */ "./resources/js/components/auth/liquidaciones/liquidaciones_vue/modulo_liquidaciones.vue?vue&type=template&id=28ced3e2&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+var script = {}
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
+  script,
+  _modulo_liquidaciones_vue_vue_type_template_id_28ced3e2___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _modulo_liquidaciones_vue_vue_type_template_id_28ced3e2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/auth/liquidaciones/liquidaciones_vue/modulo_liquidaciones.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/auth/liquidaciones/liquidaciones_vue/modulo_liquidaciones.vue?vue&type=template&id=28ced3e2&":
+/*!******************************************************************************************************************************!*\
+  !*** ./resources/js/components/auth/liquidaciones/liquidaciones_vue/modulo_liquidaciones.vue?vue&type=template&id=28ced3e2& ***!
+  \******************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_modulo_liquidaciones_vue_vue_type_template_id_28ced3e2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./modulo_liquidaciones.vue?vue&type=template&id=28ced3e2& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/liquidaciones/liquidaciones_vue/modulo_liquidaciones.vue?vue&type=template&id=28ced3e2&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_modulo_liquidaciones_vue_vue_type_template_id_28ced3e2___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_modulo_liquidaciones_vue_vue_type_template_id_28ced3e2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/auth/perfil.vue":
 /*!*************************************************!*\
   !*** ./resources/js/components/auth/perfil.vue ***!
@@ -99968,7 +100233,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_auth_cuentas_cuentas_vue_crear_cuenta_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/auth/cuentas/cuentas_vue/crear_cuenta.vue */ "./resources/js/components/auth/cuentas/cuentas_vue/crear_cuenta.vue");
 /* harmony import */ var _components_auth_cuentas_cuentas_vue_listar_cuenta_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/auth/cuentas/cuentas_vue/listar_cuenta.vue */ "./resources/js/components/auth/cuentas/cuentas_vue/listar_cuenta.vue");
 /* harmony import */ var _components_auth_cuentas_cuentas_vue_formulario_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/auth/cuentas/cuentas_vue/formulario.vue */ "./resources/js/components/auth/cuentas/cuentas_vue/formulario.vue");
+/* harmony import */ var _components_auth_liquidaciones_liquidaciones_vue_modulo_liquidaciones_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/auth/liquidaciones/liquidaciones_vue/modulo_liquidaciones.vue */ "./resources/js/components/auth/liquidaciones/liquidaciones_vue/modulo_liquidaciones.vue");
  //loged
+
 
 
 
@@ -99988,6 +100255,10 @@ var routes_empa = [{
     path: '/modulo-cuentas',
     component: _components_auth_cuentas_cuentas_vue_modulo_cuentas_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
     name: 'ModuloCuentas'
+  }, {
+    path: '/modulo-liquidaciones',
+    component: _components_auth_liquidaciones_liquidaciones_vue_modulo_liquidaciones_vue__WEBPACK_IMPORTED_MODULE_6__["default"],
+    name: 'Liquidaciones'
   }, //aqui las rutas con permiso de auth
   {
     path: '/crear-cuenta',
