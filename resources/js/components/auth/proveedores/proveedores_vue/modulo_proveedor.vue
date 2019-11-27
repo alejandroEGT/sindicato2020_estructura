@@ -24,6 +24,7 @@
 
                 <div class="col-12 col-md-2">
                   <q-btn
+                  @click="url_listar_proveedor"
                     color="primary"
                     class="block"
                     icon="create"
@@ -45,6 +46,10 @@ export default {
   methods: {
     url_registro_proveedor() {
       this.$router.push("/ingreso_proveedor");
+    },
+
+    url_listar_proveedor(){
+      this.$router.push("/listar_proveedor");
     }
   }
 };

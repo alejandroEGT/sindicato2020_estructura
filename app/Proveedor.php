@@ -23,14 +23,10 @@ class Proveedor extends Model
             $proveedor->correo = $request->correo;
             $proveedor->pagina_web = $request->pagina;
             $proveedor->giro = $request->giro;
-            $proveedor->flujo = $request->flujo;
             $proveedor->contacto = $request->contacto;
             $proveedor->procedencia = $request->procedencia;
-            $proveedor->declarante = $request->declarante;
             $proveedor->detraccion = $request->detraccion;
             $proveedor->rut = $limpiar;
-            $proveedor->fecha_vencimiento = $request->fecha_vencimiento;
-            $proveedor->agente_rete = $request->agente_rete;
             $proveedor->tipo_proveedor = $request->tipo;
             $proveedor->activo = 'S';
             if ($proveedor->save()) {
@@ -43,18 +39,81 @@ class Proveedor extends Model
         }
     }
 
-    protected function traerProcedencia(){
+    protected function traerProveedores()
+    {
+        $prov = DB::table('proveedores as p')
+            ->select([
+                'p.id',
+                'p.codigo',
+                'p.razon_social',
+                'p.direccion',
+                'p.ubicacion',
+                'p.telefono',
+                'p.correo',
+                'p.pagina_web as pagina',
+                'p.contacto',
+                'p.rut',
+                DB::raw("concat(p.detraccion, '%') as detraccion"),
+                'p.activo',
+                'g.descripcion as giro',
+                'pro.descripcion as procedencia',
+                't.descripcion as tipo'
+            ])
+            ->join('giros as g', 'g.id', 'p.giro')
+            ->join('procedencia as pro', 'pro.id', 'p.procedencia')
+            ->join('tipo as t', 't.id', 'p.tipo_proveedor')
+            ->get();
+
+        if (!$prov->isEmpty()) {
+            return ['estado' => 'success', 'proveedores' => $prov];
+        } else {
+            return ['estado' => 'failed', 'mensaje' => 'No se encuentran Proveedores ingresados.'];
+        }
+    }
+
+    protected function traerProcedencia()
+    {
         $proc = DB::table('procedencia')
-        ->select([
-            'id',
-            'descripcion'
-        ])
-        ->where([
-            'activo' => 'S'
-        ])
-        ->get();
+            ->select([
+                'id',
+                'descripcion'
+            ])
+            ->where([
+                'activo' => 'S'
+            ])
+            ->get();
 
         return $proc;
+    }
+
+    protected function traerGiros()
+    {
+        $giros = DB::table('giros')
+            ->select([
+                'id',
+                'descripcion'
+            ])
+            ->where([
+                'activo' => 'S'
+            ])
+            ->get();
+
+        return $giros;
+    }
+
+    protected function traerTipos()
+    {
+        $tipos = DB::table('tipo')
+            ->select([
+                'id',
+                'descripcion'
+            ])
+            ->where([
+                'activo' => 'S'
+            ])
+            ->get();
+
+        return $tipos;
     }
 
     protected function validarRut($rut)

@@ -5,6 +5,8 @@ import NotFound from '../components/404.vue'
 import Auth from "../components/auth/auth.vue";
 import ModuloProveedores from "../components/auth/proveedores/proveedores_vue/modulo_proveedor.vue";
 import RegistroProveedor from "../components/auth/proveedores/proveedores_vue/registro_proveedores.vue";
+import TablaProveedor from "../components/auth/proveedores/proveedores_vue/tabla_proveedor.vue";
+import ModuloReunion from "../components/auth/reuniones/reuniones_vue/modulo_reuniones.vue";
 
 let routes_sumbex = [
 
@@ -18,6 +20,8 @@ let routes_sumbex = [
     children: [
         { path: '/modulo-proveedor', component: ModuloProveedores, name: 'ModuloProveedores' },
         { path: '/ingreso_proveedor', component: RegistroProveedor, name: 'RegistroProveedor' },
+        { path: '/listar_proveedor', component: TablaProveedor, name: 'TablaProveedor' },
+        { path: '/modulo-reunion', component: ModuloReunion, name: 'ModuloReunion' },
         //aqui las rutas con permiso de auth
     ]
 },
