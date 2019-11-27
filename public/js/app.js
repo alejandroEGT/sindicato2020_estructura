@@ -4568,6 +4568,89 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./resources/js/components/auth/reuniones/reuniones_js/crearReunion.js?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./resources/js/components/auth/reuniones/reuniones_js/crearReunion.js?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      loading1: false,
+      loading2: false,
+      loading3: false,
+      progress: false,
+      showing: false,
+      fecha: null,
+      titulo: null,
+      cuerpo: null
+    };
+  },
+  methods: {
+    simulateProgress: function simulateProgress(number) {
+      var _this = this;
+
+      // we set loading state
+      this["loading".concat(number)] = true; // simulate a delay
+
+      setTimeout(function () {
+        // we're done, we reset loading state
+        _this["loading".concat(number)] = false;
+      }, 3000);
+    },
+    guardar: function guardar() {
+      var _this2 = this;
+
+      var data = {
+        'fecha': this.fecha,
+        'titulo': this.titulo,
+        'cuerpo': this.cuerpo
+      };
+      axios.post('api/ingresar_reunion', data).then(function (res) {
+        console.log(res);
+
+        if (res.data.estado = 'success') {
+          _this2.$q.notify({
+            color: "green-4",
+            textColor: "white",
+            icon: "cloud_done",
+            message: res.data.mensaje
+          });
+        }
+
+        _this2.fecha = '';
+        _this2.titulo = '';
+        _this2.cuerpo = '';
+      });
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./resources/js/components/auth/reuniones/reuniones_js/moduloReuniones.js?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./resources/js/components/auth/reuniones/reuniones_js/moduloReuniones.js?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  methods: {
+    crear_reunion: function crear_reunion() {
+      this.$router.push('/crear-reunion');
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/bootstrap/dist/js/bootstrap.js":
 /*!*****************************************************!*\
   !*** ./node_modules/bootstrap/dist/js/bootstrap.js ***!
@@ -81276,6 +81359,187 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/reuniones/reuniones_vue/crear_reunion.vue?vue&type=template&id=1dc4fb25&":
+/*!*********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/auth/reuniones/reuniones_vue/crear_reunion.vue?vue&type=template&id=1dc4fb25& ***!
+  \*********************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "q-pa-md" }, [
+    _c("div", { staticClass: "row justify-center" }, [
+      _c(
+        "div",
+        { staticClass: "col-12 col-md-8" },
+        [
+          _c(
+            "q-card",
+            { staticClass: "my-card" },
+            [
+              _c("q-card-section", { staticClass: "bg-primary text-white" }, [
+                _c("div", { staticClass: "text-h6 text-center" }, [
+                  _vm._v("Formulario Reunion")
+                ])
+              ]),
+              _vm._v(" "),
+              _c("q-separator"),
+              _vm._v(" "),
+              _c("q-card-section", [
+                _c(
+                  "div",
+                  { staticClass: "row justify-start q-col-gutter-md" },
+                  [
+                    _c(
+                      "div",
+                      { staticClass: "col-6 col-md-6" },
+                      [
+                        _c("q-input", {
+                          attrs: {
+                            outlined: "",
+                            label: "Ingrese fecha de inicio",
+                            "stack-label": "",
+                            type: "date"
+                          },
+                          model: {
+                            value: _vm.fecha,
+                            callback: function($$v) {
+                              _vm.fecha = $$v
+                            },
+                            expression: "fecha"
+                          }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "col-6 col-md-6" },
+                      [
+                        _c("q-input", {
+                          attrs: {
+                            outlined: "",
+                            label: "Ingrese titulo de la Reunion",
+                            "stack-label": "",
+                            type: "text"
+                          },
+                          model: {
+                            value: _vm.titulo,
+                            callback: function($$v) {
+                              _vm.titulo = $$v
+                            },
+                            expression: "titulo"
+                          }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "col-12 col-md-12" },
+                      [
+                        _c("q-input", {
+                          attrs: {
+                            outlined: "",
+                            label: "Ingrese la descripcion",
+                            "stack-label": "",
+                            type: "textarea",
+                            autogrow: "",
+                            maxlength: "500",
+                            counter: ""
+                          },
+                          model: {
+                            value: _vm.cuerpo,
+                            callback: function($$v) {
+                              _vm.cuerpo = $$v
+                            },
+                            expression: "cuerpo"
+                          }
+                        })
+                      ],
+                      1
+                    )
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c(
+                "q-card-actions",
+                { attrs: { align: "center" } },
+                [
+                  _c("q-btn", {
+                    attrs: {
+                      loading: _vm.loading1,
+                      color: "secondary",
+                      "icon-right": "send",
+                      label: "Crear Reunion"
+                    },
+                    on: {
+                      click: function($event) {
+                        _vm.simulateProgress(1), _vm.guardar()
+                      }
+                    },
+                    scopedSlots: _vm._u([
+                      {
+                        key: "loading",
+                        fn: function() {
+                          return [_c("q-spinner-facebook")]
+                        },
+                        proxy: true
+                      }
+                    ])
+                  }),
+                  _vm._v(" "),
+                  _c("q-btn", {
+                    attrs: {
+                      loading: _vm.loading2,
+                      color: "primary",
+                      "icon-right": "table_chart",
+                      label: "Reuniones"
+                    },
+                    on: {
+                      click: function($event) {
+                        _vm.simulateProgress(2), _vm.url_listado_clientes()
+                      }
+                    },
+                    scopedSlots: _vm._u([
+                      {
+                        key: "loading",
+                        fn: function() {
+                          return [_c("q-spinner-facebook")]
+                        },
+                        proxy: true
+                      }
+                    ])
+                  })
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/reuniones/reuniones_vue/modulo_reuniones.vue?vue&type=template&id=e2c25960&":
 /*!************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/auth/reuniones/reuniones_vue/modulo_reuniones.vue?vue&type=template&id=e2c25960& ***!
@@ -81319,7 +81583,7 @@ var render = function() {
                       [
                         _c("q-btn", {
                           attrs: { color: "blue", label: "Crear Reunion" },
-                          on: { click: _vm.url_registro_clientes }
+                          on: { click: _vm.crear_reunion }
                         }),
                         _vm._v(" "),
                         _c("q-btn", {
@@ -97961,6 +98225,89 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/auth/reuniones/reuniones_js/crearReunion.js?vue&type=script&lang=js&":
+/*!******************************************************************************************************!*\
+  !*** ./resources/js/components/auth/reuniones/reuniones_js/crearReunion.js?vue&type=script&lang=js& ***!
+  \******************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_crearReunion_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!./crearReunion.js?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./resources/js/components/auth/reuniones/reuniones_js/crearReunion.js?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_crearReunion_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/auth/reuniones/reuniones_js/moduloReuniones.js?vue&type=script&lang=js&":
+/*!*********************************************************************************************************!*\
+  !*** ./resources/js/components/auth/reuniones/reuniones_js/moduloReuniones.js?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_moduloReuniones_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!./moduloReuniones.js?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./resources/js/components/auth/reuniones/reuniones_js/moduloReuniones.js?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_moduloReuniones_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/auth/reuniones/reuniones_vue/crear_reunion.vue":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/auth/reuniones/reuniones_vue/crear_reunion.vue ***!
+  \********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _crear_reunion_vue_vue_type_template_id_1dc4fb25___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./crear_reunion.vue?vue&type=template&id=1dc4fb25& */ "./resources/js/components/auth/reuniones/reuniones_vue/crear_reunion.vue?vue&type=template&id=1dc4fb25&");
+/* harmony import */ var _reuniones_js_crearReunion_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../reuniones_js/crearReunion.js?vue&type=script&lang=js& */ "./resources/js/components/auth/reuniones/reuniones_js/crearReunion.js?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _reuniones_js_crearReunion_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _crear_reunion_vue_vue_type_template_id_1dc4fb25___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _crear_reunion_vue_vue_type_template_id_1dc4fb25___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/auth/reuniones/reuniones_vue/crear_reunion.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/auth/reuniones/reuniones_vue/crear_reunion.vue?vue&type=template&id=1dc4fb25&":
+/*!***************************************************************************************************************!*\
+  !*** ./resources/js/components/auth/reuniones/reuniones_vue/crear_reunion.vue?vue&type=template&id=1dc4fb25& ***!
+  \***************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_crear_reunion_vue_vue_type_template_id_1dc4fb25___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./crear_reunion.vue?vue&type=template&id=1dc4fb25& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/reuniones/reuniones_vue/crear_reunion.vue?vue&type=template&id=1dc4fb25&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_crear_reunion_vue_vue_type_template_id_1dc4fb25___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_crear_reunion_vue_vue_type_template_id_1dc4fb25___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/auth/reuniones/reuniones_vue/modulo_reuniones.vue":
 /*!***********************************************************************************!*\
   !*** ./resources/js/components/auth/reuniones/reuniones_vue/modulo_reuniones.vue ***!
@@ -97971,15 +98318,17 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modulo_reuniones_vue_vue_type_template_id_e2c25960___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modulo_reuniones.vue?vue&type=template&id=e2c25960& */ "./resources/js/components/auth/reuniones/reuniones_vue/modulo_reuniones.vue?vue&type=template&id=e2c25960&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _reuniones_js_moduloReuniones_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../reuniones_js/moduloReuniones.js?vue&type=script&lang=js& */ "./resources/js/components/auth/reuniones/reuniones_js/moduloReuniones.js?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
-var script = {}
+
+
 
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
-  script,
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _reuniones_js_moduloReuniones_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _modulo_reuniones_vue_vue_type_template_id_e2c25960___WEBPACK_IMPORTED_MODULE_0__["render"],
   _modulo_reuniones_vue_vue_type_template_id_e2c25960___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
@@ -98300,10 +98649,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_auth_proveedores_proveedores_vue_registro_proveedores_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/auth/proveedores/proveedores_vue/registro_proveedores.vue */ "./resources/js/components/auth/proveedores/proveedores_vue/registro_proveedores.vue");
 /* harmony import */ var _components_auth_proveedores_proveedores_vue_tabla_proveedor_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/auth/proveedores/proveedores_vue/tabla_proveedor.vue */ "./resources/js/components/auth/proveedores/proveedores_vue/tabla_proveedor.vue");
 /* harmony import */ var _components_auth_reuniones_reuniones_vue_modulo_reuniones_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/auth/reuniones/reuniones_vue/modulo_reuniones.vue */ "./resources/js/components/auth/reuniones/reuniones_vue/modulo_reuniones.vue");
+/* harmony import */ var _components_auth_reuniones_reuniones_vue_crear_reunion_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/auth/reuniones/reuniones_vue/crear_reunion.vue */ "./resources/js/components/auth/reuniones/reuniones_vue/crear_reunion.vue");
  //loged
 
 
 
+
+ //Reuniones
 
 
 
@@ -98332,6 +98684,10 @@ var routes_sumbex = [{
     path: '/modulo-reunion',
     component: _components_auth_reuniones_reuniones_vue_modulo_reuniones_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
     name: 'ModuloReunion'
+  }, {
+    path: '/crear-reunion',
+    component: _components_auth_reuniones_reuniones_vue_crear_reunion_vue__WEBPACK_IMPORTED_MODULE_6__["default"],
+    name: 'CrearReunion'
   } //aqui las rutas con permiso de auth
   ]
 }, {

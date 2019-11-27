@@ -15,7 +15,7 @@
               <q-card-actions>
                 <q-btn
                   color="blue"
-                  @click="url_registro_clientes"
+                  @click="crear_reunion"
                   label="Crear Reunion"
                 />
                 <q-btn
@@ -32,3 +32,5 @@
     </div>
   </div>
 </template>
+
+<script src="../reuniones_js/moduloReuniones.js"></script>
