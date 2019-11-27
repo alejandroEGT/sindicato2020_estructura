@@ -7,6 +7,7 @@ import ModuloClientes from "../components/auth/clientes/clientes_vue/modulo_clie
 //clientes
 import RegistroClientes from '../components/auth/clientes/clientes_vue/registroClientes.vue';
 import ListarClientes from '../components/auth/clientes/clientes_vue/listarClientes.vue';
+import DeudasClientes from '../components/auth/clientes/clientes_vue/deudasClientes.vue';
 
 let routes_empa = [
 
@@ -30,6 +31,11 @@ let routes_empa = [
                 path: '/listar-clientes',
                 name: 'listarClientes',
                 component: ListarClientes
+            },
+            {
+                path: '/deudas-clientes',
+                name: 'deudasClientes',
+                component: DeudasClientes
             },
 
         ]

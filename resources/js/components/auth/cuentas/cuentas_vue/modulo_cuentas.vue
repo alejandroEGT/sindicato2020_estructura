@@ -19,6 +19,9 @@
 			        	<div class="col-12 col-md-2">
 			        		<q-btn @click="url_listar_cuenta" color="primary" class="block" icon="list" label="Listar cuentas" />
 			        	</div>
+			        	<div class="col-12 col-md-2">
+			        		<q-btn @click="url_formulario_cuenta" color="primary" class="block" icon="attach_file" label="Formulario" />
+			        	</div>
 			        </div>
 			      </div>
 			    </q-card>
