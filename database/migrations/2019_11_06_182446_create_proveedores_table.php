@@ -23,14 +23,10 @@ class CreateProveedoresTable extends Migration
             $table->string('correo')->nullable();
             $table->string('pagina_web')->nullable();
             $table->integer('giro')->nullable();
-            $table->integer('flujo')->nullable();
             $table->string('contacto')->nullable();
             $table->integer('procedencia')->nullable();
-            $table->char('declarante', 1)->nullable();
             $table->integer('detraccion')->nullable();
             $table->string('rut');
-            $table->char('fecha_vencimiento', 1)->nullable();
-            $table->char('agente_reten', 1)->nullable();
             $table->integer('tipo_proveedor')->nullable();
             $table->char('activo', 1);
             $table->timestamps();
