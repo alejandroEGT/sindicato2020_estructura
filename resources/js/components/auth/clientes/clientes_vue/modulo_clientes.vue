@@ -2,7 +2,7 @@
   <div>
     <div class="q-pa-md q-gutter-md">
       <div class="row justify-center">
-        <div class="col-12 col-md-6">
+        <div class="col-12 col-md-12">
           <q-card class="my-card">
             <!-- titulo  -->
             <q-card-section class="bg-primary text-white">
@@ -12,7 +12,7 @@
             <q-separator />
 
             <q-card-actions class="q-col-gutter-md text-center">
-              <div class="col-12 col-md-4">
+              <div class="col-12 col-md-3">
                 <q-btn
                   class="full-width"
                   color="blue"
@@ -21,7 +21,7 @@
                   label="Registro de Clientes"
                 />
               </div>
-              <div class="col-12 col-md-4">
+              <div class="col-12 col-md-3">
                 <q-btn
                   class="full-width"
                   color="blue"
@@ -30,7 +30,16 @@
                   label="Listado de Clientes"
                 />
               </div>
-              <div class="col-12 col-md-4">
+              <div class="col-12 col-md-3">
+                <q-btn
+                  class="full-width"
+                  color="green"
+                  icon-right="format_list_numbered"
+                  @click="url_deudas_clientes"
+                  label="Clientes con Deudas"
+                />
+              </div>
+              <div class="col-12 col-md-3">
                 <q-btn
                   class="full-width"
                   color="red"

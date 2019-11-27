@@ -3,6 +3,8 @@
 namespace App;
 
 use Carbon\Carbon;
+use App\TipoDeudaCliente;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Validator;
 
@@ -42,7 +44,7 @@ class Cliente extends Model
                                     ->get();
         if (count($listar) > 0) {
             foreach ($listar as $key) {
-                $key->fecha_nacimiento =  Carbon::parse($key->fecha_nacimiento)->format('d-m-Y');
+                $key->fecha_nacimiento = Carbon::parse($key->fecha_nacimiento)->format('d-m-Y');
                 $key->nombres = ucwords($key->nombres);
                 $key->apellido_paterno = ucfirst($key->apellido_paterno);
                 $key->apellido_materno = ucfirst($key->apellido_materno);
@@ -227,6 +229,7 @@ class Cliente extends Model
     protected function eliminar_cliente($request)
     {
         $eliminar=$this::find($request->id);
+        // dd($request->id);
         $eliminar->activo = 'N';
 
         if($eliminar->save()){
@@ -236,6 +239,44 @@ class Cliente extends Model
             return ['estado'=>'failed', 'mensaje'=>'A ocurrido un error al eliminar el cliente.'];
         }
         
+    }
+
+    protected function traer_clientes_deudas()
+    {
+      $listar = $this::select([
+                              'id',
+                              DB::raw("INITCAP(concat(nombres ,' ', 
+                                                      apellido_paterno ,' ', 
+                                                      apellido_materno)) 
+                                                      as cliente_deuda")             
+                              ])
+                              ->where('activo', 'S')
+                              ->get();
+                              
+     if (count($listar) > 0) {
+         return $listar;
+     }else{
+       return "no hay clientes para mostrar";
+     }
+
+
+    }
+
+    protected function traer_tipo_deuda()
+    {
+      $listar = TipoDeudaCliente::select([
+                            'id',
+                            'tipo'
+                            ])
+                            ->where('activo','S')
+                            ->get();
+      
+      if(count($listar) > 0){
+        return $listar;
+      }else{
+        return ("no hay datos para mostrar");
+      }
+
     }
 
 }

@@ -62,7 +62,7 @@
       class="my-sticky-header-table"
     >
       <!-- funciones especiales -->
-      <template v-slot:top="props">
+      <template v-slot:top="pantalla">
         <q-space />
         <!-- filtro de datos -->
         <div class="col">
@@ -125,8 +125,8 @@
             flat
             round
             dense
-            :icon="props.inFullscreen ? 'fullscreen_exit' : 'fullscreen'"
-            @click="props.toggleFullscreen"
+            :icon="pantalla.inFullscreen ? 'fullscreen_exit' : 'fullscreen'"
+            @click="pantalla.toggleFullscreen"
             class="q-ml-md"
           />
           <label>Pantalla Completa</label>
@@ -151,16 +151,17 @@
         </div>
       </template>
 
-      <template v-slot:body="props">
-        <q-tr :props="props">
-          <q-td key="id" :props="props">
-            <q-badge color="green">{{props.row.id}}</q-badge>
+      <template v-slot:body="tabla">
+        <q-tr :props="tabla">
+
+          <q-td key="id" :props="tabla">
+            <q-badge color="green">{{tabla.row.id}}</q-badge>
           </q-td>
 
-          <q-td key="fecha_nacimiento" :props="props">
-            {{props.row.fecha_nacimiento}}
+          <q-td key="fecha_nacimiento" :props="tabla">
+            {{tabla.row.fecha_nacimiento}}
             <q-popup-edit
-              v-model="props.row.fecha_nacimiento"
+              v-model="tabla.row.fecha_nacimiento"
               title="Modificar Fecha de Nacimiento"
               :validate="val => val.length >= 3"
             >
@@ -183,7 +184,7 @@
                       dense
                       flat
                       icon="edit"
-                      @click="actualizar_dato(props.row.id,'fecha_nacimiento',campoUpd)"
+                      @click="actualizar_dato(tabla.row.id,'fecha_nacimiento',campoUpd)"
                       @click.stop="set"
                       :disable="validate(campoUpd) === false || initialValue === 'dd-mm-aaaa'"
                     />
@@ -194,10 +195,10 @@
             </q-popup-edit>
           </q-td>
 
-          <q-td key="rut" :props="props">
-            {{props.row.rut}}
+          <q-td key="rut" :props="tabla">
+            {{tabla.row.rut}}
             <q-popup-edit
-              v-model="props.row.rut"
+              v-model="tabla.row.rut"
               title="Modificar Rut"
               :validate="val => val.length >= 2"
             >
@@ -216,7 +217,7 @@
                 >
                   <template v-slot:after>
                     <q-btn
-                      @click="actualizar_dato(props.row.id,'rut',campoUpd)"
+                      @click="actualizar_dato(tabla.row.id,'rut',campoUpd)"
                       @click.stop="set"
                       color="red"
                       round
@@ -232,10 +233,10 @@
             </q-popup-edit>
           </q-td>
 
-          <q-td key="nombres" :props="props">
-            {{props.row.nombres}}
+          <q-td key="nombres" :props="tabla">
+            {{tabla.row.nombres}}
             <q-popup-edit
-              v-model="props.row.nombres"
+              v-model="tabla.row.nombres"
               title="Modificar Nombres"
               :validate="val => val.length >= 3"
             >
@@ -254,7 +255,7 @@
                 >
                   <template v-slot:after>
                     <q-btn
-                      @click="actualizar_dato(props.row.id,'nombres',campoUpd)"
+                      @click="actualizar_dato(tabla.row.id,'nombres',campoUpd)"
                       @click.stop="set"
                       color="red"
                       round
@@ -270,10 +271,10 @@
             </q-popup-edit>
           </q-td>
 
-          <q-td key="apellido_paterno" :props="props">
-            {{props.row.apellido_paterno}}
+          <q-td key="apellido_paterno" :props="tabla">
+            {{tabla.row.apellido_paterno}}
             <q-popup-edit
-              v-model="props.row.apellido_paterno"
+              v-model="tabla.row.apellido_paterno"
               title="Modificar Apellido Paterno"
               :validate="val => val.length >= 3"
             >
@@ -292,7 +293,7 @@
                 >
                   <template v-slot:after>
                     <q-btn
-                      @click="actualizar_dato(props.row.id,'apellido_paterno',campoUpd)"
+                      @click="actualizar_dato(tabla.row.id,'apellido_paterno',campoUpd)"
                       @click.stop="set"
                       color="red"
                       round
@@ -308,10 +309,10 @@
             </q-popup-edit>
           </q-td>
 
-          <q-td key="apellido_materno" :props="props">
-            {{props.row.apellido_materno}}
+          <q-td key="apellido_materno" :props="tabla">
+            {{tabla.row.apellido_materno}}
             <q-popup-edit
-              v-model="props.row.apellido_materno"
+              v-model="tabla.row.apellido_materno"
               title="Modificar Apellido Materno"
               :validate="val => val.length >= 3"
             >
@@ -330,7 +331,7 @@
                 >
                   <template v-slot:after>
                     <q-btn
-                      @click="actualizar_dato(props.row.id,'apellido_materno',campoUpd)"
+                      @click="actualizar_dato(tabla.row.id,'apellido_materno',campoUpd)"
                       @click.stop="set"
                       color="red"
                       round
@@ -346,15 +347,16 @@
             </q-popup-edit>
           </q-td>
 
-          <q-td key="opcion" :props="props">
-            <q-btn label="Eliminar" color="red" @click="confirm = true" />
-            <q-dialog v-model="confirm" persistent>
+          <q-td key="id" :props="tabla">
+            {{tabla.row.id}}
+            <q-btn label="Eliminar" color="red" @click="eliminar_cliente_estado(tabla.row.id)" />
+            <!-- <q-dialog v-model="confirm" persistent>
               <q-card>
                 <q-card-section class="row items-center">
                   <q-avatar icon="delete" color="primary" text-color="white" />
                   <span
                     class="q-ml-sm"
-                  >¿Esta seguro que desea eliminar al cliente, {{props.row.nombres}} {{props.row.apellido_paterno}} {{props.row.apellido_materno}}?</span>
+                  > {{tabla.row.id}} ¿Esta seguro que desea eliminar al cliente?</span>
                 </q-card-section>
 
                 <q-card-actions align="right">
@@ -364,12 +366,13 @@
                     label="Aceptar"
                     color="green"
                     v-close-popup
-                    @click="eliminar_cliente_estado(props.row.id)"
+                    @click="confirm = true"
                   />
                 </q-card-actions>
               </q-card>
-            </q-dialog>
+            </q-dialog> -->
           </q-td>
+
         </q-tr>
       </template>
     </q-table>

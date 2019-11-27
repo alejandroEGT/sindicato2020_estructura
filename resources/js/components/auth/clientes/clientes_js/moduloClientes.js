@@ -15,6 +15,9 @@ export default {
         },
         url_index() {
             this.$router.push('/index');
+        },
+        url_deudas_clientes() {
+            this.$router.push('/deudas-clientes');
         }
 
     }

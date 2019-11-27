@@ -3581,6 +3581,107 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./resources/js/components/auth/clientes/clientes_js/deudasClientes.js?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./resources/js/components/auth/clientes/clientes_js/deudasClientes.js?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      loading1: false,
+      loading2: false,
+      loading3: false,
+      selectClientes: [],
+      selectTipoDeuda: [],
+      errores: [],
+      clientes: '',
+      tipoDeuda: '',
+      monto: '',
+      descripcion: '',
+      fechaTope: ''
+    };
+  },
+  methods: {
+    simulateProgress: function simulateProgress(number) {
+      var _this = this;
+
+      // we set loading state
+      this["loading".concat(number)] = true; // simulate a delay
+
+      setTimeout(function () {
+        // we're done, we reset loading state
+        _this["loading".concat(number)] = false;
+      }, 3000);
+    },
+    url_volver: function url_volver() {
+      this.$router.push('/modulo-clientes');
+    },
+    mostrar_clientes_deudas: function mostrar_clientes_deudas() {
+      var _this2 = this;
+
+      axios.get('api/traer_clientes_deudas').then(function (response) {
+        _this2.selectClientes = response.data;
+      })["catch"](function (error) {
+        alert(error);
+      });
+    },
+    mostrar_tipo_deudas: function mostrar_tipo_deudas() {
+      var _this3 = this;
+
+      axios.get('api/traer_tipo_deuda').then(function (response) {
+        _this3.selectTipoDeuda = response.data;
+      })["catch"](function (error) {
+        alert(error);
+      });
+    },
+    registrar_clientes_deudas: function registrar_clientes_deudas() {
+      var _this4 = this;
+
+      var data = {
+        'cliente_id': this.clientes.id,
+        'tipo_deuda_id': this.tipoDeuda.id,
+        'monto': this.monto,
+        'descripcion': this.descripcion,
+        'fecha': this.fechaTope
+      };
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('api/registro_cliente_deudas', data).then(function (response) {
+        if (response.data.estado == 'success') {
+          _this4.$q.notify({
+            color: "green-4",
+            textColor: "white",
+            icon: "cloud_done",
+            message: response.data.mensaje
+          });
+
+          _this4.clientes = '';
+          _this4.tipoDeuda = '';
+          _this4.monto = '';
+          _this4.descripcion = '';
+          _this4.fecha = '';
+        }
+
+        if (response.data.estado == 'failed_v') {
+          _this4.errores = response.data.mensaje;
+        }
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.mostrar_clientes_deudas();
+    this.mostrar_tipo_deudas();
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./resources/js/components/auth/clientes/clientes_js/listarClientes.js?vue&type=script&lang=js&":
 /*!************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./resources/js/components/auth/clientes/clientes_js/listarClientes.js?vue&type=script&lang=js& ***!
@@ -3769,6 +3870,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     url_index: function url_index() {
       this.$router.push('/index');
+    },
+    url_deudas_clientes: function url_deudas_clientes() {
+      this.$router.push('/deudas-clientes');
     }
   }
 });
@@ -10390,6 +10494,25 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 // module
 exports.push([module.i, "\na:link\r\n{\r\ntext-decoration:none;\n}\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./resources/js/components/auth/clientes/clientes_css/deudasClientes.css?vue&type=style&index=0&lang=css&":
+/*!*********************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./resources/js/components/auth/clientes/clientes_css/deudasClientes.css?vue&type=style&index=0&lang=css& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
 
 // exports
 
@@ -75555,6 +75678,36 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./resources/js/components/auth/clientes/clientes_css/deudasClientes.css?vue&type=style&index=0&lang=css&":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./resources/js/components/auth/clientes/clientes_css/deudasClientes.css?vue&type=style&index=0&lang=css& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../../../node_modules/css-loader??ref--6-1!../../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../../node_modules/postcss-loader/src??ref--6-2!./deudasClientes.css?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./resources/js/components/auth/clientes/clientes_css/deudasClientes.css?vue&type=style&index=0&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./resources/js/components/auth/clientes/clientes_css/listarClientes.css?vue&type=style&index=0&lang=css&":
 /*!*************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./resources/js/components/auth/clientes/clientes_css/listarClientes.css?vue&type=style&index=0&lang=css& ***!
@@ -79202,6 +79355,299 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/clientes/clientes_vue/deudasClientes.vue?vue&type=template&id=890ee780&":
+/*!********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/auth/clientes/clientes_vue/deudasClientes.vue?vue&type=template&id=890ee780& ***!
+  \********************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "q-pa-md q-gutter-md" }, [
+      _c("div", { staticClass: "row justify-center" }, [
+        _c(
+          "div",
+          { staticClass: "col-12 col-md-8" },
+          [
+            _c(
+              "q-card",
+              { staticClass: "my-card" },
+              [
+                _c("q-card-section", { staticClass: "bg-primary text-white" }, [
+                  _c("div", { staticClass: "text-h6" }, [
+                    _vm._v("Deudas de Clientes")
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("q-separator"),
+                _vm._v(" "),
+                _c("q-card-section", [
+                  _c(
+                    "div",
+                    { staticClass: "row justify-start q-col-gutter-md" },
+                    [
+                      _c(
+                        "div",
+                        { staticClass: "col-12 col-md-4" },
+                        [
+                          _c("q-select", {
+                            attrs: {
+                              standout: "bg-blue text-white",
+                              options: _vm.selectClientes,
+                              "option-value": "id",
+                              "option-label": "cliente_deuda",
+                              label: "Clientes"
+                            },
+                            model: {
+                              value: _vm.clientes,
+                              callback: function($$v) {
+                                _vm.clientes = $$v
+                              },
+                              expression: "clientes"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "col-12 col-md-4" },
+                        [
+                          _c("q-select", {
+                            attrs: {
+                              standout: "bg-blue text-white",
+                              options: _vm.selectTipoDeuda,
+                              "option-value": "id",
+                              "option-label": "tipo",
+                              label: "Tipo de deuda"
+                            },
+                            model: {
+                              value: _vm.tipoDeuda,
+                              callback: function($$v) {
+                                _vm.tipoDeuda = $$v
+                              },
+                              expression: "tipoDeuda"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "col-12 col-md-4" },
+                        [
+                          _c("q-input", {
+                            attrs: {
+                              outlined: "",
+                              counter: "",
+                              maxlength: "50",
+                              label: "Monto que debe",
+                              "stack-label": "",
+                              type: "number"
+                            },
+                            model: {
+                              value: _vm.monto,
+                              callback: function($$v) {
+                                _vm.monto = $$v
+                              },
+                              expression: "monto"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "col-12 col-md-8" },
+                        [
+                          _c("q-input", {
+                            attrs: {
+                              outlined: "",
+                              counter: "",
+                              maxlength: "100",
+                              label: "Descripcion de la deuda",
+                              "stack-label": "",
+                              type: "text"
+                            },
+                            model: {
+                              value: _vm.descripcion,
+                              callback: function($$v) {
+                                _vm.descripcion = $$v
+                              },
+                              expression: "descripcion"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "col-12 col-md-4" },
+                        [
+                          _c("q-input", {
+                            attrs: {
+                              outlined: "",
+                              counter: "",
+                              maxlength: "10",
+                              label: "fecha tope de pago",
+                              "stack-label": "",
+                              type: "date"
+                            },
+                            model: {
+                              value: _vm.fechaTope,
+                              callback: function($$v) {
+                                _vm.fechaTope = $$v
+                              },
+                              expression: "fechaTope"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("q-separator"),
+                _vm._v(" "),
+                _c(
+                  "q-card-actions",
+                  { attrs: { align: "right" } },
+                  [
+                    _c("q-btn", {
+                      attrs: {
+                        loading: _vm.loading1,
+                        color: "secondary",
+                        "icon-right": "send",
+                        label: "ingresar"
+                      },
+                      on: {
+                        click: function($event) {
+                          _vm.simulateProgress(1),
+                            _vm.registrar_clientes_deudas()
+                        }
+                      },
+                      scopedSlots: _vm._u([
+                        {
+                          key: "loading",
+                          fn: function() {
+                            return [_c("q-spinner-facebook")]
+                          },
+                          proxy: true
+                        }
+                      ])
+                    }),
+                    _vm._v(" "),
+                    _c("q-btn", {
+                      attrs: {
+                        loading: _vm.loading3,
+                        color: "red",
+                        "icon-right": "settings_backup_restore",
+                        label: "volver"
+                      },
+                      on: {
+                        click: function($event) {
+                          _vm.simulateProgress(3), _vm.url_volver()
+                        }
+                      },
+                      scopedSlots: _vm._u([
+                        {
+                          key: "loading",
+                          fn: function() {
+                            return [_c("q-spinner-facebook")]
+                          },
+                          proxy: true
+                        }
+                      ])
+                    })
+                  ],
+                  1
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "q-pa-md q-gutter-sm" },
+              _vm._l(_vm.errores, function(e) {
+                return _c(
+                  "ul",
+                  { key: e[0] },
+                  [
+                    _c(
+                      "q-banner",
+                      {
+                        staticClass: "bg-orange text-white",
+                        attrs: { "inline-actions": "", rounded: "" },
+                        scopedSlots: _vm._u(
+                          [
+                            {
+                              key: "action",
+                              fn: function() {
+                                return [
+                                  _c("q-btn", {
+                                    attrs: {
+                                      flat: "",
+                                      color: "white",
+                                      label: "Advertencia!",
+                                      disabled: ""
+                                    }
+                                  })
+                                ]
+                              },
+                              proxy: true
+                            }
+                          ],
+                          null,
+                          true
+                        )
+                      },
+                      [
+                        _c("li", [
+                          _c("i", { staticClass: "material-icons md-24" }, [
+                            _vm._v("info")
+                          ]),
+                          _vm._v(
+                            "\n                " +
+                              _vm._s(e[0]) +
+                              "\n              "
+                          )
+                        ])
+                      ]
+                    )
+                  ],
+                  1
+                )
+              }),
+              0
+            )
+          ],
+          1
+        )
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/clientes/clientes_vue/listarClientes.vue?vue&type=template&id=0ebef70d&":
 /*!********************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/auth/clientes/clientes_vue/listarClientes.vue?vue&type=template&id=0ebef70d& ***!
@@ -79319,7 +79765,7 @@ var render = function() {
         scopedSlots: _vm._u([
           {
             key: "top",
-            fn: function(props) {
+            fn: function(pantalla) {
               return [
                 _c("q-space"),
                 _vm._v(" "),
@@ -79441,11 +79887,11 @@ var render = function() {
                         flat: "",
                         round: "",
                         dense: "",
-                        icon: props.inFullscreen
+                        icon: pantalla.inFullscreen
                           ? "fullscreen_exit"
                           : "fullscreen"
                       },
-                      on: { click: props.toggleFullscreen }
+                      on: { click: pantalla.toggleFullscreen }
                     }),
                     _vm._v(" "),
                     _c("label", [_vm._v("Pantalla Completa")]),
@@ -79510,18 +79956,18 @@ var render = function() {
           },
           {
             key: "body",
-            fn: function(props) {
+            fn: function(tabla) {
               return [
                 _c(
                   "q-tr",
-                  { attrs: { props: props } },
+                  { attrs: { props: tabla } },
                   [
                     _c(
                       "q-td",
-                      { key: "id", attrs: { props: props } },
+                      { key: "id", attrs: { props: tabla } },
                       [
                         _c("q-badge", { attrs: { color: "green" } }, [
-                          _vm._v(_vm._s(props.row.id))
+                          _vm._v(_vm._s(tabla.row.id))
                         ])
                       ],
                       1
@@ -79529,11 +79975,11 @@ var render = function() {
                     _vm._v(" "),
                     _c(
                       "q-td",
-                      { key: "fecha_nacimiento", attrs: { props: props } },
+                      { key: "fecha_nacimiento", attrs: { props: tabla } },
                       [
                         _vm._v(
                           "\n          " +
-                            _vm._s(props.row.fecha_nacimiento) +
+                            _vm._s(tabla.row.fecha_nacimiento) +
                             "\n          "
                         ),
                         _c("q-popup-edit", {
@@ -79608,7 +80054,7 @@ var render = function() {
                                                     click: [
                                                       function($event) {
                                                         return _vm.actualizar_dato(
-                                                          props.row.id,
+                                                          tabla.row.id,
                                                           "fecha_nacimiento",
                                                           _vm.campoUpd
                                                         )
@@ -79659,11 +80105,11 @@ var render = function() {
                             true
                           ),
                           model: {
-                            value: props.row.fecha_nacimiento,
+                            value: tabla.row.fecha_nacimiento,
                             callback: function($$v) {
-                              _vm.$set(props.row, "fecha_nacimiento", $$v)
+                              _vm.$set(tabla.row, "fecha_nacimiento", $$v)
                             },
-                            expression: "props.row.fecha_nacimiento"
+                            expression: "tabla.row.fecha_nacimiento"
                           }
                         })
                       ],
@@ -79672,11 +80118,11 @@ var render = function() {
                     _vm._v(" "),
                     _c(
                       "q-td",
-                      { key: "rut", attrs: { props: props } },
+                      { key: "rut", attrs: { props: tabla } },
                       [
                         _vm._v(
                           "\n          " +
-                            _vm._s(props.row.rut) +
+                            _vm._s(tabla.row.rut) +
                             "\n          "
                         ),
                         _c("q-popup-edit", {
@@ -79751,7 +80197,7 @@ var render = function() {
                                                     click: [
                                                       function($event) {
                                                         return _vm.actualizar_dato(
-                                                          props.row.id,
+                                                          tabla.row.id,
                                                           "rut",
                                                           _vm.campoUpd
                                                         )
@@ -79802,11 +80248,11 @@ var render = function() {
                             true
                           ),
                           model: {
-                            value: props.row.rut,
+                            value: tabla.row.rut,
                             callback: function($$v) {
-                              _vm.$set(props.row, "rut", $$v)
+                              _vm.$set(tabla.row, "rut", $$v)
                             },
-                            expression: "props.row.rut"
+                            expression: "tabla.row.rut"
                           }
                         })
                       ],
@@ -79815,11 +80261,11 @@ var render = function() {
                     _vm._v(" "),
                     _c(
                       "q-td",
-                      { key: "nombres", attrs: { props: props } },
+                      { key: "nombres", attrs: { props: tabla } },
                       [
                         _vm._v(
                           "\n          " +
-                            _vm._s(props.row.nombres) +
+                            _vm._s(tabla.row.nombres) +
                             "\n          "
                         ),
                         _c("q-popup-edit", {
@@ -79894,7 +80340,7 @@ var render = function() {
                                                     click: [
                                                       function($event) {
                                                         return _vm.actualizar_dato(
-                                                          props.row.id,
+                                                          tabla.row.id,
                                                           "nombres",
                                                           _vm.campoUpd
                                                         )
@@ -79945,11 +80391,11 @@ var render = function() {
                             true
                           ),
                           model: {
-                            value: props.row.nombres,
+                            value: tabla.row.nombres,
                             callback: function($$v) {
-                              _vm.$set(props.row, "nombres", $$v)
+                              _vm.$set(tabla.row, "nombres", $$v)
                             },
-                            expression: "props.row.nombres"
+                            expression: "tabla.row.nombres"
                           }
                         })
                       ],
@@ -79958,11 +80404,11 @@ var render = function() {
                     _vm._v(" "),
                     _c(
                       "q-td",
-                      { key: "apellido_paterno", attrs: { props: props } },
+                      { key: "apellido_paterno", attrs: { props: tabla } },
                       [
                         _vm._v(
                           "\n          " +
-                            _vm._s(props.row.apellido_paterno) +
+                            _vm._s(tabla.row.apellido_paterno) +
                             "\n          "
                         ),
                         _c("q-popup-edit", {
@@ -80037,7 +80483,7 @@ var render = function() {
                                                     click: [
                                                       function($event) {
                                                         return _vm.actualizar_dato(
-                                                          props.row.id,
+                                                          tabla.row.id,
                                                           "apellido_paterno",
                                                           _vm.campoUpd
                                                         )
@@ -80088,11 +80534,11 @@ var render = function() {
                             true
                           ),
                           model: {
-                            value: props.row.apellido_paterno,
+                            value: tabla.row.apellido_paterno,
                             callback: function($$v) {
-                              _vm.$set(props.row, "apellido_paterno", $$v)
+                              _vm.$set(tabla.row, "apellido_paterno", $$v)
                             },
-                            expression: "props.row.apellido_paterno"
+                            expression: "tabla.row.apellido_paterno"
                           }
                         })
                       ],
@@ -80101,11 +80547,11 @@ var render = function() {
                     _vm._v(" "),
                     _c(
                       "q-td",
-                      { key: "apellido_materno", attrs: { props: props } },
+                      { key: "apellido_materno", attrs: { props: tabla } },
                       [
                         _vm._v(
                           "\n          " +
-                            _vm._s(props.row.apellido_materno) +
+                            _vm._s(tabla.row.apellido_materno) +
                             "\n          "
                         ),
                         _c("q-popup-edit", {
@@ -80180,7 +80626,7 @@ var render = function() {
                                                     click: [
                                                       function($event) {
                                                         return _vm.actualizar_dato(
-                                                          props.row.id,
+                                                          tabla.row.id,
                                                           "apellido_materno",
                                                           _vm.campoUpd
                                                         )
@@ -80231,11 +80677,11 @@ var render = function() {
                             true
                           ),
                           model: {
-                            value: props.row.apellido_materno,
+                            value: tabla.row.apellido_materno,
                             callback: function($$v) {
-                              _vm.$set(props.row, "apellido_materno", $$v)
+                              _vm.$set(tabla.row, "apellido_materno", $$v)
                             },
-                            expression: "props.row.apellido_materno"
+                            expression: "tabla.row.apellido_materno"
                           }
                         })
                       ],
@@ -80244,107 +80690,19 @@ var render = function() {
                     _vm._v(" "),
                     _c(
                       "q-td",
-                      { key: "opcion", attrs: { props: props } },
+                      { key: "id", attrs: { props: tabla } },
                       [
+                        _vm._v(
+                          "\n          " + _vm._s(tabla.row.id) + "\n          "
+                        ),
                         _c("q-btn", {
                           attrs: { label: "Eliminar", color: "red" },
                           on: {
                             click: function($event) {
-                              _vm.confirm = true
+                              return _vm.eliminar_cliente_estado(tabla.row.id)
                             }
                           }
-                        }),
-                        _vm._v(" "),
-                        _c(
-                          "q-dialog",
-                          {
-                            attrs: { persistent: "" },
-                            model: {
-                              value: _vm.confirm,
-                              callback: function($$v) {
-                                _vm.confirm = $$v
-                              },
-                              expression: "confirm"
-                            }
-                          },
-                          [
-                            _c(
-                              "q-card",
-                              [
-                                _c(
-                                  "q-card-section",
-                                  { staticClass: "row items-center" },
-                                  [
-                                    _c("q-avatar", {
-                                      attrs: {
-                                        icon: "delete",
-                                        color: "primary",
-                                        "text-color": "white"
-                                      }
-                                    }),
-                                    _vm._v(" "),
-                                    _c("span", { staticClass: "q-ml-sm" }, [
-                                      _vm._v(
-                                        "¿Esta seguro que desea eliminar al cliente, " +
-                                          _vm._s(props.row.nombres) +
-                                          " " +
-                                          _vm._s(props.row.apellido_paterno) +
-                                          " " +
-                                          _vm._s(props.row.apellido_materno) +
-                                          "?"
-                                      )
-                                    ])
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "q-card-actions",
-                                  { attrs: { align: "right" } },
-                                  [
-                                    _c("q-btn", {
-                                      directives: [
-                                        {
-                                          name: "close-popup",
-                                          rawName: "v-close-popup"
-                                        }
-                                      ],
-                                      attrs: {
-                                        flat: "",
-                                        label: "Cancel",
-                                        color: "red"
-                                      }
-                                    }),
-                                    _vm._v(" "),
-                                    _c("q-btn", {
-                                      directives: [
-                                        {
-                                          name: "close-popup",
-                                          rawName: "v-close-popup"
-                                        }
-                                      ],
-                                      attrs: {
-                                        flat: "",
-                                        label: "Aceptar",
-                                        color: "green"
-                                      },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.eliminar_cliente_estado(
-                                            props.row.id
-                                          )
-                                        }
-                                      }
-                                    })
-                                  ],
-                                  1
-                                )
-                              ],
-                              1
-                            )
-                          ],
-                          1
-                        )
+                        })
                       ],
                       1
                     )
@@ -80434,7 +80792,7 @@ var render = function() {
       _c("div", { staticClass: "row justify-center" }, [
         _c(
           "div",
-          { staticClass: "col-12 col-md-6" },
+          { staticClass: "col-12 col-md-12" },
           [
             _c(
               "q-card",
@@ -80454,7 +80812,7 @@ var render = function() {
                   [
                     _c(
                       "div",
-                      { staticClass: "col-12 col-md-4" },
+                      { staticClass: "col-12 col-md-3" },
                       [
                         _c("q-btn", {
                           staticClass: "full-width",
@@ -80471,7 +80829,7 @@ var render = function() {
                     _vm._v(" "),
                     _c(
                       "div",
-                      { staticClass: "col-12 col-md-4" },
+                      { staticClass: "col-12 col-md-3" },
                       [
                         _c("q-btn", {
                           staticClass: "full-width",
@@ -80488,7 +80846,24 @@ var render = function() {
                     _vm._v(" "),
                     _c(
                       "div",
-                      { staticClass: "col-12 col-md-4" },
+                      { staticClass: "col-12 col-md-3" },
+                      [
+                        _c("q-btn", {
+                          staticClass: "full-width",
+                          attrs: {
+                            color: "green",
+                            "icon-right": "format_list_numbered",
+                            label: "Clientes con Deudas"
+                          },
+                          on: { click: _vm.url_deudas_clientes }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "col-12 col-md-3" },
                       [
                         _c("q-btn", {
                           staticClass: "full-width",
@@ -98547,6 +98922,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/auth/clientes/clientes_css/deudasClientes.css?vue&type=style&index=0&lang=css&":
+/*!****************************************************************************************************************!*\
+  !*** ./resources/js/components/auth/clientes/clientes_css/deudasClientes.css?vue&type=style&index=0&lang=css& ***!
+  \****************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_deudasClientes_css_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/style-loader!../../../../../../node_modules/css-loader??ref--6-1!../../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../../node_modules/postcss-loader/src??ref--6-2!./deudasClientes.css?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./resources/js/components/auth/clientes/clientes_css/deudasClientes.css?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_deudasClientes_css_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_deudasClientes_css_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_deudasClientes_css_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_deudasClientes_css_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_deudasClientes_css_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
 /***/ "./resources/js/components/auth/clientes/clientes_css/listarClientes.css?vue&type=style&index=0&lang=css&":
 /*!****************************************************************************************************************!*\
   !*** ./resources/js/components/auth/clientes/clientes_css/listarClientes.css?vue&type=style&index=0&lang=css& ***!
@@ -98595,6 +98986,20 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/auth/clientes/clientes_js/deudasClientes.js?vue&type=script&lang=js&":
+/*!******************************************************************************************************!*\
+  !*** ./resources/js/components/auth/clientes/clientes_js/deudasClientes.js?vue&type=script&lang=js& ***!
+  \******************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_deudasClientes_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!./deudasClientes.js?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./resources/js/components/auth/clientes/clientes_js/deudasClientes.js?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_deudasClientes_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/auth/clientes/clientes_js/listarClientes.js?vue&type=script&lang=js&":
 /*!******************************************************************************************************!*\
   !*** ./resources/js/components/auth/clientes/clientes_js/listarClientes.js?vue&type=script&lang=js& ***!
@@ -98634,6 +99039,63 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_registroClientes_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!./registroClientes.js?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./resources/js/components/auth/clientes/clientes_js/registroClientes.js?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_registroClientes_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/auth/clientes/clientes_vue/deudasClientes.vue":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/components/auth/clientes/clientes_vue/deudasClientes.vue ***!
+  \*******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _deudasClientes_vue_vue_type_template_id_890ee780___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./deudasClientes.vue?vue&type=template&id=890ee780& */ "./resources/js/components/auth/clientes/clientes_vue/deudasClientes.vue?vue&type=template&id=890ee780&");
+/* harmony import */ var _clientes_js_deudasClientes_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../clientes_js/deudasClientes.js?vue&type=script&lang=js& */ "./resources/js/components/auth/clientes/clientes_js/deudasClientes.js?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _clientes_css_deudasClientes_css_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../clientes_css/deudasClientes.css?vue&type=style&index=0&lang=css& */ "./resources/js/components/auth/clientes/clientes_css/deudasClientes.css?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _clientes_js_deudasClientes_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _deudasClientes_vue_vue_type_template_id_890ee780___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _deudasClientes_vue_vue_type_template_id_890ee780___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/auth/clientes/clientes_vue/deudasClientes.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/auth/clientes/clientes_vue/deudasClientes.vue?vue&type=template&id=890ee780&":
+/*!**************************************************************************************************************!*\
+  !*** ./resources/js/components/auth/clientes/clientes_vue/deudasClientes.vue?vue&type=template&id=890ee780& ***!
+  \**************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_deudasClientes_vue_vue_type_template_id_890ee780___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./deudasClientes.vue?vue&type=template&id=890ee780& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/clientes/clientes_vue/deudasClientes.vue?vue&type=template&id=890ee780&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_deudasClientes_vue_vue_type_template_id_890ee780___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_deudasClientes_vue_vue_type_template_id_890ee780___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
 
 /***/ }),
 
@@ -99578,10 +100040,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_auth_clientes_clientes_vue_modulo_clientes_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/auth/clientes/clientes_vue/modulo_clientes.vue */ "./resources/js/components/auth/clientes/clientes_vue/modulo_clientes.vue");
 /* harmony import */ var _components_auth_clientes_clientes_vue_registroClientes_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/auth/clientes/clientes_vue/registroClientes.vue */ "./resources/js/components/auth/clientes/clientes_vue/registroClientes.vue");
 /* harmony import */ var _components_auth_clientes_clientes_vue_listarClientes_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/auth/clientes/clientes_vue/listarClientes.vue */ "./resources/js/components/auth/clientes/clientes_vue/listarClientes.vue");
+/* harmony import */ var _components_auth_clientes_clientes_vue_deudasClientes_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/auth/clientes/clientes_vue/deudasClientes.vue */ "./resources/js/components/auth/clientes/clientes_vue/deudasClientes.vue");
  //loged
 
 
  //clientes
+
 
 
 
@@ -99606,6 +100070,10 @@ var routes_empa = [{
     path: '/listar-clientes',
     name: 'listarClientes',
     component: _components_auth_clientes_clientes_vue_listarClientes_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
+  }, {
+    path: '/deudas-clientes',
+    name: 'deudasClientes',
+    component: _components_auth_clientes_clientes_vue_deudasClientes_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
   }]
 }, {
   path: '/404',
