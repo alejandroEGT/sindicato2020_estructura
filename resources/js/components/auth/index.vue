@@ -72,7 +72,7 @@
           
           <div class="row q-col-gutter-md">
             
-                <div class="col-12 col-md-3">
+                <div class="col-12 col-md-6">
                    <q-card class="my-card">
                       <q-img src="https://cdn.quasar.dev/img/parallax2.jpg">
                         <div class="absolute-bottom">
@@ -83,13 +83,15 @@
 
                       <q-card-actions>
                         <q-btn flat @click="url_modulo_cuenta">Cuentas</q-btn><br>
-                        <q-btn flat @click="url_modulo_prestamos">Prestamos</q-btn>
+                        <q-btn flat @click="url_modulo_prestamos">Prestamos</q-btn><br>
+                        <q-btn flat @click="url_modulo_Liquidaciones">Liquidaciones</q-btn>
+                         <!-- <q-btn flat @click="url_modulo_prestamos">Liquidaciones</q-btn> -->
                         <!-- <q-btn flat>Action 2</q-btn> -->
                       </q-card-actions>
                     </q-card>
                 </div>
 
-                <div class="col-12 col-md-3">
+                <div class="col-12 col-md-6">
                    <q-card class="my-card">
                       <q-img src="https://cdn.quasar.dev/img/parallax2.jpg">
                         <div class="absolute-bottom">
@@ -108,6 +110,26 @@
                 </div>
 
 
+          </div>
+
+          <div>
+            <div class="col-12 col-md-6">
+                   <q-card class="my-card">
+                      <q-img src="https://cdn.quasar.dev/img/parallax2.jpg">
+                        <div class="absolute-bottom">
+                          <div class="text-h6">Gestión y Administración</div>
+                          <div class="text-subtitle2">Registro de reuniones, monitoreo de tareas administrativas</div>
+                        </div>
+                      </q-img>
+
+                      <q-card-actions>
+                        <q-btn flat @click="url_modulo_reunion">Reuniones</q-btn><br>
+                        <!-- <q-btn flat @click="url_modulo_proveedor">Proveedores</q-btn> -->
+
+                        <!-- <q-btn flat>Action 2</q-btn> -->
+                      </q-card-actions>
+                    </q-card>
+                </div>
           </div>
 
 
@@ -191,7 +213,12 @@ export default {
        url_listar_cuenta(){
         this.$router.push('/listar-cuenta');
        },
-
+       url_modulo_Liquidaciones(){
+         this.$router.push('/modulo-liquidaciones');
+       },
+       url_modulo_reunion(){
+         this.$router.push('/modulo-reunion');
+       }
 
     // async onCapture () {
     //   this.img = await this.$refs.webcam.capture()

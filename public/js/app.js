@@ -1,50 +1,6 @@
 /******/ (function(modules) { // webpackBootstrap
-/******/ 	// install a JSONP callback for chunk loading
-/******/ 	function webpackJsonpCallback(data) {
-/******/ 		var chunkIds = data[0];
-/******/ 		var moreModules = data[1];
-/******/
-/******/
-/******/ 		// add "moreModules" to the modules object,
-/******/ 		// then flag all "chunkIds" as loaded and fire callback
-/******/ 		var moduleId, chunkId, i = 0, resolves = [];
-/******/ 		for(;i < chunkIds.length; i++) {
-/******/ 			chunkId = chunkIds[i];
-/******/ 			if(Object.prototype.hasOwnProperty.call(installedChunks, chunkId) && installedChunks[chunkId]) {
-/******/ 				resolves.push(installedChunks[chunkId][0]);
-/******/ 			}
-/******/ 			installedChunks[chunkId] = 0;
-/******/ 		}
-/******/ 		for(moduleId in moreModules) {
-/******/ 			if(Object.prototype.hasOwnProperty.call(moreModules, moduleId)) {
-/******/ 				modules[moduleId] = moreModules[moduleId];
-/******/ 			}
-/******/ 		}
-/******/ 		if(parentJsonpFunction) parentJsonpFunction(data);
-/******/
-/******/ 		while(resolves.length) {
-/******/ 			resolves.shift()();
-/******/ 		}
-/******/
-/******/ 	};
-/******/
-/******/
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
-/******/
-/******/ 	// object to store loaded and loading chunks
-/******/ 	// undefined = chunk not loaded, null = chunk preloaded/prefetched
-/******/ 	// Promise = chunk loading, 0 = chunk loaded
-/******/ 	var installedChunks = {
-/******/ 		"/js/app": 0
-/******/ 	};
-/******/
-/******/
-/******/
-/******/ 	// script path function
-/******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({}[chunkId]||chunkId) + ".js"
-/******/ 	}
 /******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
@@ -70,67 +26,6 @@
 /******/ 		return module.exports;
 /******/ 	}
 /******/
-/******/ 	// This file contains only the entry chunk.
-/******/ 	// The chunk loading function for additional chunks
-/******/ 	__webpack_require__.e = function requireEnsure(chunkId) {
-/******/ 		var promises = [];
-/******/
-/******/
-/******/ 		// JSONP chunk loading for javascript
-/******/
-/******/ 		var installedChunkData = installedChunks[chunkId];
-/******/ 		if(installedChunkData !== 0) { // 0 means "already installed".
-/******/
-/******/ 			// a Promise means "currently loading".
-/******/ 			if(installedChunkData) {
-/******/ 				promises.push(installedChunkData[2]);
-/******/ 			} else {
-/******/ 				// setup Promise in chunk cache
-/******/ 				var promise = new Promise(function(resolve, reject) {
-/******/ 					installedChunkData = installedChunks[chunkId] = [resolve, reject];
-/******/ 				});
-/******/ 				promises.push(installedChunkData[2] = promise);
-/******/
-/******/ 				// start chunk loading
-/******/ 				var script = document.createElement('script');
-/******/ 				var onScriptComplete;
-/******/
-/******/ 				script.charset = 'utf-8';
-/******/ 				script.timeout = 120;
-/******/ 				if (__webpack_require__.nc) {
-/******/ 					script.setAttribute("nonce", __webpack_require__.nc);
-/******/ 				}
-/******/ 				script.src = jsonpScriptSrc(chunkId);
-/******/
-/******/ 				// create error before stack unwound to get useful stacktrace later
-/******/ 				var error = new Error();
-/******/ 				onScriptComplete = function (event) {
-/******/ 					// avoid mem leaks in IE.
-/******/ 					script.onerror = script.onload = null;
-/******/ 					clearTimeout(timeout);
-/******/ 					var chunk = installedChunks[chunkId];
-/******/ 					if(chunk !== 0) {
-/******/ 						if(chunk) {
-/******/ 							var errorType = event && (event.type === 'load' ? 'missing' : event.type);
-/******/ 							var realSrc = event && event.target && event.target.src;
-/******/ 							error.message = 'Loading chunk ' + chunkId + ' failed.\n(' + errorType + ': ' + realSrc + ')';
-/******/ 							error.name = 'ChunkLoadError';
-/******/ 							error.type = errorType;
-/******/ 							error.request = realSrc;
-/******/ 							chunk[1](error);
-/******/ 						}
-/******/ 						installedChunks[chunkId] = undefined;
-/******/ 					}
-/******/ 				};
-/******/ 				var timeout = setTimeout(function(){
-/******/ 					onScriptComplete({ type: 'timeout', target: script });
-/******/ 				}, 120000);
-/******/ 				script.onerror = script.onload = onScriptComplete;
-/******/ 				document.head.appendChild(script);
-/******/ 			}
-/******/ 		}
-/******/ 		return Promise.all(promises);
-/******/ 	};
 /******/
 /******/ 	// expose the modules object (__webpack_modules__)
 /******/ 	__webpack_require__.m = modules;
@@ -183,16 +78,6 @@
 /******/
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "/";
-/******/
-/******/ 	// on error function for async loading
-/******/ 	__webpack_require__.oe = function(err) { console.error(err); throw err; };
-/******/
-/******/ 	var jsonpArray = window["webpackJsonp"] = window["webpackJsonp"] || [];
-/******/ 	var oldJsonpFunction = jsonpArray.push.bind(jsonpArray);
-/******/ 	jsonpArray.push = webpackJsonpCallback;
-/******/ 	jsonpArray = jsonpArray.slice();
-/******/ 	for(var i = 0; i < jsonpArray.length; i++) webpackJsonpCallback(jsonpArray[i]);
-/******/ 	var parentJsonpFunction = oldJsonpFunction;
 /******/
 /******/
 /******/ 	// Load entry module and return exports
@@ -3424,6 +3309,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 // import { WebCam } from 'vue-cam-vision'
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -3484,6 +3391,12 @@ __webpack_require__.r(__webpack_exports__);
     },
     url_listar_cuenta: function url_listar_cuenta() {
       this.$router.push('/listar-cuenta');
+    },
+    url_modulo_Liquidaciones: function url_modulo_Liquidaciones() {
+      this.$router.push('/modulo-liquidaciones');
+    },
+    url_modulo_reunion: function url_modulo_reunion() {
+      this.$router.push('/modulo-reunion');
     } // async onCapture () {
     //   this.img = await this.$refs.webcam.capture()
     // },
@@ -4309,14 +4222,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      model: null,
       nombreCuenta: null,
       descripcionCuenta: null,
       accept: false,
       text: '',
       ph: '',
+      fixed: false,
       dense: false,
       nombre: '',
-      descripcion: ''
+      descripcion: '',
+      options: ['Google', 'Facebook', 'Twitter', 'Apple', 'Oracle'],
+      cuenta_id: '',
+      nombre_s: '',
+      descripcion_s: ''
     };
   },
   methods: {
@@ -4345,9 +4264,131 @@ __webpack_require__.r(__webpack_exports__);
       this.nombreCuenta = null;
       this.descripcionCuenta = null;
       this.accept = false;
+    },
+    traer: function traer() {
+      var _this2 = this;
+
+      axios.get('api/traer_cuenta').then(function (res) {
+        _this2.options = res.data;
+      });
+    },
+    guardar_subcuenta: function guardar_subcuenta() {
+      var _this3 = this;
+
+      var data = {
+        'nombre': this.nombre_s,
+        'descripcion': this.descripcion_s,
+        'cuenta_id': this.cuenta_id.id
+      };
+      axios.post('api/ingresar_subcuenta', data).then(function (res) {
+        // this.options = res.data;
+        if (res.data.estado == 'success') {
+          _this3.$q.notify({
+            color: "green-4",
+            textColor: "white",
+            icon: "cloud_done",
+            message: "Subcuenta creada"
+          });
+        }
+      });
     }
   },
-  crear: function crear() {}
+  created: function created() {
+    this.traer();
+  },
+  mounted: function mounted() {// this.traer();
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./resources/js/components/auth/cuentas/cuentas_js/formulario.js?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./resources/js/components/auth/cuentas/cuentas_js/formulario.js?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      cuenta_id: null,
+      loading2: false,
+      fecha: '',
+      codigo: '',
+      descripcion: '',
+      monto: '',
+      file: null,
+      options: [],
+      tipo_monto_id: '',
+      subcuenta: '',
+      subcuentas: []
+    };
+  },
+  mounted: function mounted() {
+    this.traer();
+  },
+  created: function created() {},
+  methods: {
+    traer: function traer() {
+      var _this = this;
+
+      axios.get('api/traer_cuenta').then(function (res) {
+        _this.options = res.data; // this.loading = false;
+        // this.original = res.data;
+        // this.data = res.data;
+      });
+    },
+    change_cuenta: function change_cuenta(dos) {
+      var _this2 = this;
+
+      this["loading".concat(dos)] = true;
+      axios.get('api/traer_subcuenta/' + this.cuenta_id.id).then(function (res) {
+        if (res.data.estado == 'success') {
+          _this2.subcuentas = res.data.lista;
+          _this2["loading".concat(dos)] = false;
+        }
+      });
+    },
+    guardar: function guardar() {
+      var _this3 = this;
+
+      var data = new FormData();
+      data.append('cuenta_id', this.cuenta_id.id);
+      data.append('fecha', this.fecha);
+      data.append('codigo', this.codigo);
+      data.append('descripcion', this.descripcion);
+      data.append('sub_cuenta_id', this.subcuenta.id);
+      data.append('tipo_monto_id', this.tipo_monto_id.id);
+      data.append('archivo', this.file);
+      data.append('monto', this.monto);
+      console.log(data);
+      axios.post('api/insertar_cuenta_detalle', data).then(function (res) {
+        if (res.data.estado == 'success') {
+          _this3.$q.notify({
+            color: "green-4",
+            textColor: "white",
+            icon: "cloud_done",
+            message: "" + res.data.mensaje + ""
+          });
+
+          _this3.limpiar_mdelos();
+        }
+      });
+    },
+    limpiar_mdelos: function limpiar_mdelos() {
+      this.cuenta_id = null;
+      this.fecha = '';
+      this.codigo = '';
+      this.descripcion = '';
+      this.subcuenta = '';
+      this.tipo_monto_id = '';
+      this.file = null;
+      this.monto = '';
+    }
+  }
 });
 
 /***/ }),
@@ -4363,47 +4404,182 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var quasar_lang_index_json__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! quasar/lang/index.json */ "./node_modules/quasar/lang/index.json");
 var quasar_lang_index_json__WEBPACK_IMPORTED_MODULE_0___namespace = /*#__PURE__*/__webpack_require__.t(/*! quasar/lang/index.json */ "./node_modules/quasar/lang/index.json", 1);
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
-
-function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
-
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      monto_inicio: '',
+      arrastre: 0,
+      view_tabla: false,
       selected: [],
+      fixed: [],
+      modal_ic: false,
+      cuenta_id: '',
+      options: [],
       columns: [{
         name: 'id',
         align: 'center',
         label: 'Id',
         field: 'id',
-        sortable: true
+        sortable: true,
+        headerClasses: 'bg-primary text-white'
       }, {
-        name: 'nombre',
-        label: 'Nombre',
+        name: 'titulo',
+        align: 'center',
+        label: 'Titulo',
         field: 'titulo',
-        sortable: true
+        sortable: true,
+        headerClasses: 'bg-primary text-white'
+      }, {
+        name: 'fecha',
+        align: 'center',
+        label: 'Fecha',
+        field: 'fecha',
+        sortable: true,
+        headerClasses: 'bg-primary text-white'
+      }, {
+        name: 'archivo',
+        align: 'center',
+        label: 'Archivo',
+        field: 'archivo',
+        sortable: true,
+        headerClasses: 'bg-primary text-white'
       }, {
         name: 'descripcion',
+        align: 'center',
         label: 'Descripcion',
-        field: 'descripcion'
+        field: 'descripcion',
+        headerClasses: 'bg-primary text-white'
+      }, {
+        name: 'ingreso',
+        align: 'center',
+        label: 'Ingreso',
+        field: 'monto_ingreso',
+        sortable: true,
+        headerClasses: 'bg-primary text-white'
+      }, {
+        name: 'egreso',
+        align: 'center',
+        label: 'Egreso',
+        field: 'monto_egreso',
+        sortable: true,
+        headerClasses: 'bg-primary text-white'
+      }, {
+        name: 'view',
+        label: 'View',
+        field: 'view',
+        sortable: true,
+        headerClasses: 'bg-primary text-white'
       }],
-      pagination: {
-        sortBy: 'name',
-        descending: false,
-        page: 1,
-        rowsPerPage: 3,
-        rowsNumber: 10
-      },
-      data: [],
-      original: [],
-      lang: this.$q.lang.isoName,
-      filter: '',
-      loading: false
+      mes: '',
+      meses: [{
+        'id': '1',
+        'label': 'Enero'
+      }, {
+        'id': '2',
+        'label': 'Febrero'
+      }, {
+        'id': '3',
+        'label': 'Marzo'
+      }, {
+        'id': '4',
+        'label': 'Abril'
+      }, {
+        'id': '5',
+        'label': 'Mayo'
+      }, {
+        'id': '6',
+        'label': 'Junio'
+      }, {
+        'id': '7',
+        'label': 'Julio'
+      }, {
+        'id': '8',
+        'label': 'Agosto'
+      }, {
+        'id': '9',
+        'label': 'Septiembre'
+      }, {
+        'id': '10',
+        'label': 'Octubre'
+      }, {
+        'id': '11',
+        'label': 'Noviembre'
+      }, {
+        'id': '12',
+        'label': 'Diciembre'
+      }],
+      anio: '',
+      anios: [{
+        'id': '2019',
+        'label': '2019'
+      }, {
+        'id': '2020',
+        'label': '2020'
+      }, {
+        'id': '2021',
+        'label': '2021'
+      }, {
+        'id': '2022',
+        'label': '2022'
+      }],
+      tabla: [],
+      ingresos: 0,
+      egresos: 0,
+      columns_resumen: [{
+        name: 'name',
+        required: true,
+        label: 'Resumen del mes',
+        align: 'left',
+        field: function field(row) {
+          return row.name;
+        },
+        format: function format(val) {
+          return "".concat(val);
+        },
+        sortable: true,
+        classes: 'bg-grey-2 ellipsis',
+        style: 'max-width: 100px',
+        headerClasses: 'bg-primary text-white'
+      }, {
+        name: 'valor',
+        align: 'center',
+        label: 'Valor',
+        field: 'valor',
+        sortable: true
+      }],
+      data_resumen: [],
+      columns_acumulado: [{
+        name: 'name',
+        required: true,
+        label: 'Resumen acumulado',
+        align: 'left',
+        field: function field(row) {
+          return row.name;
+        },
+        format: function format(val) {
+          return "".concat(val);
+        },
+        sortable: true,
+        classes: 'bg-grey-2 ellipsis',
+        style: 'max-width: 100px',
+        headerClasses: 'bg-primary text-white'
+      }, {
+        name: 'valor',
+        align: 'center',
+        label: 'Valor',
+        field: 'valor',
+        sortable: true
+      }],
+      data_acumulado: [{
+        name: '',
+        valor: ''
+      }],
+      //variables para editar
+      e_fecha: '',
+      e_descripcion: '',
+      e_ingreso: '',
+      e_egreso: ''
     };
   },
   methods: {
@@ -4414,129 +4590,189 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       var _this = this;
 
       axios.get('api/traer_cuenta').then(function (res) {
-        _this.loading = false;
-        _this.original = res.data;
+        _this.options = res.data; // this.loading = false;
+        // this.original = res.data;
+        // this.data = res.data;
       });
     },
-    onRequest: function onRequest(props) {
+    listar: function listar() {
       var _this2 = this;
 
-      var _props$pagination = props.pagination,
-          page = _props$pagination.page,
-          rowsPerPage = _props$pagination.rowsPerPage,
-          rowsNumber = _props$pagination.rowsNumber,
-          sortBy = _props$pagination.sortBy,
-          descending = _props$pagination.descending;
-      var filter = props.filter;
-      this.loading = true; // emulate server
+      axios.get('api/listar_cuenta_detalle/' + this.mes.id + '/' + this.anio.id + '/' + this.cuenta_id.id).then(function (res) {
+        if (res.data.estado == 'success') {
+          _this2.tabla = res.data.lista;
+          var sumar_i = 0;
+          var sumar_e = 0;
 
-      setTimeout(function () {
-        var _this2$data;
-
-        // update rowsCount with appropriate value
-        _this2.pagination.rowsNumber = _this2.getRowsNumberCount(filter); // get all rows if "All" (0) is selected
-
-        var fetchCount = rowsPerPage === 0 ? rowsNumber : rowsPerPage; // calculate starting row of data
-
-        var startRow = (page - 1) * rowsPerPage; // fetch data from "server"
-
-        var returnedData = _this2.fetchFromServer(startRow, fetchCount, filter, sortBy, descending); // clear out existing data and add new
-
-
-        (_this2$data = _this2.data).splice.apply(_this2$data, [0, _this2.data.length].concat(_toConsumableArray(returnedData))); // don't forget to update local pagination object
-
-
-        _this2.pagination.page = page;
-        _this2.pagination.rowsPerPage = rowsPerPage;
-        _this2.pagination.sortBy = sortBy;
-        _this2.pagination.descending = descending; // ...and turn of loading indicator
-
-        _this2.loading = false;
-      }, 1500);
-    },
-    fetchFromServer: function fetchFromServer(startRow, count, filter, sortBy, descending) {
-      var data = [];
-
-      if (!filter) {
-        data = this.original.slice(startRow, startRow + count);
-      } else {
-        var found = 0;
-
-        for (var index = startRow, items = 0; index < this.original.length && items < count; ++index) {
-          var row = this.original[index]; // match filter?
-
-          if (!row['titulo'].includes(filter)) {
-            // get a different row, until one is found
-            continue;
+          for (var i = 0; i < _this2.tabla.length; i++) {
+            sumar_i += Number(_this2.tabla[i].monto_ingreso);
+            sumar_e += Number(_this2.tabla[i].monto_egreso);
           }
 
-          ++found;
+          _this2.ingresos = sumar_i;
+          _this2.egresos = sumar_e;
+          _this2.data_resumen = [{
+            name: 'Ingreso',
+            valor: _this2.formatPrice(sumar_i)
+          }, {
+            name: 'Egreso',
+            valor: _this2.formatPrice(sumar_e)
+          }, {
+            name: 'Total mensual',
+            valor: _this2.formatPrice(sumar_i - sumar_e)
+          }];
 
-          if (found >= startRow) {
-            data.push(row);
-            ++items;
-          }
-        }
-      } // handle sortBy
+          _this2.traer_inicio_mensual(_this2.mes.id, _this2.anio.id, _this2.cuenta_id.id);
 
-
-      if (sortBy) {
-        data.sort(function (a, b) {
-          var x = descending ? b : a;
-          var y = descending ? a : b;
-
-          if (sortBy === 'desc') {
-            // string sort
-            return x[sortBy] > y[sortBy] ? 1 : x[sortBy] < y[sortBy] ? -1 : 0;
-          } else {
-            // numeric sort
-            return parseFloat(x[sortBy]) - parseFloat(y[sortBy]);
-          }
-        });
-      }
-
-      return data;
-    },
-    // emulate 'SELECT count(*) FROM ...WHERE...'
-    getRowsNumberCount: function getRowsNumberCount(filter) {
-      if (!filter) {
-        return this.original.length;
-      }
-
-      var count = 0;
-      this.original.forEach(function (treat) {
-        if (treat['titulo'].includes(filter)) {
-          ++count;
+          _this2.view_tabla = true; // this[`loading${dos}`] = false
+        } else {
+          _this2.view_tabla = false;
         }
       });
-      return count;
-    }
-  },
-  watch: {
-    lang: function lang(_lang) {
+    },
+    ingresar_inicio_mes: function ingresar_inicio_mes() {
       var _this3 = this;
 
-      // dynamic import, so loading on demand only
-      __webpack_require__("./node_modules/quasar/lang lazy recursive ^\\.\\/.*$")("./".concat(_lang)).then(function (lang) {
-        _this3.$q.lang.set(lang["default"]);
+      var data = {
+        'cuenta_id': this.cuenta_id.id,
+        'anio': this.anio.id,
+        'mes': this.mes.id,
+        'monto_inicio': this.monto_inicio
+      };
+      axios.post('api/ini_cie_ingresar', data).then(function (res) {
+        if (res.data.estado == 'success') {
+          _this3.$q.notify({
+            color: "green-4",
+            textColor: "white",
+            icon: "cloud_done",
+            message: "" + res.data.mensaje + ""
+          });
+
+          _this3.listar();
+        } else {
+          _this3.$q.notify({
+            color: "red-4",
+            textColor: "white",
+            icon: "cloud_done",
+            message: "" + res.data.mensaje + ""
+          });
+        }
+      });
+    },
+    traer_inicio_mensual: function traer_inicio_mensual(mes, anio, cuenta) {
+      var _this4 = this;
+
+      axios.get('api/traer_inicio_mensual/' + mes + '/' + anio + '/' + cuenta).then(function (res) {
+        _this4.monto_inicio = res.data.inicio_mensual;
+      });
+    },
+    limpiar: function limpiar() {
+      this.tabla = [];
+      this.view_tabla = false;
+    },
+    ruta: function ruta(_ruta) {
+      this.$router.push(_ruta);
+    },
+    show: function show(component) {
+      console.log(this.$refs);
+      this.$refs['' + component + ''].show();
+    },
+    // following method is REQUIRED
+    // (don't change its name --> "hide")
+    hide: function hide(component) {
+      this.$refs['' + component + ''].hide();
+    },
+    // hide() {
+    //   this.$refs.dialog.hide()
+    // },
+    onDialogHide: function onDialogHide() {
+      // required to be emitted
+      // when QDialog emits "hide" event
+      this.$emit('hide');
+    },
+    formatPrice: function formatPrice(value) {
+      var val = (value / 1).toFixed(0).replace('.', ',');
+      return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    },
+    llenar_inputs: function llenar_inputs(fecha, descripcion, monto_ingreso, monto_egreso) {
+      this.e_fecha = fecha;
+      this.e_descripcion = descripcion;
+      this.e_ingreso = monto_ingreso;
+      this.e_egreso = monto_egreso;
+      this.file = null;
+    },
+    editar: function editar(id, nombre, valor) {
+      var _this5 = this;
+
+      // console.log(id,
+      //   nombre,
+      //   valor);
+      var data = new FormData();
+      data.append('id', id);
+      data.append('nombre', nombre);
+      data.append('valor', valor);
+      axios.post('api/actualizar_cuenta_detalle', data).then(function (res) {
+        if (res.data.estado == 'success') {
+          _this5.$q.notify({
+            color: "green-4",
+            textColor: "white",
+            icon: "cloud_done",
+            message: "" + res.data.mensaje + ""
+          });
+        }
+      });
+    },
+    editar_archivo: function editar_archivo(id, nombre) {
+      var _this6 = this;
+
+      var data = new FormData();
+      data.append('id', id);
+      data.append('nombre', nombre);
+      data.append('valor', this.file);
+      axios.post('api/actualizar_cuenta_detalle_archivo', data).then(function (res) {
+        if (res.data.estado == 'success') {
+          _this6.$q.notify({
+            color: "green-4",
+            textColor: "white",
+            icon: "cloud_done",
+            message: "" + res.data.mensaje + ""
+          });
+        }
+      });
+    },
+    eliminar: function eliminar(id, component) {
+      var _this7 = this;
+
+      axios.get('api/eliminar_cuenta_detalle/' + id).then(function (res) {
+        if (res.data.estado == 'success') {
+          _this7.$q.notify({
+            color: "green-4",
+            textColor: "white",
+            icon: "cloud_done",
+            message: "" + res.data.mensaje + ""
+          });
+
+          _this7.hide(component);
+
+          _this7.listar();
+        }
       });
     }
   },
-  created: function created() {
-    this.langOptions = quasar_lang_index_json__WEBPACK_IMPORTED_MODULE_0__.map(function (lang) {
-      return {
-        label: lang.nativeName,
-        value: lang.isoName
-      };
-    });
-    this.traer();
+  watch: {// lang (lang) {
+    //   // dynamic import, so loading on demand only
+    //   import(`quasar/lang/${lang}`).then(lang => {
+    //     this.$q.lang.set(lang.default)
+    //   })
+    // }
   },
+  created: function created() {},
   mounted: function mounted() {
     // get initial data from server (1st page)
-    this.onRequest({
-      pagination: this.pagination,
-      filter: undefined
-    });
+    this.traer(); // this.onRequest({
+    //   pagination: this.pagination,
+    //   filter: undefined
+    // })
   }
 });
 
@@ -4562,6 +4798,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     url_listar_cuenta: function url_listar_cuenta() {
       this.$router.push('/listar-cuenta');
+    },
+    url_formulario_cuenta: function url_formulario_cuenta() {
+      this.$router.push('/formulario-cuenta');
     }
   }
 });
@@ -10709,7 +10948,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\na:link\r\n{\r\ntext-decoration:none;\n}\r\n", ""]);
+exports.push([module.i, "\na:link\n{\ntext-decoration:none;\n}\n", ""]);
 
 // exports
 
@@ -10747,7 +10986,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".titulo{\r\ncolor: #ffffff;\r\nbackground: #bdc3c7;  /* fallback for old browsers */  /* Chrome 10-25, Safari 5.1-6 */\r\nbackground: -webkit-gradient(linear, left top, right top, from(#2c3e50), to(#bdc3c7));\r\nbackground: linear-gradient(to right, #2c3e50, #bdc3c7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */\n}", ""]);
+exports.push([module.i, ".titulo{\ncolor: #ffffff;\nbackground: #bdc3c7;  /* fallback for old browsers */  /* Chrome 10-25, Safari 5.1-6 */\nbackground: -webkit-gradient(linear, left top, right top, from(#2c3e50), to(#bdc3c7));\nbackground: linear-gradient(to right, #2c3e50, #bdc3c7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */\n}", ""]);
 
 // exports
 
@@ -75606,489 +75845,6 @@ if(false) {}
 
 /***/ }),
 
-/***/ "./node_modules/quasar/lang lazy recursive ^\\.\\/.*$":
-/*!*****************************************************************!*\
-  !*** ./node_modules/quasar/lang lazy ^\.\/.*$ namespace object ***!
-  \*****************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var map = {
-	"./": [
-		"./node_modules/quasar/lang/index.json",
-		3
-	],
-	"./ar": [
-		"./node_modules/quasar/lang/ar.js",
-		9,
-		0
-	],
-	"./ar.js": [
-		"./node_modules/quasar/lang/ar.js",
-		9,
-		0
-	],
-	"./bg": [
-		"./node_modules/quasar/lang/bg.js",
-		9,
-		1
-	],
-	"./bg.js": [
-		"./node_modules/quasar/lang/bg.js",
-		9,
-		1
-	],
-	"./ca": [
-		"./node_modules/quasar/lang/ca.js",
-		9,
-		2
-	],
-	"./ca.js": [
-		"./node_modules/quasar/lang/ca.js",
-		9,
-		2
-	],
-	"./cs": [
-		"./node_modules/quasar/lang/cs.js",
-		9,
-		3
-	],
-	"./cs.js": [
-		"./node_modules/quasar/lang/cs.js",
-		9,
-		3
-	],
-	"./da": [
-		"./node_modules/quasar/lang/da.js",
-		9,
-		4
-	],
-	"./da.js": [
-		"./node_modules/quasar/lang/da.js",
-		9,
-		4
-	],
-	"./de": [
-		"./node_modules/quasar/lang/de.js",
-		9,
-		5
-	],
-	"./de.js": [
-		"./node_modules/quasar/lang/de.js",
-		9,
-		5
-	],
-	"./el": [
-		"./node_modules/quasar/lang/el.js",
-		9,
-		6
-	],
-	"./el.js": [
-		"./node_modules/quasar/lang/el.js",
-		9,
-		6
-	],
-	"./en-gb": [
-		"./node_modules/quasar/lang/en-gb.js",
-		9,
-		7
-	],
-	"./en-gb.js": [
-		"./node_modules/quasar/lang/en-gb.js",
-		9,
-		7
-	],
-	"./en-us": [
-		"./node_modules/quasar/lang/en-us.js",
-		9,
-		8
-	],
-	"./en-us.js": [
-		"./node_modules/quasar/lang/en-us.js",
-		9,
-		8
-	],
-	"./eo": [
-		"./node_modules/quasar/lang/eo.js",
-		9,
-		9
-	],
-	"./eo.js": [
-		"./node_modules/quasar/lang/eo.js",
-		9,
-		9
-	],
-	"./es": [
-		"./node_modules/quasar/lang/es.js",
-		9,
-		10
-	],
-	"./es.js": [
-		"./node_modules/quasar/lang/es.js",
-		9,
-		10
-	],
-	"./fa-ir": [
-		"./node_modules/quasar/lang/fa-ir.js",
-		9,
-		11
-	],
-	"./fa-ir.js": [
-		"./node_modules/quasar/lang/fa-ir.js",
-		9,
-		11
-	],
-	"./fi": [
-		"./node_modules/quasar/lang/fi.js",
-		9,
-		12
-	],
-	"./fi.js": [
-		"./node_modules/quasar/lang/fi.js",
-		9,
-		12
-	],
-	"./fr": [
-		"./node_modules/quasar/lang/fr.js",
-		9,
-		13
-	],
-	"./fr.js": [
-		"./node_modules/quasar/lang/fr.js",
-		9,
-		13
-	],
-	"./gn": [
-		"./node_modules/quasar/lang/gn.js",
-		9,
-		14
-	],
-	"./gn.js": [
-		"./node_modules/quasar/lang/gn.js",
-		9,
-		14
-	],
-	"./he": [
-		"./node_modules/quasar/lang/he.js",
-		9,
-		15
-	],
-	"./he.js": [
-		"./node_modules/quasar/lang/he.js",
-		9,
-		15
-	],
-	"./hr": [
-		"./node_modules/quasar/lang/hr.js",
-		9,
-		16
-	],
-	"./hr.js": [
-		"./node_modules/quasar/lang/hr.js",
-		9,
-		16
-	],
-	"./hu": [
-		"./node_modules/quasar/lang/hu.js",
-		9,
-		17
-	],
-	"./hu.js": [
-		"./node_modules/quasar/lang/hu.js",
-		9,
-		17
-	],
-	"./id": [
-		"./node_modules/quasar/lang/id.js",
-		9,
-		18
-	],
-	"./id.js": [
-		"./node_modules/quasar/lang/id.js",
-		9,
-		18
-	],
-	"./index": [
-		"./node_modules/quasar/lang/index.json",
-		3
-	],
-	"./index.json": [
-		"./node_modules/quasar/lang/index.json",
-		3
-	],
-	"./it": [
-		"./node_modules/quasar/lang/it.js",
-		9,
-		19
-	],
-	"./it.js": [
-		"./node_modules/quasar/lang/it.js",
-		9,
-		19
-	],
-	"./ja": [
-		"./node_modules/quasar/lang/ja.js",
-		9,
-		20
-	],
-	"./ja.js": [
-		"./node_modules/quasar/lang/ja.js",
-		9,
-		20
-	],
-	"./km": [
-		"./node_modules/quasar/lang/km.js",
-		9,
-		21
-	],
-	"./km.js": [
-		"./node_modules/quasar/lang/km.js",
-		9,
-		21
-	],
-	"./ko-kr": [
-		"./node_modules/quasar/lang/ko-kr.js",
-		9,
-		22
-	],
-	"./ko-kr.js": [
-		"./node_modules/quasar/lang/ko-kr.js",
-		9,
-		22
-	],
-	"./lu": [
-		"./node_modules/quasar/lang/lu.js",
-		9,
-		23
-	],
-	"./lu.js": [
-		"./node_modules/quasar/lang/lu.js",
-		9,
-		23
-	],
-	"./lv": [
-		"./node_modules/quasar/lang/lv.js",
-		9,
-		24
-	],
-	"./lv.js": [
-		"./node_modules/quasar/lang/lv.js",
-		9,
-		24
-	],
-	"./ml": [
-		"./node_modules/quasar/lang/ml.js",
-		9,
-		25
-	],
-	"./ml.js": [
-		"./node_modules/quasar/lang/ml.js",
-		9,
-		25
-	],
-	"./ms": [
-		"./node_modules/quasar/lang/ms.js",
-		9,
-		26
-	],
-	"./ms.js": [
-		"./node_modules/quasar/lang/ms.js",
-		9,
-		26
-	],
-	"./nb-no": [
-		"./node_modules/quasar/lang/nb-no.js",
-		9,
-		27
-	],
-	"./nb-no.js": [
-		"./node_modules/quasar/lang/nb-no.js",
-		9,
-		27
-	],
-	"./nl": [
-		"./node_modules/quasar/lang/nl.js",
-		9,
-		28
-	],
-	"./nl.js": [
-		"./node_modules/quasar/lang/nl.js",
-		9,
-		28
-	],
-	"./pl": [
-		"./node_modules/quasar/lang/pl.js",
-		9,
-		29
-	],
-	"./pl.js": [
-		"./node_modules/quasar/lang/pl.js",
-		9,
-		29
-	],
-	"./pt": [
-		"./node_modules/quasar/lang/pt.js",
-		9,
-		31
-	],
-	"./pt-br": [
-		"./node_modules/quasar/lang/pt-br.js",
-		9,
-		30
-	],
-	"./pt-br.js": [
-		"./node_modules/quasar/lang/pt-br.js",
-		9,
-		30
-	],
-	"./pt.js": [
-		"./node_modules/quasar/lang/pt.js",
-		9,
-		31
-	],
-	"./ro": [
-		"./node_modules/quasar/lang/ro.js",
-		9,
-		32
-	],
-	"./ro.js": [
-		"./node_modules/quasar/lang/ro.js",
-		9,
-		32
-	],
-	"./ru": [
-		"./node_modules/quasar/lang/ru.js",
-		9,
-		33
-	],
-	"./ru.js": [
-		"./node_modules/quasar/lang/ru.js",
-		9,
-		33
-	],
-	"./sk": [
-		"./node_modules/quasar/lang/sk.js",
-		9,
-		34
-	],
-	"./sk.js": [
-		"./node_modules/quasar/lang/sk.js",
-		9,
-		34
-	],
-	"./sl": [
-		"./node_modules/quasar/lang/sl.js",
-		9,
-		35
-	],
-	"./sl.js": [
-		"./node_modules/quasar/lang/sl.js",
-		9,
-		35
-	],
-	"./sr": [
-		"./node_modules/quasar/lang/sr.js",
-		9,
-		36
-	],
-	"./sr.js": [
-		"./node_modules/quasar/lang/sr.js",
-		9,
-		36
-	],
-	"./sv": [
-		"./node_modules/quasar/lang/sv.js",
-		9,
-		37
-	],
-	"./sv.js": [
-		"./node_modules/quasar/lang/sv.js",
-		9,
-		37
-	],
-	"./th": [
-		"./node_modules/quasar/lang/th.js",
-		9,
-		38
-	],
-	"./th.js": [
-		"./node_modules/quasar/lang/th.js",
-		9,
-		38
-	],
-	"./tr": [
-		"./node_modules/quasar/lang/tr.js",
-		9,
-		39
-	],
-	"./tr.js": [
-		"./node_modules/quasar/lang/tr.js",
-		9,
-		39
-	],
-	"./uk": [
-		"./node_modules/quasar/lang/uk.js",
-		9,
-		40
-	],
-	"./uk.js": [
-		"./node_modules/quasar/lang/uk.js",
-		9,
-		40
-	],
-	"./vi": [
-		"./node_modules/quasar/lang/vi.js",
-		9,
-		41
-	],
-	"./vi.js": [
-		"./node_modules/quasar/lang/vi.js",
-		9,
-		41
-	],
-	"./zh-hans": [
-		"./node_modules/quasar/lang/zh-hans.js",
-		9,
-		42
-	],
-	"./zh-hans.js": [
-		"./node_modules/quasar/lang/zh-hans.js",
-		9,
-		42
-	],
-	"./zh-hant": [
-		"./node_modules/quasar/lang/zh-hant.js",
-		9,
-		43
-	],
-	"./zh-hant.js": [
-		"./node_modules/quasar/lang/zh-hant.js",
-		9,
-		43
-	]
-};
-function webpackAsyncContext(req) {
-	if(!__webpack_require__.o(map, req)) {
-		return Promise.resolve().then(function() {
-			var e = new Error("Cannot find module '" + req + "'");
-			e.code = 'MODULE_NOT_FOUND';
-			throw e;
-		});
-	}
-
-	var ids = map[req], id = ids[0];
-	return Promise.all(ids.slice(2).map(__webpack_require__.e)).then(function() {
-		return __webpack_require__.t(id, ids[1])
-	});
-}
-webpackAsyncContext.keys = function webpackAsyncContextKeys() {
-	return Object.keys(map);
-};
-webpackAsyncContext.id = "./node_modules/quasar/lang lazy recursive ^\\.\\/.*$";
-module.exports = webpackAsyncContext;
-
-/***/ }),
-
 /***/ "./node_modules/quasar/lang/index.json":
 /*!*********************************************!*\
   !*** ./node_modules/quasar/lang/index.json ***!
@@ -77072,6 +76828,586 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 "use strict";
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(o){return typeof o}:function(o){return o&&"function"==typeof Symbol&&o.constructor===Symbol&&o!==Symbol.prototype?"symbol":typeof o};!function(){function o(e,t){if(!o.installed){if(o.installed=!0,!t)return void console.error("You have to install axios");e.axios=t,Object.defineProperties(e.prototype,{axios:{get:function(){return t}},$http:{get:function(){return t}}})}}"object"==( false?undefined:_typeof(exports))?module.exports=o: true?!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function(){return o}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)):undefined}();
+
+/***/ }),
+
+/***/ "./node_modules/vue-friendly-iframe/dist/vue-friendly-iframe.js":
+/*!**********************************************************************!*\
+  !*** ./node_modules/vue-friendly-iframe/dist/vue-friendly-iframe.js ***!
+  \**********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/*!
+ * vue-friendly-iframe v0.16.0 (https://github.com/officert/vue-friendly-iframe)
+ * (c) 2019 Tim Officer
+ * Released under the MIT License.
+ */
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(true)
+		module.exports = factory();
+	else { var i, a; }
+})(typeof self !== 'undefined' ? self : this, function() {
+return /******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _FriendlyIframe = __webpack_require__(1);
+
+var _FriendlyIframe2 = _interopRequireDefault(_FriendlyIframe);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = _FriendlyIframe2.default;
+module.exports = exports['default'];
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(2)(
+  /* script */
+  __webpack_require__(3),
+  /* template */
+  __webpack_require__(9),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports) {
+
+// this module is a runtime utility for cleaner component module output and will
+// be included in the final webpack user bundle
+
+module.exports = function normalizeComponent (
+  rawScriptExports,
+  compiledTemplate,
+  scopeId,
+  cssModules
+) {
+  var esModule
+  var scriptExports = rawScriptExports = rawScriptExports || {}
+
+  // ES6 modules interop
+  var type = typeof rawScriptExports.default
+  if (type === 'object' || type === 'function') {
+    esModule = rawScriptExports
+    scriptExports = rawScriptExports.default
+  }
+
+  // Vue.extend constructor export interop
+  var options = typeof scriptExports === 'function'
+    ? scriptExports.options
+    : scriptExports
+
+  // render functions
+  if (compiledTemplate) {
+    options.render = compiledTemplate.render
+    options.staticRenderFns = compiledTemplate.staticRenderFns
+  }
+
+  // scopedId
+  if (scopeId) {
+    options._scopeId = scopeId
+  }
+
+  // inject cssModules
+  if (cssModules) {
+    var computed = Object.create(options.computed || null)
+    Object.keys(cssModules).forEach(function (key) {
+      var module = cssModules[key]
+      computed[key] = function () { return module }
+    })
+    options.computed = computed
+  }
+
+  return {
+    esModule: esModule,
+    exports: scriptExports,
+    options: options
+  }
+}
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _v = __webpack_require__(4);
+
+var _v2 = _interopRequireDefault(_v);
+
+var _utils = __webpack_require__(8);
+
+var _utils2 = _interopRequireDefault(_utils);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function generateGuid() {
+  return (0, _v2.default)();
+}
+
+exports.default = {
+  name: 'friendly-iframe',
+  props: {
+    src: {
+      type: String,
+      required: true
+    },
+    crossorigin: {
+      type: String,
+      required: false,
+      default: 'anonymous'
+    },
+    target: {
+      type: String,
+      required: false,
+      default: '_parent'
+    },
+    className: {
+      type: String,
+      required: false
+    },
+    frameborder: {
+      type: String,
+      required: false
+    },
+    gesture: {
+      type: String,
+      required: false
+    },
+    allow: {
+      type: String,
+      required: false
+    },
+    allowfullscreen: {
+      type: String,
+      required: false
+    },
+    scrolling: {
+      type: String,
+      required: false
+    }
+  },
+  data: function data() {
+    return {
+      iframeEl: null,
+      iframeLoadedMessage: 'IFRAME_LOADED_' + generateGuid(),
+      iframeOnReadyStateChangeMessage: 'IFRAME_ON_READ_STATE_CHANGE_' + generateGuid()
+    };
+  },
+
+  computed: {},
+  watch: {
+    src: function src() {
+      this.reinitIframe(this);
+    }
+  },
+  methods: {
+    removeIframe: function removeIframe() {
+      while (this.$el.firstChild) {
+        this.$el.removeChild(this.$el.firstChild);
+      }
+    },
+    setIframeUrl: function setIframeUrl() {
+      var iframeDoc = this.iframeEl.contentWindow.document;
+      iframeDoc.open().write('\n          <body onload="window.location.href=\'' + this.src + '\'; parent.postMessage(\'' + this.iframeLoadedMessage + '\', \'*\')"></body>\n          <script>\n            window.document.onreadystatechange = function () {\n              if(window.document.readyState === \'complete\') {\n                parent.postMessage(\'' + this.iframeOnReadyStateChangeMessage + '\', \'*\')\n              }\n            };\n          </script>\n          ');
+
+      iframeDoc.close();
+    },
+
+    reinitIframe: _utils2.default.debounce(function (vm) {
+      vm.removeIframe();
+      vm.initIframe();
+    }, 200),
+    initIframe: function initIframe() {
+      this.iframeEl = document.createElement('iframe');
+      this.iframeEl.setAttribute('iframe-src', this.src);
+      this.iframeEl.setAttribute('crossorigin', this.crossorigin);
+      this.iframeEl.setAttribute('target', this.target);
+      this.iframeEl.setAttribute('style', 'visibility: hidden; position: absolute; top: -99999px');
+      if (this.className) this.iframeEl.setAttribute('class', this.className);
+      if (this.class) this.iframeEl.setAttribute('class', this.class);
+      if (this.frameborder) this.iframeEl.setAttribute('frameborder', this.frameborder);
+      if (this.gesture) this.iframeEl.setAttribute('gesture', this.gesture);
+      if (this.allow) this.iframeEl.setAttribute('allow', this.allow);
+      if (this.allowfullscreen) this.iframeEl.setAttribute('allowfullscreen', this.allowfullscreen);
+      if (this.scrolling) this.iframeEl.setAttribute('scrolling', this.scrolling);
+
+      this.$el.appendChild(this.iframeEl);
+
+      this.setIframeUrl();
+    },
+    listenForEvents: function listenForEvents() {
+      var _this = this;
+
+      var eventMethod = window.addEventListener ? 'addEventListener' : 'attachEvent';
+      var eventer = window[eventMethod];
+      var messageEvent = eventMethod === 'attachEvent' ? 'onmessage' : 'message';
+
+      eventer(messageEvent, function (event) {
+        if (event.data === _this.iframeLoadedMessage) {
+          _this.$emit('iframe-load');
+
+          _this.iframeEl.setAttribute('style', 'visibility: visible;');
+        }
+
+        if (event.data === _this.iframeOnReadyStateChangeMessage) {
+          _this.$emit('document-load');
+
+          _this.$emit('load');
+        }
+      }, false);
+    }
+  },
+  mounted: function mounted() {
+    this.listenForEvents();
+
+    this.initIframe();
+  }
+};
+module.exports = exports['default'];
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var rng = __webpack_require__(5);
+var bytesToUuid = __webpack_require__(7);
+
+// **`v1()` - Generate time-based UUID**
+//
+// Inspired by https://github.com/LiosK/UUID.js
+// and http://docs.python.org/library/uuid.html
+
+// random #'s we need to init node and clockseq
+var _seedBytes = rng();
+
+// Per 4.5, create and 48-bit node id, (47 random bits + multicast bit = 1)
+var _nodeId = [
+  _seedBytes[0] | 0x01,
+  _seedBytes[1], _seedBytes[2], _seedBytes[3], _seedBytes[4], _seedBytes[5]
+];
+
+// Per 4.2.2, randomize (14 bit) clockseq
+var _clockseq = (_seedBytes[6] << 8 | _seedBytes[7]) & 0x3fff;
+
+// Previous uuid creation time
+var _lastMSecs = 0, _lastNSecs = 0;
+
+// See https://github.com/broofa/node-uuid for API details
+function v1(options, buf, offset) {
+  var i = buf && offset || 0;
+  var b = buf || [];
+
+  options = options || {};
+
+  var clockseq = options.clockseq !== undefined ? options.clockseq : _clockseq;
+
+  // UUID timestamps are 100 nano-second units since the Gregorian epoch,
+  // (1582-10-15 00:00).  JSNumbers aren't precise enough for this, so
+  // time is handled internally as 'msecs' (integer milliseconds) and 'nsecs'
+  // (100-nanoseconds offset from msecs) since unix epoch, 1970-01-01 00:00.
+  var msecs = options.msecs !== undefined ? options.msecs : new Date().getTime();
+
+  // Per 4.2.1.2, use count of uuid's generated during the current clock
+  // cycle to simulate higher resolution clock
+  var nsecs = options.nsecs !== undefined ? options.nsecs : _lastNSecs + 1;
+
+  // Time since last uuid creation (in msecs)
+  var dt = (msecs - _lastMSecs) + (nsecs - _lastNSecs)/10000;
+
+  // Per 4.2.1.2, Bump clockseq on clock regression
+  if (dt < 0 && options.clockseq === undefined) {
+    clockseq = clockseq + 1 & 0x3fff;
+  }
+
+  // Reset nsecs if clock regresses (new clockseq) or we've moved onto a new
+  // time interval
+  if ((dt < 0 || msecs > _lastMSecs) && options.nsecs === undefined) {
+    nsecs = 0;
+  }
+
+  // Per 4.2.1.2 Throw error if too many uuids are requested
+  if (nsecs >= 10000) {
+    throw new Error('uuid.v1(): Can\'t create more than 10M uuids/sec');
+  }
+
+  _lastMSecs = msecs;
+  _lastNSecs = nsecs;
+  _clockseq = clockseq;
+
+  // Per 4.1.4 - Convert from unix epoch to Gregorian epoch
+  msecs += 12219292800000;
+
+  // `time_low`
+  var tl = ((msecs & 0xfffffff) * 10000 + nsecs) % 0x100000000;
+  b[i++] = tl >>> 24 & 0xff;
+  b[i++] = tl >>> 16 & 0xff;
+  b[i++] = tl >>> 8 & 0xff;
+  b[i++] = tl & 0xff;
+
+  // `time_mid`
+  var tmh = (msecs / 0x100000000 * 10000) & 0xfffffff;
+  b[i++] = tmh >>> 8 & 0xff;
+  b[i++] = tmh & 0xff;
+
+  // `time_high_and_version`
+  b[i++] = tmh >>> 24 & 0xf | 0x10; // include version
+  b[i++] = tmh >>> 16 & 0xff;
+
+  // `clock_seq_hi_and_reserved` (Per 4.2.2 - include variant)
+  b[i++] = clockseq >>> 8 | 0x80;
+
+  // `clock_seq_low`
+  b[i++] = clockseq & 0xff;
+
+  // `node`
+  var node = options.node || _nodeId;
+  for (var n = 0; n < 6; ++n) {
+    b[i + n] = node[n];
+  }
+
+  return buf ? buf : bytesToUuid(b);
+}
+
+module.exports = v1;
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(global) {// Unique ID creation requires a high quality random # generator.  In the
+// browser this is a little complicated due to unknown quality of Math.random()
+// and inconsistent support for the `crypto` API.  We do the best we can via
+// feature-detection
+var rng;
+
+var crypto = global.crypto || global.msCrypto; // for IE 11
+if (crypto && crypto.getRandomValues) {
+  // WHATWG crypto RNG - http://wiki.whatwg.org/wiki/Crypto
+  var rnds8 = new Uint8Array(16); // eslint-disable-line no-undef
+  rng = function whatwgRNG() {
+    crypto.getRandomValues(rnds8);
+    return rnds8;
+  };
+}
+
+if (!rng) {
+  // Math.random()-based (RNG)
+  //
+  // If all else fails, use Math.random().  It's fast, but is of unspecified
+  // quality.
+  var rnds = new Array(16);
+  rng = function() {
+    for (var i = 0, r; i < 16; i++) {
+      if ((i & 0x03) === 0) r = Math.random() * 0x100000000;
+      rnds[i] = r >>> ((i & 0x03) << 3) & 0xff;
+    }
+
+    return rnds;
+  };
+}
+
+module.exports = rng;
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports) {
+
+/**
+ * Convert array of 16 byte values to UUID string format of the form:
+ * XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
+ */
+var byteToHex = [];
+for (var i = 0; i < 256; ++i) {
+  byteToHex[i] = (i + 0x100).toString(16).substr(1);
+}
+
+function bytesToUuid(buf, offset) {
+  var i = offset || 0;
+  var bth = byteToHex;
+  return bth[buf[i++]] + bth[buf[i++]] +
+          bth[buf[i++]] + bth[buf[i++]] + '-' +
+          bth[buf[i++]] + bth[buf[i++]] + '-' +
+          bth[buf[i++]] + bth[buf[i++]] + '-' +
+          bth[buf[i++]] + bth[buf[i++]] + '-' +
+          bth[buf[i++]] + bth[buf[i++]] +
+          bth[buf[i++]] + bth[buf[i++]] +
+          bth[buf[i++]] + bth[buf[i++]];
+}
+
+module.exports = bytesToUuid;
+
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+function debounce(func, wait, immediate) {
+  var timeout = void 0;
+
+  return function () {
+    var context = this;
+
+    var args = arguments;
+
+    var later = function later() {
+      timeout = null;
+      if (!immediate) func.apply(context, args);
+    };
+
+    var callNow = immediate && !timeout;
+
+    clearTimeout(timeout);
+
+    timeout = setTimeout(later, wait);
+
+    if (callNow) func.apply(context, args);
+  };
+}
+
+exports.default = {
+  debounce: debounce
+};
+module.exports = exports["default"];
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "vue-friendly-iframe"
+  })
+},staticRenderFns: []}
+
+/***/ })
+/******/ ]);
+});
 
 /***/ }),
 
@@ -79956,28 +80292,452 @@ var render = function() {
                           }
                         }),
                         _vm._v(" "),
-                        _c("div", { staticClass: "row justify-center" }, [
+                        _c("div", { staticClass: "row justify-left" }, [
                           _c(
                             "div",
                             { staticClass: "col-2" },
                             [
                               _c("q-btn", {
                                 attrs: {
-                                  label: "Crear",
+                                  label: "Crear cuenta",
                                   type: "submit",
                                   color: "primary"
                                 }
                               })
                             ],
                             1
-                          )
+                          ),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "row justify-center" }, [
+                            _c(
+                              "div",
+                              { staticClass: "col-2" },
+                              [
+                                _c("q-btn", {
+                                  attrs: {
+                                    label: "subCuenta",
+                                    color: "purple"
+                                  },
+                                  on: {
+                                    click: function($event) {
+                                      _vm.fixed = true
+                                    }
+                                  }
+                                })
+                              ],
+                              1
+                            )
+                          ])
                         ])
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "q-dialog",
+                      {
+                        attrs: {
+                          "full-width": "",
+                          "no-backdrop-dismiss": true
+                        },
+                        model: {
+                          value: _vm.fixed,
+                          callback: function($$v) {
+                            _vm.fixed = $$v
+                          },
+                          expression: "fixed"
+                        }
+                      },
+                      [
+                        _c(
+                          "q-card",
+                          [
+                            _c("q-card-section", [
+                              _c("div", { staticClass: "text-h6" }, [
+                                _vm._v("Crear subcuenta")
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("q-separator"),
+                            _vm._v(" "),
+                            _c(
+                              "q-card-section",
+                              {
+                                staticClass: "scroll",
+                                staticStyle: { "max-height": "100vh" }
+                              },
+                              [
+                                _c("q-select", {
+                                  attrs: {
+                                    standout: "bg-primary text-white",
+                                    options: _vm.options,
+                                    label: "Seleccione cuenta",
+                                    "option-label": "titulo",
+                                    "option-value": "id"
+                                  },
+                                  model: {
+                                    value: _vm.cuenta_id,
+                                    callback: function($$v) {
+                                      _vm.cuenta_id = $$v
+                                    },
+                                    expression: "cuenta_id"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("q-input", {
+                                  attrs: {
+                                    outlined: "",
+                                    label: "Nombre de subcuenta",
+                                    "stack-label": "",
+                                    type: "text"
+                                  },
+                                  model: {
+                                    value: _vm.nombre_s,
+                                    callback: function($$v) {
+                                      _vm.nombre_s = $$v
+                                    },
+                                    expression: "nombre_s"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("q-input", {
+                                  attrs: {
+                                    outlined: "",
+                                    label: "Descripcion de la subcuenta",
+                                    "stack-label": "",
+                                    type: "textarea"
+                                  },
+                                  model: {
+                                    value: _vm.descripcion_s,
+                                    callback: function($$v) {
+                                      _vm.descripcion_s = $$v
+                                    },
+                                    expression: "descripcion_s"
+                                  }
+                                })
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c("q-separator"),
+                            _vm._v(" "),
+                            _c(
+                              "q-card-actions",
+                              { attrs: { align: "right" } },
+                              [
+                                _c("q-btn", {
+                                  attrs: {
+                                    flat: "",
+                                    label: "Crear",
+                                    color: "primary"
+                                  },
+                                  on: { click: _vm.guardar_subcuenta }
+                                }),
+                                _vm._v(" "),
+                                _c("q-btn", {
+                                  directives: [
+                                    {
+                                      name: "close-popup",
+                                      rawName: "v-close-popup"
+                                    }
+                                  ],
+                                  attrs: {
+                                    flat: "",
+                                    label: "Cerrar",
+                                    color: "black"
+                                  }
+                                })
+                              ],
+                              1
+                            )
+                          ],
+                          1
+                        )
                       ],
                       1
                     )
                   ],
                   1
                 )
+              ])
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/cuentas/cuentas_vue/formulario.vue?vue&type=template&id=3f2b5d42&":
+/*!**************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/auth/cuentas/cuentas_vue/formulario.vue?vue&type=template&id=3f2b5d42& ***!
+  \**************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("br"),
+    _vm._v(" "),
+    _c("div", { staticClass: "row justify-center" }, [
+      _c(
+        "div",
+        { staticClass: "col-8" },
+        [
+          _c(
+            "q-card",
+            { staticClass: "my-card" },
+            [
+              _c("q-card-section", { staticClass: "bg-primary text-white" }, [
+                _c("div", { staticClass: "text-h6" }, [
+                  _vm._v("Cuentas/formulario")
+                ])
+              ]),
+              _vm._v(" "),
+              _c("q-separator"),
+              _vm._v(" "),
+              _c("dir", { staticClass: "q-pa-md" }, [
+                _c("div", { staticClass: "row q-col-gutter-md" }, [
+                  _c(
+                    "div",
+                    { staticClass: "col-12 col-md-8" },
+                    [
+                      _c("q-select", {
+                        attrs: {
+                          standout: "bg-primary text-white",
+                          options: _vm.options,
+                          label: "Seleccione cuenta",
+                          "option-label": function(item) {
+                            return item === null
+                              ? "Null value"
+                              : item.titulo + " - " + item.descripcion
+                          },
+                          "option-value": "id"
+                        },
+                        on: {
+                          input: function($event) {
+                            return _vm.change_cuenta(2)
+                          }
+                        },
+                        model: {
+                          value: _vm.cuenta_id,
+                          callback: function($$v) {
+                            _vm.cuenta_id = $$v
+                          },
+                          expression: "cuenta_id"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "col-12 col-md-4" },
+                    [
+                      _c("q-select", {
+                        attrs: {
+                          loading: _vm.loading2,
+                          standout: "bg-primary text-white",
+                          options: _vm.subcuentas,
+                          label: "Seleccione sub cuenta",
+                          "option-label": "titulo",
+                          "option-value": "id"
+                        },
+                        model: {
+                          value: _vm.subcuenta,
+                          callback: function($$v) {
+                            _vm.subcuenta = $$v
+                          },
+                          expression: "subcuenta"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ]),
+                _vm._v(" "),
+                _c("hr"),
+                _vm._v(" "),
+                _c("div", { staticClass: "row q-col-gutter-md" }, [
+                  _c(
+                    "div",
+                    { staticClass: "col-12 col-md-3" },
+                    [
+                      _c("q-input", {
+                        attrs: {
+                          outlined: "",
+                          label: "Fecha",
+                          "stack-label": "",
+                          type: "date"
+                        },
+                        model: {
+                          value: _vm.fecha,
+                          callback: function($$v) {
+                            _vm.fecha = $$v
+                          },
+                          expression: "fecha"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "col-12 col-md-3" },
+                    [
+                      _c("q-input", {
+                        attrs: {
+                          outlined: "",
+                          label: "Codigo o identificador",
+                          "stack-label": "",
+                          type: "text"
+                        },
+                        model: {
+                          value: _vm.codigo,
+                          callback: function($$v) {
+                            _vm.codigo = $$v
+                          },
+                          expression: "codigo"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "col-12 col-md-3" },
+                    [
+                      _c("q-select", {
+                        attrs: {
+                          standout: "bg-primary text-white",
+                          options: [
+                            { id: "1", label: "Ingreso" },
+                            { id: "2", label: "Egreso" }
+                          ],
+                          label: "tipo de monto",
+                          "option-label": "label",
+                          "option-value": "id"
+                        },
+                        model: {
+                          value: _vm.tipo_monto_id,
+                          callback: function($$v) {
+                            _vm.tipo_monto_id = $$v
+                          },
+                          expression: "tipo_monto_id"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "col-12 col-md-3" },
+                    [
+                      _c("q-input", {
+                        attrs: {
+                          outlined: "",
+                          label: "Monto",
+                          "stack-label": "",
+                          type: "numeric"
+                        },
+                        model: {
+                          value: _vm.monto,
+                          callback: function($$v) {
+                            _vm.monto = $$v
+                          },
+                          expression: "monto"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ]),
+                _vm._v(" "),
+                _c("br"),
+                _vm._v(" "),
+                _c("div", { staticClass: "row q-col-gutter-md" }, [
+                  _c(
+                    "div",
+                    { staticClass: "col-12 col-md-12" },
+                    [
+                      _c("q-input", {
+                        attrs: {
+                          outlined: "",
+                          label: "Descripcion de cuenta",
+                          "stack-label": "",
+                          type: "textarea"
+                        },
+                        model: {
+                          value: _vm.descripcion,
+                          callback: function($$v) {
+                            _vm.descripcion = $$v
+                          },
+                          expression: "descripcion"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ]),
+                _vm._v(" "),
+                _c("br"),
+                _vm._v(" "),
+                _c("div", { staticClass: "column" }, [
+                  _c(
+                    "div",
+                    { staticClass: "col self-start" },
+                    [
+                      _c("q-input", {
+                        attrs: { type: "file" },
+                        on: {
+                          input: function(val) {
+                            _vm.file = val[0]
+                          }
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "col self-end" },
+                    [
+                      _c("q-btn", {
+                        attrs: {
+                          color: "primary",
+                          label: "guardar",
+                          icon: "create"
+                        },
+                        on: { click: _vm.guardar }
+                      })
+                    ],
+                    1
+                  )
+                ])
               ])
             ],
             1
@@ -80016,125 +80776,1747 @@ var render = function() {
     _c("div", { staticClass: "row justify-center" }, [
       _c(
         "div",
-        { staticClass: "col-8" },
+        { staticClass: "col-10" },
         [
           _c(
             "q-card",
             { staticClass: "my-card" },
             [
               _c("q-card-section", { staticClass: "bg-primary text-white" }, [
-                _c("div", { staticClass: "text-h6" }, [
-                  _vm._v("Cuentas/listar cuenta")
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-12 col-md-9" }, [
+                    _c("div", { staticClass: "text-h6" }, [
+                      _vm._v("Cuentas/listar cuenta")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "col-12 col-md-2" },
+                    [
+                      _c(
+                        "q-btn-dropdown",
+                        {
+                          attrs: {
+                            color: "primary",
+                            icon: "build",
+                            label: "Opciones"
+                          }
+                        },
+                        [
+                          _c(
+                            "q-list",
+                            [
+                              _c(
+                                "q-item",
+                                {
+                                  attrs: { clickable: "" },
+                                  on: {
+                                    click: function($event) {
+                                      _vm.modal_ic = true
+                                    }
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "q-item-section",
+                                    [
+                                      _c("q-avatar", {
+                                        attrs: {
+                                          icon: "monetization_on",
+                                          color: "primary",
+                                          "text-color": "white"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "q-item-section",
+                                    [
+                                      _c("q-item-label", [
+                                        _vm._v("Inicio y cierre mensual")
+                                      ]),
+                                      _vm._v(" "),
+                                      _c(
+                                        "q-dialog",
+                                        {
+                                          attrs: {
+                                            "full-width": "",
+                                            "no-backdrop-dismiss": true
+                                          },
+                                          model: {
+                                            value: _vm.modal_ic,
+                                            callback: function($$v) {
+                                              _vm.modal_ic = $$v
+                                            },
+                                            expression: "modal_ic"
+                                          }
+                                        },
+                                        [
+                                          _c(
+                                            "q-card",
+                                            [
+                                              _c("q-card-section", [
+                                                _c(
+                                                  "div",
+                                                  { staticClass: "row" },
+                                                  [
+                                                    _c(
+                                                      "div",
+                                                      {
+                                                        staticClass:
+                                                          "col-10 col-md-11"
+                                                      },
+                                                      [
+                                                        _c(
+                                                          "div",
+                                                          {
+                                                            staticClass:
+                                                              "text-h6"
+                                                          },
+                                                          [_vm._v("Archivo")]
+                                                        )
+                                                      ]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "div",
+                                                      {
+                                                        staticClass:
+                                                          "col-10 col-md-1"
+                                                      },
+                                                      [
+                                                        _c("q-btn", {
+                                                          directives: [
+                                                            {
+                                                              name:
+                                                                "close-popup",
+                                                              rawName:
+                                                                "v-close-popup"
+                                                            }
+                                                          ],
+                                                          attrs: {
+                                                            label: "Volver",
+                                                            icon:
+                                                              "keyboard_backspace",
+                                                            flat: ""
+                                                          }
+                                                        })
+                                                      ],
+                                                      1
+                                                    )
+                                                  ]
+                                                )
+                                              ]),
+                                              _vm._v(" "),
+                                              _c("div", [
+                                                _c(
+                                                  "div",
+                                                  { staticClass: "q-pa-md" },
+                                                  [
+                                                    _c(
+                                                      "div",
+                                                      {
+                                                        staticClass:
+                                                          "row q-col-gutter-md"
+                                                      },
+                                                      [
+                                                        _c(
+                                                          "div",
+                                                          {
+                                                            staticClass:
+                                                              "col-12 col-md-2"
+                                                          },
+                                                          [
+                                                            _c("q-select", {
+                                                              attrs: {
+                                                                standout:
+                                                                  "bg-primary text-white",
+                                                                options:
+                                                                  _vm.options,
+                                                                label:
+                                                                  "Seleccione cuenta",
+                                                                "option-label":
+                                                                  "titulo",
+                                                                "option-value":
+                                                                  "id"
+                                                              },
+                                                              model: {
+                                                                value:
+                                                                  _vm.cuenta_id,
+                                                                callback: function(
+                                                                  $$v
+                                                                ) {
+                                                                  _vm.cuenta_id = $$v
+                                                                },
+                                                                expression:
+                                                                  "cuenta_id"
+                                                              }
+                                                            })
+                                                          ],
+                                                          1
+                                                        ),
+                                                        _vm._v(" "),
+                                                        _c(
+                                                          "div",
+                                                          {
+                                                            staticClass:
+                                                              "col-12 col-md-2"
+                                                          },
+                                                          [
+                                                            _c("q-select", {
+                                                              attrs: {
+                                                                standout:
+                                                                  "bg-primary text-white",
+                                                                options:
+                                                                  _vm.anios,
+                                                                label:
+                                                                  "Seleccione año",
+                                                                "option-label":
+                                                                  "label",
+                                                                "option-value":
+                                                                  "id"
+                                                              },
+                                                              model: {
+                                                                value: _vm.anio,
+                                                                callback: function(
+                                                                  $$v
+                                                                ) {
+                                                                  _vm.anio = $$v
+                                                                },
+                                                                expression:
+                                                                  "anio"
+                                                              }
+                                                            })
+                                                          ],
+                                                          1
+                                                        ),
+                                                        _vm._v(" "),
+                                                        _c(
+                                                          "div",
+                                                          {
+                                                            staticClass:
+                                                              "col-12 col-md-2"
+                                                          },
+                                                          [
+                                                            _c("q-select", {
+                                                              attrs: {
+                                                                standout:
+                                                                  "bg-primary text-white",
+                                                                options:
+                                                                  _vm.meses,
+                                                                label:
+                                                                  "Seleccione mes",
+                                                                "option-label":
+                                                                  "label",
+                                                                "option-value":
+                                                                  "id"
+                                                              },
+                                                              model: {
+                                                                value: _vm.mes,
+                                                                callback: function(
+                                                                  $$v
+                                                                ) {
+                                                                  _vm.mes = $$v
+                                                                },
+                                                                expression:
+                                                                  "mes"
+                                                              }
+                                                            })
+                                                          ],
+                                                          1
+                                                        ),
+                                                        _vm._v(" "),
+                                                        _c(
+                                                          "div",
+                                                          {
+                                                            staticClass:
+                                                              "col-12 col-md-2"
+                                                          },
+                                                          [
+                                                            _c("q-input", {
+                                                              attrs: {
+                                                                label:
+                                                                  "Monto inicial"
+                                                              },
+                                                              model: {
+                                                                value:
+                                                                  _vm.monto_inicio,
+                                                                callback: function(
+                                                                  $$v
+                                                                ) {
+                                                                  _vm.monto_inicio = $$v
+                                                                },
+                                                                expression:
+                                                                  "monto_inicio"
+                                                              }
+                                                            })
+                                                          ],
+                                                          1
+                                                        ),
+                                                        _vm._v(" "),
+                                                        _c(
+                                                          "div",
+                                                          {
+                                                            staticClass:
+                                                              "col-12 col-md-2"
+                                                          },
+                                                          [
+                                                            _c("q-btn", {
+                                                              attrs: {
+                                                                label:
+                                                                  "Calcular"
+                                                              }
+                                                            })
+                                                          ],
+                                                          1
+                                                        ),
+                                                        _vm._v(" "),
+                                                        _c(
+                                                          "div",
+                                                          {
+                                                            staticClass:
+                                                              "col-12 col-md-2"
+                                                          },
+                                                          [
+                                                            _c("q-btn", {
+                                                              attrs: {
+                                                                label: "Guardar"
+                                                              },
+                                                              on: {
+                                                                click:
+                                                                  _vm.ingresar_inicio_mes
+                                                              }
+                                                            })
+                                                          ],
+                                                          1
+                                                        )
+                                                      ]
+                                                    )
+                                                  ]
+                                                )
+                                              ])
+                                            ],
+                                            1
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
                 ])
               ]),
               _vm._v(" "),
               _c("q-separator"),
               _vm._v(" "),
-              _c("div", { staticClass: "col-6" }, [
-                _c(
-                  "div",
-                  { staticClass: "q-pa-md" },
+              _c(
+                "div",
+                { staticClass: "col-6" },
+                [
                   [
-                    [
-                      _c(
-                        "div",
-                        { staticClass: "q-pa-md" },
-                        [
-                          _c("q-table", {
-                            attrs: {
-                              title: "Listado",
-                              data: _vm.data,
-                              columns: _vm.columns,
-                              "row-key": "id",
-                              selection: "single",
-                              selected: _vm.selected,
-                              "rows-per-page-label": "Cantidad:",
-                              "no-data-label": "Sin datos",
-                              "no-results-label": "sin resultados",
-                              pagination: _vm.pagination,
-                              filter: _vm.filter,
-                              loading: _vm.loading,
-                              "binary-state-sort": "",
-                              "no-results-label": "sin datos niggis"
-                            },
-                            on: {
-                              "update:selected": function($event) {
-                                _vm.selected = $event
-                              },
-                              "update:pagination": function($event) {
-                                _vm.pagination = $event
-                              },
-                              request: _vm.onRequest
-                            },
-                            scopedSlots: _vm._u([
-                              {
-                                key: "top-right",
-                                fn: function() {
-                                  return [
-                                    _c("q-input", {
-                                      attrs: {
-                                        borderless: "",
-                                        dense: "",
-                                        debounce: "300",
-                                        placeholder: "Buscar por nombre.."
-                                      },
-                                      scopedSlots: _vm._u([
-                                        {
-                                          key: "append",
-                                          fn: function() {
-                                            return [
-                                              _c("q-icon", {
-                                                attrs: { name: "search" }
-                                              })
-                                            ]
-                                          },
-                                          proxy: true
-                                        }
-                                      ]),
-                                      model: {
-                                        value: _vm.filter,
-                                        callback: function($$v) {
-                                          _vm.filter = $$v
-                                        },
-                                        expression: "filter"
-                                      }
-                                    })
-                                  ]
-                                },
-                                proxy: true
-                              }
-                            ])
-                          }),
-                          _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "q-pa-md" },
+                      [
+                        _c("div", { staticClass: "row q-col-gutter-md" }, [
                           _c(
-                            "q-list",
-                            _vm._l(_vm.selected, function(s) {
-                              return _c("q-item", { key: s.id }, [
-                                _vm._v(
-                                  "\n\t\t\t\t\t\t      " +
-                                    _vm._s(s.name) +
-                                    "\n\t\t\t\t\t\t    "
-                                )
-                              ])
-                            }),
+                            "div",
+                            { staticClass: "col-12 col-md-6" },
+                            [
+                              _c("q-select", {
+                                attrs: {
+                                  standout: "bg-primary text-white",
+                                  options: _vm.options,
+                                  label: "Seleccione cuenta",
+                                  "option-label": "titulo",
+                                  "option-value": "id"
+                                },
+                                model: {
+                                  value: _vm.cuenta_id,
+                                  callback: function($$v) {
+                                    _vm.cuenta_id = $$v
+                                  },
+                                  expression: "cuenta_id"
+                                }
+                              })
+                            ],
                             1
                           ),
                           _vm._v(" "),
-                          _c("div", { staticClass: "q-mt-md" }, [
-                            _vm._v(
-                              "\n\t\t\t\t\t\t      Selected: " +
-                                _vm._s(JSON.stringify(_vm.selected)) +
-                                "\n\t\t\t\t\t\t    "
-                            )
-                          ])
-                        ],
-                        1
-                      )
-                    ]
+                          _c(
+                            "div",
+                            { staticClass: "col-12 col-md-3" },
+                            [
+                              _c("q-select", {
+                                attrs: {
+                                  standout: "bg-primary text-white",
+                                  options: _vm.anios,
+                                  label: "Seleccione año",
+                                  "option-label": "label",
+                                  "option-value": "id"
+                                },
+                                model: {
+                                  value: _vm.anio,
+                                  callback: function($$v) {
+                                    _vm.anio = $$v
+                                  },
+                                  expression: "anio"
+                                }
+                              })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "col-12 col-md-3" },
+                            [
+                              _c("q-select", {
+                                attrs: {
+                                  standout: "bg-primary text-white",
+                                  options: _vm.meses,
+                                  label: "Seleccione mes",
+                                  "option-label": "label",
+                                  "option-value": "id"
+                                },
+                                model: {
+                                  value: _vm.mes,
+                                  callback: function($$v) {
+                                    _vm.mes = $$v
+                                  },
+                                  expression: "mes"
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "q-list",
+                          _vm._l(_vm.selected, function(s) {
+                            return _c("q-item", { key: s.id }, [
+                              _vm._v(
+                                "\n\t\t\t\t\t\t      " +
+                                  _vm._s(s.name) +
+                                  "\n\t\t\t\t\t\t    "
+                              )
+                            ])
+                          }),
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "row justify-center" }, [
+                          _c(
+                            "div",
+                            { staticClass: "col-2 col-md-2" },
+                            [
+                              _c("q-btn", {
+                                attrs: { label: "Buscar", icon: "search" },
+                                on: { click: _vm.listar }
+                              })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "col-2 col-md-2" },
+                            [
+                              _c("q-btn", {
+                                attrs: { label: "Limpiar", icon: "clear" },
+                                on: { click: _vm.limpiar }
+                              })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "col-2 col-md-2" },
+                            [
+                              _c("q-btn", {
+                                attrs: {
+                                  label: "Volver",
+                                  icon: "keyboard_backspace"
+                                },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.ruta("/modulo-cuentas")
+                                  }
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        ])
+                      ],
+                      1
+                    )
                   ],
-                  2
-                )
-              ])
+                  _vm._v(" "),
+                  _vm.view_tabla
+                    ? _c(
+                        "div",
+                        [
+                          _c(
+                            "div",
+                            { staticClass: "q-pa-md" },
+                            [
+                              _c("q-table", {
+                                staticClass: "my-sticky-header-table",
+                                attrs: {
+                                  title:
+                                    _vm.cuenta_id.titulo +
+                                    ", " +
+                                    _vm.mes.label +
+                                    " del " +
+                                    _vm.anio.label,
+                                  data: _vm.tabla,
+                                  columns: _vm.columns,
+                                  separator: "cell",
+                                  "row-key": "name",
+                                  flat: "",
+                                  bordered: ""
+                                },
+                                scopedSlots: _vm._u(
+                                  [
+                                    {
+                                      key: "body",
+                                      fn: function(props) {
+                                        return [
+                                          _c(
+                                            "q-tr",
+                                            { attrs: { props: props } },
+                                            [
+                                              _c(
+                                                "q-td",
+                                                {
+                                                  key: "id",
+                                                  attrs: { props: props }
+                                                },
+                                                [_vm._v(_vm._s(props.row.id))]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "q-td",
+                                                {
+                                                  key: "titulo",
+                                                  attrs: { props: props }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(props.row.titulo)
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "q-td",
+                                                {
+                                                  key: "fecha",
+                                                  attrs: { props: props }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(props.row.fecha)
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "q-td",
+                                                {
+                                                  key: "archivo",
+                                                  attrs: { props: props }
+                                                },
+                                                [
+                                                  _c("q-btn", {
+                                                    attrs: {
+                                                      flat: "",
+                                                      icon: "file_copy"
+                                                    },
+                                                    on: {
+                                                      click: function($event) {
+                                                        return _vm.show(
+                                                          "dialog" +
+                                                            props.row.__index
+                                                        )
+                                                      }
+                                                    }
+                                                  }),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "q-dialog",
+                                                    {
+                                                      ref:
+                                                        "dialog" +
+                                                        props.row.__index,
+                                                      attrs: {
+                                                        "full-width": "",
+                                                        "full-height": "",
+                                                        "no-backdrop-dismiss": true
+                                                      },
+                                                      on: {
+                                                        hide: _vm.onDialogHide
+                                                      }
+                                                    },
+                                                    [
+                                                      _c(
+                                                        "q-card",
+                                                        [
+                                                          _c("q-card-section", [
+                                                            _c(
+                                                              "div",
+                                                              {
+                                                                staticClass:
+                                                                  "row"
+                                                              },
+                                                              [
+                                                                _c(
+                                                                  "div",
+                                                                  {
+                                                                    staticClass:
+                                                                      "col-10 col-md-11"
+                                                                  },
+                                                                  [
+                                                                    _c(
+                                                                      "div",
+                                                                      {
+                                                                        staticClass:
+                                                                          "text-h6"
+                                                                      },
+                                                                      [
+                                                                        _vm._v(
+                                                                          "Archivo"
+                                                                        )
+                                                                      ]
+                                                                    )
+                                                                  ]
+                                                                ),
+                                                                _vm._v(" "),
+                                                                _c(
+                                                                  "div",
+                                                                  {
+                                                                    staticClass:
+                                                                      "col-10 col-md-1"
+                                                                  },
+                                                                  [
+                                                                    _c(
+                                                                      "q-btn",
+                                                                      {
+                                                                        directives: [
+                                                                          {
+                                                                            name:
+                                                                              "close-popup",
+                                                                            rawName:
+                                                                              "v-close-popup"
+                                                                          }
+                                                                        ],
+                                                                        attrs: {
+                                                                          label:
+                                                                            "Volver",
+                                                                          icon:
+                                                                            "keyboard_backspace",
+                                                                          flat:
+                                                                            ""
+                                                                        }
+                                                                      }
+                                                                    )
+                                                                  ],
+                                                                  1
+                                                                )
+                                                              ]
+                                                            )
+                                                          ]),
+                                                          _vm._v(" "),
+                                                          _c("iframe", {
+                                                            staticStyle: {
+                                                              height: "100%",
+                                                              width: "100%"
+                                                            },
+                                                            attrs: {
+                                                              src:
+                                                                "../" +
+                                                                props.row
+                                                                  .archivo,
+                                                              frameborder: "0",
+                                                              allowfullscreen:
+                                                                ""
+                                                            }
+                                                          })
+                                                        ],
+                                                        1
+                                                      )
+                                                    ],
+                                                    1
+                                                  )
+                                                ],
+                                                1
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "q-td",
+                                                {
+                                                  key: "descripcion",
+                                                  attrs: { props: props }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      props.row.descripcion
+                                                    )
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "q-td",
+                                                {
+                                                  key: "ingreso",
+                                                  attrs: { props: props }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      _vm.formatPrice(
+                                                        props.row.monto_ingreso
+                                                      )
+                                                    )
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "q-td",
+                                                {
+                                                  key: "egreso",
+                                                  attrs: { props: props }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      _vm.formatPrice(
+                                                        props.row.monto_egreso
+                                                      )
+                                                    )
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "q-td",
+                                                {
+                                                  key: "view",
+                                                  attrs: { props: props }
+                                                },
+                                                [
+                                                  _c("q-btn", {
+                                                    attrs: {
+                                                      color: "primary",
+                                                      icon: "edit"
+                                                    },
+                                                    on: {
+                                                      click: function($event) {
+                                                        _vm.show(
+                                                          "edit" +
+                                                            props.row.__index
+                                                        )
+                                                        _vm.llenar_inputs(
+                                                          props.row.fecha,
+                                                          props.row.descripcion,
+                                                          props.row
+                                                            .monto_ingreso,
+                                                          props.row.monto_egreso
+                                                        )
+                                                      }
+                                                    },
+                                                    scopedSlots: _vm._u(
+                                                      [
+                                                        {
+                                                          key: "loading",
+                                                          fn: function() {
+                                                            return [
+                                                              _c(
+                                                                "q-spinner-facebook"
+                                                              )
+                                                            ]
+                                                          },
+                                                          proxy: true
+                                                        }
+                                                      ],
+                                                      null,
+                                                      true
+                                                    )
+                                                  }),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "q-dialog",
+                                                    {
+                                                      ref:
+                                                        "edit" +
+                                                        props.row.__index,
+                                                      attrs: {
+                                                        "no-backdrop-dismiss": true
+                                                      },
+                                                      on: {
+                                                        hide: _vm.onDialogHide
+                                                      }
+                                                    },
+                                                    [
+                                                      _c(
+                                                        "q-card",
+                                                        {
+                                                          staticStyle: {
+                                                            width: "700px",
+                                                            "max-width": "80vw"
+                                                          }
+                                                        },
+                                                        [
+                                                          _c("q-card-section", [
+                                                            _c(
+                                                              "div",
+                                                              {
+                                                                staticClass:
+                                                                  "row"
+                                                              },
+                                                              [
+                                                                _c(
+                                                                  "div",
+                                                                  {
+                                                                    staticClass:
+                                                                      "col-10 col-md-11"
+                                                                  },
+                                                                  [
+                                                                    _c(
+                                                                      "div",
+                                                                      {
+                                                                        staticClass:
+                                                                          "text-h6"
+                                                                      },
+                                                                      [
+                                                                        _vm._v(
+                                                                          "Modificación"
+                                                                        )
+                                                                      ]
+                                                                    )
+                                                                  ]
+                                                                ),
+                                                                _vm._v(" "),
+                                                                _c(
+                                                                  "div",
+                                                                  {
+                                                                    staticClass:
+                                                                      "col-10 col-md-1"
+                                                                  },
+                                                                  [
+                                                                    _c(
+                                                                      "q-btn",
+                                                                      {
+                                                                        directives: [
+                                                                          {
+                                                                            name:
+                                                                              "close-popup",
+                                                                            rawName:
+                                                                              "v-close-popup"
+                                                                          }
+                                                                        ],
+                                                                        attrs: {
+                                                                          label:
+                                                                            "Volver",
+                                                                          icon:
+                                                                            "keyboard_backspace",
+                                                                          flat:
+                                                                            ""
+                                                                        }
+                                                                      }
+                                                                    )
+                                                                  ],
+                                                                  1
+                                                                )
+                                                              ]
+                                                            )
+                                                          ]),
+                                                          _vm._v(" "),
+                                                          [
+                                                            _c(
+                                                              "div",
+                                                              {
+                                                                staticClass:
+                                                                  "row justify-center q-gutter-md"
+                                                              },
+                                                              [
+                                                                _c(
+                                                                  "q-card",
+                                                                  {
+                                                                    staticClass:
+                                                                      "my-card"
+                                                                  },
+                                                                  [
+                                                                    _c(
+                                                                      "q-card-section",
+                                                                      {
+                                                                        staticClass:
+                                                                          "bg-primary text-white"
+                                                                      },
+                                                                      [
+                                                                        _c(
+                                                                          "div",
+                                                                          {
+                                                                            staticClass:
+                                                                              "text-h6"
+                                                                          },
+                                                                          [
+                                                                            _vm._v(
+                                                                              "Modificar ID: " +
+                                                                                _vm._s(
+                                                                                  props
+                                                                                    .row
+                                                                                    .id
+                                                                                )
+                                                                            )
+                                                                          ]
+                                                                        )
+                                                                      ]
+                                                                    ),
+                                                                    _vm._v(" "),
+                                                                    _c(
+                                                                      "q-separator"
+                                                                    ),
+                                                                    _vm._v(" "),
+                                                                    _c(
+                                                                      "div",
+                                                                      {
+                                                                        staticClass:
+                                                                          "q-pa-md"
+                                                                      },
+                                                                      [
+                                                                        _c(
+                                                                          "div",
+                                                                          {
+                                                                            staticClass:
+                                                                              "row q-col-gutter-md"
+                                                                          },
+                                                                          [
+                                                                            _c(
+                                                                              "div",
+                                                                              {
+                                                                                staticClass:
+                                                                                  "col-8"
+                                                                              },
+                                                                              [
+                                                                                _c(
+                                                                                  "q-input",
+                                                                                  {
+                                                                                    attrs: {
+                                                                                      outlined:
+                                                                                        "",
+                                                                                      "stack-label":
+                                                                                        "",
+                                                                                      label:
+                                                                                        "Titulo",
+                                                                                      size:
+                                                                                        "sm",
+                                                                                      value:
+                                                                                        props
+                                                                                          .row
+                                                                                          .titulo,
+                                                                                      disable: true
+                                                                                    }
+                                                                                  }
+                                                                                )
+                                                                              ],
+                                                                              1
+                                                                            ),
+                                                                            _vm._v(
+                                                                              " "
+                                                                            ),
+                                                                            _c(
+                                                                              "div",
+                                                                              {
+                                                                                staticClass:
+                                                                                  "col-2"
+                                                                              }
+                                                                            )
+                                                                          ]
+                                                                        ),
+                                                                        _vm._v(
+                                                                          " "
+                                                                        ),
+                                                                        _c(
+                                                                          "br"
+                                                                        ),
+                                                                        _vm._v(
+                                                                          " "
+                                                                        ),
+                                                                        _c(
+                                                                          "div",
+                                                                          {
+                                                                            staticClass:
+                                                                              "row q-col-gutter-md"
+                                                                          },
+                                                                          [
+                                                                            _c(
+                                                                              "div",
+                                                                              {
+                                                                                staticClass:
+                                                                                  "col-8"
+                                                                              },
+                                                                              [
+                                                                                _c(
+                                                                                  "q-input",
+                                                                                  {
+                                                                                    attrs: {
+                                                                                      outlined:
+                                                                                        "",
+                                                                                      "stack-label":
+                                                                                        "",
+                                                                                      label:
+                                                                                        "Fecha",
+                                                                                      type:
+                                                                                        "date",
+                                                                                      value:
+                                                                                        props
+                                                                                          .row
+                                                                                          .fecha
+                                                                                    },
+                                                                                    model: {
+                                                                                      value:
+                                                                                        _vm.e_fecha,
+                                                                                      callback: function(
+                                                                                        $$v
+                                                                                      ) {
+                                                                                        _vm.e_fecha = $$v
+                                                                                      },
+                                                                                      expression:
+                                                                                        "e_fecha"
+                                                                                    }
+                                                                                  }
+                                                                                )
+                                                                              ],
+                                                                              1
+                                                                            ),
+                                                                            _vm._v(
+                                                                              " "
+                                                                            ),
+                                                                            _c(
+                                                                              "div",
+                                                                              {
+                                                                                staticClass:
+                                                                                  "col-2"
+                                                                              },
+                                                                              [
+                                                                                _c(
+                                                                                  "q-btn",
+                                                                                  {
+                                                                                    attrs: {
+                                                                                      dense:
+                                                                                        "",
+                                                                                      color:
+                                                                                        "primary",
+                                                                                      size:
+                                                                                        "sm",
+                                                                                      label:
+                                                                                        "Modificar"
+                                                                                    },
+                                                                                    on: {
+                                                                                      click: function(
+                                                                                        $event
+                                                                                      ) {
+                                                                                        return _vm.editar(
+                                                                                          props
+                                                                                            .row
+                                                                                            .id,
+                                                                                          "fecha",
+                                                                                          _vm.e_fecha
+                                                                                        )
+                                                                                      }
+                                                                                    }
+                                                                                  }
+                                                                                )
+                                                                              ],
+                                                                              1
+                                                                            )
+                                                                          ]
+                                                                        ),
+                                                                        _vm._v(
+                                                                          " "
+                                                                        ),
+                                                                        _c(
+                                                                          "br"
+                                                                        ),
+                                                                        _vm._v(
+                                                                          " "
+                                                                        ),
+                                                                        _c(
+                                                                          "div",
+                                                                          {
+                                                                            staticClass:
+                                                                              "row q-col-gutter-md"
+                                                                          },
+                                                                          [
+                                                                            _c(
+                                                                              "div",
+                                                                              {
+                                                                                staticClass:
+                                                                                  "col-8"
+                                                                              },
+                                                                              [
+                                                                                _c(
+                                                                                  "q-input",
+                                                                                  {
+                                                                                    attrs: {
+                                                                                      outlined:
+                                                                                        "",
+                                                                                      "stack-label":
+                                                                                        "",
+                                                                                      label:
+                                                                                        "Archivo",
+                                                                                      type:
+                                                                                        "file"
+                                                                                    },
+                                                                                    on: {
+                                                                                      input: function(
+                                                                                        val
+                                                                                      ) {
+                                                                                        _vm.file =
+                                                                                          val[0]
+                                                                                      }
+                                                                                    }
+                                                                                  }
+                                                                                )
+                                                                              ],
+                                                                              1
+                                                                            ),
+                                                                            _vm._v(
+                                                                              " "
+                                                                            ),
+                                                                            _c(
+                                                                              "div",
+                                                                              {
+                                                                                staticClass:
+                                                                                  "col-2"
+                                                                              },
+                                                                              [
+                                                                                _c(
+                                                                                  "q-btn",
+                                                                                  {
+                                                                                    attrs: {
+                                                                                      dense:
+                                                                                        "",
+                                                                                      color:
+                                                                                        "primary",
+                                                                                      size:
+                                                                                        "sm",
+                                                                                      label:
+                                                                                        "Modificar"
+                                                                                    },
+                                                                                    on: {
+                                                                                      click: function(
+                                                                                        $event
+                                                                                      ) {
+                                                                                        return _vm.editar_archivo(
+                                                                                          props
+                                                                                            .row
+                                                                                            .id,
+                                                                                          "archivo"
+                                                                                        )
+                                                                                      }
+                                                                                    }
+                                                                                  }
+                                                                                )
+                                                                              ],
+                                                                              1
+                                                                            )
+                                                                          ]
+                                                                        ),
+                                                                        _vm._v(
+                                                                          " "
+                                                                        ),
+                                                                        _c(
+                                                                          "br"
+                                                                        ),
+                                                                        _vm._v(
+                                                                          " "
+                                                                        ),
+                                                                        _c(
+                                                                          "div",
+                                                                          {
+                                                                            staticClass:
+                                                                              "row q-col-gutter-md"
+                                                                          },
+                                                                          [
+                                                                            _c(
+                                                                              "div",
+                                                                              {
+                                                                                staticClass:
+                                                                                  "col-8"
+                                                                              },
+                                                                              [
+                                                                                _c(
+                                                                                  "q-input",
+                                                                                  {
+                                                                                    attrs: {
+                                                                                      outlined:
+                                                                                        "",
+                                                                                      value:
+                                                                                        props
+                                                                                          .row
+                                                                                          .descripcion,
+                                                                                      "stack-label":
+                                                                                        "",
+                                                                                      label:
+                                                                                        "Descripcion",
+                                                                                      type:
+                                                                                        "textarea"
+                                                                                    },
+                                                                                    model: {
+                                                                                      value:
+                                                                                        _vm.e_descripcion,
+                                                                                      callback: function(
+                                                                                        $$v
+                                                                                      ) {
+                                                                                        _vm.e_descripcion = $$v
+                                                                                      },
+                                                                                      expression:
+                                                                                        "e_descripcion"
+                                                                                    }
+                                                                                  }
+                                                                                )
+                                                                              ],
+                                                                              1
+                                                                            ),
+                                                                            _vm._v(
+                                                                              " "
+                                                                            ),
+                                                                            _c(
+                                                                              "div",
+                                                                              {
+                                                                                staticClass:
+                                                                                  "col-2"
+                                                                              },
+                                                                              [
+                                                                                _c(
+                                                                                  "q-btn",
+                                                                                  {
+                                                                                    attrs: {
+                                                                                      dense:
+                                                                                        "",
+                                                                                      color:
+                                                                                        "primary",
+                                                                                      size:
+                                                                                        "sm",
+                                                                                      label:
+                                                                                        "Modificar"
+                                                                                    },
+                                                                                    on: {
+                                                                                      click: function(
+                                                                                        $event
+                                                                                      ) {
+                                                                                        return _vm.editar(
+                                                                                          props
+                                                                                            .row
+                                                                                            .id,
+                                                                                          "descripcion",
+                                                                                          _vm.e_descripcion
+                                                                                        )
+                                                                                      }
+                                                                                    }
+                                                                                  }
+                                                                                )
+                                                                              ],
+                                                                              1
+                                                                            )
+                                                                          ]
+                                                                        ),
+                                                                        _vm._v(
+                                                                          " "
+                                                                        ),
+                                                                        _c(
+                                                                          "br"
+                                                                        ),
+                                                                        _vm._v(
+                                                                          " "
+                                                                        ),
+                                                                        _c(
+                                                                          "div",
+                                                                          {
+                                                                            staticClass:
+                                                                              "row q-col-gutter-md"
+                                                                          },
+                                                                          [
+                                                                            _c(
+                                                                              "div",
+                                                                              {
+                                                                                staticClass:
+                                                                                  "col-8"
+                                                                              },
+                                                                              [
+                                                                                _c(
+                                                                                  "q-input",
+                                                                                  {
+                                                                                    attrs: {
+                                                                                      outlined:
+                                                                                        "",
+                                                                                      value:
+                                                                                        props
+                                                                                          .row
+                                                                                          .monto_ingreso,
+                                                                                      "stack-label":
+                                                                                        "",
+                                                                                      label:
+                                                                                        "Ingreso",
+                                                                                      type:
+                                                                                        "numeric"
+                                                                                    },
+                                                                                    model: {
+                                                                                      value:
+                                                                                        _vm.e_ingreso,
+                                                                                      callback: function(
+                                                                                        $$v
+                                                                                      ) {
+                                                                                        _vm.e_ingreso = $$v
+                                                                                      },
+                                                                                      expression:
+                                                                                        "e_ingreso"
+                                                                                    }
+                                                                                  }
+                                                                                )
+                                                                              ],
+                                                                              1
+                                                                            ),
+                                                                            _vm._v(
+                                                                              " "
+                                                                            ),
+                                                                            _c(
+                                                                              "div",
+                                                                              {
+                                                                                staticClass:
+                                                                                  "col-2"
+                                                                              },
+                                                                              [
+                                                                                _c(
+                                                                                  "q-btn",
+                                                                                  {
+                                                                                    attrs: {
+                                                                                      dense:
+                                                                                        "",
+                                                                                      color:
+                                                                                        "primary",
+                                                                                      size:
+                                                                                        "sm",
+                                                                                      label:
+                                                                                        "Modificar"
+                                                                                    },
+                                                                                    on: {
+                                                                                      click: function(
+                                                                                        $event
+                                                                                      ) {
+                                                                                        return _vm.editar(
+                                                                                          props
+                                                                                            .row
+                                                                                            .id,
+                                                                                          "ingreso",
+                                                                                          _vm.e_ingreso
+                                                                                        )
+                                                                                      }
+                                                                                    }
+                                                                                  }
+                                                                                )
+                                                                              ],
+                                                                              1
+                                                                            )
+                                                                          ]
+                                                                        ),
+                                                                        _vm._v(
+                                                                          " "
+                                                                        ),
+                                                                        _c(
+                                                                          "br"
+                                                                        ),
+                                                                        _vm._v(
+                                                                          " "
+                                                                        ),
+                                                                        _c(
+                                                                          "div",
+                                                                          {
+                                                                            staticClass:
+                                                                              "row q-col-gutter-md"
+                                                                          },
+                                                                          [
+                                                                            _c(
+                                                                              "div",
+                                                                              {
+                                                                                staticClass:
+                                                                                  "col-8"
+                                                                              },
+                                                                              [
+                                                                                _c(
+                                                                                  "q-input",
+                                                                                  {
+                                                                                    attrs: {
+                                                                                      outlined:
+                                                                                        "",
+                                                                                      value:
+                                                                                        props
+                                                                                          .row
+                                                                                          .monto_egreso,
+                                                                                      "stack-label":
+                                                                                        "",
+                                                                                      label:
+                                                                                        "Egreso",
+                                                                                      type:
+                                                                                        "numeric"
+                                                                                    },
+                                                                                    model: {
+                                                                                      value:
+                                                                                        _vm.e_egreso,
+                                                                                      callback: function(
+                                                                                        $$v
+                                                                                      ) {
+                                                                                        _vm.e_egreso = $$v
+                                                                                      },
+                                                                                      expression:
+                                                                                        "e_egreso"
+                                                                                    }
+                                                                                  }
+                                                                                )
+                                                                              ],
+                                                                              1
+                                                                            ),
+                                                                            _vm._v(
+                                                                              " "
+                                                                            ),
+                                                                            _c(
+                                                                              "div",
+                                                                              {
+                                                                                staticClass:
+                                                                                  "col-2"
+                                                                              },
+                                                                              [
+                                                                                _c(
+                                                                                  "q-btn",
+                                                                                  {
+                                                                                    attrs: {
+                                                                                      dense:
+                                                                                        "",
+                                                                                      color:
+                                                                                        "primary",
+                                                                                      size:
+                                                                                        "sm",
+                                                                                      label:
+                                                                                        "Modificar"
+                                                                                    },
+                                                                                    on: {
+                                                                                      click: function(
+                                                                                        $event
+                                                                                      ) {
+                                                                                        return _vm.editar(
+                                                                                          props
+                                                                                            .row
+                                                                                            .id,
+                                                                                          "egreso",
+                                                                                          _vm.e_egreso
+                                                                                        )
+                                                                                      }
+                                                                                    }
+                                                                                  }
+                                                                                )
+                                                                              ],
+                                                                              1
+                                                                            )
+                                                                          ]
+                                                                        ),
+                                                                        _vm._v(
+                                                                          " "
+                                                                        ),
+                                                                        _c(
+                                                                          "hr"
+                                                                        ),
+                                                                        _vm._v(
+                                                                          " "
+                                                                        ),
+                                                                        _c(
+                                                                          "div",
+                                                                          {
+                                                                            staticClass:
+                                                                              "row q-col-gutter-md"
+                                                                          },
+                                                                          [
+                                                                            _c(
+                                                                              "div",
+                                                                              {
+                                                                                staticClass:
+                                                                                  "col-8"
+                                                                              },
+                                                                              [
+                                                                                _c(
+                                                                                  "q-btn",
+                                                                                  {
+                                                                                    attrs: {
+                                                                                      label:
+                                                                                        "Eliminar",
+                                                                                      icon:
+                                                                                        "delete",
+                                                                                      color:
+                                                                                        "red"
+                                                                                    },
+                                                                                    on: {
+                                                                                      click: function(
+                                                                                        $event
+                                                                                      ) {
+                                                                                        return _vm.eliminar(
+                                                                                          props
+                                                                                            .row
+                                                                                            .id,
+                                                                                          "edit" +
+                                                                                            props
+                                                                                              .row
+                                                                                              .__index
+                                                                                        )
+                                                                                      }
+                                                                                    }
+                                                                                  }
+                                                                                )
+                                                                              ],
+                                                                              1
+                                                                            )
+                                                                          ]
+                                                                        )
+                                                                      ]
+                                                                    )
+                                                                  ],
+                                                                  1
+                                                                )
+                                                              ],
+                                                              1
+                                                            )
+                                                          ]
+                                                        ],
+                                                        2
+                                                      )
+                                                    ],
+                                                    1
+                                                  )
+                                                ],
+                                                1
+                                              )
+                                            ],
+                                            1
+                                          )
+                                        ]
+                                      }
+                                    }
+                                  ],
+                                  null,
+                                  false,
+                                  3165669489
+                                )
+                              })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          [
+                            _c("div", { staticClass: "q-pa-md" }, [
+                              _c(
+                                "div",
+                                { staticClass: "row q-col-gutter-md" },
+                                [
+                                  _c(
+                                    "div",
+                                    { attrs: { clas: "col-12 col-5" } },
+                                    [
+                                      _c("q-table", {
+                                        attrs: {
+                                          data: _vm.data_resumen,
+                                          columns: _vm.columns_resumen,
+                                          "row-key": "name",
+                                          "hide-bottom": ""
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    { attrs: { clas: "col-12 col-5" } },
+                                    [
+                                      _c("q-table", {
+                                        attrs: {
+                                          data: _vm.data_acumulado,
+                                          columns: _vm.columns_acumulado,
+                                          "row-key": "name",
+                                          "hide-bottom": ""
+                                        },
+                                        scopedSlots: _vm._u(
+                                          [
+                                            {
+                                              key: "body",
+                                              fn: function(props) {
+                                                return [
+                                                  _c(
+                                                    "q-tr",
+                                                    { attrs: { props: props } },
+                                                    [
+                                                      _c(
+                                                        "q-td",
+                                                        {
+                                                          key: "name",
+                                                          attrs: {
+                                                            props: props
+                                                          }
+                                                        },
+                                                        [_vm._v("Arrastre")]
+                                                      ),
+                                                      _vm._v(" "),
+                                                      _c(
+                                                        "q-td",
+                                                        {
+                                                          key: "valor",
+                                                          attrs: {
+                                                            props: props
+                                                          }
+                                                        },
+                                                        [
+                                                          _vm._v(
+                                                            _vm._s(
+                                                              _vm.formatPrice(
+                                                                _vm.monto_inicio
+                                                              )
+                                                            )
+                                                          )
+                                                        ]
+                                                      )
+                                                    ],
+                                                    1
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "q-tr",
+                                                    { attrs: { props: props } },
+                                                    [
+                                                      _c(
+                                                        "q-td",
+                                                        {
+                                                          key: "name",
+                                                          attrs: {
+                                                            props: props
+                                                          }
+                                                        },
+                                                        [
+                                                          _vm._v(
+                                                            "Monto del mes"
+                                                          )
+                                                        ]
+                                                      ),
+                                                      _vm._v(" "),
+                                                      _c(
+                                                        "q-td",
+                                                        {
+                                                          key: "valor",
+                                                          attrs: {
+                                                            props: props
+                                                          }
+                                                        },
+                                                        [
+                                                          _vm._v(
+                                                            _vm._s(
+                                                              _vm.formatPrice(
+                                                                _vm.ingresos -
+                                                                  _vm.egresos
+                                                              )
+                                                            )
+                                                          )
+                                                        ]
+                                                      )
+                                                    ],
+                                                    1
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "q-tr",
+                                                    { attrs: { props: props } },
+                                                    [
+                                                      _c(
+                                                        "q-td",
+                                                        {
+                                                          key: "name",
+                                                          attrs: {
+                                                            props: props
+                                                          }
+                                                        },
+                                                        [
+                                                          _vm._v(
+                                                            "Total acumulado"
+                                                          )
+                                                        ]
+                                                      ),
+                                                      _vm._v(" "),
+                                                      _c(
+                                                        "q-td",
+                                                        {
+                                                          key: "valor",
+                                                          attrs: {
+                                                            props: props
+                                                          }
+                                                        },
+                                                        [
+                                                          _vm._v(
+                                                            _vm._s(
+                                                              _vm.formatPrice(
+                                                                _vm.monto_inicio +
+                                                                  (_vm.ingresos -
+                                                                    _vm.egresos)
+                                                              )
+                                                            )
+                                                          )
+                                                        ]
+                                                      )
+                                                    ],
+                                                    1
+                                                  )
+                                                ]
+                                              }
+                                            }
+                                          ],
+                                          null,
+                                          false,
+                                          2474710560
+                                        )
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ]
+                              )
+                            ])
+                          ]
+                        ],
+                        2
+                      )
+                    : _vm._e()
+                ],
+                2
+              )
             ],
             1
           )
@@ -80213,6 +82595,23 @@ var render = function() {
                           label: "Listar cuentas"
                         },
                         on: { click: _vm.url_listar_cuenta }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "col-12 col-md-2" },
+                    [
+                      _c("q-btn", {
+                        staticClass: "block",
+                        attrs: {
+                          color: "primary",
+                          icon: "attach_file",
+                          label: "Formulario"
+                        },
+                        on: { click: _vm.url_formulario_cuenta }
                       })
                     ],
                     1
@@ -80396,7 +82795,7 @@ var render = function() {
         _c("div", { staticClass: "row q-col-gutter-md" }, [
           _c(
             "div",
-            { staticClass: "col-12 col-md-3" },
+            { staticClass: "col-12 col-md-6" },
             [
               _c(
                 "q-card",
@@ -80440,6 +82839,16 @@ var render = function() {
                           on: { click: _vm.url_modulo_prestamos }
                         },
                         [_vm._v("Prestamos")]
+                      ),
+                      _c("br"),
+                      _vm._v(" "),
+                      _c(
+                        "q-btn",
+                        {
+                          attrs: { flat: "" },
+                          on: { click: _vm.url_modulo_Liquidaciones }
+                        },
+                        [_vm._v("Liquidaciones")]
                       )
                     ],
                     1
@@ -80453,7 +82862,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "div",
-            { staticClass: "col-12 col-md-3" },
+            { staticClass: "col-12 col-md-6" },
             [
               _c(
                 "q-card",
@@ -80507,10 +82916,86 @@ var render = function() {
             ],
             1
           )
+        ]),
+        _vm._v(" "),
+        _c("div", [
+          _c(
+            "div",
+            { staticClass: "col-12 col-md-6" },
+            [
+              _c(
+                "q-card",
+                { staticClass: "my-card" },
+                [
+                  _c(
+                    "q-img",
+                    {
+                      attrs: { src: "https://cdn.quasar.dev/img/parallax2.jpg" }
+                    },
+                    [
+                      _c("div", { staticClass: "absolute-bottom" }, [
+                        _c("div", { staticClass: "text-h6" }, [
+                          _vm._v("Gestión y Administración")
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "text-subtitle2" }, [
+                          _vm._v(
+                            "Registro de reuniones, monitoreo de tareas administrativas"
+                          )
+                        ])
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "q-card-actions",
+                    [
+                      _c(
+                        "q-btn",
+                        {
+                          attrs: { flat: "" },
+                          on: { click: _vm.url_modulo_reunion }
+                        },
+                        [_vm._v("Reuniones")]
+                      ),
+                      _c("br")
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
         ])
       ])
     ])
   ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/liquidaciones/liquidaciones_vue/modulo_liquidaciones.vue?vue&type=template&id=28ced3e2&":
+/*!************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/auth/liquidaciones/liquidaciones_vue/modulo_liquidaciones.vue?vue&type=template&id=28ced3e2& ***!
+  \************************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [_vm._v("\n    modulo-liquidaciones\n")])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -96879,6 +99364,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_18___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_18__);
 /* harmony import */ var vue_i18n__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! vue-i18n */ "./node_modules/vue-i18n/dist/vue-i18n.esm.js");
+/* harmony import */ var vue_friendly_iframe__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! vue-friendly-iframe */ "./node_modules/vue-friendly-iframe/dist/vue-friendly-iframe.js");
+/* harmony import */ var vue_friendly_iframe__WEBPACK_IMPORTED_MODULE_20___default = /*#__PURE__*/__webpack_require__.n(vue_friendly_iframe__WEBPACK_IMPORTED_MODULE_20__);
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
@@ -96943,8 +99430,10 @@ vue__WEBPACK_IMPORTED_MODULE_18___default.a.use(quasar_dist_quasar_umd__WEBPACK_
 
 
 vue__WEBPACK_IMPORTED_MODULE_18___default.a.use(vue_i18n__WEBPACK_IMPORTED_MODULE_19__["default"]);
+
+vue__WEBPACK_IMPORTED_MODULE_18___default.a.component('vue-friendly-iframe', vue_friendly_iframe__WEBPACK_IMPORTED_MODULE_20___default.a);
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_5__["default"]({
-  routes: [].concat(_toConsumableArray(_rutas_js__WEBPACK_IMPORTED_MODULE_0__["default"]), _toConsumableArray(_routes_alejandro_js__WEBPACK_IMPORTED_MODULE_1__["default"]), _toConsumableArray(_routes_bryanv_js__WEBPACK_IMPORTED_MODULE_2__["default"]), _toConsumableArray(_routes_empa_js__WEBPACK_IMPORTED_MODULE_3__["default"]), _toConsumableArray(_routes_sumbex_js__WEBPACK_IMPORTED_MODULE_4__["default"])) //mode: 'history'
+  routes: [].concat(_toConsumableArray(_rutas_js__WEBPACK_IMPORTED_MODULE_0__["default"]), _toConsumableArray(_routes_alejandro_js__WEBPACK_IMPORTED_MODULE_1__["default"]), _toConsumableArray(_routes_bryanv_js__WEBPACK_IMPORTED_MODULE_2__["default"]), _toConsumableArray(_routes_empa_js__WEBPACK_IMPORTED_MODULE_3__["default"]), _toConsumableArray(_routes_sumbex_js__WEBPACK_IMPORTED_MODULE_4__["default"])) // mode: 'history'
 
 });
 vue__WEBPACK_IMPORTED_MODULE_18___default.a.router = router;
@@ -97598,6 +100087,20 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/auth/cuentas/cuentas_js/formulario.js?vue&type=script&lang=js&":
+/*!************************************************************************************************!*\
+  !*** ./resources/js/components/auth/cuentas/cuentas_js/formulario.js?vue&type=script&lang=js& ***!
+  \************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_formulario_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!./formulario.js?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./resources/js/components/auth/cuentas/cuentas_js/formulario.js?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_formulario_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/auth/cuentas/cuentas_js/listar_cuentas.js?vue&type=script&lang=js&":
 /*!****************************************************************************************************!*\
   !*** ./resources/js/components/auth/cuentas/cuentas_js/listar_cuentas.js?vue&type=script&lang=js& ***!
@@ -97676,6 +100179,61 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_crear_cuenta_vue_vue_type_template_id_5c01bba6___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_crear_cuenta_vue_vue_type_template_id_5c01bba6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/auth/cuentas/cuentas_vue/formulario.vue":
+/*!*************************************************************************!*\
+  !*** ./resources/js/components/auth/cuentas/cuentas_vue/formulario.vue ***!
+  \*************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _formulario_vue_vue_type_template_id_3f2b5d42___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./formulario.vue?vue&type=template&id=3f2b5d42& */ "./resources/js/components/auth/cuentas/cuentas_vue/formulario.vue?vue&type=template&id=3f2b5d42&");
+/* harmony import */ var _cuentas_js_formulario_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../cuentas_js/formulario.js?vue&type=script&lang=js& */ "./resources/js/components/auth/cuentas/cuentas_js/formulario.js?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _cuentas_js_formulario_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _formulario_vue_vue_type_template_id_3f2b5d42___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _formulario_vue_vue_type_template_id_3f2b5d42___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/auth/cuentas/cuentas_vue/formulario.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/auth/cuentas/cuentas_vue/formulario.vue?vue&type=template&id=3f2b5d42&":
+/*!********************************************************************************************************!*\
+  !*** ./resources/js/components/auth/cuentas/cuentas_vue/formulario.vue?vue&type=template&id=3f2b5d42& ***!
+  \********************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_formulario_vue_vue_type_template_id_3f2b5d42___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./formulario.vue?vue&type=template&id=3f2b5d42& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/cuentas/cuentas_vue/formulario.vue?vue&type=template&id=3f2b5d42&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_formulario_vue_vue_type_template_id_3f2b5d42___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_formulario_vue_vue_type_template_id_3f2b5d42___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -97873,6 +100431,59 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_template_id_010800b6___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_template_id_010800b6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/auth/liquidaciones/liquidaciones_vue/modulo_liquidaciones.vue":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/components/auth/liquidaciones/liquidaciones_vue/modulo_liquidaciones.vue ***!
+  \***********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _modulo_liquidaciones_vue_vue_type_template_id_28ced3e2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modulo_liquidaciones.vue?vue&type=template&id=28ced3e2& */ "./resources/js/components/auth/liquidaciones/liquidaciones_vue/modulo_liquidaciones.vue?vue&type=template&id=28ced3e2&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+var script = {}
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
+  script,
+  _modulo_liquidaciones_vue_vue_type_template_id_28ced3e2___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _modulo_liquidaciones_vue_vue_type_template_id_28ced3e2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/auth/liquidaciones/liquidaciones_vue/modulo_liquidaciones.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/auth/liquidaciones/liquidaciones_vue/modulo_liquidaciones.vue?vue&type=template&id=28ced3e2&":
+/*!******************************************************************************************************************************!*\
+  !*** ./resources/js/components/auth/liquidaciones/liquidaciones_vue/modulo_liquidaciones.vue?vue&type=template&id=28ced3e2& ***!
+  \******************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_modulo_liquidaciones_vue_vue_type_template_id_28ced3e2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./modulo_liquidaciones.vue?vue&type=template&id=28ced3e2& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/liquidaciones/liquidaciones_vue/modulo_liquidaciones.vue?vue&type=template&id=28ced3e2&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_modulo_liquidaciones_vue_vue_type_template_id_28ced3e2___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_modulo_liquidaciones_vue_vue_type_template_id_28ced3e2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -98483,7 +101094,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_auth_cuentas_cuentas_vue_modulo_cuentas_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/auth/cuentas/cuentas_vue/modulo_cuentas.vue */ "./resources/js/components/auth/cuentas/cuentas_vue/modulo_cuentas.vue");
 /* harmony import */ var _components_auth_cuentas_cuentas_vue_crear_cuenta_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/auth/cuentas/cuentas_vue/crear_cuenta.vue */ "./resources/js/components/auth/cuentas/cuentas_vue/crear_cuenta.vue");
 /* harmony import */ var _components_auth_cuentas_cuentas_vue_listar_cuenta_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/auth/cuentas/cuentas_vue/listar_cuenta.vue */ "./resources/js/components/auth/cuentas/cuentas_vue/listar_cuenta.vue");
+/* harmony import */ var _components_auth_cuentas_cuentas_vue_formulario_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/auth/cuentas/cuentas_vue/formulario.vue */ "./resources/js/components/auth/cuentas/cuentas_vue/formulario.vue");
+/* harmony import */ var _components_auth_liquidaciones_liquidaciones_vue_modulo_liquidaciones_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/auth/liquidaciones/liquidaciones_vue/modulo_liquidaciones.vue */ "./resources/js/components/auth/liquidaciones/liquidaciones_vue/modulo_liquidaciones.vue");
  //loged
+
+
 
 
 
@@ -98502,6 +101117,10 @@ var routes_empa = [{
     path: '/modulo-cuentas',
     component: _components_auth_cuentas_cuentas_vue_modulo_cuentas_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
     name: 'ModuloCuentas'
+  }, {
+    path: '/modulo-liquidaciones',
+    component: _components_auth_liquidaciones_liquidaciones_vue_modulo_liquidaciones_vue__WEBPACK_IMPORTED_MODULE_6__["default"],
+    name: 'Liquidaciones'
   }, //aqui las rutas con permiso de auth
   {
     path: '/crear-cuenta',
@@ -98511,6 +101130,10 @@ var routes_empa = [{
     path: '/listar-cuenta',
     component: _components_auth_cuentas_cuentas_vue_listar_cuenta_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
     name: 'ListarCuenta'
+  }, {
+    path: '/formulario-cuenta',
+    component: _components_auth_cuentas_cuentas_vue_formulario_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
+    name: 'Formulario'
   }]
 }, {
   path: '/404',
@@ -98792,7 +101415,7 @@ var routes = [{
   path: '*',
   hidden: true,
   redirect: {
-    path: '/404'
+    path: '/'
   }
 }];
 /* harmony default export */ __webpack_exports__["default"] = (routes);
@@ -98817,8 +101440,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\bryan\Desktop\Proyectos\neofox_contable\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\bryan\Desktop\Proyectos\neofox_contable\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/alejandroesteban/Desktop/proyectos2019/template_vue_laravel_2019/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/alejandroesteban/Desktop/proyectos2019/template_vue_laravel_2019/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
