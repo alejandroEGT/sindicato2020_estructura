@@ -10,4 +10,5 @@ Route::get('/traer_tipos', 'ProveedorController@TraerTipos');
 
 //------------->Reuniones
 Route::post('/ingresar_reunion', 'ReunionController@CrearReunion');
+Route::get('/traer_reuniones', 'ReunionController@TraerReuniones');
 //------------->Reuniones

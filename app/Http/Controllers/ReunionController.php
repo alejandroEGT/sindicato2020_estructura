@@ -11,4 +11,9 @@ class ReunionController extends Controller
     {
         return Reunion::crearReunion($request);
     }
+
+    public function TraerReuniones()
+    {
+        return Reunion::traerReuniones();
+    }
 }

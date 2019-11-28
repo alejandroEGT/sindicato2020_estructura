@@ -4991,21 +4991,29 @@ __webpack_require__.r(__webpack_exports__);
         'cuerpo': this.cuerpo
       };
       axios.post('api/ingresar_reunion', data).then(function (res) {
-        console.log(res);
-
         if (res.data.estado = 'success') {
+          _this2.fecha = '';
+          _this2.titulo = '';
+          _this2.cuerpo = '';
+
           _this2.$q.notify({
             color: "green-4",
             textColor: "white",
             icon: "cloud_done",
             message: res.data.mensaje
           });
+        } else {
+          _this2.$q.notify({
+            color: "red-4",
+            textColor: "white",
+            icon: "cloud_done",
+            message: res.data.mensaje
+          });
         }
-
-        _this2.fecha = '';
-        _this2.titulo = '';
-        _this2.cuerpo = '';
       });
+    },
+    traer_reuniones: function traer_reuniones() {
+      this.$router.push('/traer-reuniones');
     }
   }
 });
@@ -5025,6 +5033,9 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     crear_reunion: function crear_reunion() {
       this.$router.push('/crear-reunion');
+    },
+    traer_reuniones: function traer_reuniones() {
+      this.$router.push('/traer-reuniones');
     }
   }
 });
@@ -85676,7 +85687,7 @@ var render = function() {
                     },
                     on: {
                       click: function($event) {
-                        _vm.simulateProgress(2), _vm.url_listado_clientes()
+                        _vm.simulateProgress(2), _vm.traer_reuniones()
                       }
                     },
                     scopedSlots: _vm._u([
@@ -85760,7 +85771,7 @@ var render = function() {
                             "icon-right": "format_list_numbered",
                             label: "Reuniones"
                           },
-                          on: { click: _vm.url_listado_clientes }
+                          on: { click: _vm.traer_reuniones }
                         })
                       ],
                       1
@@ -85777,6 +85788,30 @@ var render = function() {
       ])
     ])
   ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/reuniones/reuniones_vue/traer_reuniones.vue?vue&type=template&id=09f38edc&":
+/*!***********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/auth/reuniones/reuniones_vue/traer_reuniones.vue?vue&type=template&id=09f38edc& ***!
+  \***********************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("h1", [_vm._v("\n    traer\n")])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -102744,6 +102779,59 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/auth/reuniones/reuniones_vue/traer_reuniones.vue":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/auth/reuniones/reuniones_vue/traer_reuniones.vue ***!
+  \**********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _traer_reuniones_vue_vue_type_template_id_09f38edc___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./traer_reuniones.vue?vue&type=template&id=09f38edc& */ "./resources/js/components/auth/reuniones/reuniones_vue/traer_reuniones.vue?vue&type=template&id=09f38edc&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+var script = {}
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
+  script,
+  _traer_reuniones_vue_vue_type_template_id_09f38edc___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _traer_reuniones_vue_vue_type_template_id_09f38edc___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/auth/reuniones/reuniones_vue/traer_reuniones.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/auth/reuniones/reuniones_vue/traer_reuniones.vue?vue&type=template&id=09f38edc&":
+/*!*****************************************************************************************************************!*\
+  !*** ./resources/js/components/auth/reuniones/reuniones_vue/traer_reuniones.vue?vue&type=template&id=09f38edc& ***!
+  \*****************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_traer_reuniones_vue_vue_type_template_id_09f38edc___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./traer_reuniones.vue?vue&type=template&id=09f38edc& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/reuniones/reuniones_vue/traer_reuniones.vue?vue&type=template&id=09f38edc&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_traer_reuniones_vue_vue_type_template_id_09f38edc___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_traer_reuniones_vue_vue_type_template_id_09f38edc___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/outer.vue":
 /*!*******************************************!*\
   !*** ./resources/js/components/outer.vue ***!
@@ -103049,12 +103137,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_auth_proveedores_proveedores_vue_tabla_proveedor_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/auth/proveedores/proveedores_vue/tabla_proveedor.vue */ "./resources/js/components/auth/proveedores/proveedores_vue/tabla_proveedor.vue");
 /* harmony import */ var _components_auth_reuniones_reuniones_vue_modulo_reuniones_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/auth/reuniones/reuniones_vue/modulo_reuniones.vue */ "./resources/js/components/auth/reuniones/reuniones_vue/modulo_reuniones.vue");
 /* harmony import */ var _components_auth_reuniones_reuniones_vue_crear_reunion_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/auth/reuniones/reuniones_vue/crear_reunion.vue */ "./resources/js/components/auth/reuniones/reuniones_vue/crear_reunion.vue");
+/* harmony import */ var _components_auth_reuniones_reuniones_vue_traer_reuniones_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/auth/reuniones/reuniones_vue/traer_reuniones.vue */ "./resources/js/components/auth/reuniones/reuniones_vue/traer_reuniones.vue");
  //loged
 
 
 
 
  //Reuniones
+
 
 
 
@@ -103087,6 +103177,10 @@ var routes_sumbex = [{
     path: '/crear-reunion',
     component: _components_auth_reuniones_reuniones_vue_crear_reunion_vue__WEBPACK_IMPORTED_MODULE_6__["default"],
     name: 'CrearReunion'
+  }, {
+    path: '/traer-reuniones',
+    component: _components_auth_reuniones_reuniones_vue_traer_reuniones_vue__WEBPACK_IMPORTED_MODULE_7__["default"],
+    name: 'TraerReuniones'
   } //aqui las rutas con permiso de auth
   ]
 }, {

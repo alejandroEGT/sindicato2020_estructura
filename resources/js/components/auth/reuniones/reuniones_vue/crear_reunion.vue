@@ -57,7 +57,7 @@
             <q-btn
               :loading="loading2"
               color="primary"
-              @click="simulateProgress(2),url_listado_clientes()"
+              @click="simulateProgress(2),traer_reuniones()"
               icon-right="table_chart"
               label="Reuniones"
             >

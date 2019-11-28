@@ -21,7 +21,7 @@
                 <q-btn
                   color="blue"
                   icon-right="format_list_numbered"
-                  @click="url_listado_clientes"
+                  @click="traer_reuniones"
                   label="Reuniones"
                 />
               </q-card-actions>

@@ -4,6 +4,10 @@ export default {
             this.$router.push('/crear-reunion');
         },
 
+        traer_reuniones(){
+            this.$router.push('/traer-reuniones');
+        }
+
     }
 
 }
