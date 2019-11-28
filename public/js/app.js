@@ -4631,6 +4631,94 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./resources/js/components/auth/liquidaciones/liquidaciones_js/formulario_liquidaciones.js?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./resources/js/components/auth/liquidaciones/liquidaciones_js/formulario_liquidaciones.js?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// const stringOptions = [
+//   'Google', 'Facebook', 'Twitter', 'Apple', 'Oracle'
+// ]
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      loading2: false,
+      empleado: '',
+      options: [],
+      stringOptions: [],
+      rut: '',
+      fecha_nacimiento: ''
+    };
+  },
+  created: function created() {
+    this.select_nombre();
+  },
+  methods: {
+    select_nombre: function select_nombre() {
+      var _this = this;
+
+      axios.get('api/select_nombre').then(function (res) {
+        _this.stringOptions = res.data;
+        _this.options = _this.stringOptions;
+        console.log(_this.options);
+      });
+    },
+    filterFn: function filterFn(val, update, abort) {
+      var _this2 = this;
+
+      update(function () {
+        var needle = val.toLowerCase();
+        console.log(needle); //console.log(this.stringOptions.filter(v => v.nombre.toLowerCase()))
+
+        _this2.options = _this2.stringOptions.filter(function (v) {
+          return v.nombre.toLowerCase().indexOf(needle) > -1;
+        });
+      });
+    },
+    seleccionado: function seleccionado() {
+      var _this3 = this;
+
+      this.loading2 = true;
+      console.log(this.empleado.id);
+      axios.get('api/traer_datos_persona/' + this.empleado.id).then(function (res) {
+        _this3.rut = res.data.rut;
+        _this3.fecha_nacimiento = res.data.fecha_nacimiento;
+        console.log(res.data);
+        _this3.loading2 = false;
+      });
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./resources/js/components/auth/liquidaciones/liquidaciones_js/modulo_liquidaciones.js?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./resources/js/components/auth/liquidaciones/liquidaciones_js/modulo_liquidaciones.js?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {};
+  },
+  methods: {
+    url: function url(_url) {
+      this.$router.push(_url);
+    }
+  },
+  created: function created() {}
+});
+
+/***/ }),
+
 /***/ "./node_modules/bootstrap/dist/js/bootstrap.js":
 /*!*****************************************************!*\
   !*** ./node_modules/bootstrap/dist/js/bootstrap.js ***!
@@ -82672,6 +82760,138 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/liquidaciones/liquidaciones_vue/formulario_liquidaciones.vue?vue&type=template&id=5698d244&":
+/*!****************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/auth/liquidaciones/liquidaciones_vue/formulario_liquidaciones.vue?vue&type=template&id=5698d244& ***!
+  \****************************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "q-pa-md" }, [
+    _c("div", { staticClass: "row justify-center" }, [
+      _c(
+        "div",
+        { staticClass: "col-12" },
+        [
+          _c(
+            "q-card",
+            { staticClass: "my-card" },
+            [
+              _c("q-card-section", { staticClass: "bg-primary text-white" }, [
+                _c("div", { staticClass: "text-h6" }, [
+                  _vm._v("Liquidaciones/formulario")
+                ])
+              ]),
+              _vm._v(" "),
+              _c("q-separator"),
+              _vm._v(" "),
+              _c("div", { staticClass: "q-pa-md row q-col-gutter-md" }, [
+                _c(
+                  "div",
+                  { staticClass: "col-12 col-md-3" },
+                  [
+                    _c("q-select", {
+                      attrs: {
+                        outlined: "",
+                        options: _vm.options,
+                        "option-label": "nombre",
+                        "option-value": "id",
+                        label: "Nombre",
+                        filled: "",
+                        "use-input": "",
+                        "hide-selected": "",
+                        "fill-input": "",
+                        "input-debounce": "0"
+                      },
+                      on: { filter: _vm.filterFn, input: _vm.seleccionado },
+                      model: {
+                        value: _vm.empleado,
+                        callback: function($$v) {
+                          _vm.empleado = $$v
+                        },
+                        expression: "empleado"
+                      }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "col-12 col-md-3" },
+                  [
+                    _c("q-input", {
+                      attrs: {
+                        loading: _vm.loading2,
+                        outlined: "",
+                        label: "Rut",
+                        "stack-label": "",
+                        type: "text",
+                        disable: true
+                      },
+                      model: {
+                        value: _vm.rut,
+                        callback: function($$v) {
+                          _vm.rut = $$v
+                        },
+                        expression: "rut"
+                      }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "col-12 col-md-3" },
+                  [
+                    _c("q-input", {
+                      attrs: {
+                        loading: _vm.loading2,
+                        outlined: "",
+                        label: "Fecha de ingreso",
+                        "stack-label": "",
+                        type: "date",
+                        disable: true
+                      },
+                      model: {
+                        value: _vm.fecha_nacimiento,
+                        callback: function($$v) {
+                          _vm.fecha_nacimiento = $$v
+                        },
+                        expression: "fecha_nacimiento"
+                      }
+                    })
+                  ],
+                  1
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "q-pa-md row" })
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/liquidaciones/liquidaciones_vue/modulo_liquidaciones.vue?vue&type=template&id=28ced3e2&":
 /*!************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/auth/liquidaciones/liquidaciones_vue/modulo_liquidaciones.vue?vue&type=template&id=28ced3e2& ***!
@@ -82687,7 +82907,71 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_vm._v("\n    modulo-liquidaciones\n")])
+  return _c("div", { staticClass: "q-pa-md" }, [
+    _c("div", { staticClass: "row justify-center" }, [
+      _c(
+        "div",
+        { staticClass: "col-12 col-md-10" },
+        [
+          _c(
+            "q-card",
+            { staticClass: "my-card" },
+            [
+              _c("q-card-section", { staticClass: "bg-primary text-white" }, [
+                _c("div", { staticClass: "text-h6" }, [_vm._v("Liquidaciones")])
+              ]),
+              _vm._v(" "),
+              _c("q-separator"),
+              _vm._v(" "),
+              _c("div", { staticClass: "q-pa-md" }, [
+                _c("div", { staticClass: "row q-col-gutter-md" }, [
+                  _c(
+                    "div",
+                    { staticClass: "col-12 col-md-2" },
+                    [
+                      _c("q-btn", {
+                        staticClass: "block",
+                        attrs: {
+                          color: "primary",
+                          icon: "create",
+                          label: "Formulario"
+                        },
+                        on: {
+                          click: function($event) {
+                            return _vm.url("/formulario-liquidaciones")
+                          }
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "col-12 col-md-2" },
+                    [
+                      _c("q-btn", {
+                        staticClass: "block",
+                        attrs: {
+                          color: "primary",
+                          icon: "list",
+                          label: "lista Generadas"
+                        },
+                        on: { click: _vm.url }
+                      })
+                    ],
+                    1
+                  )
+                ])
+              ])
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -99799,25 +100083,111 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/auth/liquidaciones/liquidaciones_vue/modulo_liquidaciones.vue":
-/*!***********************************************************************************************!*\
-  !*** ./resources/js/components/auth/liquidaciones/liquidaciones_vue/modulo_liquidaciones.vue ***!
-  \***********************************************************************************************/
+/***/ "./resources/js/components/auth/liquidaciones/liquidaciones_js/formulario_liquidaciones.js?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************!*\
+  !*** ./resources/js/components/auth/liquidaciones/liquidaciones_js/formulario_liquidaciones.js?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _modulo_liquidaciones_vue_vue_type_template_id_28ced3e2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modulo_liquidaciones.vue?vue&type=template&id=28ced3e2& */ "./resources/js/components/auth/liquidaciones/liquidaciones_vue/modulo_liquidaciones.vue?vue&type=template&id=28ced3e2&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_formulario_liquidaciones_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!./formulario_liquidaciones.js?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./resources/js/components/auth/liquidaciones/liquidaciones_js/formulario_liquidaciones.js?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_formulario_liquidaciones_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
-var script = {}
+/***/ }),
+
+/***/ "./resources/js/components/auth/liquidaciones/liquidaciones_js/modulo_liquidaciones.js?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************!*\
+  !*** ./resources/js/components/auth/liquidaciones/liquidaciones_js/modulo_liquidaciones.js?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_modulo_liquidaciones_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!./modulo_liquidaciones.js?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./resources/js/components/auth/liquidaciones/liquidaciones_js/modulo_liquidaciones.js?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_modulo_liquidaciones_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/auth/liquidaciones/liquidaciones_vue/formulario_liquidaciones.vue":
+/*!***************************************************************************************************!*\
+  !*** ./resources/js/components/auth/liquidaciones/liquidaciones_vue/formulario_liquidaciones.vue ***!
+  \***************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _formulario_liquidaciones_vue_vue_type_template_id_5698d244___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./formulario_liquidaciones.vue?vue&type=template&id=5698d244& */ "./resources/js/components/auth/liquidaciones/liquidaciones_vue/formulario_liquidaciones.vue?vue&type=template&id=5698d244&");
+/* harmony import */ var _liquidaciones_js_formulario_liquidaciones_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../liquidaciones_js/formulario_liquidaciones.js?vue&type=script&lang=js& */ "./resources/js/components/auth/liquidaciones/liquidaciones_js/formulario_liquidaciones.js?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
 
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
-  script,
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _liquidaciones_js_formulario_liquidaciones_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _formulario_liquidaciones_vue_vue_type_template_id_5698d244___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _formulario_liquidaciones_vue_vue_type_template_id_5698d244___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/auth/liquidaciones/liquidaciones_vue/formulario_liquidaciones.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/auth/liquidaciones/liquidaciones_vue/formulario_liquidaciones.vue?vue&type=template&id=5698d244&":
+/*!**********************************************************************************************************************************!*\
+  !*** ./resources/js/components/auth/liquidaciones/liquidaciones_vue/formulario_liquidaciones.vue?vue&type=template&id=5698d244& ***!
+  \**********************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_formulario_liquidaciones_vue_vue_type_template_id_5698d244___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./formulario_liquidaciones.vue?vue&type=template&id=5698d244& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/liquidaciones/liquidaciones_vue/formulario_liquidaciones.vue?vue&type=template&id=5698d244&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_formulario_liquidaciones_vue_vue_type_template_id_5698d244___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_formulario_liquidaciones_vue_vue_type_template_id_5698d244___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/auth/liquidaciones/liquidaciones_vue/modulo_liquidaciones.vue":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/components/auth/liquidaciones/liquidaciones_vue/modulo_liquidaciones.vue ***!
+  \***********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _modulo_liquidaciones_vue_vue_type_template_id_28ced3e2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modulo_liquidaciones.vue?vue&type=template&id=28ced3e2& */ "./resources/js/components/auth/liquidaciones/liquidaciones_vue/modulo_liquidaciones.vue?vue&type=template&id=28ced3e2&");
+/* harmony import */ var _liquidaciones_js_modulo_liquidaciones_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../liquidaciones_js/modulo_liquidaciones.js?vue&type=script&lang=js& */ "./resources/js/components/auth/liquidaciones/liquidaciones_js/modulo_liquidaciones.js?vue&type=script&lang=js&");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _liquidaciones_js_modulo_liquidaciones_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _liquidaciones_js_modulo_liquidaciones_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _liquidaciones_js_modulo_liquidaciones_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _modulo_liquidaciones_vue_vue_type_template_id_28ced3e2___WEBPACK_IMPORTED_MODULE_0__["render"],
   _modulo_liquidaciones_vue_vue_type_template_id_28ced3e2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
@@ -100234,7 +100604,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_auth_cuentas_cuentas_vue_listar_cuenta_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/auth/cuentas/cuentas_vue/listar_cuenta.vue */ "./resources/js/components/auth/cuentas/cuentas_vue/listar_cuenta.vue");
 /* harmony import */ var _components_auth_cuentas_cuentas_vue_formulario_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/auth/cuentas/cuentas_vue/formulario.vue */ "./resources/js/components/auth/cuentas/cuentas_vue/formulario.vue");
 /* harmony import */ var _components_auth_liquidaciones_liquidaciones_vue_modulo_liquidaciones_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/auth/liquidaciones/liquidaciones_vue/modulo_liquidaciones.vue */ "./resources/js/components/auth/liquidaciones/liquidaciones_vue/modulo_liquidaciones.vue");
+/* harmony import */ var _components_auth_liquidaciones_liquidaciones_vue_formulario_liquidaciones_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/auth/liquidaciones/liquidaciones_vue/formulario_liquidaciones.vue */ "./resources/js/components/auth/liquidaciones/liquidaciones_vue/formulario_liquidaciones.vue");
  //loged
+
 
 
 
@@ -100272,6 +100644,10 @@ var routes_empa = [{
     path: '/formulario-cuenta',
     component: _components_auth_cuentas_cuentas_vue_formulario_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
     name: 'Formulario'
+  }, {
+    path: '/formulario-liquidaciones',
+    component: _components_auth_liquidaciones_liquidaciones_vue_formulario_liquidaciones_vue__WEBPACK_IMPORTED_MODULE_7__["default"],
+    name: 'FormularioLiq'
   }]
 }, {
   path: '/404',

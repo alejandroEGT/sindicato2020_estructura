@@ -7,7 +7,7 @@ import CrearCuenta from "../components/auth/cuentas/cuentas_vue/crear_cuenta.vue
 import ListarCuenta from "../components/auth/cuentas/cuentas_vue/listar_cuenta.vue";
 import Formulario from "../components/auth/cuentas/cuentas_vue/formulario.vue";
 import Liquidaciones from "../components/auth/liquidaciones/liquidaciones_vue/modulo_liquidaciones.vue";
-
+import FormularioLiq from "../components/auth/liquidaciones/liquidaciones_vue/formulario_liquidaciones.vue";
 
 let routes_empa = [
 
@@ -25,7 +25,8 @@ let routes_empa = [
         { path: '/crear-cuenta', component: CrearCuenta, name: 'CrearCuenta' },
         { path: '/listar-cuenta', component: ListarCuenta, name: 'ListarCuenta' },
         { path: '/formulario-cuenta', component: Formulario, name: 'Formulario' },
-   
+        { path: '/formulario-liquidaciones', component: FormularioLiq, name: 'FormularioLiq' },
+        
        
     ]
 },

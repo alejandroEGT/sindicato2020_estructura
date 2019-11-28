@@ -14,6 +14,9 @@
 	Route::post('actualizar_cuenta_detalle','CuentadescripcionController@actualizar');
 	Route::post('actualizar_cuenta_detalle_archivo','CuentadescripcionController@actualizar_archivo');
 	Route::get('eliminar_cuenta_detalle/{id}','CuentadescripcionController@eliminar_cuenta_detalle');
+
+	Route::get('select_nombre','LiquidacionesController@select_nombre');
+	Route::get('traer_datos_persona/{id}','LiquidacionesController@traer_datos_persona');
 	
 	
 
