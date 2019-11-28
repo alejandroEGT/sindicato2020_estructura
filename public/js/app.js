@@ -13012,7 +13012,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\na:link\r\n{\r\ntext-decoration:none;\n}\r\n", ""]);
+exports.push([module.i, "\na:link\n{\ntext-decoration:none;\n}\n", ""]);
 
 // exports
 
@@ -13050,7 +13050,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "\n.my-sticky-header-table\r\n  /* max height is important */\r\n  .q-table__middle{\r\n    max-height: 500px;\n}\n.q-table__top,\r\n  .q-table__bottom,\r\n  thead tr:first-child th{\r\n    /* bg color is important for th; just specify one */\r\n    background-color: #027be3;\r\n    color: #ffffff;\n}\n.fondo{\r\n    background-color: #ffffff;\n}\nthead tr th{\r\n    position: -webkit-sticky;\r\n    position: sticky;\r\n    z-index: 1;\n}\nthead tr:first-child th{\r\n    top: 0;\n}\r\n  /* this is when the loading indicator appears */\n.q-table--loading thead tr:last-child th{\r\n    /* height of all previous header rows */\r\n    top: 48px;\n}", ""]);
+exports.push([module.i, "\n.my-sticky-header-table\n  /* max height is important */\n  .q-table__middle{\n    max-height: 500px;\n}\n.q-table__top,\n  .q-table__bottom,\n  thead tr:first-child th{\n    /* bg color is important for th; just specify one */\n    background-color: #027be3;\n    color: #ffffff;\n}\n.fondo{\n    background-color: #ffffff;\n}\nthead tr th{\n    position: -webkit-sticky;\n    position: sticky;\n    z-index: 1;\n}\nthead tr:first-child th{\n    top: 0;\n}\n  /* this is when the loading indicator appears */\n.q-table--loading thead tr:last-child th{\n    /* height of all previous header rows */\n    top: 48px;\n}", ""]);
 
 // exports
 
@@ -13088,7 +13088,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".titulo{\r\ncolor: #ffffff;\r\nbackground: #bdc3c7;  /* fallback for old browsers */  /* Chrome 10-25, Safari 5.1-6 */\r\nbackground: -webkit-gradient(linear, left top, right top, from(#2c3e50), to(#bdc3c7));\r\nbackground: linear-gradient(to right, #2c3e50, #bdc3c7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */\n}\r\n", ""]);
+exports.push([module.i, ".titulo{\ncolor: #ffffff;\nbackground: #bdc3c7;  /* fallback for old browsers */  /* Chrome 10-25, Safari 5.1-6 */\nbackground: -webkit-gradient(linear, left top, right top, from(#2c3e50), to(#bdc3c7));\nbackground: linear-gradient(to right, #2c3e50, #bdc3c7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */\n}\n", ""]);
 
 // exports
 
@@ -13107,7 +13107,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "ul{list-style:none;}\r\n/* Rules for sizing the icon. */\n.material-icons.md-18 { font-size: 18px;\n}\n.material-icons.md-24 { font-size: 24px;\n}\n.material-icons.md-36 { font-size: 36px;\n}\n.material-icons.md-48 { font-size: 48px;\n}\r\n\r\n/* Rules for using icons as black on a light background. */\n.material-icons.md-dark { color: rgba(0, 0, 0, 0.54);\n}\n.material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26);\n}\r\n\r\n/* Rules for using icons as white on a dark background. */\n.material-icons.md-light { color: rgba(255, 255, 255, 1);\n}\n.material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3);\n}", ""]);
+exports.push([module.i, "ul{list-style:none;}\n/* Rules for sizing the icon. */\n.material-icons.md-18 { font-size: 18px;\n}\n.material-icons.md-24 { font-size: 24px;\n}\n.material-icons.md-36 { font-size: 36px;\n}\n.material-icons.md-48 { font-size: 48px;\n}\n\n/* Rules for using icons as black on a light background. */\n.material-icons.md-dark { color: rgba(0, 0, 0, 0.54);\n}\n.material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26);\n}\n\n/* Rules for using icons as white on a dark background. */\n.material-icons.md-light { color: rgba(255, 255, 255, 1);\n}\n.material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3);\n}", ""]);
 
 // exports
 
@@ -109399,8 +109399,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\david\Desktop\Proyectos NeoFox\neofox_contable\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\david\Desktop\Proyectos NeoFox\neofox_contable\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/alejandroesteban/Desktop/proyectos2019/template_vue_laravel_2019/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/alejandroesteban/Desktop/proyectos2019/template_vue_laravel_2019/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ }),
