@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 
 class Proveedor extends Model
@@ -40,6 +41,20 @@ class Proveedor extends Model
         } else {
             return ['estado' => 'failed', 'mensaje' => 'El rut ingresado no es valido.'];
         }
+    }
+
+    protected function traerProcedencia(){
+        $proc = DB::table('procedencia')
+        ->select([
+            'id',
+            'descripcion'
+        ])
+        ->where([
+            'activo' => 'S'
+        ])
+        ->get();
+
+        return $proc;
     }
 
     protected function validarRut($rut)

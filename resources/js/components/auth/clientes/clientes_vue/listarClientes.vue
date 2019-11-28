@@ -375,6 +375,7 @@
 
         </q-tr>
       </template>
+      
     </q-table>
 
     <!-- alertas -->

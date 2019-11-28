@@ -19,7 +19,7 @@ class DeudasCliente extends Model
                 'cliente_id' => 'required',
                 'tipo_deuda_id' => 'required',
                 'monto' => 'required|min:1|max:50',
-                'descripcion' => 'required|min:3|max:100',
+                'descripcion' => 'required|min:3|max:500',
                 'fecha' => 'required',
             ],
              [
@@ -30,7 +30,7 @@ class DeudasCliente extends Model
                 'monto.max' => 'El monto no puede tener más de 50 caracteres.',
                 'descripcion.required' => 'La descripcion es necesaria',
                 'descripcion.min' => 'La descripcion debe tener un minimo de 3 caracteres.',
-                'descripcion.max' => 'La descripcion no puede tener más de 100 caracteres.',
+                'descripcion.max' => 'La descripcion no puede tener más de 500 caracteres.',
                 'fecha.required' => 'La fecha es necesaria',
 
                 

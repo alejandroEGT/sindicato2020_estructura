@@ -17,7 +17,7 @@
                   class="full-width"
                   color="blue"
                   icon-right="person_add"
-                  @click="url_registro_clientes"
+                  @click="url_registro_clientes()"
                   label="Registro de Clientes"
                 />
               </div>
@@ -26,7 +26,7 @@
                   class="full-width"
                   color="blue"
                   icon-right="format_list_numbered"
-                  @click="url_listado_clientes"
+                  @click="url_listado_clientes()"
                   label="Listado de Clientes"
                 />
               </div>
@@ -35,8 +35,17 @@
                   class="full-width"
                   color="green"
                   icon-right="format_list_numbered"
-                  @click="url_deudas_clientes"
+                  @click="url_deudas_clientes()"
                   label="Clientes con Deudas"
+                />
+              </div>
+              <div class="col-12 col-md-3">
+                <q-btn
+                  class="full-width"
+                  color="green"
+                  icon-right="format_list_numbered"
+                  @click="url_listado_deudas_clientes()"
+                  label="listado de Clientes con Deudas"
                 />
               </div>
               <div class="col-12 col-md-3">

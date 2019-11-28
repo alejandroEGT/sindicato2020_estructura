@@ -32,6 +32,9 @@ export default {
     url_volver() {
       this.$router.push('/modulo-clientes');
     },
+    url_listar_deudas_clientes() {
+      this.$router.push('/listar-deudas-clientes');
+    },
 
     mostrar_clientes_deudas() {
       axios.get('api/traer_clientes_deudas').then((response) => {
