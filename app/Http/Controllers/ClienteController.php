@@ -90,4 +90,11 @@ class ClienteController extends Controller
     public function registro_cliente_deudas(Request $datos){
         return DeudasCliente::registro_cliente_deudas($datos);
     }
+
+    public function buscar_cliente($rut){
+        return DeudasCliente::buscar_cliente($rut);
+    }
+    public function deudas_cliente($id){
+        return DeudasCliente::deudas_cliente($id);
+    }
 }

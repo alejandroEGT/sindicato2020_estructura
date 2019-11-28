@@ -168,7 +168,7 @@ class Cliente extends Model
                   $modificar->rut = $request->input;
 
                   if ($modificar->save()) {
-                      return ['estado'=>'success', 'mensaje'=>'Fecha de nacimiento actualizada.'];
+                      return ['estado'=>'success', 'mensaje'=>'Rut del cliente actualizado.'];
                   } else {
                       return ['estado'=>'failed', 'mensaje'=>'A ocurrido un error al igreso de datos.'];
                   }
@@ -228,15 +228,26 @@ class Cliente extends Model
 
     protected function eliminar_cliente($request)
     {
-        $eliminar=$this::find($request->id);
-        // dd($request->id);
-        $eliminar->activo = 'N';
 
-        if($eliminar->save()){
-          {
+      $deudaCliente = DeudasCliente::where([
+                                             'cliente_id'=>$request->id,
+                                             'activo'=>'S'               
+                                            ])
+                                            ->get();
+        
+        if ($deudaCliente->isEmpty()) {
+            $eliminar = $this::find($request->id);
+            $eliminar->activo = 'N';
+
+            if ($eliminar->save()) {
+                {
             return ['estado'=>'success', 'mensaje'=>'Cliente Eliminado con exito!.'];
-        } 
-            return ['estado'=>'failed', 'mensaje'=>'A ocurrido un error al eliminar el cliente.'];
+        }
+                return ['estado'=>'failed', 'mensaje'=>'A ocurrido un error al eliminar el cliente.'];
+            }
+        }else{
+          return ['estado'=>'failed', 'mensaje'=>'No es posible eliminar a este cliente ya que tiene deudas pendientes.'];
+
         }
         
     }

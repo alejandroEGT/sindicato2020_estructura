@@ -100,9 +100,25 @@ export default {
                     });
                     this.loading = false;
                     this.traer_clientes();
+                }else{
+                    this.$q.notify({
+                        color: "red-4",
+                        textColor: "white",
+                        icon: "delete_forever",
+                        message: response.data.mensaje
+                      });
+                      this.loading = false;
                 }
                 
             })
+        },
+
+        show(component) {
+            this.$refs[''+component+''].show()
+        },
+
+        onDialogHide() {
+            this.$emit('hide')
         },
 
         onRefresh() {

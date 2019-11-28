@@ -2,6 +2,9 @@
 
 namespace App;
 
+use Carbon\Carbon;
+use App\Cliente;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Validator;
 
@@ -67,6 +70,121 @@ class DeudasCliente extends Model
 
         return $validarDatos;
 
+    }
+
+    protected function buscar_cliente($rut)
+    {
+        $limpiar = $this->limpiarRut($rut);
+        $verificar = $this->validarRut($limpiar);
+        if ($verificar == true) {
+            $listar = Cliente::select([
+                                    'id',
+                                    'rut',
+                                    DB::raw("INITCAP(concat(nombres ,' ', 
+                                    apellido_paterno ,' ', 
+                                    apellido_materno)) 
+                                    as cliente_deuda")
+                           
+                                ])
+                                    ->where([
+                                        'activo'=>'S',
+                                        'rut'=>$limpiar
+                                    ])
+                                    ->get();
+        
+        if(!$listar->isEmpty()){
+           
+            return ['estado'=>'success' , 'cliente' => $listar[0]];
+        }
+        else{
+            return ['estado'=>'failed', 'mensaje'=>'El rut ingresado no existe en nuestros registros.'];
+        }                            
+                                    
+        }else{
+            return ['estado'=>'failed', 'mensaje'=>'El rut ingresado no es valido.'];
+        }
+
+    }
+
+    protected function deudas_cliente($id){
+
+        $listar = DeudasCliente::select([
+                                        'deudas_cliente.id',
+                                        'deudas_cliente.monto',
+                                        'deudas_cliente.descripcion',
+                                        'deudas_cliente.fecha',
+                                        'tdc.tipo',
+                                        ])
+                                        ->join('tipo_deuda_cliente as tdc','tdc.id','deudas_cliente.tipo_deuda_id')
+                                        ->orderBy('fecha','asc')
+                                        ->where([
+                                            'deudas_cliente.activo'=>'S',
+                                            'deudas_cliente.cliente_id' =>$id
+                                        ])
+                                        ->get();
+
+    if (count($listar) > 0) {
+        foreach ($listar as $key) {
+            $key->fecha = Carbon::parse($key->fecha)->format('d-m-Y');
+        }
+    }
+    if(!$listar->isEmpty()){
+        return ['estado'=>'success' , 'cliente' => $listar];
+    }else{
+        return ['estado'=>'failed', 'mensaje'=>'El cliente no posee deudas vigentes.'];
+    }                                            
+    }
+
+    protected function validarRut($rut)
+    {
+        try {
+            $rut = preg_replace('/[^k0-9]/i', '', $rut);
+            $dv  = substr($rut, -1);
+            $numero = substr($rut, 0, strlen($rut) - 1);
+            $i = 2;
+            $suma = 0;
+            foreach (array_reverse(str_split($numero)) as $v) {
+                if ($i == 8)
+                    $i = 2;
+                $suma += $v * $i;
+                ++$i;
+            }
+            $dvr = 11 - ($suma % 11);
+
+            if ($dvr == 11)
+                $dvr = 0;
+            if ($dvr == 10)
+                $dvr = 'K';
+            if ($dvr == strtoupper($dv))
+                return true;
+            else
+                return false;
+        } catch (\Exception $e) {
+            return false;
+        }
+    }
+
+    protected function limpiarRut($rut)
+    {
+        $rut = str_replace('á', 'a', $rut);
+        $rut = str_replace('Á', 'A', $rut);
+        $rut = str_replace('é', 'e', $rut);
+        $rut = str_replace('É', 'E', $rut);
+        $rut = str_replace('í', 'i', $rut);
+        $rut = str_replace('Í', 'I', $rut);
+        $rut = str_replace('ó', 'o', $rut);
+        $rut = str_replace('Ó', 'O', $rut);
+        $rut = str_replace('Ú', 'U', $rut);
+        $rut = str_replace('ú', 'u', $rut);
+
+        //Quitando Caracteres Especiales 
+        $rut = str_replace('"', '', $rut);
+        $rut = str_replace(':', '', $rut);
+        $rut = str_replace('.', '', $rut);
+        $rut = str_replace(',', '', $rut);
+        $rut = str_replace(';', '', $rut);
+        $rut = str_replace('-', '', $rut);
+        return $rut;
     }
     
 }
