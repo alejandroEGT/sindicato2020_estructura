@@ -49,10 +49,11 @@
                     <q-input
                     outlined
                     counter
-                    maxlength="100"
+                    maxlength="500"
                     v-model="descripcion"
                     label="Descripcion de la deuda"
                     stack-label
+                    autogrow
                     type="text"
                   />
                 </div>
@@ -81,6 +82,18 @@
                 @click="simulateProgress(1), registrar_clientes_deudas()"
                 icon-right="send"
                 label="ingresar"
+              >
+                <template v-slot:loading>
+                  <q-spinner-facebook />
+                </template>
+              </q-btn>
+
+              <q-btn
+                :loading="loading2"
+                color="blue"
+                @click="simulateProgress(2), url_listar_deudas_clientes()"
+                icon-right="send"
+                label="Tabla"
               >
                 <template v-slot:loading>
                   <q-spinner-facebook />

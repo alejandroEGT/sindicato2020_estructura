@@ -8,6 +8,7 @@ import ModuloClientes from "../components/auth/clientes/clientes_vue/modulo_clie
 import RegistroClientes from '../components/auth/clientes/clientes_vue/registroClientes.vue';
 import ListarClientes from '../components/auth/clientes/clientes_vue/listarClientes.vue';
 import DeudasClientes from '../components/auth/clientes/clientes_vue/deudasClientes.vue';
+import ListarDeudasClientes from '../components/auth/clientes/clientes_vue/listarDeudasClientes.vue';
 
 let routes_empa = [
 
@@ -36,6 +37,11 @@ let routes_empa = [
                 path: '/deudas-clientes',
                 name: 'deudasClientes',
                 component: DeudasClientes
+            },
+            {
+                path: '/listar-deudas-clientes',
+                name: 'listarDeudasClientes',
+                component: ListarDeudasClientes
             },
 
         ]
