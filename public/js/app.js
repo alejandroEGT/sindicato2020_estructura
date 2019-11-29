@@ -3581,32 +3581,15 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.vue?vue&type=script&lang=js&":
-/*!********************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.vue?vue&type=script&lang=js& ***!
-  \********************************************************************************************************************************************************************************************************/
-=======
-/***/ "./node_modules/babel-loader/lib/index.js?!./resources/js/components/auth/cuentas/cuentas_js/crear_cuentas.js?vue&type=script&lang=js&":
-/*!*********************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./resources/js/components/auth/cuentas/cuentas_js/crear_cuentas.js?vue&type=script&lang=js& ***!
-  \*********************************************************************************************************************************************/
->>>>>>> eef99ef0add1ff8afc506203d8c5f9d2b26bb790
-=======
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/proveedores/proveedores_vue/modulo_proveedor.vue?vue&type=script&lang=js&":
 /*!************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/auth/proveedores/proveedores_vue/modulo_proveedor.vue?vue&type=script&lang=js& ***!
   \************************************************************************************************************************************************************************************************************/
->>>>>>> alejandro
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 //
 //
 //
@@ -3684,7 +3667,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
->>>>>>> alejandro
 //
 //
 //
@@ -3745,11 +3727,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-<<<<<<< HEAD
-    return {
-      step: 1
-    };
-=======
     return _defineProperty({
       codigo: null,
       razon_social: null,
@@ -3784,7 +3761,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   mounted: function mounted() {
     this.traerProcedencia();
->>>>>>> alejandro
   }
 });
 
@@ -4076,8 +4052,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-=======
->>>>>>> eef99ef0add1ff8afc506203d8c5f9d2b26bb790
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -4618,6 +4592,39 @@ __webpack_require__.r(__webpack_exports__);
     },
     url_formulario_cuenta: function url_formulario_cuenta() {
       this.$router.push('/formulario-cuenta');
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.js?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.js?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      //VARIABLES PARA EL STEPPER FORMULARIO
+      step: 1,
+      rut: '',
+      monto: null,
+      tipo: false,
+      interes: null,
+      fecha: '',
+      //VARIABLES QUE RESCATAN AL USUARIO
+      usuario: 'Bryan Vidal Díaz'
+    };
+  },
+  methods: {
+    calcularIntereses: function calcularIntereses() {
+      var valorConIneteres = monto * intereses;
+      console.log(valorConIneteres);
     }
   }
 });
@@ -10701,11 +10708,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-<<<<<<< HEAD
 exports.push([module.i, ".titulo{\r\ncolor: #ffffff;\r\nbackground: #bdc3c7;  /* fallback for old browsers */  /* Chrome 10-25, Safari 5.1-6 */\r\nbackground: -webkit-gradient(linear, left top, right top, from(#2c3e50), to(#bdc3c7));\r\nbackground: linear-gradient(to right, #2c3e50, #bdc3c7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */\n}\r\n", ""]);
-=======
-exports.push([module.i, ".titulo{\ncolor: #ffffff;\nbackground: #bdc3c7;  /* fallback for old browsers */  /* Chrome 10-25, Safari 5.1-6 */\nbackground: -webkit-gradient(linear, left top, right top, from(#2c3e50), to(#bdc3c7));\nbackground: linear-gradient(to right, #2c3e50, #bdc3c7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */\n}", ""]);
->>>>>>> alejandro
 
 // exports
 
@@ -44482,27 +44485,12 @@ if(false) {}
       }
       else if (document.location.href.indexOf('-extension://') > -1) {
         browser.bex = true;
-<<<<<<< HEAD
-<<<<<<< HEAD
       }
       else if (window.Capacitor !== void 0) {
         browser.capacitor = true;
         browser.nativeMobile = true;
         browser.nativeMobileWrapper = 'capacitor';
       }
-=======
-=======
->>>>>>> alejandro
-      }
-      else if (window.Capacitor !== void 0) {
-        browser.capacitor = true;
-        browser.nativeMobile = true;
-        browser.nativeMobileWrapper = 'capacitor';
-      }
-<<<<<<< HEAD
->>>>>>> eef99ef0add1ff8afc506203d8c5f9d2b26bb790
-=======
->>>>>>> alejandro
       else if (window._cordovaNative !== void 0 || window.cordova !== void 0) {
         browser.cordova = true;
         browser.nativeMobile = true;
@@ -53535,8 +53523,6 @@ if(false) {}
     methods: {
       __getComputedLocale: function __getComputedLocale () {
         return this.locale || this.$q.lang.date
-<<<<<<< HEAD
-<<<<<<< HEAD
       },
 
       __getCurrentDate: function __getCurrentDate () {
@@ -53558,34 +53544,6 @@ if(false) {}
         }
       },
 
-=======
-=======
->>>>>>> alejandro
-      },
-
-      __getCurrentDate: function __getCurrentDate () {
-        var d = new Date();
-
-        if (this.calendar === 'persian') {
-          var jDate = toJalaali(d);
-          return {
-            year: jDate.jy,
-            month: jDate.jm,
-            day: jDate.jd
-          }
-        }
-
-        return {
-          year: d.getFullYear(),
-          month: d.getMonth() + 1,
-          day: d.getDate()
-        }
-      },
-
-<<<<<<< HEAD
->>>>>>> eef99ef0add1ff8afc506203d8c5f9d2b26bb790
-=======
->>>>>>> alejandro
       __getCurrentTime: function __getCurrentTime () {
         var d = new Date();
 
@@ -54403,7 +54361,6 @@ if(false) {}
     if (isNaN(date)) {
       return
     }
-<<<<<<< HEAD
 
     if (mask === void 0) {
       mask = defaultMask;
@@ -54413,17 +54370,6 @@ if(false) {}
       ? dateLocale
       : lang.props.date;
 
-=======
-
-    if (mask === void 0) {
-      mask = defaultMask;
-    }
-
-    var locale = dateLocale !== void 0
-      ? dateLocale
-      : lang.props.date;
-
->>>>>>> eef99ef0add1ff8afc506203d8c5f9d2b26bb790
     return mask.replace(
       token,
       function (match, text) { return match in formatter
@@ -54732,10 +54678,6 @@ if(false) {}
       setToday: function setToday () {
         this.__updateValue(Object.assign({}, this.today), 'today');
         this.view = 'Calendar';
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> alejandro
       },
 
       setView: function setView (view) {
@@ -54776,7 +54718,6 @@ if(false) {}
           year = parseInt(d[0], 10);
           month = parseInt(d[1], 10);
         }
-<<<<<<< HEAD
         else {
           // may come from data() where computed
           // props are not yet available
@@ -54784,57 +54725,6 @@ if(false) {}
             ? this.today
             : this.__getCurrentDate();
 
-=======
-      },
-
-      setView: function setView (view) {
-        if (viewIsValid(view) === true) {
-          this.view = view;
-        }
-      },
-
-      offsetCalendar: function offsetCalendar (type, descending) {
-        if (['month', 'year'].includes(type)) {
-          this[("__goTo" + (type === 'month' ? 'Month' : 'Year'))](
-            descending === true ? -1 : 1
-          );
-        }
-      },
-
-      __getModels: function __getModels (val, mask, locale) {
-        var external = __splitDate(
-          val,
-          this.calendar === 'persian' ? 'YYYY/MM/DD' : mask,
-          locale,
-          this.calendar
-        );
-
-        return {
-          external: external,
-          inner: external.dateHash === null
-            ? this.__getDefaultModel()
-            : Object.assign({}, external)
-        }
-      },
-
-      __getDefaultModel: function __getDefaultModel () {
-        var year, month;
-
-        if (this.defaultYearMonth !== void 0) {
-          var d = this.defaultYearMonth.split('/');
-          year = parseInt(d[0], 10);
-          month = parseInt(d[1], 10);
-        }
-=======
->>>>>>> alejandro
-        else {
-          // may come from data() where computed
-          // props are not yet available
-          var d$1 = this.today !== void 0
-            ? this.today
-            : this.__getCurrentDate();
-
->>>>>>> eef99ef0add1ff8afc506203d8c5f9d2b26bb790
           year = d$1.year;
           month = d$1.month;
         }
@@ -56439,8 +56329,6 @@ if(false) {}
         }
         else {
           this.shake();
-<<<<<<< HEAD
-<<<<<<< HEAD
         }
       },
 
@@ -56455,27 +56343,6 @@ if(false) {}
         }
       },
 
-=======
-=======
->>>>>>> alejandro
-        }
-      },
-
-      __onFocusChange: function __onFocusChange (e) {
-        // the focus is not in a vue child component
-        if (
-          this.showing === true &&
-          this.__portal !== void 0 &&
-          childHasFocus(this.__portal.$el, e.target) !== true
-        ) {
-          this.focus();
-        }
-      },
-
-<<<<<<< HEAD
->>>>>>> eef99ef0add1ff8afc506203d8c5f9d2b26bb790
-=======
->>>>>>> alejandro
       __renderPortal: function __renderPortal (h) {
         var on = Object.assign({}, this.$listeners,
           // stop propagating this events from children
@@ -56670,7 +56537,6 @@ if(false) {}
           function (res) {
             if (index !== this$1.validateIndex) {
               return true
-<<<<<<< HEAD
             }
 
             if (res === void 0 || Array.isArray(res) === false || res.length === 0) {
@@ -56678,15 +56544,6 @@ if(false) {}
               return true
             }
 
-=======
-            }
-
-            if (res === void 0 || Array.isArray(res) === false || res.length === 0) {
-              update(false);
-              return true
-            }
-
->>>>>>> eef99ef0add1ff8afc506203d8c5f9d2b26bb790
             var msg = res.find(function (r) { return r === false || typeof r === 'string'; });
             update(msg !== void 0, msg);
             return msg === void 0
@@ -57270,23 +57127,10 @@ if(false) {}
     methods: {
       __getInitialMaskedValue: function __getInitialMaskedValue () {
         this.__updateMaskInternals();
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> alejandro
 
         if (this.hasMask === true) {
           var masked = this.__mask(this.__unmask(this.value));
 
-<<<<<<< HEAD
-=======
-
-        if (this.hasMask === true) {
-          var masked = this.__mask(this.__unmask(this.value));
-
->>>>>>> eef99ef0add1ff8afc506203d8c5f9d2b26bb790
-=======
->>>>>>> alejandro
           return this.fillMask !== false
             ? this.__fillWithMask(masked)
             : masked
@@ -57504,8 +57348,6 @@ if(false) {}
 
       __moveCursorForPaste: function __moveCursorForPaste (inp, start, end) {
         var preMasked = this.__mask(this.__unmask(inp.value));
-<<<<<<< HEAD
-<<<<<<< HEAD
 
         start = Math.max(0, this.maskMarked.indexOf(MARKER), Math.min(preMasked.length, start));
 
@@ -57524,31 +57366,6 @@ if(false) {}
           }
         }
 
-=======
-=======
->>>>>>> alejandro
-
-        start = Math.max(0, this.maskMarked.indexOf(MARKER), Math.min(preMasked.length, start));
-
-        inp.setSelectionRange(start, end, 'forward');
-      },
-
-      __moveCursorLeft: function __moveCursorLeft (inp, start, end, selection) {
-        var noMarkBefore = this.maskMarked.slice(start - 1).indexOf(MARKER) === -1;
-        var i = Math.max(0, start - 1);
-
-        for (; i >= 0; i--) {
-          if (this.maskMarked[i] === MARKER) {
-            start = i;
-            noMarkBefore === true && start++;
-            break
-          }
-        }
-
-<<<<<<< HEAD
->>>>>>> eef99ef0add1ff8afc506203d8c5f9d2b26bb790
-=======
->>>>>>> alejandro
         if (
           i < 0 &&
           this.maskMarked[start] !== void 0 &&
@@ -57566,8 +57383,6 @@ if(false) {}
       __moveCursorRight: function __moveCursorRight (inp, start, end, selection) {
         var limit = inp.value.length;
         var i = Math.min(limit, end + 1);
-<<<<<<< HEAD
-<<<<<<< HEAD
 
         for (; i <= limit; i++) {
           if (this.maskMarked[i] === MARKER) {
@@ -57587,32 +57402,6 @@ if(false) {}
           return this.__moveCursorLeft(inp, limit, limit)
         }
 
-=======
-=======
->>>>>>> alejandro
-
-        for (; i <= limit; i++) {
-          if (this.maskMarked[i] === MARKER) {
-            end = i;
-            break
-          }
-          else if (this.maskMarked[i - 1] === MARKER) {
-            end = i;
-          }
-        }
-
-        if (
-          i > limit &&
-          this.maskMarked[end - 1] !== void 0 &&
-          this.maskMarked[end - 1] !== MARKER
-        ) {
-          return this.__moveCursorLeft(inp, limit, limit)
-        }
-
-<<<<<<< HEAD
->>>>>>> eef99ef0add1ff8afc506203d8c5f9d2b26bb790
-=======
->>>>>>> alejandro
         inp.setSelectionRange(selection ? start : end, end, 'forward');
       },
 
@@ -57672,8 +57461,6 @@ if(false) {}
         }
 
         inp.setSelectionRange(selection === true ? start : end, end, 'forward');
-<<<<<<< HEAD
-<<<<<<< HEAD
       },
 
       __onMaskedKeydown: function __onMaskedKeydown (e) {
@@ -57706,45 +57493,6 @@ if(false) {}
         this.$emit('keydown', e);
       },
 
-=======
-=======
->>>>>>> alejandro
-      },
-
-      __onMaskedKeydown: function __onMaskedKeydown (e) {
-        var
-          inp = this.$refs.input,
-          start = inp.selectionStart,
-          end = inp.selectionEnd;
-
-        if (e.keyCode === 37 || e.keyCode === 39) { // Left / Right
-          var fn = this['__moveCursor' + (e.keyCode === 39 ? 'Right' : 'Left') + (this.reverseFillMask === true ? 'Reverse' : '')];
-
-          e.preventDefault();
-          fn(inp, start, end, e.shiftKey);
-        }
-        else if (
-          e.keyCode === 8 && // Backspace
-          this.reverseFillMask !== true &&
-          start === end
-        ) {
-          this.__moveCursorLeft(inp, start, end, true);
-        }
-        else if (
-          e.keyCode === 46 && // Delete
-          this.reverseFillMask === true &&
-          start === end
-        ) {
-          this.__moveCursorRightReverse(inp, start, end, true);
-        }
-
-        this.$emit('keydown', e);
-      },
-
-<<<<<<< HEAD
->>>>>>> eef99ef0add1ff8afc506203d8c5f9d2b26bb790
-=======
->>>>>>> alejandro
       __mask: function __mask (val) {
         if (val === void 0 || val === null || val === '') { return '' }
 
@@ -57783,27 +57531,12 @@ if(false) {}
         var
           mask = this.computedMask,
           firstTokenIndex = this.maskMarked.indexOf(MARKER);
-<<<<<<< HEAD
-<<<<<<< HEAD
 
         var valIndex = val.length - 1, output = '';
 
         for (var maskIndex = mask.length - 1; maskIndex >= 0; maskIndex--) {
           var maskDef = mask[maskIndex];
 
-=======
-=======
->>>>>>> alejandro
-
-        var valIndex = val.length - 1, output = '';
-
-        for (var maskIndex = mask.length - 1; maskIndex >= 0; maskIndex--) {
-          var maskDef = mask[maskIndex];
-
-<<<<<<< HEAD
->>>>>>> eef99ef0add1ff8afc506203d8c5f9d2b26bb790
-=======
->>>>>>> alejandro
           var valChar = val[valIndex];
 
           if (typeof maskDef === 'string') {
@@ -58316,39 +58049,9 @@ if(false) {}
 
         if (this.$q.platform.is.ios !== true) {
           this.anchorEl.addEventListener('mouseleave', this.__delayHide, passive$1);
-<<<<<<< HEAD
-<<<<<<< HEAD
         }
       },
 
-      __unconfigureScrollTarget: function __unconfigureScrollTarget () {
-        if (this.scrollTarget !== void 0) {
-          this.scrollTarget.removeEventListener('scroll', this.hide, passive$1);
-          this.scrollTarget = void 0;
-=======
->>>>>>> alejandro
-        }
-      },
-
-<<<<<<< HEAD
-      __configureScrollTarget: function __configureScrollTarget () {
-        if (this.anchorEl !== void 0) {
-          this.scrollTarget = getScrollTarget(this.anchorEl);
-          if (this.noParentEvent !== true) {
-            this.scrollTarget.addEventListener('scroll', this.hide, passive$1);
-          }
-          if (this.noParentEvent === true || this.scrollTarget !== window) {
-            window.addEventListener('scroll', this.updatePosition, passive$1);
-          }
-        }
-      },
-
-=======
-        }
-      },
-
-=======
->>>>>>> alejandro
       __unconfigureScrollTarget: function __unconfigureScrollTarget () {
         if (this.scrollTarget !== void 0) {
           this.scrollTarget.removeEventListener('scroll', this.hide, passive$1);
@@ -58369,7 +58072,6 @@ if(false) {}
         }
       },
 
->>>>>>> eef99ef0add1ff8afc506203d8c5f9d2b26bb790
       __renderPortal: function __renderPortal (h) {
         return h('transition', {
           props: { name: this.transition }
@@ -63935,7 +63637,6 @@ if(false) {}
           this.__updateType(width, this.$q.screen.height, this.parsedBreakpoint);
         }
       },
-<<<<<<< HEAD
 
       '$q.screen.height': function $q_screen_height (height) {
         if (this.$refs.popup.showing !== true) {
@@ -63943,15 +63644,6 @@ if(false) {}
         }
       },
 
-=======
-
-      '$q.screen.height': function $q_screen_height (height) {
-        if (this.$refs.popup.showing !== true) {
-          this.__updateType(this.$q.screen.width, height, this.parsedBreakpoint);
-        }
-      },
-
->>>>>>> eef99ef0add1ff8afc506203d8c5f9d2b26bb790
       breakpoint: function breakpoint (breakpoint$1) {
         if (this.$refs.popup.showing !== true) {
           this.__updateType(this.$q.screen.width, this.$q.screen.height, parseInt(breakpoint$1, 10));
@@ -65340,7 +65032,6 @@ if(false) {}
       if (parent === window) {
         details.scrollStart = window.pageXOffset || window.scrollX || document.body.scrollLeft || 0;
         details.scrollViewSize += window.innerWidth;
-<<<<<<< HEAD
       }
       else {
         details.scrollStart = parentCalc.scrollLeft;
@@ -65357,24 +65048,6 @@ if(false) {}
         details.scrollStart = parentCalc.scrollTop;
         details.scrollViewSize += parentCalc.clientHeight;
       }
-=======
-      }
-      else {
-        details.scrollStart = parentCalc.scrollLeft;
-        details.scrollViewSize += parentCalc.clientWidth;
-      }
-      details.scrollMaxSize = parentCalc.scrollWidth;
-    }
-    else {
-      if (parent === window) {
-        details.scrollStart = window.pageYOffset || window.scrollY || document.body.scrollTop || 0;
-        details.scrollViewSize += window.innerHeight;
-      }
-      else {
-        details.scrollStart = parentCalc.scrollTop;
-        details.scrollViewSize += parentCalc.clientHeight;
-      }
->>>>>>> eef99ef0add1ff8afc506203d8c5f9d2b26bb790
       details.scrollMaxSize = parentCalc.scrollHeight;
     }
 
@@ -65424,7 +65097,6 @@ if(false) {}
     else {
       parent[horizontal === true ? 'scrollLeft' : 'scrollTop'] = scroll;
     }
-<<<<<<< HEAD
   }
 
   function sumSize (sizeAgg, size, from, to) {
@@ -65447,30 +65119,6 @@ if(false) {}
     return total
   }
 
-=======
-  }
-
-  function sumSize (sizeAgg, size, from, to) {
-    if (from >= to) { return 0 }
-
-    var
-      lastTo = size.length,
-      fromAgg = Math.floor(from / aggBucketSize),
-      toAgg = Math.floor((to - 1) / aggBucketSize) + 1;
-
-    var total = sizeAgg.slice(fromAgg, toAgg).reduce(sumFn, 0);
-
-    if (from % aggBucketSize !== 0) {
-      total -= size.slice(fromAgg * aggBucketSize, from).reduce(sumFn, 0);
-    }
-    if (to % aggBucketSize !== 0 && to !== lastTo) {
-      total -= size.slice(to, toAgg * aggBucketSize).reduce(sumFn, 0);
-    }
-
-    return total
-  }
-
->>>>>>> eef99ef0add1ff8afc506203d8c5f9d2b26bb790
   var commonVirtScrollProps = {
     virtualScrollSliceSize: {
       type: Number,
@@ -66337,7 +65985,6 @@ if(false) {}
         // keyboard search when not having use-input
         if (optionsLength > 0 && this.useInput !== true && e.keyCode >= 48 && e.keyCode <= 90) {
           this.menu !== true && this.showPopup(e);
-<<<<<<< HEAD
 
           // clear search buffer if expired
           if (this.searchBuffer === void 0 || this.searchBufferExp < Date.now()) {
@@ -66367,37 +66014,6 @@ if(false) {}
             ))
           }
 
-=======
-
-          // clear search buffer if expired
-          if (this.searchBuffer === void 0 || this.searchBufferExp < Date.now()) {
-            this.searchBuffer = '';
-          }
-
-          var
-            char = String.fromCharCode(e.keyCode).toLocaleLowerCase(),
-            keyRepeat = this.searchBuffer.length === 1 && this.searchBuffer[0] === char;
-
-          this.searchBufferExp = Date.now() + 1500;
-          if (keyRepeat === false) {
-            this.searchBuffer += char;
-          }
-
-          var searchRe = new RegExp('^' + this.searchBuffer.split('').join('.*'), 'i');
-
-          var index$1 = this.optionIndex;
-
-          if (keyRepeat === true || searchRe.test(this.__getOptionLabel(this.options[index$1])) !== true) {
-            do {
-              index$1 = normalizeToInterval(index$1 + 1, -1, optionsLength - 1);
-            }
-            while (index$1 !== this.optionIndex && (
-              this.__isDisabled(this.options[index$1]) === true ||
-              searchRe.test(this.__getOptionLabel(this.options[index$1])) !== true
-            ))
-          }
-
->>>>>>> eef99ef0add1ff8afc506203d8c5f9d2b26bb790
           if (this.optionIndex !== index$1) {
             this.$nextTick(function () {
               this$1.setOptionIndex(index$1);
@@ -66485,21 +66101,12 @@ if(false) {}
               ? this.$refs.menu.__portal.$el
               : void 0
           )
-<<<<<<< HEAD
       },
 
       __getVirtualScrollTarget: function __getVirtualScrollTarget () {
         return this.__getVirtualScrollEl()
       },
 
-=======
-      },
-
-      __getVirtualScrollTarget: function __getVirtualScrollTarget () {
-        return this.__getVirtualScrollEl()
-      },
-
->>>>>>> eef99ef0add1ff8afc506203d8c5f9d2b26bb790
       __getSelection: function __getSelection (h, fromDialog) {
         var this$1 = this;
         var obj;
@@ -66947,7 +66554,6 @@ if(false) {}
         this.$emit('blur', e);
         this.__resetInputValue();
       },
-<<<<<<< HEAD
 
       __onDialogShow: function __onDialogShow () {
         var el = document.activeElement;
@@ -66965,25 +66571,6 @@ if(false) {}
           return
         }
 
-=======
-
-      __onDialogShow: function __onDialogShow () {
-        var el = document.activeElement;
-        // IE can have null document.activeElement
-        if (
-          (el === null || el.id !== this.targetUid) &&
-          this.$refs.target !== el
-        ) {
-          this.$refs.target.focus();
-        }
-      },
-
-      __closeMenu: function __closeMenu () {
-        if (this.dialog === true) {
-          return
-        }
-
->>>>>>> eef99ef0add1ff8afc506203d8c5f9d2b26bb790
         if (this.menu === true) {
           this.menu = false;
         }
@@ -67007,7 +66594,6 @@ if(false) {}
         else {
           this.__focus();
         }
-<<<<<<< HEAD
 
         if (this.$listeners.filter !== void 0) {
           this.filter(this.inputValue);
@@ -67022,22 +66608,6 @@ if(false) {}
         this.__closeMenu();
       },
 
-=======
-
-        if (this.$listeners.filter !== void 0) {
-          this.filter(this.inputValue);
-        }
-        else if (this.noOptions !== true || this.$scopedSlots['no-option'] !== void 0) {
-          this.menu = true;
-        }
-      },
-
-      hidePopup: function hidePopup () {
-        this.dialog = false;
-        this.__closeMenu();
-      },
-
->>>>>>> eef99ef0add1ff8afc506203d8c5f9d2b26bb790
       __resetInputValue: function __resetInputValue () {
         this.useInput === true && this.updateInputValue(
           this.multiple !== true && this.fillInput === true && this.innerValue.length > 0
@@ -73730,23 +73300,10 @@ if(false) {}
       if (binding.oldValue !== binding.value) {
         ctx.handler = binding.value;
       }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> alejandro
 
       // duration in ms, touch in pixels, mouse in pixels
       var data = [600, 5, 7];
 
-<<<<<<< HEAD
-=======
-
-      // duration in ms, touch in pixels, mouse in pixels
-      var data = [600, 5, 7];
-
->>>>>>> eef99ef0add1ff8afc506203d8c5f9d2b26bb790
-=======
->>>>>>> alejandro
       if (typeof binding.arg === 'string' && binding.arg.length) {
         binding.arg.split(':').forEach(function (val, index) {
           var v = parseInt(val, 10);
@@ -75462,15 +75019,6 @@ if(false) {}
         this.$options.computed = {};
       }
       this.$options.computed.__qMeta = this.$options.meta;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-    }
-    else if (hasMeta(this) === true) {
-      this.__qMeta = this.$options.meta;
->>>>>>> eef99ef0add1ff8afc506203d8c5f9d2b26bb790
-=======
->>>>>>> alejandro
     }
     else if (hasMeta(this) === true) {
       this.__qMeta = this.$options.meta;
@@ -76019,495 +75567,6 @@ if(false) {}
 
 /***/ }),
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-/***/ "./node_modules/quasar/lang lazy recursive ^\\.\\/.*$":
-/*!*****************************************************************!*\
-  !*** ./node_modules/quasar/lang lazy ^\.\/.*$ namespace object ***!
-  \*****************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var map = {
-	"./": [
-		"./node_modules/quasar/lang/index.json",
-		3
-	],
-	"./ar": [
-		"./node_modules/quasar/lang/ar.js",
-		9,
-		0
-	],
-	"./ar.js": [
-		"./node_modules/quasar/lang/ar.js",
-		9,
-		0
-	],
-	"./bg": [
-		"./node_modules/quasar/lang/bg.js",
-		9,
-		1
-	],
-	"./bg.js": [
-		"./node_modules/quasar/lang/bg.js",
-		9,
-		1
-	],
-	"./ca": [
-		"./node_modules/quasar/lang/ca.js",
-		9,
-		2
-	],
-	"./ca.js": [
-		"./node_modules/quasar/lang/ca.js",
-		9,
-		2
-	],
-	"./cs": [
-		"./node_modules/quasar/lang/cs.js",
-		9,
-		3
-	],
-	"./cs.js": [
-		"./node_modules/quasar/lang/cs.js",
-		9,
-		3
-	],
-	"./da": [
-		"./node_modules/quasar/lang/da.js",
-		9,
-		4
-	],
-	"./da.js": [
-		"./node_modules/quasar/lang/da.js",
-		9,
-		4
-	],
-	"./de": [
-		"./node_modules/quasar/lang/de.js",
-		9,
-		5
-	],
-	"./de.js": [
-		"./node_modules/quasar/lang/de.js",
-		9,
-		5
-	],
-	"./el": [
-		"./node_modules/quasar/lang/el.js",
-		9,
-		6
-	],
-	"./el.js": [
-		"./node_modules/quasar/lang/el.js",
-		9,
-		6
-	],
-	"./en-gb": [
-		"./node_modules/quasar/lang/en-gb.js",
-		9,
-		7
-	],
-	"./en-gb.js": [
-		"./node_modules/quasar/lang/en-gb.js",
-		9,
-		7
-	],
-	"./en-us": [
-		"./node_modules/quasar/lang/en-us.js",
-		9,
-		8
-	],
-	"./en-us.js": [
-		"./node_modules/quasar/lang/en-us.js",
-		9,
-		8
-	],
-	"./eo": [
-		"./node_modules/quasar/lang/eo.js",
-		9,
-		9
-	],
-	"./eo.js": [
-		"./node_modules/quasar/lang/eo.js",
-		9,
-		9
-	],
-	"./es": [
-		"./node_modules/quasar/lang/es.js",
-		9,
-		10
-	],
-	"./es.js": [
-		"./node_modules/quasar/lang/es.js",
-		9,
-		10
-	],
-	"./fa-ir": [
-		"./node_modules/quasar/lang/fa-ir.js",
-		9,
-		11
-	],
-	"./fa-ir.js": [
-		"./node_modules/quasar/lang/fa-ir.js",
-		9,
-		11
-	],
-	"./fi": [
-		"./node_modules/quasar/lang/fi.js",
-		9,
-		12
-	],
-	"./fi.js": [
-		"./node_modules/quasar/lang/fi.js",
-		9,
-		12
-	],
-	"./fr": [
-		"./node_modules/quasar/lang/fr.js",
-		9,
-		13
-	],
-	"./fr.js": [
-		"./node_modules/quasar/lang/fr.js",
-		9,
-		13
-	],
-	"./gn": [
-		"./node_modules/quasar/lang/gn.js",
-		9,
-		14
-	],
-	"./gn.js": [
-		"./node_modules/quasar/lang/gn.js",
-		9,
-		14
-	],
-	"./he": [
-		"./node_modules/quasar/lang/he.js",
-		9,
-		15
-	],
-	"./he.js": [
-		"./node_modules/quasar/lang/he.js",
-		9,
-		15
-	],
-	"./hr": [
-		"./node_modules/quasar/lang/hr.js",
-		9,
-		16
-	],
-	"./hr.js": [
-		"./node_modules/quasar/lang/hr.js",
-		9,
-		16
-	],
-	"./hu": [
-		"./node_modules/quasar/lang/hu.js",
-		9,
-		17
-	],
-	"./hu.js": [
-		"./node_modules/quasar/lang/hu.js",
-		9,
-		17
-	],
-	"./id": [
-		"./node_modules/quasar/lang/id.js",
-		9,
-		18
-	],
-	"./id.js": [
-		"./node_modules/quasar/lang/id.js",
-		9,
-		18
-	],
-	"./index": [
-		"./node_modules/quasar/lang/index.json",
-		3
-	],
-	"./index.json": [
-		"./node_modules/quasar/lang/index.json",
-		3
-	],
-	"./it": [
-		"./node_modules/quasar/lang/it.js",
-		9,
-		19
-	],
-	"./it.js": [
-		"./node_modules/quasar/lang/it.js",
-		9,
-		19
-	],
-	"./ja": [
-		"./node_modules/quasar/lang/ja.js",
-		9,
-		20
-	],
-	"./ja.js": [
-		"./node_modules/quasar/lang/ja.js",
-		9,
-		20
-	],
-	"./km": [
-		"./node_modules/quasar/lang/km.js",
-		9,
-		21
-	],
-	"./km.js": [
-		"./node_modules/quasar/lang/km.js",
-		9,
-		21
-	],
-	"./ko-kr": [
-		"./node_modules/quasar/lang/ko-kr.js",
-		9,
-		22
-	],
-	"./ko-kr.js": [
-		"./node_modules/quasar/lang/ko-kr.js",
-		9,
-		22
-	],
-	"./lu": [
-		"./node_modules/quasar/lang/lu.js",
-		9,
-		23
-	],
-	"./lu.js": [
-		"./node_modules/quasar/lang/lu.js",
-		9,
-		23
-	],
-	"./lv": [
-		"./node_modules/quasar/lang/lv.js",
-		9,
-		24
-	],
-	"./lv.js": [
-		"./node_modules/quasar/lang/lv.js",
-		9,
-		24
-	],
-	"./ml": [
-		"./node_modules/quasar/lang/ml.js",
-		9,
-		25
-	],
-	"./ml.js": [
-		"./node_modules/quasar/lang/ml.js",
-		9,
-		25
-	],
-	"./ms": [
-		"./node_modules/quasar/lang/ms.js",
-		9,
-		26
-	],
-	"./ms.js": [
-		"./node_modules/quasar/lang/ms.js",
-		9,
-		26
-	],
-	"./nb-no": [
-		"./node_modules/quasar/lang/nb-no.js",
-		9,
-		27
-	],
-	"./nb-no.js": [
-		"./node_modules/quasar/lang/nb-no.js",
-		9,
-		27
-	],
-	"./nl": [
-		"./node_modules/quasar/lang/nl.js",
-		9,
-		28
-	],
-	"./nl.js": [
-		"./node_modules/quasar/lang/nl.js",
-		9,
-		28
-	],
-	"./pl": [
-		"./node_modules/quasar/lang/pl.js",
-		9,
-		29
-	],
-	"./pl.js": [
-		"./node_modules/quasar/lang/pl.js",
-		9,
-		29
-	],
-	"./pt": [
-		"./node_modules/quasar/lang/pt.js",
-		9,
-		31
-	],
-	"./pt-br": [
-		"./node_modules/quasar/lang/pt-br.js",
-		9,
-		30
-	],
-	"./pt-br.js": [
-		"./node_modules/quasar/lang/pt-br.js",
-		9,
-		30
-	],
-	"./pt.js": [
-		"./node_modules/quasar/lang/pt.js",
-		9,
-		31
-	],
-	"./ro": [
-		"./node_modules/quasar/lang/ro.js",
-		9,
-		32
-	],
-	"./ro.js": [
-		"./node_modules/quasar/lang/ro.js",
-		9,
-		32
-	],
-	"./ru": [
-		"./node_modules/quasar/lang/ru.js",
-		9,
-		33
-	],
-	"./ru.js": [
-		"./node_modules/quasar/lang/ru.js",
-		9,
-		33
-	],
-	"./sk": [
-		"./node_modules/quasar/lang/sk.js",
-		9,
-		34
-	],
-	"./sk.js": [
-		"./node_modules/quasar/lang/sk.js",
-		9,
-		34
-	],
-	"./sl": [
-		"./node_modules/quasar/lang/sl.js",
-		9,
-		35
-	],
-	"./sl.js": [
-		"./node_modules/quasar/lang/sl.js",
-		9,
-		35
-	],
-	"./sr": [
-		"./node_modules/quasar/lang/sr.js",
-		9,
-		36
-	],
-	"./sr.js": [
-		"./node_modules/quasar/lang/sr.js",
-		9,
-		36
-	],
-	"./sv": [
-		"./node_modules/quasar/lang/sv.js",
-		9,
-		37
-	],
-	"./sv.js": [
-		"./node_modules/quasar/lang/sv.js",
-		9,
-		37
-	],
-	"./th": [
-		"./node_modules/quasar/lang/th.js",
-		9,
-		38
-	],
-	"./th.js": [
-		"./node_modules/quasar/lang/th.js",
-		9,
-		38
-	],
-	"./tr": [
-		"./node_modules/quasar/lang/tr.js",
-		9,
-		39
-	],
-	"./tr.js": [
-		"./node_modules/quasar/lang/tr.js",
-		9,
-		39
-	],
-	"./uk": [
-		"./node_modules/quasar/lang/uk.js",
-		9,
-		40
-	],
-	"./uk.js": [
-		"./node_modules/quasar/lang/uk.js",
-		9,
-		40
-	],
-	"./vi": [
-		"./node_modules/quasar/lang/vi.js",
-		9,
-		41
-	],
-	"./vi.js": [
-		"./node_modules/quasar/lang/vi.js",
-		9,
-		41
-	],
-	"./zh-hans": [
-		"./node_modules/quasar/lang/zh-hans.js",
-		9,
-		42
-	],
-	"./zh-hans.js": [
-		"./node_modules/quasar/lang/zh-hans.js",
-		9,
-		42
-	],
-	"./zh-hant": [
-		"./node_modules/quasar/lang/zh-hant.js",
-		9,
-		43
-	],
-	"./zh-hant.js": [
-		"./node_modules/quasar/lang/zh-hant.js",
-		9,
-		43
-	]
-};
-function webpackAsyncContext(req) {
-	if(!__webpack_require__.o(map, req)) {
-		return Promise.resolve().then(function() {
-			var e = new Error("Cannot find module '" + req + "'");
-			e.code = 'MODULE_NOT_FOUND';
-			throw e;
-		});
-	}
-
-	var ids = map[req], id = ids[0];
-	return Promise.all(ids.slice(2).map(__webpack_require__.e)).then(function() {
-		return __webpack_require__.t(id, ids[1])
-	});
-}
-webpackAsyncContext.keys = function webpackAsyncContextKeys() {
-	return Object.keys(map);
-};
-webpackAsyncContext.id = "./node_modules/quasar/lang lazy recursive ^\\.\\/.*$";
-module.exports = webpackAsyncContext;
-
-/***/ }),
-
->>>>>>> eef99ef0add1ff8afc506203d8c5f9d2b26bb790
-=======
->>>>>>> alejandro
 /***/ "./node_modules/quasar/lang/index.json":
 /*!*********************************************!*\
   !*** ./node_modules/quasar/lang/index.json ***!
@@ -82680,25 +81739,13 @@ var render = function() {
     _c("div", { staticClass: "row justify-center" }, [
       _c(
         "div",
-<<<<<<< HEAD
-<<<<<<< HEAD
         { staticClass: "col-10" },
-=======
-        { staticClass: "col-8" },
->>>>>>> eef99ef0add1ff8afc506203d8c5f9d2b26bb790
-=======
-        { staticClass: "col-10" },
->>>>>>> alejandro
         [
           _c(
             "q-card",
             { staticClass: "my-card" },
             [
               _c("q-card-section", { staticClass: "bg-primary text-white" }, [
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> alejandro
                 _c("div", { staticClass: "row" }, [
                   _c("div", { staticClass: "col-12 col-md-9" }, [
                     _c("div", { staticClass: "text-h6" }, [
@@ -83035,16 +82082,11 @@ var render = function() {
                     ],
                     1
                   )
-=======
-                _c("div", { staticClass: "text-h6" }, [
-                  _vm._v("Cuentas/listar cuenta")
->>>>>>> eef99ef0add1ff8afc506203d8c5f9d2b26bb790
                 ])
               ]),
               _vm._v(" "),
               _c("q-separator"),
               _vm._v(" "),
-<<<<<<< HEAD
               _c(
                 "div",
                 { staticClass: "col-6" },
@@ -84382,116 +83424,6 @@ var render = function() {
                 ],
                 2
               )
-<<<<<<< HEAD
-=======
-              _c("div", { staticClass: "col-6" }, [
-                _c(
-                  "div",
-                  { staticClass: "q-pa-md" },
-                  [
-                    [
-                      _c(
-                        "div",
-                        { staticClass: "q-pa-md" },
-                        [
-                          _c("q-table", {
-                            attrs: {
-                              title: "Listado",
-                              data: _vm.data,
-                              columns: _vm.columns,
-                              "row-key": "id",
-                              selection: "single",
-                              selected: _vm.selected,
-                              "rows-per-page-label": "Cantidad:",
-                              "no-data-label": "Sin datos",
-                              "no-results-label": "sin resultados",
-                              pagination: _vm.pagination,
-                              filter: _vm.filter,
-                              loading: _vm.loading,
-                              "binary-state-sort": "",
-                              "no-results-label": "sin datos niggis"
-                            },
-                            on: {
-                              "update:selected": function($event) {
-                                _vm.selected = $event
-                              },
-                              "update:pagination": function($event) {
-                                _vm.pagination = $event
-                              },
-                              request: _vm.onRequest
-                            },
-                            scopedSlots: _vm._u([
-                              {
-                                key: "top-right",
-                                fn: function() {
-                                  return [
-                                    _c("q-input", {
-                                      attrs: {
-                                        borderless: "",
-                                        dense: "",
-                                        debounce: "300",
-                                        placeholder: "Buscar por nombre.."
-                                      },
-                                      scopedSlots: _vm._u([
-                                        {
-                                          key: "append",
-                                          fn: function() {
-                                            return [
-                                              _c("q-icon", {
-                                                attrs: { name: "search" }
-                                              })
-                                            ]
-                                          },
-                                          proxy: true
-                                        }
-                                      ]),
-                                      model: {
-                                        value: _vm.filter,
-                                        callback: function($$v) {
-                                          _vm.filter = $$v
-                                        },
-                                        expression: "filter"
-                                      }
-                                    })
-                                  ]
-                                },
-                                proxy: true
-                              }
-                            ])
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "q-list",
-                            _vm._l(_vm.selected, function(s) {
-                              return _c("q-item", { key: s.id }, [
-                                _vm._v(
-                                  "\n\t\t\t\t\t\t      " +
-                                    _vm._s(s.name) +
-                                    "\n\t\t\t\t\t\t    "
-                                )
-                              ])
-                            }),
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "q-mt-md" }, [
-                            _vm._v(
-                              "\n\t\t\t\t\t\t      Selected: " +
-                                _vm._s(JSON.stringify(_vm.selected)) +
-                                "\n\t\t\t\t\t\t    "
-                            )
-                          ])
-                        ],
-                        1
-                      )
-                    ]
-                  ],
-                  2
-                )
-              ])
->>>>>>> eef99ef0add1ff8afc506203d8c5f9d2b26bb790
-=======
->>>>>>> alejandro
             ],
             1
           )
@@ -85314,134 +84246,557 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "q-pa-md" },
-    [
+  return _c("div", { staticClass: "q-pa-md" }, [
+    _c("div", { staticClass: "row justify-center" }, [
       _c(
-        "q-stepper",
-        {
-          ref: "stepper",
-          attrs: { color: "primary", animated: "" },
-          scopedSlots: _vm._u([
-            {
-              key: "navigation",
-              fn: function() {
-                return [
+        "div",
+        { staticClass: "col-12 col-md-8" },
+        [
+          _c(
+            "q-card",
+            [
+              _c("q-card-section", { staticClass: "bg-primary text-white" }, [
+                _c("div", { staticClass: "text-h6" }, [
+                  _vm._v("Solicitar Prestamo")
+                ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "q-stepper",
+                {
+                  ref: "stepper",
+                  attrs: { color: "primary", animated: "" },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "navigation",
+                      fn: function() {
+                        return [
+                          _c(
+                            "q-stepper-navigation",
+                            [
+                              _c("q-btn", {
+                                attrs: {
+                                  color: "primary",
+                                  disable:
+                                    (_vm.step === 1 && _vm.rut == "") ||
+                                    (_vm.step === 3 && _vm.monto == null),
+                                  label:
+                                    _vm.step === 4 ? "Solicitar" : "Continuar"
+                                },
+                                on: {
+                                  click: [
+                                    function($event) {
+                                      return _vm.$refs.stepper.next()
+                                    },
+                                    _vm.calcularIntereses
+                                  ]
+                                }
+                              }),
+                              _vm._v(" "),
+                              _vm.step > 1
+                                ? _c("q-btn", {
+                                    staticClass: "q-ml-sm",
+                                    attrs: {
+                                      flat: "",
+                                      color: "primary",
+                                      label: "Volver"
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.$refs.stepper.previous()
+                                      }
+                                    }
+                                  })
+                                : _vm._e()
+                            ],
+                            1
+                          )
+                        ]
+                      },
+                      proxy: true
+                    }
+                  ]),
+                  model: {
+                    value: _vm.step,
+                    callback: function($$v) {
+                      _vm.step = $$v
+                    },
+                    expression: "step"
+                  }
+                },
+                [
                   _c(
-                    "q-stepper-navigation",
+                    "q-step",
+                    {
+                      attrs: {
+                        name: 1,
+                        title: "Ingrese el rut del cliente",
+                        icon: "account_circle",
+                        done: _vm.step > 1
+                      }
+                    },
                     [
-                      _c("q-btn", {
+                      _c("q-input", {
                         attrs: {
-                          color: "primary",
-                          label: _vm.step === 4 ? "Finish" : "Continue"
-                        },
-                        on: {
-                          click: function($event) {
-                            return _vm.$refs.stepper.next()
-                          }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _vm.step > 1
-                        ? _c("q-btn", {
-                            staticClass: "q-ml-sm",
-                            attrs: {
-                              flat: "",
-                              color: "primary",
-                              label: "Back"
+                          outlined: "",
+                          counter: "",
+                          maxlength: "20",
+                          label: "Ingrese rut del cliente",
+                          "stack-label": "",
+                          type: "text",
+                          hint: "El rut debe ser sin punto ni guion",
+                          rules: [
+                            function(val) {
+                              return (
+                                val.length <= 20 ||
+                                "El maximo da caracteres es de 20"
+                              )
                             },
-                            on: {
-                              click: function($event) {
-                                return _vm.$refs.stepper.previous()
+                            function(val) {
+                              return (
+                                val.length >= 2 ||
+                                "El minimo de caracteres es de 2"
+                              )
+                            }
+                          ]
+                        },
+                        model: {
+                          value: _vm.rut,
+                          callback: function($$v) {
+                            _vm.rut = $$v
+                          },
+                          expression: "rut"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "q-step",
+                    {
+                      attrs: {
+                        name: 2,
+                        title: "Tipo de Prestamo",
+                        icon: "create_new_folder",
+                        done: _vm.step > 2
+                      }
+                    },
+                    [
+                      _c(
+                        "q-list",
+                        [
+                          _c(
+                            "q-item",
+                            {
+                              directives: [
+                                { name: "ripple", rawName: "v-ripple" }
+                              ],
+                              attrs: { tag: "label" }
+                            },
+                            [
+                              _c(
+                                "q-item-section",
+                                { attrs: { avatar: "" } },
+                                [
+                                  _c("q-radio", {
+                                    attrs: { val: "0" },
+                                    model: {
+                                      value: _vm.tipo,
+                                      callback: function($$v) {
+                                        _vm.tipo = $$v
+                                      },
+                                      expression: "tipo"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "q-item-section",
+                                [
+                                  _c("q-item-label", [_vm._v("Sin Intereses")]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "q-item-label",
+                                    { attrs: { caption: "" } },
+                                    [
+                                      _vm._v(
+                                        "El prestamo solicitado no generara ningún tipo de interes"
+                                      )
+                                    ]
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "q-item",
+                            {
+                              directives: [
+                                { name: "ripple", rawName: "v-ripple" }
+                              ],
+                              attrs: { tag: "label" }
+                            },
+                            [
+                              _c(
+                                "q-item-section",
+                                { attrs: { avatar: "" } },
+                                [
+                                  _c("q-radio", {
+                                    attrs: { val: "1" },
+                                    model: {
+                                      value: _vm.tipo,
+                                      callback: function($$v) {
+                                        _vm.tipo = $$v
+                                      },
+                                      expression: "tipo"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "q-item-section",
+                                [
+                                  _c("q-item-label", [_vm._v("Con Intereses")]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "q-item-label",
+                                    { attrs: { caption: "" } },
+                                    [
+                                      _vm._v(
+                                        "El prestamo solicitado generara un interes con un valor que puede definir a continuación"
+                                      )
+                                    ]
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("q-slide-transition", [
+                        _c(
+                          "div",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: _vm.tipo == "1",
+                                expression: "tipo == '1'"
                               }
+                            ]
+                          },
+                          [
+                            _c("q-input", {
+                              attrs: {
+                                outlined: "",
+                                counter: "",
+                                maxlength: "3",
+                                label: "Ingrese porcentaje",
+                                "stack-label": "",
+                                type: "number",
+                                hint:
+                                  "Ingrese el porcentaje que desea de interes sin simbolo",
+                                rules: [
+                                  function(val) {
+                                    return (
+                                      val.length <= 3 ||
+                                      "El maximo da caracteres es de 3"
+                                    )
+                                  },
+                                  function(val) {
+                                    return (
+                                      val.length >= 1 ||
+                                      "El minimo de caracteres es de 2"
+                                    )
+                                  }
+                                ]
+                              },
+                              model: {
+                                value: _vm.interes,
+                                callback: function($$v) {
+                                  _vm.interes = $$v
+                                },
+                                expression: "interes"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "q-step",
+                    {
+                      attrs: {
+                        name: 3,
+                        title: "Monto y fecha",
+                        icon: "assignment"
+                      }
+                    },
+                    [
+                      _c(
+                        "div",
+                        { staticClass: "q-gutter-md" },
+                        [
+                          _c("q-input", {
+                            attrs: {
+                              outlined: "",
+                              counter: "",
+                              maxlength: "20",
+                              label: "Ingrese monto a solicitar",
+                              "stack-label": "",
+                              type: "number",
+                              hint: "El monto debe de ser ingresado sin puntos",
+                              rules: [
+                                function(val) {
+                                  return (
+                                    val.length <= 20 ||
+                                    "El maximo da caracteres es de 20"
+                                  )
+                                },
+                                function(val) {
+                                  return (
+                                    val.length >= 2 ||
+                                    "El minimo de caracteres es de 1"
+                                  )
+                                }
+                              ]
+                            },
+                            model: {
+                              value: _vm.monto,
+                              callback: function($$v) {
+                                _vm.monto = $$v
+                              },
+                              expression: "monto"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("q-input", {
+                            attrs: {
+                              outlined: "",
+                              counter: "",
+                              label: "Fecha del prestamo",
+                              "stack-label": "",
+                              type: "date",
+                              hint:
+                                "Seleccione la fecha en la cual se genero el prestamo"
+                            },
+                            model: {
+                              value: _vm.fecha,
+                              callback: function($$v) {
+                                _vm.fecha = $$v
+                              },
+                              expression: "fecha"
                             }
                           })
-                        : _vm._e()
+                        ],
+                        1
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "q-step",
+                    {
+                      attrs: {
+                        name: 4,
+                        title: "Confimar datos prestamo",
+                        icon: "add_comment"
+                      }
+                    },
+                    [
+                      _c(
+                        "q-list",
+                        [
+                          _c(
+                            "q-item",
+                            [
+                              _c(
+                                "q-item-section",
+                                [
+                                  _c("q-item-label", [
+                                    _vm._v("Solicitante del Prestamo")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "q-item-label",
+                                    { attrs: { caption: "", lines: "2" } },
+                                    [_vm._v(_vm._s(_vm.usuario))]
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("q-separator", {
+                            attrs: { spaced: "", inset: "" }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "q-item",
+                            [
+                              _c(
+                                "q-item-section",
+                                [
+                                  _c("q-item-label", [
+                                    _vm._v("Tipo de prestamo")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "q-item-label",
+                                    { attrs: { caption: "" } },
+                                    [
+                                      _c(
+                                        "q-label",
+                                        {
+                                          directives: [
+                                            {
+                                              name: "show",
+                                              rawName: "v-show",
+                                              value: _vm.tipo == "0",
+                                              expression: "tipo == '0'"
+                                            }
+                                          ]
+                                        },
+                                        [_vm._v("Sin Intereses")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "q-label",
+                                        {
+                                          directives: [
+                                            {
+                                              name: "show",
+                                              rawName: "v-show",
+                                              value: _vm.tipo == "1",
+                                              expression: "tipo == '1'"
+                                            }
+                                          ]
+                                        },
+                                        [_vm._v("Con Intereses")]
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("q-separator", {
+                            attrs: { spaced: "", inset: "" }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "q-item",
+                            [
+                              _c(
+                                "q-item-section",
+                                [
+                                  _c("q-item-label", [
+                                    _vm._v("Monto Solicitado")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "q-item-label",
+                                    { attrs: { caption: "" } },
+                                    [_vm._v(_vm._s(_vm.monto))]
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("q-separator", {
+                            attrs: { spaced: "", inset: "" }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "q-item",
+                            [
+                              _c(
+                                "q-item-section",
+                                [
+                                  _c("q-item-label", [
+                                    _vm._v("Total con Intereses")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "q-item-label",
+                                    { attrs: { caption: "" } },
+                                    [_vm._v(_vm._s(_vm.monto))]
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("q-separator", {
+                            attrs: { spaced: "", inset: "" }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "q-item",
+                            [
+                              _c(
+                                "q-item-section",
+                                [
+                                  _c("q-item-label", [
+                                    _vm._v("Fecha Solicitud Prestamo")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "q-item-label",
+                                    { attrs: { caption: "" } },
+                                    [_vm._v(_vm._s(_vm.fecha))]
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
                     ],
                     1
                   )
-                ]
-              },
-              proxy: true
-            }
-          ]),
-          model: {
-            value: _vm.step,
-            callback: function($$v) {
-              _vm.step = $$v
-            },
-            expression: "step"
-          }
-        },
-        [
-          _c(
-            "q-step",
-            {
-              attrs: {
-                name: 1,
-                title: "Select campaign settings",
-                icon: "settings",
-                done: _vm.step > 1
-              }
-            },
-            [
-              _vm._v(
-                "\n        For each ad campaign that you create, you can control how much you're willing to\n        spend on clicks and conversions, which networks and geographical locations you want\n        your ads to show on, and more.\n      "
+                ],
+                1
               )
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "q-step",
-            {
-              attrs: {
-                name: 2,
-                title: "Create an ad group",
-                caption: "Optional",
-                icon: "create_new_folder",
-                done: _vm.step > 2
-              }
-            },
-            [
-              _vm._v(
-                "\n        An ad group contains one or more ads which target a shared set of keywords.\n      "
-              )
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "q-step",
-            {
-              attrs: {
-                name: 3,
-                title: "Ad template",
-                icon: "assignment",
-                disable: ""
-              }
-            },
-            [
-              _vm._v(
-                "\n        This step won't show up because it is disabled.\n      "
-              )
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "q-step",
-            { attrs: { name: 4, title: "Create an ad", icon: "add_comment" } },
-            [
-              _vm._v(
-                "\n        Try out different ad text to see what brings in the most customers, and learn how to\n        enhance your ads using features like ad extensions. If you run into any problems with\n        your ads, find out how to tell if they're running and how to resolve approval issues.\n      "
-              )
-            ]
+            ],
+            1
           )
         ],
         1
       )
-    ],
-    1
-  )
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -102192,6 +101547,20 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.js?vue&type=script&lang=js&":
+/*!***********************************************************************************************************!*\
+  !*** ./resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.js?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_modulo_prestamos_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!./modulo_prestamos.js?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.js?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_modulo_prestamos_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.vue":
 /*!***********************************************************************************!*\
   !*** ./resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.vue ***!
@@ -102202,7 +101571,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modulo_prestamos_vue_vue_type_template_id_f62203b4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modulo_prestamos.vue?vue&type=template&id=f62203b4& */ "./resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.vue?vue&type=template&id=f62203b4&");
-/* harmony import */ var _modulo_prestamos_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modulo_prestamos.vue?vue&type=script&lang=js& */ "./resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.vue?vue&type=script&lang=js&");
+/* harmony import */ var _modulo_prestamos_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modulo_prestamos.js?vue&type=script&lang=js& */ "./resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.js?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -102212,7 +101581,7 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _modulo_prestamos_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _modulo_prestamos_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _modulo_prestamos_vue_vue_type_template_id_f62203b4___WEBPACK_IMPORTED_MODULE_0__["render"],
   _modulo_prestamos_vue_vue_type_template_id_f62203b4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
@@ -102226,20 +101595,6 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 if (false) { var api; }
 component.options.__file = "resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.vue?vue&type=script&lang=js&":
-/*!************************************************************************************************************!*\
-  !*** ./resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.vue?vue&type=script&lang=js& ***!
-  \************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_modulo_prestamos_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./modulo_prestamos.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_modulo_prestamos_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
@@ -102840,13 +102195,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
 __webpack_require__(/*! C:\Users\v_and\Desktop\VUE\neofox_contable\resources\js\app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! C:\Users\v_and\Desktop\VUE\neofox_contable\resources\sass\app.scss */"./resources/sass/app.scss");
-=======
-__webpack_require__(/*! /Users/alejandroesteban/Desktop/proyectos2019/template_vue_laravel_2019/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/alejandroesteban/Desktop/proyectos2019/template_vue_laravel_2019/resources/sass/app.scss */"./resources/sass/app.scss");
->>>>>>> alejandro
 
 
 /***/ })
