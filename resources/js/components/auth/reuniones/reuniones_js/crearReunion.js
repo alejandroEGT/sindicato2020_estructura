@@ -7,6 +7,7 @@ export default {
       progress: false,
       showing: false,
       fecha: null,
+      hora: null,
       titulo: null,
       cuerpo: null,
     }
@@ -26,15 +27,14 @@ export default {
     guardar() {
       const data = {
         'fecha': this.fecha,
+        'hora': this.hora,
         'titulo': this.titulo,
         'cuerpo': this.cuerpo
       }
 
       axios.post('api/ingresar_reunion', data).then((res) => {
         if (res.data.estado = 'success') {
-          this.fecha = '';
-          this.titulo = '';
-          this.cuerpo = '';
+          this.limpiar();
           this.$q.notify({
             color: "green-4",
             textColor: "white",
@@ -50,6 +50,13 @@ export default {
           });
         }
       });
+    },
+
+    limpiar() {
+      this.fecha = '';
+      this.hora = '';
+      this.titulo = '';
+      this.cuerpo = '';
     },
 
     traer_reuniones() {

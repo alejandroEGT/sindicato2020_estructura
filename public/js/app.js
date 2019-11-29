@@ -5228,6 +5228,7 @@ __webpack_require__.r(__webpack_exports__);
       progress: false,
       showing: false,
       fecha: null,
+      hora: null,
       titulo: null,
       cuerpo: null
     };
@@ -5249,14 +5250,13 @@ __webpack_require__.r(__webpack_exports__);
 
       var data = {
         'fecha': this.fecha,
+        'hora': this.hora,
         'titulo': this.titulo,
         'cuerpo': this.cuerpo
       };
       axios.post('api/ingresar_reunion', data).then(function (res) {
         if (res.data.estado = 'success') {
-          _this2.fecha = '';
-          _this2.titulo = '';
-          _this2.cuerpo = '';
+          _this2.limpiar();
 
           _this2.$q.notify({
             color: "green-4",
@@ -5273,6 +5273,12 @@ __webpack_require__.r(__webpack_exports__);
           });
         }
       });
+    },
+    limpiar: function limpiar() {
+      this.fecha = '';
+      this.hora = '';
+      this.titulo = '';
+      this.cuerpo = '';
     },
     traer_reuniones: function traer_reuniones() {
       this.$router.push('/traer-reuniones');
@@ -5299,6 +5305,83 @@ __webpack_require__.r(__webpack_exports__);
     traer_reuniones: function traer_reuniones() {
       this.$router.push('/traer-reuniones');
     }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./resources/js/components/auth/reuniones/reuniones_js/traerReuniones.js?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./resources/js/components/auth/reuniones/reuniones_js/traerReuniones.js?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      columns: [{
+        name: 'id',
+        align: 'center',
+        label: 'ID',
+        field: 'id',
+        sortable: true
+      }, {
+        name: 'fecha_inicio',
+        align: 'center',
+        label: 'Fecha Reunion',
+        field: 'fecha_inicio',
+        sortable: true
+      }, {
+        name: 'titulo',
+        align: 'center',
+        label: 'Titulo',
+        field: 'titulo',
+        sortable: true
+      }, {
+        name: 'creada_por',
+        align: 'center',
+        label: 'Creada por',
+        field: 'creada_por',
+        sortable: true
+      }, {
+        name: 'created_at',
+        align: 'center',
+        label: 'Creada',
+        field: 'created_at',
+        sortable: true
+      }, {
+        name: 'opciones',
+        align: 'center',
+        label: 'Opciones',
+        field: 'opciones',
+        sortable: true
+      }],
+      reuniones: []
+    };
+  },
+  methods: {
+    traerReuniones: function traerReuniones() {
+      var _this = this;
+
+      axios.get('api/traer_reuniones').then(function (res) {
+        if (res.data.estado = 'success') {
+          _this.reuniones = res.data.reuniones;
+        } else {
+          _this.$q.notify({
+            color: "red-4",
+            textColor: "white",
+            icon: "cloud_done",
+            message: res.data.mensaje
+          });
+        }
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.traerReuniones();
   }
 });
 
@@ -94578,7 +94661,7 @@ var render = function() {
                   [
                     _c(
                       "div",
-                      { staticClass: "col-6 col-md-6" },
+                      { staticClass: "col-3 col-md-3" },
                       [
                         _c("q-input", {
                           attrs: {
@@ -94601,14 +94684,39 @@ var render = function() {
                     _vm._v(" "),
                     _c(
                       "div",
+                      { staticClass: "col-3 col-md-3" },
+                      [
+                        _c("q-input", {
+                          attrs: {
+                            outlined: "",
+                            label: "Ingrese hora de inicio",
+                            "stack-label": "",
+                            type: "time"
+                          },
+                          model: {
+                            value: _vm.hora,
+                            callback: function($$v) {
+                              _vm.hora = $$v
+                            },
+                            expression: "hora"
+                          }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
                       { staticClass: "col-6 col-md-6" },
                       [
                         _c("q-input", {
                           attrs: {
                             outlined: "",
-                            label: "Ingrese titulo de la Reunion",
+                            label: "Ingrese el titulo",
                             "stack-label": "",
-                            type: "text"
+                            type: "text",
+                            maxlength: "50",
+                            counter: ""
                           },
                           model: {
                             value: _vm.titulo,
@@ -94832,7 +94940,22 @@ var render = function() {
                 _vm._v(" "),
                 _c("q-separator"),
                 _vm._v(" "),
-                _c("q-card-section")
+                _c(
+                  "q-card-section",
+                  [
+                    _c("q-table", {
+                      staticClass: "my-sticky-header-table",
+                      attrs: {
+                        data: _vm.reuniones,
+                        columns: _vm.columns,
+                        "row-key": "name",
+                        flat: "",
+                        bordered: ""
+                      }
+                    })
+                  ],
+                  1
+                )
               ],
               1
             )
@@ -111817,6 +111940,20 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/auth/reuniones/reuniones_js/traerReuniones.js?vue&type=script&lang=js&":
+/*!********************************************************************************************************!*\
+  !*** ./resources/js/components/auth/reuniones/reuniones_js/traerReuniones.js?vue&type=script&lang=js& ***!
+  \********************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_traerReuniones_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!./traerReuniones.js?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./resources/js/components/auth/reuniones/reuniones_js/traerReuniones.js?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_traerReuniones_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/auth/reuniones/reuniones_vue/crear_reunion.vue":
 /*!********************************************************************************!*\
   !*** ./resources/js/components/auth/reuniones/reuniones_vue/crear_reunion.vue ***!
@@ -111937,15 +112074,17 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _traer_reuniones_vue_vue_type_template_id_09f38edc___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./traer_reuniones.vue?vue&type=template&id=09f38edc& */ "./resources/js/components/auth/reuniones/reuniones_vue/traer_reuniones.vue?vue&type=template&id=09f38edc&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _reuniones_js_traerReuniones_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../reuniones_js/traerReuniones.js?vue&type=script&lang=js& */ "./resources/js/components/auth/reuniones/reuniones_js/traerReuniones.js?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
-var script = {}
+
+
 
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
-  script,
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _reuniones_js_traerReuniones_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _traer_reuniones_vue_vue_type_template_id_09f38edc___WEBPACK_IMPORTED_MODULE_0__["render"],
   _traer_reuniones_vue_vue_type_template_id_09f38edc___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,

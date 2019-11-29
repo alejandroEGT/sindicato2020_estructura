@@ -9,7 +9,7 @@
           <q-separator />
           <q-card-section>
             <div class="row justify-start q-col-gutter-md">
-              <div class="col-6 col-md-6">
+              <div class="col-3 col-md-3">
                 <q-input
                   outlined
                   v-model="fecha"
@@ -18,13 +18,25 @@
                   type="date"
                 />
               </div>
+              <div class="col-3 col-md-3">
+                <q-input
+                  v-model="hora"
+                  outlined
+                  label="Ingrese hora de inicio"
+                  stack-label
+                  type="time"
+                />
+              </div>
+
               <div class="col-6 col-md-6">
                 <q-input
                   outlined
                   v-model="titulo"
-                  label="Ingrese titulo de la Reunion"
+                  label="Ingrese el titulo"
                   stack-label
                   type="text"
+                  maxlength="50"
+                  counter
                 />
               </div>
               <div class="col-12 col-md-12">
@@ -40,7 +52,6 @@
                 />
               </div>
             </div>
-           
           </q-card-section>
           <q-card-actions align="center">
             <q-btn

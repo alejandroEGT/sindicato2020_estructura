@@ -2,9 +2,10 @@
 
 namespace App;
 
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 
 class Reunion extends Model
 {
@@ -12,8 +13,9 @@ class Reunion extends Model
 
     protected function crearReunion($request)
     {
+        $fecha = $request->fecha . ' ' . $request->hora;
         $reunion = new Reunion;
-        $reunion->fecha_inicio = $request->fecha;
+        $reunion->fecha_inicio = $fecha;
         $reunion->estado_reunion_id = 1;
         $reunion->titulo = $request->titulo;
         $reunion->cuerpo = $request->cuerpo;
@@ -31,13 +33,20 @@ class Reunion extends Model
         $reuniones = DB::table('reuniones as r')
             ->select([
                 'r.id',
-                'r.fecha_incio',
+                'r.fecha_inicio',
                 'r.titulo',
-                'u.name'
+                /* 'r.cuerpo', */
+                DB::raw('initcap(u.name) as creada_por'),/* initcap */
+                'r.created_at'
             ])
             ->join('users as u', 'u.id', 'r.user_id')
             ->get();
         if (!$reuniones->isEmpty()) {
+            Carbon::setLocale('es');
+            foreach ($reuniones as $key) {
+                $fecha = ucwords(Carbon::parse($key->created_at)->diffForHumans());
+                $key->created_at = $fecha;
+            }
             return ['estado' => 'success', 'reuniones' => $reuniones];
         } else {
             return ['estado' => 'failed', 'mensaje' => 'No se encuentran reuniones creadas.'];

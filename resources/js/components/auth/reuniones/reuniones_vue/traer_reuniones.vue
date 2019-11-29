@@ -7,9 +7,20 @@
             <div class="text-h6 text-center">Reuniones</div>
           </q-card-section>
           <q-separator />
-          <q-card-section></q-card-section>
+          <q-card-section>
+            <q-table
+              class="my-sticky-header-table"
+              :data="reuniones"
+              :columns="columns"
+              row-key="name"
+              flat
+              bordered
+            />
+          </q-card-section>
         </q-card>
       </q-card>
     </div>
   </div>
 </template>
+
+<script src="../reuniones_js/traerReuniones.js"></script>
