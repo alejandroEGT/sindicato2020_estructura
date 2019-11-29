@@ -1,55 +1,109 @@
 <template>
   <div class="row justify-center">
-    <div class="col-6">
+    <div class="col-11 col-md-4">
       <q-card
-        class="my-card text-white"
+        class="my-card text-white t-10"
         style="background: radial-gradient(circle, #35a2ff 0%, #014a88 100%)"
       >
-        <!-- <q-card-section>
-          <div class="text-h6">Bienvenido</div>
-        </q-card-section>-->
-
         <q-tabs v-model="tab" class="text-white">
           <q-tab class="text-h6" label="Login" name="login" />
           <q-tab class="text-h6" label="Registro" name="registro" />
         </q-tabs>
 
         <q-tab-panels v-model="tab" animated>
-          <q-tab-panel
-            name="login"
-            style="background: radial-gradient(circle, #35a2ff 0%, #014a88 100%)"
-          >
-            <!-- <q-card-section> -->
-            <q-input v-model="email" label="Ingrese su correo" />
-            <q-separator />
-            <q-input v-model="password" label="Ingrese su contraseña" />
-            <q-separator />
-            <br />
-            <q-btn
-              class="content-center"
-              color="primary"
-              @click="login"
-              icon="mail"
-              label="Ingresar"
+          <q-tab-panel name="login">
+            <q-input
+              v-model="email"
+              label="Ingrese su correo"
+              outlined
+              counter
+              maxlength="100"
+              type="email"
             />
+            <q-input
+              v-model="password"
+              outlined
+              counter
+              maxlength="25"
+              label="Ingrese su contraseña"
+              :type="isPwd ? 'password' : 'text'"
+            >
+              <template v-slot:append>
+                <q-icon
+                  :name="isPwd ? 'visibility_off' : 'visibility'"
+                  class="cursor-pointer"
+                  @click="isPwd = !isPwd"
+                />
+              </template>
+            </q-input>
+            <br />
+            <q-card-actions align="right">
+              <q-btn
+                class="content-center"
+                color="primary"
+                :loading="loading1"
+                @click="simulateProgress(1),login()"
+                icon-right="mail"
+                label="Ingresar"
+              >
+                <template v-slot:loading>
+                  <q-spinner-facebook />
+                </template>
+              </q-btn>
+            </q-card-actions>
+
             <!--  </q-card-section> -->
           </q-tab-panel>
 
-          <q-tab-panel
-            name="registro"
-            style="background: radial-gradient(circle, #35a2ff 0%, #014a88 100%)"
-          >
-            <q-input v-model="nombre" label="Ingrese su nombre" />
-            <q-input v-model="email" label="Ingrese su correo" />
-            <q-input v-model="password" label="Ingrese su contraseña" />
-            <br />
-            <q-btn
-              class="content-center"
-              color="primary"
-              @click="registrar"
-              icon="mail"
-              label="Registrarse"
+          <q-tab-panel name="registro">
+            <q-input
+              v-model="nombre"
+              label="Ingrese su nombre"
+              outlined
+              counter
+              maxlength="100"
+              type="text"
             />
+            <q-input
+              v-model="email"
+              label="Ingrese su correo"
+              outlined
+              counter
+              maxlength="100"
+              type="email"
+            />
+            <q-input
+              v-model="password"
+              outlined
+              counter
+              maxlength="25"
+              label="Ingrese su contraseña"
+              :type="isPwd ? 'password' : 'text'"
+            >
+              <template v-slot:append>
+                <q-icon
+                  :name="isPwd ? 'visibility_off' : 'visibility'"
+                  class="cursor-pointer"
+                  @click="isPwd = !isPwd"
+                />
+              </template>
+            </q-input>
+            <br />
+
+            <q-card-actions align="right">
+              <q-btn
+                class="content-center"
+                color="primary"
+                :loading="loading2"
+                @click="simulateProgress(2),registrar()"
+                icon-right="mail"
+                label="Registrarse"
+              >
+                <template v-slot:loading>
+                  <q-spinner-facebook />
+                </template>
+              </q-btn>
+            </q-card-actions>
           </q-tab-panel>
         </q-tab-panels>
       </q-card>
@@ -66,7 +120,10 @@ export default {
       email: "",
       password: "",
       error: false,
-      tab: "login"
+      tab: "login",
+      isPwd: true,
+      loading1: false,
+      loading2: false
     };
   },
 
@@ -89,15 +146,24 @@ export default {
       });
     },
 
-    registrar(){
+    registrar() {
       const datos = {
-        'name': this.nombre,
-        'email': this.email,
-        'password': this.password
-      }
-      axios.post('api/auth/register', datos).then((res)=>{
-					console.log(res)
-				});
+        name: this.nombre,
+        email: this.email,
+        password: this.password
+      };
+      axios.post("api/auth/register", datos).then(res => {
+        console.log(res);
+      });
+    },
+    simulateProgress(number) {
+      // we set loading state
+      this[`loading${number}`] = true;
+      // simulate a delay
+      setTimeout(() => {
+        // we're done, we reset loading state
+        this[`loading${number}`] = false;
+      }, 10000);
     }
   }
 };
