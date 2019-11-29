@@ -4588,9 +4588,12 @@ var quasar_lang_index_json__WEBPACK_IMPORTED_MODULE_0___namespace = /*#__PURE__*
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      monto_inicio: '',
+      arrastre: 0,
       view_tabla: false,
       selected: [],
-      fixed: false,
+      fixed: [],
+      modal_ic: false,
       cuenta_id: '',
       options: [],
       columns: [{
@@ -4641,8 +4644,13 @@ var quasar_lang_index_json__WEBPACK_IMPORTED_MODULE_0___namespace = /*#__PURE__*
         field: 'monto_egreso',
         sortable: true,
         headerClasses: 'bg-primary text-white'
-      } // { name: 'view', label: 'View', field: 'view', sortable: true ,  headerClasses: 'bg-primary text-white'},
-      ],
+      }, {
+        name: 'view',
+        label: 'View',
+        field: 'view',
+        sortable: true,
+        headerClasses: 'bg-primary text-white'
+      }],
       mes: '',
       meses: [{
         'id': '1',
@@ -4701,7 +4709,7 @@ var quasar_lang_index_json__WEBPACK_IMPORTED_MODULE_0___namespace = /*#__PURE__*
       columns_resumen: [{
         name: 'name',
         required: true,
-        label: 'Resumen',
+        label: 'Resumen del mes',
         align: 'left',
         field: function field(row) {
           return row.name;
@@ -4720,7 +4728,38 @@ var quasar_lang_index_json__WEBPACK_IMPORTED_MODULE_0___namespace = /*#__PURE__*
         field: 'valor',
         sortable: true
       }],
-      data_resumen: []
+      data_resumen: [],
+      columns_acumulado: [{
+        name: 'name',
+        required: true,
+        label: 'Resumen acumulado',
+        align: 'left',
+        field: function field(row) {
+          return row.name;
+        },
+        format: function format(val) {
+          return "".concat(val);
+        },
+        sortable: true,
+        classes: 'bg-grey-2 ellipsis',
+        style: 'max-width: 100px',
+        headerClasses: 'bg-primary text-white'
+      }, {
+        name: 'valor',
+        align: 'center',
+        label: 'Valor',
+        field: 'valor',
+        sortable: true
+      }],
+      data_acumulado: [{
+        name: '',
+        valor: ''
+      }],
+      //variables para editar
+      e_fecha: '',
+      e_descripcion: '',
+      e_ingreso: '',
+      e_egreso: ''
     };
   },
   methods: {
@@ -4754,18 +4793,55 @@ var quasar_lang_index_json__WEBPACK_IMPORTED_MODULE_0___namespace = /*#__PURE__*
           _this2.egresos = sumar_e;
           _this2.data_resumen = [{
             name: 'Ingreso',
-            valor: sumar_i
+            valor: _this2.formatPrice(sumar_i)
           }, {
             name: 'Egreso',
-            valor: sumar_e
+            valor: _this2.formatPrice(sumar_e)
           }, {
             name: 'Total mensual',
-            valor: sumar_i - sumar_e
+            valor: _this2.formatPrice(sumar_i - sumar_e)
           }];
+
+          _this2.traer_inicio_mensual(_this2.mes.id, _this2.anio.id, _this2.cuenta_id.id);
+
           _this2.view_tabla = true; // this[`loading${dos}`] = false
         } else {
           _this2.view_tabla = false;
         }
+      });
+    },
+    ingresar_inicio_mes: function ingresar_inicio_mes() {
+      var _this3 = this;
+
+      var data = {
+        'cuenta_id': this.cuenta_id.id,
+        'anio': this.anio.id,
+        'mes': this.mes.id,
+        'monto_inicio': this.monto_inicio
+      };
+      axios.post('api/ini_cie_ingresar', data).then(function (res) {
+        if (res.data.estado == 'success') {
+          _this3.$q.notify({
+            color: "green-4",
+            textColor: "white",
+            icon: "cloud_done",
+            message: "" + res.data.mensaje + ""
+          });
+        } else {
+          _this3.$q.notify({
+            color: "red-4",
+            textColor: "white",
+            icon: "cloud_done",
+            message: "" + res.data.mensaje + ""
+          });
+        }
+      });
+    },
+    traer_inicio_mensual: function traer_inicio_mensual(mes, anio, cuenta) {
+      var _this4 = this;
+
+      axios.get('api/traer_inicio_mensual/' + mes + '/' + anio + '/' + cuenta).then(function (res) {
+        _this4.monto_inicio = res.data.inicio_mensual;
       });
     },
     limpiar: function limpiar() {
@@ -4774,84 +4850,71 @@ var quasar_lang_index_json__WEBPACK_IMPORTED_MODULE_0___namespace = /*#__PURE__*
     },
     ruta: function ruta(_ruta) {
       this.$router.push(_ruta);
-    } // onRequest (props) {
-    //    // this.data = [];
-    //   let { page, rowsPerPage, rowsNumber, sortBy, descending } = props.pagination
-    //   let filter = props.filter
-    //   this.loading = true
-    //   // emulate server
-    //   setTimeout(() => {
-    //     // update rowsCount with appropriate value
-    //     this.pagination.rowsNumber = this.getRowsNumberCount(filter)
-    //     // get all rows if "All" (0) is selected
-    //     let fetchCount = rowsPerPage === 0 ? rowsNumber : rowsPerPage
-    //     // calculate starting row of data
-    //     let startRow = (page - 1) * rowsPerPage
-    //     // fetch data from "server"
-    //     let returnedData = this.fetchFromServer(startRow, fetchCount, filter, sortBy, descending)
-    //     // clear out existing data and add new
-    //     this.data.splice(0, this.data.length, ...returnedData)
-    //     // don't forget to update local pagination object
-    //     this.pagination.page = page
-    //     this.pagination.rowsPerPage = rowsPerPage
-    //     this.pagination.sortBy = sortBy
-    //     this.pagination.descending = descending
-    //     // ...and turn of loading indicator
-    //     this.loading = false
-    //   }, 1500)
-    // },
-    // fetchFromServer (startRow, count, filter, sortBy, descending) {
-    //   let data = []
-    //   if (!filter) {
-    //     data = this.original.slice(startRow, startRow + count)
-    //   }
-    //   else {
-    //     let found = 0
-    //     for (let index = startRow, items = 0; index < this.original.length && items < count; ++index) {
-    //       let row = this.original[index]
-    //       // match filter?
-    //       if (!row['titulo'].includes(filter)) {
-    //         // get a different row, until one is found
-    //         continue
-    //       }
-    //       ++found
-    //       if (found >= startRow) {
-    //         data.push(row)
-    //         ++items
-    //       }
-    //     }
-    //   }
-    //   // handle sortBy
-    //   if (sortBy) {
-    //     data.sort((a, b) => {
-    //       let x = descending ? b : a
-    //       let y = descending ? a : b
-    //       if (sortBy === 'desc') {
-    //         // string sort
-    //         return x[sortBy] > y[sortBy] ? 1 : x[sortBy] < y[sortBy] ? -1 : 0
-    //       }
-    //       else {
-    //         // numeric sort
-    //         return parseFloat(x[sortBy]) - parseFloat(y[sortBy])
-    //       }
-    //     })
-    //   }
-    //   return data
-    // },
-    // // emulate 'SELECT count(*) FROM ...WHERE...'
-    // getRowsNumberCount (filter) {
-    //   if (!filter) {
-    //     return this.original.length
-    //   }
-    //   let count = 0
-    //   this.original.forEach((treat) => {
-    //     if (treat['titulo'].includes(filter)) {
-    //       ++count
-    //     }
-    //   })
-    //   return count
-    // }
+    },
+    show: function show(component) {
+      console.log(this.$refs);
+      this.$refs['' + component + ''].show();
+    },
+    // following method is REQUIRED
+    // (don't change its name --> "hide")
+    hide: function hide() {
+      this.$refs.dialog.hide();
+    },
+    onDialogHide: function onDialogHide() {
+      // required to be emitted
+      // when QDialog emits "hide" event
+      this.$emit('hide');
+    },
+    formatPrice: function formatPrice(value) {
+      var val = (value / 1).toFixed(0).replace('.', ',');
+      return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    },
+    llenar_inputs: function llenar_inputs(fecha, descripcion, monto_ingreso, monto_egreso) {
+      this.e_fecha = fecha;
+      this.e_descripcion = descripcion;
+      this.e_ingreso = monto_ingreso;
+      this.e_egreso = monto_egreso;
+      this.file = null;
+    },
+    editar: function editar(id, nombre, valor) {
+      var _this5 = this;
 
+      // console.log(id,
+      //   nombre,
+      //   valor);
+      var data = new FormData();
+      data.append('id', id);
+      data.append('nombre', nombre);
+      data.append('valor', valor);
+      axios.post('api/actualizar_cuenta_detalle', data).then(function (res) {
+        if (res.data.estado == 'success') {
+          _this5.$q.notify({
+            color: "green-4",
+            textColor: "white",
+            icon: "cloud_done",
+            message: "" + res.data.mensaje + ""
+          });
+        }
+      });
+    },
+    editar_archivo: function editar_archivo(id, nombre) {
+      var _this6 = this;
+
+      var data = new FormData();
+      data.append('id', id);
+      data.append('nombre', nombre);
+      data.append('valor', this.file);
+      axios.post('api/actualizar_cuenta_detalle_archivo', data).then(function (res) {
+        if (res.data.estado == 'success') {
+          _this6.$q.notify({
+            color: "green-4",
+            textColor: "white",
+            icon: "cloud_done",
+            message: "" + res.data.mensaje + ""
+          });
+        }
+      });
+    }
   },
   watch: {// lang (lang) {
     //   // dynamic import, so loading on demand only
@@ -4901,6 +4964,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+<<<<<<< HEAD
 /***/ "./node_modules/base64-js/index.js":
 /*!*****************************************!*\
   !*** ./node_modules/base64-js/index.js ***!
@@ -5062,6 +5126,38 @@ function fromByteArray (uint8) {
   return parts.join('')
 }
 
+=======
+/***/ "./node_modules/babel-loader/lib/index.js?!./resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.js?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.js?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      //VARIABLES PARA EL STEPPER FORMULARIO
+      step: 1,
+      rut: '',
+      monto: null,
+      tipo: false,
+      interes: null,
+      fecha: '',
+      //VARIABLES QUE RESCATAN AL USUARIO
+      usuario: 'Bryan Vidal Díaz'
+    };
+  },
+  methods: {
+    calcularIntereses: function calcularIntereses() {
+      var valorConIneteres = monto * intereses;
+      console.log(valorConIneteres);
+    }
+  }
+});
+>>>>>>> 80d9f97386fa1333dd62269b55de45ea3f702306
 
 /***/ }),
 
@@ -91052,16 +91148,10 @@ var render = function() {
                               _c(
                                 "q-item",
                                 {
-                                  directives: [
-                                    {
-                                      name: "close-popup",
-                                      rawName: "v-close-popup"
-                                    }
-                                  ],
                                   attrs: { clickable: "" },
                                   on: {
                                     click: function($event) {
-                                      return _vm.ruta()
+                                      _vm.modal_ic = true
                                     }
                                   }
                                 },
@@ -91085,7 +91175,273 @@ var render = function() {
                                     [
                                       _c("q-item-label", [
                                         _vm._v("Inicio y cierre mensual")
-                                      ])
+                                      ]),
+                                      _vm._v(" "),
+                                      _c(
+                                        "q-dialog",
+                                        {
+                                          attrs: {
+                                            "full-width": "",
+                                            "no-backdrop-dismiss": true
+                                          },
+                                          model: {
+                                            value: _vm.modal_ic,
+                                            callback: function($$v) {
+                                              _vm.modal_ic = $$v
+                                            },
+                                            expression: "modal_ic"
+                                          }
+                                        },
+                                        [
+                                          _c(
+                                            "q-card",
+                                            [
+                                              _c("q-card-section", [
+                                                _c(
+                                                  "div",
+                                                  { staticClass: "row" },
+                                                  [
+                                                    _c(
+                                                      "div",
+                                                      {
+                                                        staticClass:
+                                                          "col-10 col-md-11"
+                                                      },
+                                                      [
+                                                        _c(
+                                                          "div",
+                                                          {
+                                                            staticClass:
+                                                              "text-h6"
+                                                          },
+                                                          [_vm._v("Archivo")]
+                                                        )
+                                                      ]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "div",
+                                                      {
+                                                        staticClass:
+                                                          "col-10 col-md-1"
+                                                      },
+                                                      [
+                                                        _c("q-btn", {
+                                                          directives: [
+                                                            {
+                                                              name:
+                                                                "close-popup",
+                                                              rawName:
+                                                                "v-close-popup"
+                                                            }
+                                                          ],
+                                                          attrs: {
+                                                            label: "Volver",
+                                                            icon:
+                                                              "keyboard_backspace",
+                                                            flat: ""
+                                                          }
+                                                        })
+                                                      ],
+                                                      1
+                                                    )
+                                                  ]
+                                                )
+                                              ]),
+                                              _vm._v(" "),
+                                              _c("div", [
+                                                _c(
+                                                  "div",
+                                                  { staticClass: "q-pa-md" },
+                                                  [
+                                                    _c(
+                                                      "div",
+                                                      {
+                                                        staticClass:
+                                                          "row q-col-gutter-md"
+                                                      },
+                                                      [
+                                                        _c(
+                                                          "div",
+                                                          {
+                                                            staticClass:
+                                                              "col-12 col-md-2"
+                                                          },
+                                                          [
+                                                            _c("q-select", {
+                                                              attrs: {
+                                                                standout:
+                                                                  "bg-primary text-white",
+                                                                options:
+                                                                  _vm.options,
+                                                                label:
+                                                                  "Seleccione cuenta",
+                                                                "option-label":
+                                                                  "titulo",
+                                                                "option-value":
+                                                                  "id"
+                                                              },
+                                                              model: {
+                                                                value:
+                                                                  _vm.cuenta_id,
+                                                                callback: function(
+                                                                  $$v
+                                                                ) {
+                                                                  _vm.cuenta_id = $$v
+                                                                },
+                                                                expression:
+                                                                  "cuenta_id"
+                                                              }
+                                                            })
+                                                          ],
+                                                          1
+                                                        ),
+                                                        _vm._v(" "),
+                                                        _c(
+                                                          "div",
+                                                          {
+                                                            staticClass:
+                                                              "col-12 col-md-2"
+                                                          },
+                                                          [
+                                                            _c("q-select", {
+                                                              attrs: {
+                                                                standout:
+                                                                  "bg-primary text-white",
+                                                                options:
+                                                                  _vm.anios,
+                                                                label:
+                                                                  "Seleccione año",
+                                                                "option-label":
+                                                                  "label",
+                                                                "option-value":
+                                                                  "id"
+                                                              },
+                                                              model: {
+                                                                value: _vm.anio,
+                                                                callback: function(
+                                                                  $$v
+                                                                ) {
+                                                                  _vm.anio = $$v
+                                                                },
+                                                                expression:
+                                                                  "anio"
+                                                              }
+                                                            })
+                                                          ],
+                                                          1
+                                                        ),
+                                                        _vm._v(" "),
+                                                        _c(
+                                                          "div",
+                                                          {
+                                                            staticClass:
+                                                              "col-12 col-md-2"
+                                                          },
+                                                          [
+                                                            _c("q-select", {
+                                                              attrs: {
+                                                                standout:
+                                                                  "bg-primary text-white",
+                                                                options:
+                                                                  _vm.meses,
+                                                                label:
+                                                                  "Seleccione mes",
+                                                                "option-label":
+                                                                  "label",
+                                                                "option-value":
+                                                                  "id"
+                                                              },
+                                                              model: {
+                                                                value: _vm.mes,
+                                                                callback: function(
+                                                                  $$v
+                                                                ) {
+                                                                  _vm.mes = $$v
+                                                                },
+                                                                expression:
+                                                                  "mes"
+                                                              }
+                                                            })
+                                                          ],
+                                                          1
+                                                        ),
+                                                        _vm._v(" "),
+                                                        _c(
+                                                          "div",
+                                                          {
+                                                            staticClass:
+                                                              "col-12 col-md-2"
+                                                          },
+                                                          [
+                                                            _c("q-input", {
+                                                              attrs: {
+                                                                label:
+                                                                  "Monto inicial"
+                                                              },
+                                                              model: {
+                                                                value:
+                                                                  _vm.monto_inicio,
+                                                                callback: function(
+                                                                  $$v
+                                                                ) {
+                                                                  _vm.monto_inicio = $$v
+                                                                },
+                                                                expression:
+                                                                  "monto_inicio"
+                                                              }
+                                                            })
+                                                          ],
+                                                          1
+                                                        ),
+                                                        _vm._v(" "),
+                                                        _c(
+                                                          "div",
+                                                          {
+                                                            staticClass:
+                                                              "col-12 col-md-2"
+                                                          },
+                                                          [
+                                                            _c("q-btn", {
+                                                              attrs: {
+                                                                label:
+                                                                  "Calcular"
+                                                              }
+                                                            })
+                                                          ],
+                                                          1
+                                                        ),
+                                                        _vm._v(" "),
+                                                        _c(
+                                                          "div",
+                                                          {
+                                                            staticClass:
+                                                              "col-12 col-md-2"
+                                                          },
+                                                          [
+                                                            _c("q-btn", {
+                                                              attrs: {
+                                                                label: "Guardar"
+                                                              },
+                                                              on: {
+                                                                click:
+                                                                  _vm.ingresar_inicio_mes
+                                                              }
+                                                            })
+                                                          ],
+                                                          1
+                                                        )
+                                                      ]
+                                                    )
+                                                  ]
+                                                )
+                                              ])
+                                            ],
+                                            1
+                                          )
+                                        ],
+                                        1
+                                      )
                                     ],
                                     1
                                   )
@@ -91337,7 +91693,10 @@ var render = function() {
                                                     },
                                                     on: {
                                                       click: function($event) {
-                                                        _vm.fixed = true
+                                                        return _vm.show(
+                                                          "dialog" +
+                                                            props.row.__index
+                                                        )
                                                       }
                                                     }
                                                   }),
@@ -91345,19 +91704,16 @@ var render = function() {
                                                   _c(
                                                     "q-dialog",
                                                     {
+                                                      ref:
+                                                        "dialog" +
+                                                        props.row.__index,
                                                       attrs: {
                                                         "full-width": "",
                                                         "full-height": "",
                                                         "no-backdrop-dismiss": true
                                                       },
-                                                      model: {
-                                                        value: _vm.fixed,
-                                                        callback: function(
-                                                          $$v
-                                                        ) {
-                                                          _vm.fixed = $$v
-                                                        },
-                                                        expression: "fixed"
+                                                      on: {
+                                                        hide: _vm.onDialogHide
                                                       }
                                                     },
                                                     [
@@ -91478,7 +91834,9 @@ var render = function() {
                                                 [
                                                   _vm._v(
                                                     _vm._s(
-                                                      props.row.monto_ingreso
+                                                      _vm.formatPrice(
+                                                        props.row.monto_ingreso
+                                                      )
                                                     )
                                                   )
                                                 ]
@@ -91493,10 +91851,754 @@ var render = function() {
                                                 [
                                                   _vm._v(
                                                     _vm._s(
-                                                      props.row.monto_egreso
+                                                      _vm.formatPrice(
+                                                        props.row.monto_egreso
+                                                      )
                                                     )
                                                   )
                                                 ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "q-td",
+                                                {
+                                                  key: "view",
+                                                  attrs: { props: props }
+                                                },
+                                                [
+                                                  _c("q-btn", {
+                                                    attrs: {
+                                                      color: "primary",
+                                                      icon: "edit"
+                                                    },
+                                                    on: {
+                                                      click: function($event) {
+                                                        _vm.show(
+                                                          "edit" +
+                                                            props.row.__index
+                                                        )
+                                                        _vm.llenar_inputs(
+                                                          props.row.fecha,
+                                                          props.row.descripcion,
+                                                          props.row
+                                                            .monto_ingreso,
+                                                          props.row.monto_egreso
+                                                        )
+                                                      }
+                                                    },
+                                                    scopedSlots: _vm._u(
+                                                      [
+                                                        {
+                                                          key: "loading",
+                                                          fn: function() {
+                                                            return [
+                                                              _c(
+                                                                "q-spinner-facebook"
+                                                              )
+                                                            ]
+                                                          },
+                                                          proxy: true
+                                                        }
+                                                      ],
+                                                      null,
+                                                      true
+                                                    )
+                                                  }),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "q-dialog",
+                                                    {
+                                                      ref:
+                                                        "edit" +
+                                                        props.row.__index,
+                                                      attrs: {
+                                                        "no-backdrop-dismiss": true
+                                                      },
+                                                      on: {
+                                                        hide: _vm.onDialogHide
+                                                      }
+                                                    },
+                                                    [
+                                                      _c(
+                                                        "q-card",
+                                                        {
+                                                          staticStyle: {
+                                                            width: "700px",
+                                                            "max-width": "80vw"
+                                                          }
+                                                        },
+                                                        [
+                                                          _c("q-card-section", [
+                                                            _c(
+                                                              "div",
+                                                              {
+                                                                staticClass:
+                                                                  "row"
+                                                              },
+                                                              [
+                                                                _c(
+                                                                  "div",
+                                                                  {
+                                                                    staticClass:
+                                                                      "col-10 col-md-11"
+                                                                  },
+                                                                  [
+                                                                    _c(
+                                                                      "div",
+                                                                      {
+                                                                        staticClass:
+                                                                          "text-h6"
+                                                                      },
+                                                                      [
+                                                                        _vm._v(
+                                                                          "Modificación"
+                                                                        )
+                                                                      ]
+                                                                    )
+                                                                  ]
+                                                                ),
+                                                                _vm._v(" "),
+                                                                _c(
+                                                                  "div",
+                                                                  {
+                                                                    staticClass:
+                                                                      "col-10 col-md-1"
+                                                                  },
+                                                                  [
+                                                                    _c(
+                                                                      "q-btn",
+                                                                      {
+                                                                        directives: [
+                                                                          {
+                                                                            name:
+                                                                              "close-popup",
+                                                                            rawName:
+                                                                              "v-close-popup"
+                                                                          }
+                                                                        ],
+                                                                        attrs: {
+                                                                          label:
+                                                                            "Volver",
+                                                                          icon:
+                                                                            "keyboard_backspace",
+                                                                          flat:
+                                                                            ""
+                                                                        }
+                                                                      }
+                                                                    )
+                                                                  ],
+                                                                  1
+                                                                )
+                                                              ]
+                                                            )
+                                                          ]),
+                                                          _vm._v(" "),
+                                                          [
+                                                            _c(
+                                                              "div",
+                                                              {
+                                                                staticClass:
+                                                                  "row justify-center q-gutter-md"
+                                                              },
+                                                              [
+                                                                _c(
+                                                                  "q-card",
+                                                                  {
+                                                                    staticClass:
+                                                                      "my-card"
+                                                                  },
+                                                                  [
+                                                                    _c(
+                                                                      "q-card-section",
+                                                                      {
+                                                                        staticClass:
+                                                                          "bg-primary text-white"
+                                                                      },
+                                                                      [
+                                                                        _c(
+                                                                          "div",
+                                                                          {
+                                                                            staticClass:
+                                                                              "text-h6"
+                                                                          },
+                                                                          [
+                                                                            _vm._v(
+                                                                              "Modificar ID: " +
+                                                                                _vm._s(
+                                                                                  props
+                                                                                    .row
+                                                                                    .id
+                                                                                )
+                                                                            )
+                                                                          ]
+                                                                        )
+                                                                      ]
+                                                                    ),
+                                                                    _vm._v(" "),
+                                                                    _c(
+                                                                      "q-separator"
+                                                                    ),
+                                                                    _vm._v(" "),
+                                                                    _c(
+                                                                      "div",
+                                                                      {
+                                                                        staticClass:
+                                                                          "q-pa-md"
+                                                                      },
+                                                                      [
+                                                                        _c(
+                                                                          "div",
+                                                                          {
+                                                                            staticClass:
+                                                                              "row q-col-gutter-md"
+                                                                          },
+                                                                          [
+                                                                            _c(
+                                                                              "div",
+                                                                              {
+                                                                                staticClass:
+                                                                                  "col-8"
+                                                                              },
+                                                                              [
+                                                                                _c(
+                                                                                  "q-input",
+                                                                                  {
+                                                                                    attrs: {
+                                                                                      outlined:
+                                                                                        "",
+                                                                                      "stack-label":
+                                                                                        "",
+                                                                                      label:
+                                                                                        "Titulo",
+                                                                                      size:
+                                                                                        "sm",
+                                                                                      value:
+                                                                                        props
+                                                                                          .row
+                                                                                          .titulo,
+                                                                                      disable: true
+                                                                                    }
+                                                                                  }
+                                                                                )
+                                                                              ],
+                                                                              1
+                                                                            ),
+                                                                            _vm._v(
+                                                                              " "
+                                                                            ),
+                                                                            _c(
+                                                                              "div",
+                                                                              {
+                                                                                staticClass:
+                                                                                  "col-2"
+                                                                              }
+                                                                            )
+                                                                          ]
+                                                                        ),
+                                                                        _vm._v(
+                                                                          " "
+                                                                        ),
+                                                                        _c(
+                                                                          "br"
+                                                                        ),
+                                                                        _vm._v(
+                                                                          " "
+                                                                        ),
+                                                                        _c(
+                                                                          "div",
+                                                                          {
+                                                                            staticClass:
+                                                                              "row q-col-gutter-md"
+                                                                          },
+                                                                          [
+                                                                            _c(
+                                                                              "div",
+                                                                              {
+                                                                                staticClass:
+                                                                                  "col-8"
+                                                                              },
+                                                                              [
+                                                                                _c(
+                                                                                  "q-input",
+                                                                                  {
+                                                                                    attrs: {
+                                                                                      outlined:
+                                                                                        "",
+                                                                                      "stack-label":
+                                                                                        "",
+                                                                                      label:
+                                                                                        "Fecha",
+                                                                                      type:
+                                                                                        "date",
+                                                                                      value:
+                                                                                        props
+                                                                                          .row
+                                                                                          .fecha
+                                                                                    },
+                                                                                    model: {
+                                                                                      value:
+                                                                                        _vm.e_fecha,
+                                                                                      callback: function(
+                                                                                        $$v
+                                                                                      ) {
+                                                                                        _vm.e_fecha = $$v
+                                                                                      },
+                                                                                      expression:
+                                                                                        "e_fecha"
+                                                                                    }
+                                                                                  }
+                                                                                )
+                                                                              ],
+                                                                              1
+                                                                            ),
+                                                                            _vm._v(
+                                                                              " "
+                                                                            ),
+                                                                            _c(
+                                                                              "div",
+                                                                              {
+                                                                                staticClass:
+                                                                                  "col-2"
+                                                                              },
+                                                                              [
+                                                                                _c(
+                                                                                  "q-btn",
+                                                                                  {
+                                                                                    attrs: {
+                                                                                      dense:
+                                                                                        "",
+                                                                                      color:
+                                                                                        "primary",
+                                                                                      size:
+                                                                                        "sm",
+                                                                                      label:
+                                                                                        "Modificar"
+                                                                                    },
+                                                                                    on: {
+                                                                                      click: function(
+                                                                                        $event
+                                                                                      ) {
+                                                                                        return _vm.editar(
+                                                                                          props
+                                                                                            .row
+                                                                                            .id,
+                                                                                          "fecha",
+                                                                                          _vm.e_fecha
+                                                                                        )
+                                                                                      }
+                                                                                    }
+                                                                                  }
+                                                                                )
+                                                                              ],
+                                                                              1
+                                                                            )
+                                                                          ]
+                                                                        ),
+                                                                        _vm._v(
+                                                                          " "
+                                                                        ),
+                                                                        _c(
+                                                                          "br"
+                                                                        ),
+                                                                        _vm._v(
+                                                                          " "
+                                                                        ),
+                                                                        _c(
+                                                                          "div",
+                                                                          {
+                                                                            staticClass:
+                                                                              "row q-col-gutter-md"
+                                                                          },
+                                                                          [
+                                                                            _c(
+                                                                              "div",
+                                                                              {
+                                                                                staticClass:
+                                                                                  "col-8"
+                                                                              },
+                                                                              [
+                                                                                _c(
+                                                                                  "q-input",
+                                                                                  {
+                                                                                    attrs: {
+                                                                                      outlined:
+                                                                                        "",
+                                                                                      "stack-label":
+                                                                                        "",
+                                                                                      label:
+                                                                                        "Archivo",
+                                                                                      type:
+                                                                                        "file"
+                                                                                    },
+                                                                                    on: {
+                                                                                      input: function(
+                                                                                        val
+                                                                                      ) {
+                                                                                        _vm.file =
+                                                                                          val[0]
+                                                                                      }
+                                                                                    }
+                                                                                  }
+                                                                                )
+                                                                              ],
+                                                                              1
+                                                                            ),
+                                                                            _vm._v(
+                                                                              " "
+                                                                            ),
+                                                                            _c(
+                                                                              "div",
+                                                                              {
+                                                                                staticClass:
+                                                                                  "col-2"
+                                                                              },
+                                                                              [
+                                                                                _c(
+                                                                                  "q-btn",
+                                                                                  {
+                                                                                    attrs: {
+                                                                                      dense:
+                                                                                        "",
+                                                                                      color:
+                                                                                        "primary",
+                                                                                      size:
+                                                                                        "sm",
+                                                                                      label:
+                                                                                        "Modificar"
+                                                                                    },
+                                                                                    on: {
+                                                                                      click: function(
+                                                                                        $event
+                                                                                      ) {
+                                                                                        return _vm.editar_archivo(
+                                                                                          props
+                                                                                            .row
+                                                                                            .id,
+                                                                                          "archivo"
+                                                                                        )
+                                                                                      }
+                                                                                    }
+                                                                                  }
+                                                                                )
+                                                                              ],
+                                                                              1
+                                                                            )
+                                                                          ]
+                                                                        ),
+                                                                        _vm._v(
+                                                                          " "
+                                                                        ),
+                                                                        _c(
+                                                                          "br"
+                                                                        ),
+                                                                        _vm._v(
+                                                                          " "
+                                                                        ),
+                                                                        _c(
+                                                                          "div",
+                                                                          {
+                                                                            staticClass:
+                                                                              "row q-col-gutter-md"
+                                                                          },
+                                                                          [
+                                                                            _c(
+                                                                              "div",
+                                                                              {
+                                                                                staticClass:
+                                                                                  "col-8"
+                                                                              },
+                                                                              [
+                                                                                _c(
+                                                                                  "q-input",
+                                                                                  {
+                                                                                    attrs: {
+                                                                                      outlined:
+                                                                                        "",
+                                                                                      value:
+                                                                                        props
+                                                                                          .row
+                                                                                          .descripcion,
+                                                                                      "stack-label":
+                                                                                        "",
+                                                                                      label:
+                                                                                        "Descripcion",
+                                                                                      type:
+                                                                                        "textarea"
+                                                                                    },
+                                                                                    model: {
+                                                                                      value:
+                                                                                        _vm.e_descripcion,
+                                                                                      callback: function(
+                                                                                        $$v
+                                                                                      ) {
+                                                                                        _vm.e_descripcion = $$v
+                                                                                      },
+                                                                                      expression:
+                                                                                        "e_descripcion"
+                                                                                    }
+                                                                                  }
+                                                                                )
+                                                                              ],
+                                                                              1
+                                                                            ),
+                                                                            _vm._v(
+                                                                              " "
+                                                                            ),
+                                                                            _c(
+                                                                              "div",
+                                                                              {
+                                                                                staticClass:
+                                                                                  "col-2"
+                                                                              },
+                                                                              [
+                                                                                _c(
+                                                                                  "q-btn",
+                                                                                  {
+                                                                                    attrs: {
+                                                                                      dense:
+                                                                                        "",
+                                                                                      color:
+                                                                                        "primary",
+                                                                                      size:
+                                                                                        "sm",
+                                                                                      label:
+                                                                                        "Modificar"
+                                                                                    },
+                                                                                    on: {
+                                                                                      click: function(
+                                                                                        $event
+                                                                                      ) {
+                                                                                        return _vm.editar(
+                                                                                          props
+                                                                                            .row
+                                                                                            .id,
+                                                                                          "descripcion",
+                                                                                          _vm.e_descripcion
+                                                                                        )
+                                                                                      }
+                                                                                    }
+                                                                                  }
+                                                                                )
+                                                                              ],
+                                                                              1
+                                                                            )
+                                                                          ]
+                                                                        ),
+                                                                        _vm._v(
+                                                                          " "
+                                                                        ),
+                                                                        _c(
+                                                                          "br"
+                                                                        ),
+                                                                        _vm._v(
+                                                                          " "
+                                                                        ),
+                                                                        _c(
+                                                                          "div",
+                                                                          {
+                                                                            staticClass:
+                                                                              "row q-col-gutter-md"
+                                                                          },
+                                                                          [
+                                                                            _c(
+                                                                              "div",
+                                                                              {
+                                                                                staticClass:
+                                                                                  "col-8"
+                                                                              },
+                                                                              [
+                                                                                _c(
+                                                                                  "q-input",
+                                                                                  {
+                                                                                    attrs: {
+                                                                                      outlined:
+                                                                                        "",
+                                                                                      value:
+                                                                                        props
+                                                                                          .row
+                                                                                          .monto_ingreso,
+                                                                                      "stack-label":
+                                                                                        "",
+                                                                                      label:
+                                                                                        "Ingreso",
+                                                                                      type:
+                                                                                        "numeric"
+                                                                                    },
+                                                                                    model: {
+                                                                                      value:
+                                                                                        _vm.e_ingreso,
+                                                                                      callback: function(
+                                                                                        $$v
+                                                                                      ) {
+                                                                                        _vm.e_ingreso = $$v
+                                                                                      },
+                                                                                      expression:
+                                                                                        "e_ingreso"
+                                                                                    }
+                                                                                  }
+                                                                                )
+                                                                              ],
+                                                                              1
+                                                                            ),
+                                                                            _vm._v(
+                                                                              " "
+                                                                            ),
+                                                                            _c(
+                                                                              "div",
+                                                                              {
+                                                                                staticClass:
+                                                                                  "col-2"
+                                                                              },
+                                                                              [
+                                                                                _c(
+                                                                                  "q-btn",
+                                                                                  {
+                                                                                    attrs: {
+                                                                                      dense:
+                                                                                        "",
+                                                                                      color:
+                                                                                        "primary",
+                                                                                      size:
+                                                                                        "sm",
+                                                                                      label:
+                                                                                        "Modificar"
+                                                                                    },
+                                                                                    on: {
+                                                                                      click: function(
+                                                                                        $event
+                                                                                      ) {
+                                                                                        return _vm.editar(
+                                                                                          props
+                                                                                            .row
+                                                                                            .id,
+                                                                                          "ingreso",
+                                                                                          _vm.e_ingreso
+                                                                                        )
+                                                                                      }
+                                                                                    }
+                                                                                  }
+                                                                                )
+                                                                              ],
+                                                                              1
+                                                                            )
+                                                                          ]
+                                                                        ),
+                                                                        _vm._v(
+                                                                          " "
+                                                                        ),
+                                                                        _c(
+                                                                          "br"
+                                                                        ),
+                                                                        _vm._v(
+                                                                          " "
+                                                                        ),
+                                                                        _c(
+                                                                          "div",
+                                                                          {
+                                                                            staticClass:
+                                                                              "row q-col-gutter-md"
+                                                                          },
+                                                                          [
+                                                                            _c(
+                                                                              "div",
+                                                                              {
+                                                                                staticClass:
+                                                                                  "col-8"
+                                                                              },
+                                                                              [
+                                                                                _c(
+                                                                                  "q-input",
+                                                                                  {
+                                                                                    attrs: {
+                                                                                      outlined:
+                                                                                        "",
+                                                                                      value:
+                                                                                        props
+                                                                                          .row
+                                                                                          .monto_egreso,
+                                                                                      "stack-label":
+                                                                                        "",
+                                                                                      label:
+                                                                                        "Egreso",
+                                                                                      type:
+                                                                                        "numeric"
+                                                                                    },
+                                                                                    model: {
+                                                                                      value:
+                                                                                        _vm.e_egreso,
+                                                                                      callback: function(
+                                                                                        $$v
+                                                                                      ) {
+                                                                                        _vm.e_egreso = $$v
+                                                                                      },
+                                                                                      expression:
+                                                                                        "e_egreso"
+                                                                                    }
+                                                                                  }
+                                                                                )
+                                                                              ],
+                                                                              1
+                                                                            ),
+                                                                            _vm._v(
+                                                                              " "
+                                                                            ),
+                                                                            _c(
+                                                                              "div",
+                                                                              {
+                                                                                staticClass:
+                                                                                  "col-2"
+                                                                              },
+                                                                              [
+                                                                                _c(
+                                                                                  "q-btn",
+                                                                                  {
+                                                                                    attrs: {
+                                                                                      dense:
+                                                                                        "",
+                                                                                      color:
+                                                                                        "primary",
+                                                                                      size:
+                                                                                        "sm",
+                                                                                      label:
+                                                                                        "Modificar"
+                                                                                    },
+                                                                                    on: {
+                                                                                      click: function(
+                                                                                        $event
+                                                                                      ) {
+                                                                                        return _vm.editar(
+                                                                                          props
+                                                                                            .row
+                                                                                            .id,
+                                                                                          "egreso",
+                                                                                          _vm.e_egreso
+                                                                                        )
+                                                                                      }
+                                                                                    }
+                                                                                  }
+                                                                                )
+                                                                              ],
+                                                                              1
+                                                                            )
+                                                                          ]
+                                                                        )
+                                                                      ]
+                                                                    )
+                                                                  ],
+                                                                  1
+                                                                )
+                                                              ],
+                                                              1
+                                                            )
+                                                          ]
+                                                        ],
+                                                        2
+                                                      )
+                                                    ],
+                                                    1
+                                                  )
+                                                ],
+                                                1
                                               )
                                             ],
                                             1
@@ -91507,7 +92609,7 @@ var render = function() {
                                   ],
                                   null,
                                   false,
-                                  3289779628
+                                  2144636192
                                 )
                               })
                             ],
@@ -91516,23 +92618,178 @@ var render = function() {
                           _vm._v(" "),
                           [
                             _c("div", { staticClass: "q-pa-md" }, [
-                              _c("div", { staticClass: "row" }, [
-                                _c(
-                                  "div",
-                                  { attrs: { clas: "col-12 col-5" } },
-                                  [
-                                    _c("q-table", {
-                                      attrs: {
-                                        data: _vm.data_resumen,
-                                        columns: _vm.columns_resumen,
-                                        "row-key": "name",
-                                        "hide-bottom": ""
-                                      }
-                                    })
-                                  ],
-                                  1
-                                )
-                              ])
+                              _c(
+                                "div",
+                                { staticClass: "row q-col-gutter-md" },
+                                [
+                                  _c(
+                                    "div",
+                                    { attrs: { clas: "col-12 col-5" } },
+                                    [
+                                      _c("q-table", {
+                                        attrs: {
+                                          data: _vm.data_resumen,
+                                          columns: _vm.columns_resumen,
+                                          "row-key": "name",
+                                          "hide-bottom": ""
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    { attrs: { clas: "col-12 col-5" } },
+                                    [
+                                      _c("q-table", {
+                                        attrs: {
+                                          data: _vm.data_acumulado,
+                                          columns: _vm.columns_acumulado,
+                                          "row-key": "name",
+                                          "hide-bottom": ""
+                                        },
+                                        scopedSlots: _vm._u(
+                                          [
+                                            {
+                                              key: "body",
+                                              fn: function(props) {
+                                                return [
+                                                  _c(
+                                                    "q-tr",
+                                                    { attrs: { props: props } },
+                                                    [
+                                                      _c(
+                                                        "q-td",
+                                                        {
+                                                          key: "name",
+                                                          attrs: {
+                                                            props: props
+                                                          }
+                                                        },
+                                                        [_vm._v("Arrastre")]
+                                                      ),
+                                                      _vm._v(" "),
+                                                      _c(
+                                                        "q-td",
+                                                        {
+                                                          key: "valor",
+                                                          attrs: {
+                                                            props: props
+                                                          }
+                                                        },
+                                                        [
+                                                          _vm._v(
+                                                            _vm._s(
+                                                              _vm.formatPrice(
+                                                                _vm.monto_inicio
+                                                              )
+                                                            )
+                                                          )
+                                                        ]
+                                                      )
+                                                    ],
+                                                    1
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "q-tr",
+                                                    { attrs: { props: props } },
+                                                    [
+                                                      _c(
+                                                        "q-td",
+                                                        {
+                                                          key: "name",
+                                                          attrs: {
+                                                            props: props
+                                                          }
+                                                        },
+                                                        [
+                                                          _vm._v(
+                                                            "Monto del mes"
+                                                          )
+                                                        ]
+                                                      ),
+                                                      _vm._v(" "),
+                                                      _c(
+                                                        "q-td",
+                                                        {
+                                                          key: "valor",
+                                                          attrs: {
+                                                            props: props
+                                                          }
+                                                        },
+                                                        [
+                                                          _vm._v(
+                                                            _vm._s(
+                                                              _vm.formatPrice(
+                                                                _vm.ingresos -
+                                                                  _vm.egresos
+                                                              )
+                                                            )
+                                                          )
+                                                        ]
+                                                      )
+                                                    ],
+                                                    1
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "q-tr",
+                                                    { attrs: { props: props } },
+                                                    [
+                                                      _c(
+                                                        "q-td",
+                                                        {
+                                                          key: "name",
+                                                          attrs: {
+                                                            props: props
+                                                          }
+                                                        },
+                                                        [
+                                                          _vm._v(
+                                                            "Total acumulado"
+                                                          )
+                                                        ]
+                                                      ),
+                                                      _vm._v(" "),
+                                                      _c(
+                                                        "q-td",
+                                                        {
+                                                          key: "valor",
+                                                          attrs: {
+                                                            props: props
+                                                          }
+                                                        },
+                                                        [
+                                                          _vm._v(
+                                                            _vm._s(
+                                                              _vm.formatPrice(
+                                                                _vm.monto_inicio +
+                                                                  (_vm.ingresos -
+                                                                    _vm.egresos)
+                                                              )
+                                                            )
+                                                          )
+                                                        ]
+                                                      )
+                                                    ],
+                                                    1
+                                                  )
+                                                ]
+                                              }
+                                            }
+                                          ],
+                                          null,
+                                          false,
+                                          2474710560
+                                        )
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ]
+                              )
                             ])
                           ]
                         ],
@@ -92364,7 +93621,557 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_vm._v("\n\tinicio modulo prestamos\n")])
+  return _c("div", { staticClass: "q-pa-md" }, [
+    _c("div", { staticClass: "row justify-center" }, [
+      _c(
+        "div",
+        { staticClass: "col-12 col-md-8" },
+        [
+          _c(
+            "q-card",
+            [
+              _c("q-card-section", { staticClass: "bg-primary text-white" }, [
+                _c("div", { staticClass: "text-h6" }, [
+                  _vm._v("Solicitar Prestamo")
+                ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "q-stepper",
+                {
+                  ref: "stepper",
+                  attrs: { color: "primary", animated: "" },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "navigation",
+                      fn: function() {
+                        return [
+                          _c(
+                            "q-stepper-navigation",
+                            [
+                              _c("q-btn", {
+                                attrs: {
+                                  color: "primary",
+                                  disable:
+                                    (_vm.step === 1 && _vm.rut == "") ||
+                                    (_vm.step === 3 && _vm.monto == null),
+                                  label:
+                                    _vm.step === 4 ? "Solicitar" : "Continuar"
+                                },
+                                on: {
+                                  click: [
+                                    function($event) {
+                                      return _vm.$refs.stepper.next()
+                                    },
+                                    _vm.calcularIntereses
+                                  ]
+                                }
+                              }),
+                              _vm._v(" "),
+                              _vm.step > 1
+                                ? _c("q-btn", {
+                                    staticClass: "q-ml-sm",
+                                    attrs: {
+                                      flat: "",
+                                      color: "primary",
+                                      label: "Volver"
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.$refs.stepper.previous()
+                                      }
+                                    }
+                                  })
+                                : _vm._e()
+                            ],
+                            1
+                          )
+                        ]
+                      },
+                      proxy: true
+                    }
+                  ]),
+                  model: {
+                    value: _vm.step,
+                    callback: function($$v) {
+                      _vm.step = $$v
+                    },
+                    expression: "step"
+                  }
+                },
+                [
+                  _c(
+                    "q-step",
+                    {
+                      attrs: {
+                        name: 1,
+                        title: "Ingrese el rut del cliente",
+                        icon: "account_circle",
+                        done: _vm.step > 1
+                      }
+                    },
+                    [
+                      _c("q-input", {
+                        attrs: {
+                          outlined: "",
+                          counter: "",
+                          maxlength: "20",
+                          label: "Ingrese rut del cliente",
+                          "stack-label": "",
+                          type: "text",
+                          hint: "El rut debe ser sin punto ni guion",
+                          rules: [
+                            function(val) {
+                              return (
+                                val.length <= 20 ||
+                                "El maximo da caracteres es de 20"
+                              )
+                            },
+                            function(val) {
+                              return (
+                                val.length >= 2 ||
+                                "El minimo de caracteres es de 2"
+                              )
+                            }
+                          ]
+                        },
+                        model: {
+                          value: _vm.rut,
+                          callback: function($$v) {
+                            _vm.rut = $$v
+                          },
+                          expression: "rut"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "q-step",
+                    {
+                      attrs: {
+                        name: 2,
+                        title: "Tipo de Prestamo",
+                        icon: "create_new_folder",
+                        done: _vm.step > 2
+                      }
+                    },
+                    [
+                      _c(
+                        "q-list",
+                        [
+                          _c(
+                            "q-item",
+                            {
+                              directives: [
+                                { name: "ripple", rawName: "v-ripple" }
+                              ],
+                              attrs: { tag: "label" }
+                            },
+                            [
+                              _c(
+                                "q-item-section",
+                                { attrs: { avatar: "" } },
+                                [
+                                  _c("q-radio", {
+                                    attrs: { val: "0" },
+                                    model: {
+                                      value: _vm.tipo,
+                                      callback: function($$v) {
+                                        _vm.tipo = $$v
+                                      },
+                                      expression: "tipo"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "q-item-section",
+                                [
+                                  _c("q-item-label", [_vm._v("Sin Intereses")]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "q-item-label",
+                                    { attrs: { caption: "" } },
+                                    [
+                                      _vm._v(
+                                        "El prestamo solicitado no generara ningún tipo de interes"
+                                      )
+                                    ]
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "q-item",
+                            {
+                              directives: [
+                                { name: "ripple", rawName: "v-ripple" }
+                              ],
+                              attrs: { tag: "label" }
+                            },
+                            [
+                              _c(
+                                "q-item-section",
+                                { attrs: { avatar: "" } },
+                                [
+                                  _c("q-radio", {
+                                    attrs: { val: "1" },
+                                    model: {
+                                      value: _vm.tipo,
+                                      callback: function($$v) {
+                                        _vm.tipo = $$v
+                                      },
+                                      expression: "tipo"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "q-item-section",
+                                [
+                                  _c("q-item-label", [_vm._v("Con Intereses")]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "q-item-label",
+                                    { attrs: { caption: "" } },
+                                    [
+                                      _vm._v(
+                                        "El prestamo solicitado generara un interes con un valor que puede definir a continuación"
+                                      )
+                                    ]
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("q-slide-transition", [
+                        _c(
+                          "div",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: _vm.tipo == "1",
+                                expression: "tipo == '1'"
+                              }
+                            ]
+                          },
+                          [
+                            _c("q-input", {
+                              attrs: {
+                                outlined: "",
+                                counter: "",
+                                maxlength: "3",
+                                label: "Ingrese porcentaje",
+                                "stack-label": "",
+                                type: "number",
+                                hint:
+                                  "Ingrese el porcentaje que desea de interes sin simbolo",
+                                rules: [
+                                  function(val) {
+                                    return (
+                                      val.length <= 3 ||
+                                      "El maximo da caracteres es de 3"
+                                    )
+                                  },
+                                  function(val) {
+                                    return (
+                                      val.length >= 1 ||
+                                      "El minimo de caracteres es de 2"
+                                    )
+                                  }
+                                ]
+                              },
+                              model: {
+                                value: _vm.interes,
+                                callback: function($$v) {
+                                  _vm.interes = $$v
+                                },
+                                expression: "interes"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "q-step",
+                    {
+                      attrs: {
+                        name: 3,
+                        title: "Monto y fecha",
+                        icon: "assignment"
+                      }
+                    },
+                    [
+                      _c(
+                        "div",
+                        { staticClass: "q-gutter-md" },
+                        [
+                          _c("q-input", {
+                            attrs: {
+                              outlined: "",
+                              counter: "",
+                              maxlength: "20",
+                              label: "Ingrese monto a solicitar",
+                              "stack-label": "",
+                              type: "number",
+                              hint: "El monto debe de ser ingresado sin puntos",
+                              rules: [
+                                function(val) {
+                                  return (
+                                    val.length <= 20 ||
+                                    "El maximo da caracteres es de 20"
+                                  )
+                                },
+                                function(val) {
+                                  return (
+                                    val.length >= 2 ||
+                                    "El minimo de caracteres es de 1"
+                                  )
+                                }
+                              ]
+                            },
+                            model: {
+                              value: _vm.monto,
+                              callback: function($$v) {
+                                _vm.monto = $$v
+                              },
+                              expression: "monto"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("q-input", {
+                            attrs: {
+                              outlined: "",
+                              counter: "",
+                              label: "Fecha del prestamo",
+                              "stack-label": "",
+                              type: "date",
+                              hint:
+                                "Seleccione la fecha en la cual se genero el prestamo"
+                            },
+                            model: {
+                              value: _vm.fecha,
+                              callback: function($$v) {
+                                _vm.fecha = $$v
+                              },
+                              expression: "fecha"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "q-step",
+                    {
+                      attrs: {
+                        name: 4,
+                        title: "Confimar datos prestamo",
+                        icon: "add_comment"
+                      }
+                    },
+                    [
+                      _c(
+                        "q-list",
+                        [
+                          _c(
+                            "q-item",
+                            [
+                              _c(
+                                "q-item-section",
+                                [
+                                  _c("q-item-label", [
+                                    _vm._v("Solicitante del Prestamo")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "q-item-label",
+                                    { attrs: { caption: "", lines: "2" } },
+                                    [_vm._v(_vm._s(_vm.usuario))]
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("q-separator", {
+                            attrs: { spaced: "", inset: "" }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "q-item",
+                            [
+                              _c(
+                                "q-item-section",
+                                [
+                                  _c("q-item-label", [
+                                    _vm._v("Tipo de prestamo")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "q-item-label",
+                                    { attrs: { caption: "" } },
+                                    [
+                                      _c(
+                                        "q-label",
+                                        {
+                                          directives: [
+                                            {
+                                              name: "show",
+                                              rawName: "v-show",
+                                              value: _vm.tipo == "0",
+                                              expression: "tipo == '0'"
+                                            }
+                                          ]
+                                        },
+                                        [_vm._v("Sin Intereses")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "q-label",
+                                        {
+                                          directives: [
+                                            {
+                                              name: "show",
+                                              rawName: "v-show",
+                                              value: _vm.tipo == "1",
+                                              expression: "tipo == '1'"
+                                            }
+                                          ]
+                                        },
+                                        [_vm._v("Con Intereses")]
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("q-separator", {
+                            attrs: { spaced: "", inset: "" }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "q-item",
+                            [
+                              _c(
+                                "q-item-section",
+                                [
+                                  _c("q-item-label", [
+                                    _vm._v("Monto Solicitado")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "q-item-label",
+                                    { attrs: { caption: "" } },
+                                    [_vm._v(_vm._s(_vm.monto))]
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("q-separator", {
+                            attrs: { spaced: "", inset: "" }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "q-item",
+                            [
+                              _c(
+                                "q-item-section",
+                                [
+                                  _c("q-item-label", [
+                                    _vm._v("Total con Intereses")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "q-item-label",
+                                    { attrs: { caption: "" } },
+                                    [_vm._v(_vm._s(_vm.monto))]
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("q-separator", {
+                            attrs: { spaced: "", inset: "" }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "q-item",
+                            [
+                              _c(
+                                "q-item-section",
+                                [
+                                  _c("q-item-label", [
+                                    _vm._v("Fecha Solicitud Prestamo")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "q-item-label",
+                                    { attrs: { caption: "" } },
+                                    [_vm._v(_vm._s(_vm.fecha))]
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -109319,6 +111126,20 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.js?vue&type=script&lang=js&":
+/*!***********************************************************************************************************!*\
+  !*** ./resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.js?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_modulo_prestamos_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!./modulo_prestamos.js?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.js?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_modulo_prestamos_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.vue":
 /*!***********************************************************************************!*\
   !*** ./resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.vue ***!
@@ -109329,15 +111150,17 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modulo_prestamos_vue_vue_type_template_id_f62203b4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modulo_prestamos.vue?vue&type=template&id=f62203b4& */ "./resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.vue?vue&type=template&id=f62203b4&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _modulo_prestamos_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modulo_prestamos.js?vue&type=script&lang=js& */ "./resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.js?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
-var script = {}
+
+
 
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
-  script,
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _modulo_prestamos_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _modulo_prestamos_vue_vue_type_template_id_f62203b4___WEBPACK_IMPORTED_MODULE_0__["render"],
   _modulo_prestamos_vue_vue_type_template_id_f62203b4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
@@ -109963,6 +111786,7 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+<<<<<<< HEAD
 __webpack_require__(/*! C:\Users\david\Desktop\Proyectos NeoFox\neofox_contable\resources\js\app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! C:\Users\david\Desktop\Proyectos NeoFox\neofox_contable\resources\sass\app.scss */"./resources/sass/app.scss");
 
@@ -109986,6 +111810,10 @@ module.exports = __webpack_require__(/*! C:\Users\david\Desktop\Proyectos NeoFox
   \**********************/
 /*! no static exports found */
 /***/ (function(module, exports) {
+=======
+__webpack_require__(/*! C:\Users\v_and\Desktop\VUE\neofox_contable\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\v_and\Desktop\VUE\neofox_contable\resources\sass\app.scss */"./resources/sass/app.scss");
+>>>>>>> 80d9f97386fa1333dd62269b55de45ea3f702306
 
 /* (ignored) */
 

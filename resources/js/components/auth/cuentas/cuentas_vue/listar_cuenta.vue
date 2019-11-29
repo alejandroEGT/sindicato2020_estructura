@@ -14,14 +14,84 @@
            
                     <q-btn-dropdown color="primary" icon="build" label="Opciones">
                       <q-list>
-                        <q-item clickable v-close-popup @click="ruta()">
+                        <q-item clickable @click="modal_ic = true" >
                           <q-item-section>
-                            
                              <q-avatar icon="monetization_on" color="primary" text-color="white" />
-                              </q-item-section>
+                          </q-item-section>
                               <q-item-section>
                        
                                <q-item-label >Inicio y cierre mensual</q-item-label>
+                                <!-- full-width full-height -->
+                                <q-dialog full-width v-model="modal_ic" :no-backdrop-dismiss="true">
+                              <!-- <vue-friendly-iframe :src="'../'+props.row.archivo"></vue-friendly-iframe> -->
+                            
+                                  <q-card>
+                                  <q-card-section>
+                                    <div class="row">
+                                      <div class="col-10 col-md-11">
+                                          <div class="text-h6">Archivo</div>
+                                      </div>
+                                      <div class="col-10 col-md-1">
+                                        <q-btn label="Volver" icon="keyboard_backspace" flat v-close-popup />
+                                          <!-- <q-btn class="text-right" flat v-close-popup round dense icon="close" /> -->
+                                      </div>
+                                    </div>
+                                    
+                                  </q-card-section>
+
+                                  <div>
+                                    
+                                        <div class="q-pa-md">
+                                          <div class="row q-col-gutter-md">
+                                            <div class="col-12 col-md-2">
+                                              <q-select 
+                                                standout="bg-primary text-white" 
+                                                v-model="cuenta_id" 
+                                                :options="options" 
+                                                label="Seleccione cuenta"
+                                                option-label="titulo"
+                                                option-value="id"
+                                                />
+                                            </div>
+                                            <div class="col-12 col-md-2">
+                                              <q-select 
+                                                standout="bg-primary text-white" 
+                                                v-model="anio" 
+                                                :options="anios" 
+                                                label="Seleccione año"
+                                                option-label="label"
+                                                option-value="id"
+                                                />
+                                            </div>
+                                            <div class="col-12 col-md-2">
+                                              <q-select 
+                                                standout="bg-primary text-white" 
+                                                v-model="mes" 
+                                                :options="meses" 
+                                                label="Seleccione mes"
+                                                option-label="label"
+                                                option-value="id"
+                                                />
+                                            </div>
+                                            <div class="col-12 col-md-2">
+                                              <q-input v-model="monto_inicio" label="Monto inicial" />
+                                            </div>
+                                            <div class="col-12 col-md-2">
+                                              <q-btn label="Calcular" />
+                                            </div>
+                                            <div class="col-12 col-md-2">
+                                              <q-btn @click="ingresar_inicio_mes" label="Guardar" />
+                                            </div>
+                                          </div>
+                                        </div>
+
+
+                                  </div>
+                                  
+                     
+
+                                </q-card>
+                              </q-dialog>
                           
                           </q-item-section>
                         </q-item>
@@ -126,8 +196,9 @@
                     <q-td key="titulo" :props="props">{{ props.row.titulo }}</q-td>
                     <q-td key="fecha" :props="props">{{ props.row.fecha }}</q-td>
                     <q-td key="archivo" :props="props">
-                      <q-btn @click="fixed = true" flat icon="file_copy"  />
-                            <q-dialog full-width full-height v-model="fixed" :no-backdrop-dismiss="true">
+                     
+                      <q-btn @click="show('dialog'+props.row.__index)" flat icon="file_copy"  />
+                            <q-dialog :ref="'dialog'+props.row.__index" @hide="onDialogHide" full-width full-height :no-backdrop-dismiss="true">
                               <!-- <vue-friendly-iframe :src="'../'+props.row.archivo"></vue-friendly-iframe> -->
                             
                                   <q-card>
@@ -151,17 +222,195 @@
                               
 
                                 </q-card>
-                              </q-dialog>
+                            </q-dialog>
                             
 
                     </q-td>
                     <q-td key="descripcion" :props="props">{{ props.row.descripcion }}</q-td>
-                    <q-td key="ingreso" :props="props">{{ props.row.monto_ingreso }}</q-td>
-                    <q-td key="egreso" :props="props">{{ props.row.monto_egreso }}</q-td>
-                    <!-- <q-td key="view" :props="props">
+                    <q-td key="ingreso" :props="props">{{ formatPrice(props.row.monto_ingreso) }}</q-td>
+                    <q-td key="egreso" :props="props">{{ formatPrice(props.row.monto_egreso) }}</q-td>
+                    <q-td key="view" :props="props">
                       
-                      <q-btn />
-                    </q-td> -->
+                      <q-btn @click="show('edit'+props.row.__index);
+                            llenar_inputs(props.row.fecha, props.row.descripcion,props.row.monto_ingreso, props.row.monto_egreso)" 
+                      color="primary" icon="edit">
+                        <template v-slot:loading>
+                          <q-spinner-facebook />
+                        </template>
+                      </q-btn>
+
+
+                      <q-dialog :ref="'edit'+props.row.__index" @hide="onDialogHide" :no-backdrop-dismiss="true">
+                              <!-- <vue-friendly-iframe :src="'../'+props.row.archivo"></vue-friendly-iframe> -->
+                            
+                               <q-card style="width: 700px; max-width: 80vw;">
+                                  <q-card-section>
+                                    <div class="row">
+                                      <div class="col-10 col-md-11">
+                                          <div class="text-h6">Modificación</div>
+                                      </div>
+                                      <div class="col-10 col-md-1">
+                                        <q-btn label="Volver" icon="keyboard_backspace" flat v-close-popup />
+                                          <!-- <q-btn class="text-right" flat v-close-popup round dense icon="close" /> -->
+                                      </div>
+                                    </div>
+                                    
+                                  </q-card-section>
+                                  <template>
+                                      <div class="row justify-center q-gutter-md">
+                                        <q-card class="my-card">
+                                          <q-card-section class="bg-primary text-white">
+                                            <div class="text-h6">Modificar ID: {{ props.row.id }}</div>
+                                            
+                                          </q-card-section>
+
+                                          <q-separator />
+                                            <div class="q-pa-md">
+                                              <div class="row q-col-gutter-md">
+                                                <div class="col-8">
+                                                    <q-input outlined
+                                                          stack-label
+                                                          label="Titulo"
+                                                          :size="'sm'"
+                                                          :value="props.row.titulo"
+                                                          :disable="true"
+                                                    />
+                                                </div>
+                                                <div class="col-2">
+                                                    <!-- <q-btn
+                                                  
+                                                      dense
+                                                      color="primary"
+                                                      :size="'sm'"
+                                                      label="Modificar"
+                                                    /> -->
+                                                </div>
+
+                                              </div>
+                                              <br>
+                                              <div class="row q-col-gutter-md">
+                                                <div class="col-8">
+                                                  <q-input v-model="e_fecha" 
+                                                          outlined
+                                                          stack-label
+                                                          label="Fecha"
+                                                          type="date"
+                                                          :value="props.row.fecha"
+                                                  />
+                                                </div>
+                                                <div class="col-2">
+                                                    <q-btn
+                                                      dense
+                                                      color="primary"
+                                                      :size="'sm'"
+                                                      label="Modificar"
+                                                      @click="editar(props.row.id,'fecha', e_fecha)"
+                                                    />
+                                                </div>
+                                              </div>
+                                              <br>
+                                              <div class="row q-col-gutter-md">
+                                                <div class="col-8">
+                                                  <q-input 
+                                                          outlined
+                                                          @input="val => { file = val[0] }"
+                                                          stack-label
+                                                          label="Archivo"
+                                                          type="file"
+                                                  />
+                                                </div>
+                                                <div class="col-2">
+                                                    <q-btn
+                                                      dense
+                                                      color="primary"
+                                                      :size="'sm'"
+                                                      label="Modificar"
+                                                      @click="editar_archivo(props.row.id,'archivo')"
+                                                    />
+                                                </div>
+                                              </div>
+                                              <br>
+                                              <div class="row q-col-gutter-md">
+                                                <div class="col-8">
+                                                  <q-input v-model="e_descripcion" 
+                                                          outlined
+                                                          :value="props.row.descripcion"
+                                                          stack-label
+                                                          label="Descripcion"
+                                                          type="textarea"
+                                                  />
+                                                </div>
+                                                <div class="col-2">
+                                                    <q-btn
+                                                      dense
+                                                      color="primary"
+                                                      :size="'sm'"
+                                                      label="Modificar"
+                                                      @click="editar(props.row.id,'descripcion', e_descripcion)"
+                                                    />
+                                                </div>
+                                              </div>
+                                              <br>
+
+                                            
+                                              <div class="row q-col-gutter-md">
+                                                <div class="col-8">
+                                                  <q-input v-model="e_ingreso"
+                                                          outlined
+                                                          :value="props.row.monto_ingreso"
+                                                          stack-label
+                                                          label="Ingreso"
+                                                          type="numeric"
+                                                  />
+                                                </div>
+                                                <div class="col-2">
+                                                    <q-btn
+                                                      dense
+                                                      color="primary"
+                                                      :size="'sm'"
+                                                      label="Modificar"
+                                                      @click="editar(props.row.id,'ingreso', e_ingreso)"
+                                                    />
+                                                </div>
+                                              </div>
+
+                                              <br>
+                                              <div class="row q-col-gutter-md">
+                                                <div class="col-8">
+                                                  <q-input v-model="e_egreso" 
+                                                          outlined
+                                                          :value="props.row.monto_egreso"
+                                                          stack-label
+                                                          label="Egreso"
+                                                          type="numeric"
+                                                  />
+                                                </div>
+                                                <div class="col-2">
+                                                    <q-btn
+                                                      dense
+                                                      color="primary"
+                                                      :size="'sm'"
+                                                      label="Modificar"
+                                                      @click="editar(props.row.id,'egreso', e_egreso)"
+                                                    />
+                                                </div>
+                                              </div>
+                                              
+                                      
+                                            </div>
+                                        </q-card>
+
+                                       
+                                      </div>
+                                    </template>
+                                
+                                  
+                                    
+                                   
+
+                                </q-card>
+                            </q-dialog>
+                    </q-td>
                   
                   
                   </q-tr>               
@@ -172,7 +421,7 @@
 
             <template>
               <div class="q-pa-md">
-                <div class="row">
+                <div class="row q-col-gutter-md">
                    <div clas="col-12 col-5">
                      <q-table
                         :data="data_resumen"
@@ -181,6 +430,29 @@
                         hide-bottom
                         
                       />
+                   </div>  
+                   <div clas="col-12 col-5">
+                     <q-table
+                        :data="data_acumulado"
+                        :columns="columns_acumulado"
+                        row-key="name"
+                        hide-bottom  
+                      >
+                          <template v-slot:body="props">
+                          <q-tr :props="props">
+                            <q-td key="name" :props="props">Arrastre</q-td>
+                            <q-td key="valor" :props="props">{{ formatPrice(monto_inicio) }}</q-td>
+                          </q-tr>
+                           <q-tr :props="props">
+                            <q-td key="name" :props="props">Monto del mes</q-td>
+                            <q-td key="valor" :props="props">{{formatPrice(ingresos-egresos)}}</q-td>
+                          </q-tr>
+                          <q-tr :props="props">
+                            <q-td key="name" :props="props">Total acumulado</q-td>
+                            <q-td key="valor" :props="props">{{ formatPrice(monto_inicio +(ingresos-egresos))}}</q-td>
+                          </q-tr>
+                          </template>
+                     </q-table>
                    </div>   
                 </div>
               </div>
