@@ -4125,7 +4125,7 @@ __webpack_require__.r(__webpack_exports__);
           _this4.tipoDeuda = '';
           _this4.monto = '';
           _this4.descripcion = '';
-          _this4.fecha = '';
+          _this4.fechaTope = '';
         }
 
         if (response.data.estado == 'failed_v') {
@@ -4287,8 +4287,23 @@ __webpack_require__.r(__webpack_exports__);
           _this3.loading = false;
 
           _this3.traer_clientes();
+        } else {
+          _this3.$q.notify({
+            color: "red-4",
+            textColor: "white",
+            icon: "delete_forever",
+            message: response.data.mensaje
+          });
+
+          _this3.loading = false;
         }
       });
+    },
+    show: function show(component) {
+      this.$refs['' + component + ''].show();
+    },
+    onDialogHide: function onDialogHide() {
+      this.$emit('hide');
     },
     onRefresh: function onRefresh() {
       var _this4 = this;
@@ -4331,7 +4346,11 @@ __webpack_require__.r(__webpack_exports__);
       filter: '',
       campoUpd: '',
       errores: [],
-      visibleColumns: ['id', 'fecha_nacimiento', 'rut', 'nombres', 'apellido_paterno', 'apellido_materno', 'opcion'],
+      buscadorCliente: '',
+      rutCliente: '',
+      nombreCliente: '',
+      idCliente: '',
+      visibleColumns: ['id', 'tipo', 'descripcion', 'monto', 'fecha', 'opcion'],
       clientes: [{
         classes: 'ellipsis',
         name: 'id',
@@ -4341,38 +4360,31 @@ __webpack_require__.r(__webpack_exports__);
         sortable: true
       }, {
         classes: 'ellipsis',
-        name: 'fecha_nacimiento',
+        name: 'tipo',
         align: 'center',
-        label: 'Fecha de Nacimiento',
-        field: 'fecha_nacimiento',
+        label: 'Tipo de Deuda',
+        field: 'deuda',
         sortable: true
       }, {
         classes: 'ellipsis',
-        name: 'rut',
+        name: 'descripcion',
         align: 'center',
-        label: 'Rut',
-        field: 'rut',
+        label: 'Descripcion',
+        field: 'descripcion',
         sortable: true
       }, {
         classes: 'ellipsis',
-        name: 'nombres',
+        name: 'monto',
         align: 'center',
-        label: 'Nombres',
-        field: 'nombres',
+        label: 'Monto',
+        field: 'monto',
         sortable: true
       }, {
         classes: 'ellipsis',
-        name: 'apellido_paterno',
+        name: 'fecha',
         align: 'center',
-        label: 'Apellido Paterno',
-        field: 'apellido_paterno',
-        sortable: true
-      }, {
-        classes: 'ellipsis',
-        name: 'apellido_materno',
-        align: 'center',
-        label: 'Apellido Materno',
-        field: 'apellido_materno',
+        label: 'Fecha de Tope',
+        field: 'fecha',
         sortable: true
       }, {
         classes: 'ellipsis',
@@ -4382,7 +4394,7 @@ __webpack_require__.r(__webpack_exports__);
         field: 'opcion',
         sortable: true
       }],
-      listarClientes: []
+      listarDeudaCliente: []
     };
   },
   methods: {
@@ -4392,13 +4404,89 @@ __webpack_require__.r(__webpack_exports__);
     url_registro: function url_registro() {
       this.$router.push('/deudas-clientes');
     },
-    onRefresh: function onRefresh() {
+    traer_cliente: function traer_cliente() {
       var _this = this;
 
-      this.loading = true;
-      this.traer_clientes();
-      setTimeout(function () {
+      axios.get('api/buscar_cliente/' + this.buscadorCliente).then(function (response) {
+        if (_this.buscadorCliente == '') {
+          _this.$q.notify({
+            color: "red-4",
+            textColor: "white",
+            icon: "error_outline",
+            message: "El campo no puede quedar vacio, ingrese un rut porfavor."
+          });
+        } else {
+          if (response.data.estado == 'success') {
+            _this.rutCliente = response.data.cliente['rut'];
+            _this.nombreCliente = response.data.cliente['cliente_deuda'];
+            _this.idCliente = response.data.cliente['id'];
+
+            _this.listar_deudas_cliente();
+
+            _this.$q.notify({
+              color: "green-4",
+              textColor: "white",
+              icon: "cloud_done",
+              message: "Este cliente si posee deudas, se estan cargando la informacion."
+            });
+          } else {
+            _this.$q.notify({
+              color: "red-4",
+              textColor: "white",
+              icon: "error_outline",
+              message: response.data.mensaje
+            });
+          }
+        }
+      })["catch"](function (error) {
+        alert(error);
         _this.loading = false;
+      });
+    },
+    listar_deudas_cliente: function listar_deudas_cliente() {
+      var _this2 = this;
+
+      this.loading = true;
+      axios.get('api/deudas_cliente/' + this.idCliente).then(function (response) {
+        if (response.data.estado == 'success') {
+          _this2.listarDeudaCliente = response.data.cliente;
+          _this2.buscadorCliente = '';
+        } else {
+          _this2.$q.notify({
+            color: "red-4",
+            textColor: "white",
+            icon: "error_outline",
+            message: response.data.mensaje
+          });
+
+          _this2.rutCliente = '';
+          _this2.nombreCliente = '';
+          _this2.idCliente = '';
+          _this2.listarDeudaCliente = [];
+        }
+
+        _this2.loading = false;
+      })["catch"](function (error) {
+        alert(error);
+        _this2.loading = false;
+      });
+    },
+    onRefresh: function onRefresh() {
+      var _this3 = this;
+
+      this.loading = true;
+      this.rutCliente = '';
+      this.nombreCliente = '';
+      this.idCliente = '';
+      this.listarDeudaCliente = [];
+      this.$q.notify({
+        color: "green-4",
+        textColor: "white",
+        icon: "cloud_done",
+        message: "Datos limpiados, si desea ver un nuevo cliente ingrese nuevamente el rut correspondiente."
+      });
+      setTimeout(function () {
+        _this3.loading = false;
       }, 5000);
     }
   },
@@ -89625,19 +89713,108 @@ var render = function() {
                     _vm._v(" "),
                     _c(
                       "q-td",
-                      { key: "id", attrs: { props: tabla } },
+                      { key: "opcion", attrs: { props: tabla } },
                       [
-                        _vm._v(
-                          "\n          " + _vm._s(tabla.row.id) + "\n          "
-                        ),
                         _c("q-btn", {
                           attrs: { label: "Eliminar", color: "red" },
                           on: {
                             click: function($event) {
-                              return _vm.eliminar_cliente_estado(tabla.row.id)
+                              return _vm.show(
+                                "eliminarCliente" + tabla.row.__index
+                              )
                             }
                           }
-                        })
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "q-dialog",
+                          {
+                            ref: "eliminarCliente" + tabla.row.__index,
+                            attrs: { persistent: "" },
+                            on: { hide: _vm.onDialogHide }
+                          },
+                          [
+                            _c(
+                              "q-card",
+                              [
+                                _c(
+                                  "q-card-section",
+                                  { staticClass: "row items-center" },
+                                  [
+                                    _c("q-avatar", {
+                                      attrs: {
+                                        icon: "delete",
+                                        color: "primary",
+                                        "text-color": "white"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("span", { staticClass: "q-ml-sm" }, [
+                                      _vm._v(
+                                        "¿Esta seguro que desea eliminar al cliente "
+                                      ),
+                                      _c("b", [
+                                        _vm._v(
+                                          _vm._s(tabla.row.nombres) +
+                                            " " +
+                                            _vm._s(tabla.row.apellido_paterno) +
+                                            " " +
+                                            _vm._s(tabla.row.apellido_materno)
+                                        )
+                                      ]),
+                                      _vm._v("?")
+                                    ])
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "q-card-actions",
+                                  { attrs: { align: "right" } },
+                                  [
+                                    _c("q-btn", {
+                                      directives: [
+                                        {
+                                          name: "close-popup",
+                                          rawName: "v-close-popup"
+                                        }
+                                      ],
+                                      attrs: {
+                                        flat: "",
+                                        label: "Cancel",
+                                        color: "red"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("q-btn", {
+                                      directives: [
+                                        {
+                                          name: "close-popup",
+                                          rawName: "v-close-popup"
+                                        }
+                                      ],
+                                      attrs: {
+                                        flat: "",
+                                        label: "Aceptar",
+                                        color: "green"
+                                      },
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.eliminar_cliente_estado(
+                                            tabla.row.id
+                                          )
+                                        }
+                                      }
+                                    })
+                                  ],
+                                  1
+                                )
+                              ],
+                              1
+                            )
+                          ],
+                          1
+                        )
                       ],
                       1
                     )
@@ -89738,7 +89915,7 @@ var render = function() {
                 fn: function() {
                   return [
                     _c("q-icon", {
-                      attrs: { name: "account_circle", color: "primary" }
+                      attrs: { name: "monetization_on", color: "primary" }
                     })
                   ]
                 },
@@ -89752,7 +89929,7 @@ var render = function() {
                       staticClass: "q-mb-md",
                       attrs: {
                         flat: "",
-                        label: "Refrescar",
+                        label: "Limpiar",
                         "icon-right": "refresh",
                         color: "primary"
                       },
@@ -89800,7 +89977,394 @@ var render = function() {
           },
           [_vm._v("\n      LISTADO DE CLIENTES CON DEUDAS\n      ")]
         )
-      ]
+      ],
+      _vm._v(" "),
+      [
+        _c("div", { staticClass: "row" }, [
+          _c(
+            "div",
+            { staticClass: "col-12 col-md-12 q-pa-md" },
+            [
+              _c("q-input", {
+                attrs: {
+                  outlined: "",
+                  "bottom-slots": "",
+                  label: "Ingrese su rut",
+                  counter: "",
+                  maxlength: "20"
+                },
+                scopedSlots: _vm._u([
+                  {
+                    key: "append",
+                    fn: function() {
+                      return [
+                        _vm.buscadorCliente !== ""
+                          ? _c("q-icon", {
+                              staticClass: "cursor-pointer",
+                              attrs: { name: "close" },
+                              on: {
+                                click: function($event) {
+                                  _vm.buscadorCliente = ""
+                                }
+                              }
+                            })
+                          : _vm._e()
+                      ]
+                    },
+                    proxy: true
+                  },
+                  {
+                    key: "after",
+                    fn: function() {
+                      return [
+                        _c("q-btn", {
+                          attrs: {
+                            round: "",
+                            dense: "",
+                            flat: "",
+                            icon: "search"
+                          },
+                          on: {
+                            click: function($event) {
+                              return _vm.traer_cliente()
+                            }
+                          }
+                        })
+                      ]
+                    },
+                    proxy: true
+                  }
+                ]),
+                model: {
+                  value: _vm.buscadorCliente,
+                  callback: function($$v) {
+                    _vm.buscadorCliente = $$v
+                  },
+                  expression: "buscadorCliente"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "col-12 col-md-6 col-lg-6 q-pa-md" },
+            [
+              _c("q-input", {
+                attrs: {
+                  outlined: "",
+                  disable: "",
+                  label: "rut del cliente",
+                  "stack-label": "",
+                  type: "text"
+                },
+                model: {
+                  value: _vm.rutCliente,
+                  callback: function($$v) {
+                    _vm.rutCliente = $$v
+                  },
+                  expression: "rutCliente"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "col-12 col-md-6 col-lg-6 q-pa-md" },
+            [
+              _c("q-input", {
+                attrs: {
+                  outlined: "",
+                  disable: "",
+                  label: "nombre del cliente",
+                  "stack-label": "",
+                  type: "text"
+                },
+                model: {
+                  value: _vm.nombreCliente,
+                  callback: function($$v) {
+                    _vm.nombreCliente = $$v
+                  },
+                  expression: "nombreCliente"
+                }
+              })
+            ],
+            1
+          )
+        ])
+      ],
+      _vm._v(" "),
+      _c("q-table", {
+        staticClass: "my-sticky-header-table",
+        attrs: {
+          title: "Listado de Clientes",
+          "no-data-label":
+            "Aun no hay datos para mostrar, porfavor ingrese un rut de cliente para mostrar informacion.",
+          "no-results-label": "No se han encontrado resultados.",
+          "rows-per-page-label": "Cantidad:",
+          "loading-label": "Cargando...",
+          "row-key": "name",
+          data: _vm.listarDeudaCliente,
+          columns: _vm.clientes,
+          separator: _vm.separator,
+          loading: _vm.loading,
+          filter: _vm.filter,
+          "visible-columns": _vm.visibleColumns,
+          "rows-per-page-options": [5, 10, 15, 30, 50, 100, 0]
+        },
+        scopedSlots: _vm._u([
+          {
+            key: "top",
+            fn: function(pantalla) {
+              return [
+                _c("q-space"),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "col" },
+                  [
+                    _c("q-toggle", {
+                      attrs: {
+                        "left-label": "",
+                        color: "green",
+                        "checked-icon": "check",
+                        "unchecked-icon": "clear",
+                        val: "id",
+                        label: "ID"
+                      },
+                      model: {
+                        value: _vm.visibleColumns,
+                        callback: function($$v) {
+                          _vm.visibleColumns = $$v
+                        },
+                        expression: "visibleColumns"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("q-toggle", {
+                      attrs: {
+                        "left-label": "",
+                        color: "green",
+                        "checked-icon": "check",
+                        "unchecked-icon": "clear",
+                        val: "tipo",
+                        label: "Tipo de Deuda"
+                      },
+                      model: {
+                        value: _vm.visibleColumns,
+                        callback: function($$v) {
+                          _vm.visibleColumns = $$v
+                        },
+                        expression: "visibleColumns"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("q-toggle", {
+                      attrs: {
+                        "left-label": "",
+                        color: "green",
+                        "checked-icon": "check",
+                        "unchecked-icon": "clear",
+                        val: "descripcion",
+                        label: "Descripcion"
+                      },
+                      model: {
+                        value: _vm.visibleColumns,
+                        callback: function($$v) {
+                          _vm.visibleColumns = $$v
+                        },
+                        expression: "visibleColumns"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("q-toggle", {
+                      attrs: {
+                        "left-label": "",
+                        color: "green",
+                        "checked-icon": "check",
+                        "unchecked-icon": "clear",
+                        val: "monto",
+                        label: "Monto"
+                      },
+                      model: {
+                        value: _vm.visibleColumns,
+                        callback: function($$v) {
+                          _vm.visibleColumns = $$v
+                        },
+                        expression: "visibleColumns"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("q-toggle", {
+                      attrs: {
+                        "left-label": "",
+                        color: "green",
+                        "checked-icon": "check",
+                        "unchecked-icon": "clear",
+                        val: "fecha",
+                        label: "Fecha de Tope"
+                      },
+                      model: {
+                        value: _vm.visibleColumns,
+                        callback: function($$v) {
+                          _vm.visibleColumns = $$v
+                        },
+                        expression: "visibleColumns"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("q-btn", {
+                      staticClass: "q-ml-md",
+                      attrs: {
+                        flat: "",
+                        round: "",
+                        dense: "",
+                        icon: pantalla.inFullscreen
+                          ? "fullscreen_exit"
+                          : "fullscreen"
+                      },
+                      on: { click: pantalla.toggleFullscreen }
+                    }),
+                    _vm._v(" "),
+                    _c("label", [_vm._v("Pantalla Completa")]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row justify-end" }, [
+                      _c(
+                        "div",
+                        { staticClass: "col-12 col-md-4" },
+                        [
+                          _c("q-input", {
+                            staticClass: "q-ml-md",
+                            attrs: {
+                              dark: "",
+                              borderless: "",
+                              "input-class": "text-right",
+                              placeholder: "Buscar"
+                            },
+                            scopedSlots: _vm._u(
+                              [
+                                {
+                                  key: "append",
+                                  fn: function() {
+                                    return [
+                                      _vm.filter === ""
+                                        ? _c("q-icon", {
+                                            attrs: { name: "search" }
+                                          })
+                                        : _c("q-icon", {
+                                            staticClass: "cursor-pointer",
+                                            attrs: { name: "clear" },
+                                            on: {
+                                              click: function($event) {
+                                                _vm.filter = ""
+                                              }
+                                            }
+                                          })
+                                    ]
+                                  },
+                                  proxy: true
+                                }
+                              ],
+                              null,
+                              true
+                            ),
+                            model: {
+                              value: _vm.filter,
+                              callback: function($$v) {
+                                _vm.filter = $$v
+                              },
+                              expression: "filter"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    ])
+                  ],
+                  1
+                )
+              ]
+            }
+          },
+          {
+            key: "body",
+            fn: function(tabla) {
+              return [
+                _c(
+                  "q-tr",
+                  { attrs: { props: tabla } },
+                  [
+                    _c(
+                      "q-td",
+                      { key: "id", attrs: { props: tabla } },
+                      [
+                        _c("q-badge", { attrs: { color: "green" } }, [
+                          _vm._v(_vm._s(tabla.row.id))
+                        ])
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c("q-td", { key: "tipo", attrs: { props: tabla } }, [
+                      _vm._v(
+                        "\n          " + _vm._s(tabla.row.tipo) + "\n          "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "q-td",
+                      { key: "descripcion", attrs: { props: tabla } },
+                      [
+                        _vm._v(
+                          "\n          " +
+                            _vm._s(tabla.row.descripcion) +
+                            "\n          "
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("q-td", { key: "monto", attrs: { props: tabla } }, [
+                      _vm._v(
+                        "\n          " +
+                          _vm._s(tabla.row.monto) +
+                          "\n          "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("q-td", { key: "fecha", attrs: { props: tabla } }, [
+                      _vm._v(
+                        "\n          " +
+                          _vm._s(tabla.row.fecha) +
+                          "\n          "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "q-td",
+                      { key: "opcion", attrs: { props: tabla } },
+                      [
+                        _c("q-btn", {
+                          attrs: { label: "Pagar", color: "green" },
+                          on: {
+                            click: function($event) {
+                              return _vm.eliminar_cliente_estado(tabla.row.id)
+                            }
+                          }
+                        })
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ]
+            }
+          }
+        ])
+      })
     ],
     2
   )

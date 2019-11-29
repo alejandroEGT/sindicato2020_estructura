@@ -77,7 +77,7 @@ export default {
           this.tipoDeuda = '';
           this.monto = '';
           this.descripcion = '';
-          this.fecha = '';
+          this.fechaTope = '';
 
 
         }
