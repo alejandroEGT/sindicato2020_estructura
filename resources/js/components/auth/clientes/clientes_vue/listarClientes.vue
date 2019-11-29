@@ -347,16 +347,15 @@
             </q-popup-edit>
           </q-td>
 
-          <q-td key="id" :props="tabla">
-            {{tabla.row.id}}
-            <q-btn label="Eliminar" color="red" @click="eliminar_cliente_estado(tabla.row.id)" />
-            <!-- <q-dialog v-model="confirm" persistent>
+          <q-td key="opcion" :props="tabla">
+            <q-btn label="Eliminar" color="red" @click="show('eliminarCliente'+tabla.row.__index)"/>
+            <q-dialog :ref="'eliminarCliente'+tabla.row.__index" @hide="onDialogHide" persistent>
               <q-card>
                 <q-card-section class="row items-center">
                   <q-avatar icon="delete" color="primary" text-color="white" />
                   <span
                     class="q-ml-sm"
-                  > {{tabla.row.id}} ¿Esta seguro que desea eliminar al cliente?</span>
+                  >¿Esta seguro que desea eliminar al cliente <b>{{tabla.row.nombres}} {{tabla.row.apellido_paterno}} {{tabla.row.apellido_materno}}</b>?</span>
                 </q-card-section>
 
                 <q-card-actions align="right">
@@ -366,11 +365,11 @@
                     label="Aceptar"
                     color="green"
                     v-close-popup
-                    @click="confirm = true"
+                    @click="eliminar_cliente_estado(tabla.row.id)"
                   />
                 </q-card-actions>
               </q-card>
-            </q-dialog> -->
+            </q-dialog>
           </q-td>
 
         </q-tr>
