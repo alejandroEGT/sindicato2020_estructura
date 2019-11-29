@@ -51,21 +51,39 @@ export default {
         traer_cliente() {
             axios.get('api/buscar_cliente/' + this.buscadorCliente).then((response) => {
 
+                if(this.buscadorCliente == ''){
+                    this.$q.notify({
+                        color: "red-4",
+                        textColor: "white",
+                        icon: "error_outline",
+                        message: "El campo no puede quedar vacio, ingrese un rut porfavor."
+                    });
+                }else{
+
                 if (response.data.estado == 'success') {
 
                     this.rutCliente = response.data.cliente['rut'];
                     this.nombreCliente = response.data.cliente['cliente_deuda'];
                     this.idCliente = response.data.cliente['id'];
                     this.listar_deudas_cliente();
+                    this.$q.notify({
+                        color: "green-4",
+                        textColor: "white",
+                        icon: "cloud_done",
+                        message: "Este cliente si posee deudas, se estan cargando la informacion."
+                    });
+                    
                 } else {
                     this.$q.notify({
                         color: "red-4",
                         textColor: "white",
-                        icon: "cloud_done",
+                        icon: "error_outline",
                         message: response.data.mensaje
                     });
 
                 }
+            }
+
             })
                 .catch(error => {
                     alert(error);
@@ -79,11 +97,13 @@ export default {
 
                 if (response.data.estado == 'success') {
                     this.listarDeudaCliente = response.data.cliente;
+                    this.buscadorCliente = '';
+
                 } else {
                     this.$q.notify({
                         color: "red-4",
                         textColor: "white",
-                        icon: "cloud_done",
+                        icon: "error_outline",
                         message: response.data.mensaje
                     });
 
@@ -105,7 +125,18 @@ export default {
 
         onRefresh() {
             this.loading = true;
-            this.traer_clientes();
+            this.rutCliente = '';
+            this.nombreCliente = '';
+            this.idCliente = '';
+            this.listarDeudaCliente = [];
+            this.$q.notify({
+                color: "green-4",
+                textColor: "white",
+                icon: "cloud_done",
+                message: "Datos limpiados, si desea ver un nuevo cliente ingrese nuevamente el rut correspondiente."
+            });
+            
+
             setTimeout(() => {
                 this.loading = false;
             }, 5000)

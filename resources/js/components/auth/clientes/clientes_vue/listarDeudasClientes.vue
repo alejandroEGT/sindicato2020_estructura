@@ -4,14 +4,14 @@
     <template>
       <q-banner inline-actions class="bg-grey-3">
         <template v-slot:avatar>
-          <q-icon name="account_circle" color="primary" />
+          <q-icon name="monetization_on" color="primary" />
         </template>
         LISTADO DE CLIENTES CON DEUDAS
         <template v-slot:action>
           <!-- boton refrescar -->
           <q-btn
             flat
-            label="Refrescar"
+            label="Limpiar"
             icon-right="refresh"
             color="primary"
             @click="onRefresh()"
@@ -53,7 +53,6 @@
       	      label="Ingrese su rut"
       	      counter
       	      maxlength="20"
-      	      :dense="dense"
       	    >
       	      <template v-slot:append>
       	        <q-icon
@@ -86,7 +85,7 @@
       no-data-label="Aun no hay datos para mostrar, porfavor ingrese un rut de cliente para mostrar informacion."
       no-results-label="No se han encontrado resultados."
       rows-per-page-label="Cantidad:"
-      loading-label="Cargando"
+      loading-label="Cargando..."
       row-key="name"
       :data="listarDeudaCliente"
       :columns="clientes"
@@ -336,7 +335,7 @@
             </q-popup-edit> -->
           </q-td>
 
-          <q-td key="id" :props="tabla">
+          <q-td key="opcion" :props="tabla">
             <q-btn label="Pagar" color="green" @click="eliminar_cliente_estado(tabla.row.id)" />
           </q-td>
 

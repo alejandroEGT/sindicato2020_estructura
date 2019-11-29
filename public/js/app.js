@@ -4204,19 +4204,35 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.get('api/buscar_cliente/' + this.buscadorCliente).then(function (response) {
-        if (response.data.estado == 'success') {
-          _this.rutCliente = response.data.cliente['rut'];
-          _this.nombreCliente = response.data.cliente['cliente_deuda'];
-          _this.idCliente = response.data.cliente['id'];
-
-          _this.listar_deudas_cliente();
-        } else {
+        if (_this.buscadorCliente == '') {
           _this.$q.notify({
             color: "red-4",
             textColor: "white",
-            icon: "cloud_done",
-            message: response.data.mensaje
+            icon: "error_outline",
+            message: "El campo no puede quedar vacio, ingrese un rut porfavor."
           });
+        } else {
+          if (response.data.estado == 'success') {
+            _this.rutCliente = response.data.cliente['rut'];
+            _this.nombreCliente = response.data.cliente['cliente_deuda'];
+            _this.idCliente = response.data.cliente['id'];
+
+            _this.listar_deudas_cliente();
+
+            _this.$q.notify({
+              color: "green-4",
+              textColor: "white",
+              icon: "cloud_done",
+              message: "Este cliente si posee deudas, se estan cargando la informacion."
+            });
+          } else {
+            _this.$q.notify({
+              color: "red-4",
+              textColor: "white",
+              icon: "error_outline",
+              message: response.data.mensaje
+            });
+          }
         }
       })["catch"](function (error) {
         alert(error);
@@ -4230,11 +4246,12 @@ __webpack_require__.r(__webpack_exports__);
       axios.get('api/deudas_cliente/' + this.idCliente).then(function (response) {
         if (response.data.estado == 'success') {
           _this2.listarDeudaCliente = response.data.cliente;
+          _this2.buscadorCliente = '';
         } else {
           _this2.$q.notify({
             color: "red-4",
             textColor: "white",
-            icon: "cloud_done",
+            icon: "error_outline",
             message: response.data.mensaje
           });
 
@@ -4254,7 +4271,16 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
 
       this.loading = true;
-      this.traer_clientes();
+      this.rutCliente = '';
+      this.nombreCliente = '';
+      this.idCliente = '';
+      this.listarDeudaCliente = [];
+      this.$q.notify({
+        color: "green-4",
+        textColor: "white",
+        icon: "cloud_done",
+        message: "Datos limpiados, si desea ver un nuevo cliente ingrese nuevamente el rut correspondiente."
+      });
       setTimeout(function () {
         _this3.loading = false;
       }, 5000);
@@ -89437,7 +89463,7 @@ var render = function() {
                 fn: function() {
                   return [
                     _c("q-icon", {
-                      attrs: { name: "account_circle", color: "primary" }
+                      attrs: { name: "monetization_on", color: "primary" }
                     })
                   ]
                 },
@@ -89451,7 +89477,7 @@ var render = function() {
                       staticClass: "q-mb-md",
                       attrs: {
                         flat: "",
-                        label: "Refrescar",
+                        label: "Limpiar",
                         "icon-right": "refresh",
                         color: "primary"
                       },
@@ -89513,8 +89539,7 @@ var render = function() {
                   "bottom-slots": "",
                   label: "Ingrese su rut",
                   counter: "",
-                  maxlength: "20",
-                  dense: _vm.dense
+                  maxlength: "20"
                 },
                 scopedSlots: _vm._u([
                   {
@@ -89628,7 +89653,7 @@ var render = function() {
             "Aun no hay datos para mostrar, porfavor ingrese un rut de cliente para mostrar informacion.",
           "no-results-label": "No se han encontrado resultados.",
           "rows-per-page-label": "Cantidad:",
-          "loading-label": "Cargando",
+          "loading-label": "Cargando...",
           "row-key": "name",
           data: _vm.listarDeudaCliente,
           columns: _vm.clientes,
@@ -89867,7 +89892,7 @@ var render = function() {
                     _vm._v(" "),
                     _c(
                       "q-td",
-                      { key: "id", attrs: { props: tabla } },
+                      { key: "opcion", attrs: { props: tabla } },
                       [
                         _c("q-btn", {
                           attrs: { label: "Pagar", color: "green" },
