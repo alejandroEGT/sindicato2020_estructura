@@ -76,6 +76,18 @@
                 <q-spinner-facebook />
               </template>
             </q-btn>
+
+            <q-btn
+              :loading="loading3"
+              color="red"
+              @click="simulateProgress(3), volver()"
+              icon-right="settings_backup_restore"
+              label="volver"
+            >
+              <template v-slot:loading>
+                <q-spinner-facebook />
+              </template>
+            </q-btn>
           </q-card-actions>
         </q-card>
       </div>

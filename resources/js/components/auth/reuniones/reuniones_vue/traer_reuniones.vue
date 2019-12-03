@@ -3,7 +3,7 @@
     <template>
       <q-banner inline-actions class="bg-grey-3">
         <template v-slot:avatar>
-          <q-icon name="account_circle" color="primary" />
+          <q-icon name="work" color="primary" />
         </template>
         REUNIONES CREADAS
         <template v-slot:action>
@@ -22,7 +22,7 @@
             label="Volver"
             icon-right="settings_backup_restore"
             color="red"
-            @click="url_volver2()"
+            @click="volver()"
             class="q-mb-md"
           />
         </template>
@@ -31,7 +31,6 @@
 
     <!-- propiedades de la tabla -->
     <q-table
-      title="Reuniones"
       no-data-label="Aun no hay datos para mostrar."
       no-results-label="No se han encontrado resultados."
       rows-per-page-label="Cantidad:"
@@ -44,7 +43,6 @@
       :filter="filter"
       :visible-columns="visibleColumns"
       :rows-per-page-options="[5,10,15,30,50,100,0]"
-      class="my-sticky-header-table"
     >
       <template v-slot:body="tabla">
         <q-tr :props="tabla">
@@ -57,6 +55,8 @@
           <q-td key="titulo" :props="tabla">{{tabla.row.titulo}}</q-td>
 
           <q-td key="creada_por" :props="tabla">{{tabla.row.creada_por}}</q-td>
+
+          <q-td key="estado" :props="tabla">{{tabla.row.estado}}</q-td>
 
           <q-td key="created_at" :props="tabla">{{tabla.row.created_at}}</q-td>
 

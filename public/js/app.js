@@ -5282,6 +5282,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     traer_reuniones: function traer_reuniones() {
       this.$router.push('/traer-reuniones');
+    },
+    volver: function volver() {
+      this.$router.push('/modulo-reunion');
     }
   }
 });
@@ -5304,6 +5307,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     traer_reuniones: function traer_reuniones() {
       this.$router.push('/traer-reuniones');
+    },
+    volver: function volver() {
+      this.$router.push('/index');
     }
   }
 });
@@ -5328,12 +5334,18 @@ __webpack_require__.r(__webpack_exports__);
       filter: '',
       campoUpd: '',
       errores: [],
-      visibleColumns: ['id', 'fecha_inicio', 'titulo', 'creada_por', 'created_at', 'opcion'],
+      visibleColumns: ['id', 'fecha_inicio', 'titulo', 'creada_por', 'estado', 'created_at', 'opcion'],
+      title: [{
+        align: 'center',
+        label: 'id',
+        field: 'id',
+        sortable: true
+      }],
       tabla: [{
         classes: 'ellipsis',
         name: 'id',
         align: 'center',
-        label: 'id',
+        label: 'ID',
         field: 'id',
         sortable: true
       }, {
@@ -5356,6 +5368,13 @@ __webpack_require__.r(__webpack_exports__);
         align: 'center',
         label: 'Creada por:',
         field: 'creada_por',
+        sortable: true
+      }, {
+        classes: 'ellipsis',
+        name: 'estado',
+        align: 'center',
+        label: 'Estado',
+        field: 'estado',
         sortable: true
       }, {
         classes: 'ellipsis',
@@ -5391,6 +5410,18 @@ __webpack_require__.r(__webpack_exports__);
           });
         }
       });
+    },
+    onRefresh: function onRefresh() {
+      var _this2 = this;
+
+      this.loading = true;
+      this.traerReuniones();
+      setTimeout(function () {
+        _this2.loading = false;
+      }, 5000);
+    },
+    volver: function volver() {
+      this.$router.push('/modulo-reunion');
     }
   },
   mounted: function mounted() {
@@ -94869,6 +94900,29 @@ var render = function() {
                         proxy: true
                       }
                     ])
+                  }),
+                  _vm._v(" "),
+                  _c("q-btn", {
+                    attrs: {
+                      loading: _vm.loading3,
+                      color: "red",
+                      "icon-right": "settings_backup_restore",
+                      label: "volver"
+                    },
+                    on: {
+                      click: function($event) {
+                        _vm.simulateProgress(3), _vm.volver()
+                      }
+                    },
+                    scopedSlots: _vm._u([
+                      {
+                        key: "loading",
+                        fn: function() {
+                          return [_c("q-spinner-facebook")]
+                        },
+                        proxy: true
+                      }
+                    ])
                   })
                 ],
                 1
@@ -94942,6 +94996,15 @@ var render = function() {
                             label: "Reuniones"
                           },
                           on: { click: _vm.traer_reuniones }
+                        }),
+                        _vm._v(" "),
+                        _c("q-btn", {
+                          attrs: {
+                            color: "red",
+                            "icon-right": "settings_backup_restore",
+                            label: "Volver"
+                          },
+                          on: { click: _vm.volver }
                         })
                       ],
                       1
@@ -94996,9 +95059,7 @@ var render = function() {
                 key: "avatar",
                 fn: function() {
                   return [
-                    _c("q-icon", {
-                      attrs: { name: "account_circle", color: "primary" }
-                    })
+                    _c("q-icon", { attrs: { name: "work", color: "primary" } })
                   ]
                 },
                 proxy: true
@@ -95032,7 +95093,7 @@ var render = function() {
                       },
                       on: {
                         click: function($event) {
-                          return _vm.url_volver2()
+                          return _vm.volver()
                         }
                       }
                     })
@@ -95047,9 +95108,7 @@ var render = function() {
       ],
       _vm._v(" "),
       _c("q-table", {
-        staticClass: "my-sticky-header-table",
         attrs: {
-          title: "Reuniones",
           "no-data-label": "Aun no hay datos para mostrar.",
           "no-results-label": "No se han encontrado resultados.",
           "rows-per-page-label": "Cantidad:",
@@ -95095,6 +95154,10 @@ var render = function() {
                     _vm._v(" "),
                     _c("q-td", { key: "creada_por", attrs: { props: tabla } }, [
                       _vm._v(_vm._s(tabla.row.creada_por))
+                    ]),
+                    _vm._v(" "),
+                    _c("q-td", { key: "estado", attrs: { props: tabla } }, [
+                      _vm._v(_vm._s(tabla.row.estado))
                     ]),
                     _vm._v(" "),
                     _c("q-td", { key: "created_at", attrs: { props: tabla } }, [

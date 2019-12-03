@@ -13,14 +13,21 @@ export default {
                 'fecha_inicio',
                 'titulo',
                 'creada_por',
+                'estado',
                 'created_at',
                 'opcion',
             ],
+
+            title:[
+                { align: 'center', label: 'id', field: 'id', sortable: true },
+            ],
+
             tabla: [
-                { classes: 'ellipsis', name: 'id', align: 'center', label: 'id', field: 'id', sortable: true },
+                { classes: 'ellipsis', name: 'id', align: 'center', label: 'ID', field: 'id', sortable: true },
                 { classes: 'ellipsis', name: 'fecha_inicio', align: 'center', label: 'Fecha Reunion', field: 'fecha_inicio', sortable: true },
                 { classes: 'ellipsis', name: 'titulo', align: 'center', label: 'Titulo', field: 'titulo', sortable: true },
                 { classes: 'ellipsis', name: 'creada_por', align: 'center', label: 'Creada por:', field: 'creada_por', sortable: true },
+                { classes: 'ellipsis', name: 'estado', align: 'center', label: 'Estado', field: 'estado', sortable: true },
                 { classes: 'ellipsis', name: 'created_at', align: 'center', label: 'Creada', field: 'created_at', sortable: true },
                 { classes: 'ellipsis', name: 'opcion', align: 'center', label: 'Opciones', field: 'opcion', sortable: true },
 
@@ -44,6 +51,16 @@ export default {
                     });
                 }
             });
+        },
+        onRefresh() {
+            this.loading = true;
+            this.traerReuniones();
+            setTimeout(() => {
+                this.loading = false;
+            }, 5000)
+        },
+        volver() {
+            this.$router.push('/modulo-reunion');
         },
 
     },

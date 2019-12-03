@@ -24,6 +24,13 @@
                   @click="traer_reuniones"
                   label="Reuniones"
                 />
+
+                <q-btn
+                  color="red"
+                  icon-right="settings_backup_restore"
+                  @click="volver"
+                  label="Volver"
+                />
               </q-card-actions>
             </div>
           </q-card>

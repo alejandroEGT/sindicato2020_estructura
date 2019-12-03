@@ -6,7 +6,11 @@ export default {
 
         traer_reuniones(){
             this.$router.push('/traer-reuniones');
-        }
+        },
+
+        volver() {
+            this.$router.push('/index');
+          }
 
     }
 

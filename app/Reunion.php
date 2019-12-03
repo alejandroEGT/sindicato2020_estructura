@@ -37,9 +37,11 @@ class Reunion extends Model
                 'r.titulo',
                 /* 'r.cuerpo', */
                 DB::raw('initcap(u.name) as creada_por'),/* initcap */
+                'er.descripcion as estado',
                 'r.created_at'
             ])
             ->join('users as u', 'u.id', 'r.user_id')
+            ->join('estado_reuniones as er', 'er.id', 'r.estado_reunion_id')
             ->get();
         if (!$reuniones->isEmpty()) {
             Carbon::setLocale('es');
