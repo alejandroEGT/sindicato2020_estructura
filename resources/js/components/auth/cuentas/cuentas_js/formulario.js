@@ -58,13 +58,29 @@ export default{
 	    	console.log(data);
 	    	axios.post('api/insertar_cuenta_detalle', data).then((res)=>{
 	          if (res.data.estado=='success') {
-	          	 // this.subcuentas = res.data.lista;
-	          	 // this[`loading2`] = false
+				  this.$q.notify({
+					  color: "green-4",
+					  textColor: "white",
+					  icon: "cloud_done",
+					  message: "" + res.data.mensaje + ""
+				  });
+				  this.limpiar_mdelos();
 	          }
 	          
 	      	});
 	    	
-	    },
+		},
+		
+		limpiar_mdelos(){
+			this.cuenta_id = null;
+			this.fecha = '';
+			this.codigo = '';
+			this.descripcion = '';
+			this.subcuenta = '';
+			this.tipo_monto_id = '';
+			this.file = null;
+			this.monto = '';
+		}
 	   
 	}
 }

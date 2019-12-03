@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProcedenciaTable extends Migration
+class CreateGirosProvTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateProcedenciaTable extends Migration
      */
     public function up()
     {
-        Schema::create('procedencia', function (Blueprint $table) {
+        Schema::create('giros_prov', function (Blueprint $table) {
             $table->increments('id');
             $table->string('descripcion');
             $table->char('activo', 1);
@@ -28,6 +28,6 @@ class CreateProcedenciaTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('procedencia');
+        Schema::dropIfExists('giros');
     }
 }
