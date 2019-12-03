@@ -1,40 +1,32 @@
 export default {
     data() {
         return {
-            columns: [
-                {
-                    name: 'id',
-                    align: 'center',
-                    label: 'ID',
-                    field: 'id',
-                    sortable: true
-                },
-                {
-                    name: 'fecha_inicio',
-                    align: 'center',
-                    label: 'Fecha Reunion',
-                    field: 'fecha_inicio',
-                    sortable: true
-                },
-                { name: 'titulo', align: 'center', label: 'Titulo', field: 'titulo', sortable: true },
-                { name: 'creada_por', align: 'center', label: 'Creada por', field: 'creada_por', sortable: true },
-                {
-                    name: 'created_at',
-                    align: 'center',
-                    label: 'Creada',
-                    field: 'created_at',
-                    sortable: true
-                },
-                {
-                    name: 'opciones',
-                    align: 'center',
-                    label: 'Opciones',
-                    field: 'opciones',
-                    sortable: true
-                },
-            ],
+            separator: 'cell',
+            loading: false,
+            confirm: false,
+            filter: '',
+            campoUpd: '',
+            errores: [],
 
+            visibleColumns: [
+                'id',
+                'fecha_inicio',
+                'titulo',
+                'creada_por',
+                'created_at',
+                'opcion',
+            ],
+            tabla: [
+                { classes: 'ellipsis', name: 'id', align: 'center', label: 'id', field: 'id', sortable: true },
+                { classes: 'ellipsis', name: 'fecha_inicio', align: 'center', label: 'Fecha Reunion', field: 'fecha_inicio', sortable: true },
+                { classes: 'ellipsis', name: 'titulo', align: 'center', label: 'Titulo', field: 'titulo', sortable: true },
+                { classes: 'ellipsis', name: 'creada_por', align: 'center', label: 'Creada por:', field: 'creada_por', sortable: true },
+                { classes: 'ellipsis', name: 'created_at', align: 'center', label: 'Creada', field: 'created_at', sortable: true },
+                { classes: 'ellipsis', name: 'opcion', align: 'center', label: 'Opciones', field: 'opcion', sortable: true },
+
+            ],
             reuniones: [],
+
         }
     },
 

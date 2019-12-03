@@ -157,6 +157,7 @@ class Proveedor extends Model
         $rut = str_replace('Ó', 'O', $rut);
         $rut = str_replace('Ú', 'U', $rut);
         $rut = str_replace('ú', 'u', $rut);
+        $rut = str_replace('k', 'K', $rut);
 
         //Quitando Caracteres Especiales 
         $rut = str_replace('"', '', $rut);

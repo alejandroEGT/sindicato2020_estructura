@@ -5322,41 +5322,54 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      columns: [{
+      separator: 'cell',
+      loading: false,
+      confirm: false,
+      filter: '',
+      campoUpd: '',
+      errores: [],
+      visibleColumns: ['id', 'fecha_inicio', 'titulo', 'creada_por', 'created_at', 'opcion'],
+      tabla: [{
+        classes: 'ellipsis',
         name: 'id',
         align: 'center',
-        label: 'ID',
+        label: 'id',
         field: 'id',
         sortable: true
       }, {
+        classes: 'ellipsis',
         name: 'fecha_inicio',
         align: 'center',
         label: 'Fecha Reunion',
         field: 'fecha_inicio',
         sortable: true
       }, {
+        classes: 'ellipsis',
         name: 'titulo',
         align: 'center',
         label: 'Titulo',
         field: 'titulo',
         sortable: true
       }, {
+        classes: 'ellipsis',
         name: 'creada_por',
         align: 'center',
-        label: 'Creada por',
+        label: 'Creada por:',
         field: 'creada_por',
         sortable: true
       }, {
+        classes: 'ellipsis',
         name: 'created_at',
         align: 'center',
         label: 'Creada',
         field: 'created_at',
         sortable: true
       }, {
-        name: 'opciones',
+        classes: 'ellipsis',
+        name: 'opcion',
         align: 'center',
         label: 'Opciones',
-        field: 'opciones',
+        field: 'opcion',
         sortable: true
       }],
       reuniones: []
@@ -13701,6 +13714,25 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 // module
 exports.push([module.i, "ul{list-style:none;}\r\n/* Rules for sizing the icon. */\n.material-icons.md-18 { font-size: 18px;\n}\n.material-icons.md-24 { font-size: 24px;\n}\n.material-icons.md-36 { font-size: 36px;\n}\n.material-icons.md-48 { font-size: 48px;\n}\r\n\r\n/* Rules for using icons as black on a light background. */\n.material-icons.md-dark { color: rgba(0, 0, 0, 0.54);\n}\n.material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26);\n}\r\n\r\n/* Rules for using icons as white on a dark background. */\n.material-icons.md-light { color: rgba(255, 255, 255, 1);\n}\n.material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3);\n}", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./resources/js/components/auth/reuniones/reuniones_css/traerReuniones.css?vue&type=style&index=0&lang=css&":
+/*!***********************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./resources/js/components/auth/reuniones/reuniones_css/traerReuniones.css?vue&type=style&index=0&lang=css& ***!
+  \***********************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".my-sticky-header-table\r\n/* max height is important */\r\n.q-table__middle{\r\n  max-height: 500px;\n}\n.q-table__top,\r\n.q-table__bottom,\r\nthead tr:first-child th{\r\n  /* bg color is important for th; just specify one */\r\n  background-color: #027be3;\r\n  color: #ffffff;\n}\n.fondo{\r\n  background-color: #ffffff;\n}\nthead tr th{\r\n  position: -webkit-sticky;\r\n  position: sticky;\r\n  z-index: 1;\n}\nthead tr:first-child th{\r\n  top: 0;\n}\r\n/* this is when the loading indicator appears */\n.q-table--loading thead tr:last-child th{\r\n  /* height of all previous header rows */\r\n  top: 48px;\n}", ""]);
 
 // exports
 
@@ -83888,6 +83920,36 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./resources/js/components/auth/reuniones/reuniones_css/traerReuniones.css?vue&type=style&index=0&lang=css&":
+/*!***************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./resources/js/components/auth/reuniones/reuniones_css/traerReuniones.css?vue&type=style&index=0&lang=css& ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../../../node_modules/css-loader??ref--6-1!../../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../../node_modules/postcss-loader/src??ref--6-2!./traerReuniones.css?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./resources/js/components/auth/reuniones/reuniones_css/traerReuniones.css?vue&type=style&index=0&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/lib/addStyles.js":
 /*!****************************************************!*\
   !*** ./node_modules/style-loader/lib/addStyles.js ***!
@@ -94919,53 +94981,194 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "q-pa-md" }, [
-    _c(
-      "div",
-      { staticClass: "row justify-center" },
+  return _c(
+    "div",
+    { staticClass: "q-pa-md" },
+    [
       [
         _c(
-          "q-card",
-          { staticClass: "col-12 col-md-8" },
-          [
-            _c(
-              "q-card",
-              { staticClass: "my-card" },
-              [
-                _c("q-card-section", { staticClass: "bg-primary text-white" }, [
-                  _c("div", { staticClass: "text-h6 text-center" }, [
-                    _vm._v("Reuniones")
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("q-separator"),
-                _vm._v(" "),
-                _c(
-                  "q-card-section",
-                  [
-                    _c("q-table", {
-                      staticClass: "my-sticky-header-table",
+          "q-banner",
+          {
+            staticClass: "bg-grey-3",
+            attrs: { "inline-actions": "" },
+            scopedSlots: _vm._u([
+              {
+                key: "avatar",
+                fn: function() {
+                  return [
+                    _c("q-icon", {
+                      attrs: { name: "account_circle", color: "primary" }
+                    })
+                  ]
+                },
+                proxy: true
+              },
+              {
+                key: "action",
+                fn: function() {
+                  return [
+                    _c("q-btn", {
+                      staticClass: "q-mb-md",
                       attrs: {
-                        data: _vm.reuniones,
-                        columns: _vm.columns,
-                        "row-key": "name",
                         flat: "",
-                        bordered: ""
+                        label: "Refrescar",
+                        "icon-right": "refresh",
+                        color: "primary"
+                      },
+                      on: {
+                        click: function($event) {
+                          return _vm.onRefresh()
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("q-btn", {
+                      staticClass: "q-mb-md",
+                      attrs: {
+                        flat: "",
+                        label: "Volver",
+                        "icon-right": "settings_backup_restore",
+                        color: "red"
+                      },
+                      on: {
+                        click: function($event) {
+                          return _vm.url_volver2()
+                        }
                       }
                     })
+                  ]
+                },
+                proxy: true
+              }
+            ])
+          },
+          [_vm._v("\n      REUNIONES CREADAS\n      ")]
+        )
+      ],
+      _vm._v(" "),
+      _c("q-table", {
+        staticClass: "my-sticky-header-table",
+        attrs: {
+          title: "Reuniones",
+          "no-data-label": "Aun no hay datos para mostrar.",
+          "no-results-label": "No se han encontrado resultados.",
+          "rows-per-page-label": "Cantidad:",
+          "loading-label": "Cargando",
+          "row-key": "name",
+          data: _vm.reuniones,
+          columns: _vm.tabla,
+          separator: _vm.separator,
+          loading: _vm.loading,
+          filter: _vm.filter,
+          "visible-columns": _vm.visibleColumns,
+          "rows-per-page-options": [5, 10, 15, 30, 50, 100, 0]
+        },
+        scopedSlots: _vm._u([
+          {
+            key: "body",
+            fn: function(tabla) {
+              return [
+                _c(
+                  "q-tr",
+                  { attrs: { props: tabla } },
+                  [
+                    _c(
+                      "q-td",
+                      { key: "id", attrs: { props: tabla } },
+                      [
+                        _c("q-badge", { attrs: { color: "green" } }, [
+                          _vm._v(_vm._s(tabla.row.id))
+                        ])
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "q-td",
+                      { key: "fecha_inicio", attrs: { props: tabla } },
+                      [_vm._v(_vm._s(tabla.row.fecha_inicio))]
+                    ),
+                    _vm._v(" "),
+                    _c("q-td", { key: "titulo", attrs: { props: tabla } }, [
+                      _vm._v(_vm._s(tabla.row.titulo))
+                    ]),
+                    _vm._v(" "),
+                    _c("q-td", { key: "creada_por", attrs: { props: tabla } }, [
+                      _vm._v(_vm._s(tabla.row.creada_por))
+                    ]),
+                    _vm._v(" "),
+                    _c("q-td", { key: "created_at", attrs: { props: tabla } }, [
+                      _vm._v(_vm._s(tabla.row.created_at))
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "q-td",
+                      { key: "opcion", attrs: { props: tabla } },
+                      [
+                        _c("q-btn", {
+                          attrs: { label: "Ver Reunion", color: "blue" }
+                        })
+                      ],
+                      1
+                    )
                   ],
                   1
                 )
-              ],
-              1
+              ]
+            }
+          }
+        ])
+      }),
+      _vm._v(" "),
+      _vm._l(_vm.errores, function(e) {
+        return _c(
+          "ul",
+          { key: e[0] },
+          [
+            _c(
+              "q-banner",
+              {
+                staticClass: "bg-orange text-white",
+                attrs: { "inline-actions": "" },
+                scopedSlots: _vm._u(
+                  [
+                    {
+                      key: "action",
+                      fn: function() {
+                        return [
+                          _c("q-btn", {
+                            attrs: {
+                              flat: "",
+                              color: "white",
+                              label: "Advertencia!",
+                              disabled: ""
+                            }
+                          })
+                        ]
+                      },
+                      proxy: true
+                    }
+                  ],
+                  null,
+                  true
+                )
+              },
+              [
+                _c("li", [
+                  _c("i", { staticClass: "material-icons md-24" }, [
+                    _vm._v("info")
+                  ]),
+                  _vm._v("\n          " + _vm._s(e[0]) + "\n        ")
+                ])
+              ]
             )
           ],
           1
         )
-      ],
-      1
-    )
-  ])
+      })
+    ],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -111912,6 +112115,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/auth/reuniones/reuniones_css/traerReuniones.css?vue&type=style&index=0&lang=css&":
+/*!******************************************************************************************************************!*\
+  !*** ./resources/js/components/auth/reuniones/reuniones_css/traerReuniones.css?vue&type=style&index=0&lang=css& ***!
+  \******************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_traerReuniones_css_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/style-loader!../../../../../../node_modules/css-loader??ref--6-1!../../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../../node_modules/postcss-loader/src??ref--6-2!./traerReuniones.css?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./resources/js/components/auth/reuniones/reuniones_css/traerReuniones.css?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_traerReuniones_css_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_traerReuniones_css_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_traerReuniones_css_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_traerReuniones_css_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_traerReuniones_css_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
 /***/ "./resources/js/components/auth/reuniones/reuniones_js/crearReunion.js?vue&type=script&lang=js&":
 /*!******************************************************************************************************!*\
   !*** ./resources/js/components/auth/reuniones/reuniones_js/crearReunion.js?vue&type=script&lang=js& ***!
@@ -112075,7 +112294,9 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _traer_reuniones_vue_vue_type_template_id_09f38edc___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./traer_reuniones.vue?vue&type=template&id=09f38edc& */ "./resources/js/components/auth/reuniones/reuniones_vue/traer_reuniones.vue?vue&type=template&id=09f38edc&");
 /* harmony import */ var _reuniones_js_traerReuniones_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../reuniones_js/traerReuniones.js?vue&type=script&lang=js& */ "./resources/js/components/auth/reuniones/reuniones_js/traerReuniones.js?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _reuniones_css_traerReuniones_css_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../reuniones_css/traerReuniones.css?vue&type=style&index=0&lang=css& */ "./resources/js/components/auth/reuniones/reuniones_css/traerReuniones.css?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
@@ -112083,7 +112304,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _reuniones_js_traerReuniones_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _traer_reuniones_vue_vue_type_template_id_09f38edc___WEBPACK_IMPORTED_MODULE_0__["render"],
   _traer_reuniones_vue_vue_type_template_id_09f38edc___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
