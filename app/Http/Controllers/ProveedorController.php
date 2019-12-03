@@ -12,7 +12,23 @@ class ProveedorController extends Controller
         return Proveedor::ingresarProveedor($request);
     }
 
-    public function TraerProcedencia(){
+    public function TraerProveedores()
+    {
+        return Proveedor::traerProveedores();
+    }
+
+    public function TraerProcedencia()
+    {
         return Proveedor::traerProcedencia();
+    }
+
+    public function TraerGiros()
+    {
+        return Proveedor::traerGiros();
+    }
+
+    public function TraerTipos()
+    {
+        return Proveedor::traerTipos();
     }
 }

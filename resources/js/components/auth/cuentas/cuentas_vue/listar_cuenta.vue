@@ -395,9 +395,25 @@
                                                     />
                                                 </div>
                                               </div>
+
+
+                                              <hr>
+                                              <div class="row q-col-gutter-md">
+                                                <div class="col-8">
+                                                  <q-btn 
+                                                    label="Eliminar" 
+                                                    icon="delete" 
+                                                    color="red" 
+                                                    @click="eliminar(props.row.id, 'edit'+props.row.__index)"
+                                                  />
+                                          
+                                                </div>
+
+                                              
+                                            </div>
                                               
                                       
-                                            </div>
+                                          </div>
                                         </q-card>
 
                                        
