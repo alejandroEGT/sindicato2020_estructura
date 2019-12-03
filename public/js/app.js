@@ -3859,7 +3859,8 @@ __webpack_require__.r(__webpack_exports__);
       tipoDeuda: '',
       monto: '',
       descripcion: '',
-      fechaTope: ''
+      fechaTope: '',
+      options: []
     };
   },
   methods: {
@@ -3885,6 +3886,7 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get('api/traer_clientes_deudas').then(function (response) {
         _this2.selectClientes = response.data;
+        _this2.options = _this2.selectClientes;
       })["catch"](function (error) {
         alert(error);
       });
@@ -3928,6 +3930,18 @@ __webpack_require__.r(__webpack_exports__);
           _this4.errores = response.data.mensaje;
         }
       });
+    },
+    filterFn: function filterFn(val, update) {
+      var _this5 = this;
+
+      console.log(this.filterFn);
+      update(function () {
+        var needle = val.toLowerCase();
+        console.log(needle);
+        _this5.options = _this5.selectClientes.filter(function (v) {
+          return v.cliente_deuda.toLowerCase().indexOf(needle) > -1;
+        });
+      });
     }
   },
   mounted: function mounted() {
@@ -3961,7 +3975,7 @@ __webpack_require__.r(__webpack_exports__);
         classes: 'ellipsis',
         name: 'id',
         align: 'center',
-        label: 'id',
+        label: 'ID',
         field: 'id',
         sortable: true
       }, {
@@ -4146,12 +4160,14 @@ __webpack_require__.r(__webpack_exports__);
       rutCliente: '',
       nombreCliente: '',
       idCliente: '',
+      selectTipoDeuda: [],
+      tipoDeuda: '',
       visibleColumns: ['id', 'tipo', 'descripcion', 'monto', 'fecha', 'opcion'],
       clientes: [{
         classes: 'ellipsis',
         name: 'id',
         align: 'center',
-        label: 'id',
+        label: 'ID',
         field: 'id',
         sortable: true
       }, {
@@ -4159,13 +4175,13 @@ __webpack_require__.r(__webpack_exports__);
         name: 'tipo',
         align: 'center',
         label: 'Tipo de Deuda',
-        field: 'deuda',
+        field: 'tipo',
         sortable: true
       }, {
         classes: 'ellipsis',
         name: 'descripcion',
         align: 'center',
-        label: 'Descripcion',
+        label: 'Descripción',
         field: 'descripcion',
         sortable: true
       }, {
@@ -4267,14 +4283,59 @@ __webpack_require__.r(__webpack_exports__);
         _this2.loading = false;
       });
     },
-    onRefresh: function onRefresh() {
+    actualizar_dato: function actualizar_dato(id, campo, input) {
       var _this3 = this;
+
+      var data = {
+        'id': id,
+        'campo': campo,
+        'input': input
+      };
+      this.loading = true;
+      axios.post('api/modificar_campo_deuda', data).then(function (response) {
+        if (response.data.estado == 'success') {
+          _this3.$q.notify({
+            color: "green-4",
+            textColor: "white",
+            icon: "cloud_done",
+            message: response.data.mensaje
+          });
+
+          _this3.campoUpd = '';
+          _this3.errores = [];
+          _this3.loading = false;
+
+          _this3.listar_deudas_cliente();
+        }
+
+        if (response.data.estado == 'failed_v') {
+          _this3.errores = response.data.mensaje;
+          _this3.campoUpd = '';
+          _this3.loading = false;
+        }
+      })["catch"](function (error) {
+        alert(error);
+        _this3.loading = false;
+      });
+    },
+    actualizar_tipo_deudas: function actualizar_tipo_deudas() {
+      var _this4 = this;
+
+      axios.get('api/traer_tipo_deuda').then(function (response) {
+        _this4.selectTipoDeuda = response.data;
+      })["catch"](function (error) {
+        alert(error);
+      });
+    },
+    onRefresh: function onRefresh() {
+      var _this5 = this;
 
       this.loading = true;
       this.rutCliente = '';
       this.nombreCliente = '';
       this.idCliente = '';
       this.listarDeudaCliente = [];
+      this.errores = [];
       this.$q.notify({
         color: "green-4",
         textColor: "white",
@@ -4282,11 +4343,13 @@ __webpack_require__.r(__webpack_exports__);
         message: "Datos limpiados, si desea ver un nuevo cliente ingrese nuevamente el rut correspondiente."
       });
       setTimeout(function () {
-        _this3.loading = false;
+        _this5.loading = false;
       }, 5000);
     }
   },
-  mounted: function mounted() {}
+  mounted: function mounted() {
+    this.actualizar_tipo_deudas();
+  }
 });
 
 /***/ }),
@@ -4388,7 +4451,7 @@ __webpack_require__.r(__webpack_exports__);
             color: "green-4",
             textColor: "white",
             icon: "cloud_done",
-            message: "Cliente Registrado con exito!"
+            message: response.data.mensaje
           });
 
           _this2.fechaNac = '';
@@ -4397,6 +4460,15 @@ __webpack_require__.r(__webpack_exports__);
           _this2.aPaterno = '';
           _this2.aMaterno = '';
           _this2.errores = '';
+        }
+
+        if (response.data.estado == 'failed') {
+          _this2.$q.notify({
+            color: "red-4",
+            textColor: "white",
+            icon: "delete_forever",
+            message: response.data.mensaje
+          });
         }
 
         if (response.data.estado == 'failed_v') {
@@ -4964,7 +5036,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-<<<<<<< HEAD
 /***/ "./node_modules/base64-js/index.js":
 /*!*****************************************!*\
   !*** ./node_modules/base64-js/index.js ***!
@@ -5126,38 +5197,6 @@ function fromByteArray (uint8) {
   return parts.join('')
 }
 
-=======
-/***/ "./node_modules/babel-loader/lib/index.js?!./resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.js?vue&type=script&lang=js&":
-/*!*****************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.js?vue&type=script&lang=js& ***!
-  \*****************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      //VARIABLES PARA EL STEPPER FORMULARIO
-      step: 1,
-      rut: '',
-      monto: null,
-      tipo: false,
-      interes: null,
-      fecha: '',
-      //VARIABLES QUE RESCATAN AL USUARIO
-      usuario: 'Bryan Vidal Díaz'
-    };
-  },
-  methods: {
-    calcularIntereses: function calcularIntereses() {
-      var valorConIneteres = monto * intereses;
-      console.log(valorConIneteres);
-    }
-  }
-});
->>>>>>> 80d9f97386fa1333dd62269b55de45ea3f702306
 
 /***/ }),
 
@@ -88043,11 +88082,16 @@ var render = function() {
                           _c("q-select", {
                             attrs: {
                               standout: "bg-blue text-white",
-                              options: _vm.selectClientes,
+                              options: _vm.options,
                               "option-value": "id",
                               "option-label": "cliente_deuda",
-                              label: "Clientes"
+                              label: "Clientes",
+                              "use-input": "",
+                              "fill-input": "",
+                              "hide-selected": "",
+                              "input-debounce": "0"
                             },
+                            on: { filter: _vm.filterFn },
                             model: {
                               value: _vm.clientes,
                               callback: function($$v) {
@@ -88419,7 +88463,7 @@ var render = function() {
           "no-data-label": "Aun no hay datos para mostrar.",
           "no-results-label": "No se han encontrado resultados.",
           "rows-per-page-label": "Cantidad:",
-          "loading-label": "Cargando",
+          "loading-label": "Cargando...",
           "row-key": "name",
           data: _vm.listarClientes,
           columns: _vm.clientes,
@@ -88438,16 +88482,21 @@ var render = function() {
                 _vm._v(" "),
                 _c(
                   "div",
-                  { staticClass: "col" },
+                  { staticClass: "col-6 col-md-2" },
                   [
-                    _c("q-toggle", {
+                    _c("q-select", {
+                      staticStyle: { "min-width": "150px" },
                       attrs: {
-                        "left-label": "",
+                        multiple: "",
+                        dense: "",
+                        filled: "",
+                        "display-value": "Filtrar",
+                        "emit-value": "",
+                        "map-options": "",
+                        options: _vm.clientes,
+                        "option-value": "name",
                         color: "green",
-                        "checked-icon": "check",
-                        "unchecked-icon": "clear",
-                        val: "id",
-                        label: "ID"
+                        "bg-color": "white"
                       },
                       model: {
                         value: _vm.visibleColumns,
@@ -88456,98 +88505,15 @@ var render = function() {
                         },
                         expression: "visibleColumns"
                       }
-                    }),
-                    _vm._v(" "),
-                    _c("q-toggle", {
-                      attrs: {
-                        "left-label": "",
-                        color: "green",
-                        "checked-icon": "check",
-                        "unchecked-icon": "clear",
-                        val: "fecha_nacimiento",
-                        label: "Fecha de Nacimiento"
-                      },
-                      model: {
-                        value: _vm.visibleColumns,
-                        callback: function($$v) {
-                          _vm.visibleColumns = $$v
-                        },
-                        expression: "visibleColumns"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("q-toggle", {
-                      attrs: {
-                        "left-label": "",
-                        color: "green",
-                        "checked-icon": "check",
-                        "unchecked-icon": "clear",
-                        val: "rut",
-                        label: "Rut"
-                      },
-                      model: {
-                        value: _vm.visibleColumns,
-                        callback: function($$v) {
-                          _vm.visibleColumns = $$v
-                        },
-                        expression: "visibleColumns"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("q-toggle", {
-                      attrs: {
-                        "left-label": "",
-                        color: "green",
-                        "checked-icon": "check",
-                        "unchecked-icon": "clear",
-                        val: "nombres",
-                        label: "Nombres"
-                      },
-                      model: {
-                        value: _vm.visibleColumns,
-                        callback: function($$v) {
-                          _vm.visibleColumns = $$v
-                        },
-                        expression: "visibleColumns"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("q-toggle", {
-                      attrs: {
-                        "left-label": "",
-                        color: "green",
-                        "checked-icon": "check",
-                        "unchecked-icon": "clear",
-                        val: "apellido_paterno",
-                        label: "Apellido Paterno"
-                      },
-                      model: {
-                        value: _vm.visibleColumns,
-                        callback: function($$v) {
-                          _vm.visibleColumns = $$v
-                        },
-                        expression: "visibleColumns"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("q-toggle", {
-                      attrs: {
-                        "left-label": "",
-                        color: "green",
-                        "checked-icon": "check",
-                        "unchecked-icon": "clear",
-                        val: "apellido_materno",
-                        label: "Apellido Materno"
-                      },
-                      model: {
-                        value: _vm.visibleColumns,
-                        callback: function($$v) {
-                          _vm.visibleColumns = $$v
-                        },
-                        expression: "visibleColumns"
-                      }
-                    }),
-                    _vm._v(" "),
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "col-6 col-md-4" },
+                  [
                     _c("q-btn", {
                       staticClass: "q-ml-md",
                       attrs: {
@@ -88561,63 +88527,65 @@ var render = function() {
                       on: { click: pantalla.toggleFullscreen }
                     }),
                     _vm._v(" "),
-                    _c("label", [_vm._v("Pantalla Completa")]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "row justify-end" }, [
-                      _c(
-                        "div",
-                        { staticClass: "col-12 col-md-4" },
-                        [
-                          _c("q-input", {
-                            staticClass: "q-ml-md",
-                            attrs: {
-                              dark: "",
-                              borderless: "",
-                              "input-class": "text-right",
-                              placeholder: "Buscar"
-                            },
-                            scopedSlots: _vm._u(
-                              [
-                                {
-                                  key: "append",
-                                  fn: function() {
-                                    return [
-                                      _vm.filter === ""
-                                        ? _c("q-icon", {
-                                            attrs: { name: "search" }
-                                          })
-                                        : _c("q-icon", {
-                                            staticClass: "cursor-pointer",
-                                            attrs: { name: "clear" },
-                                            on: {
-                                              click: function($event) {
-                                                _vm.filter = ""
-                                              }
-                                            }
-                                          })
-                                    ]
-                                  },
-                                  proxy: true
-                                }
-                              ],
-                              null,
-                              true
-                            ),
-                            model: {
-                              value: _vm.filter,
-                              callback: function($$v) {
-                                _vm.filter = $$v
-                              },
-                              expression: "filter"
-                            }
-                          })
-                        ],
-                        1
-                      )
-                    ])
+                    _c("label", [_vm._v("Pantalla Completa")])
                   ],
                   1
-                )
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-12 col-md-6" }, [
+                  _c("div", { staticClass: "row justify-end" }, [
+                    _c(
+                      "div",
+                      { staticClass: "col-12 col-md-6" },
+                      [
+                        _c("q-input", {
+                          staticClass: "q-ml-md",
+                          attrs: {
+                            dark: "",
+                            borderless: "",
+                            "input-class": "text-right",
+                            placeholder: "Buscar"
+                          },
+                          scopedSlots: _vm._u(
+                            [
+                              {
+                                key: "append",
+                                fn: function() {
+                                  return [
+                                    _vm.filter === ""
+                                      ? _c("q-icon", {
+                                          attrs: { name: "search" }
+                                        })
+                                      : _c("q-icon", {
+                                          staticClass: "cursor-pointer",
+                                          attrs: { name: "clear" },
+                                          on: {
+                                            click: function($event) {
+                                              _vm.filter = ""
+                                            }
+                                          }
+                                        })
+                                  ]
+                                },
+                                proxy: true
+                              }
+                            ],
+                            null,
+                            true
+                          ),
+                          model: {
+                            value: _vm.filter,
+                            callback: function($$v) {
+                              _vm.filter = $$v
+                            },
+                            expression: "filter"
+                          }
+                        })
+                      ],
+                      1
+                    )
+                  ])
+                ])
               ]
             }
           },
@@ -89757,7 +89725,8 @@ var render = function() {
           loading: _vm.loading,
           filter: _vm.filter,
           "visible-columns": _vm.visibleColumns,
-          "rows-per-page-options": [5, 10, 15, 30, 50, 100, 0]
+          "rows-per-page-options": [5, 10, 15, 30, 50, 100, 0],
+          dense: _vm.$q.screen.lt.md
         },
         scopedSlots: _vm._u([
           {
@@ -89768,16 +89737,21 @@ var render = function() {
                 _vm._v(" "),
                 _c(
                   "div",
-                  { staticClass: "col" },
+                  { staticClass: "col-6 col-md-2" },
                   [
-                    _c("q-toggle", {
+                    _c("q-select", {
+                      staticStyle: { "min-width": "150px" },
                       attrs: {
-                        "left-label": "",
+                        multiple: "",
+                        dense: "",
+                        filled: "",
+                        "display-value": "Filtrar",
+                        "emit-value": "",
+                        "map-options": "",
+                        options: _vm.clientes,
+                        "option-value": "name",
                         color: "green",
-                        "checked-icon": "check",
-                        "unchecked-icon": "clear",
-                        val: "id",
-                        label: "ID"
+                        "bg-color": "white"
                       },
                       model: {
                         value: _vm.visibleColumns,
@@ -89786,80 +89760,15 @@ var render = function() {
                         },
                         expression: "visibleColumns"
                       }
-                    }),
-                    _vm._v(" "),
-                    _c("q-toggle", {
-                      attrs: {
-                        "left-label": "",
-                        color: "green",
-                        "checked-icon": "check",
-                        "unchecked-icon": "clear",
-                        val: "tipo",
-                        label: "Tipo de Deuda"
-                      },
-                      model: {
-                        value: _vm.visibleColumns,
-                        callback: function($$v) {
-                          _vm.visibleColumns = $$v
-                        },
-                        expression: "visibleColumns"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("q-toggle", {
-                      attrs: {
-                        "left-label": "",
-                        color: "green",
-                        "checked-icon": "check",
-                        "unchecked-icon": "clear",
-                        val: "descripcion",
-                        label: "Descripcion"
-                      },
-                      model: {
-                        value: _vm.visibleColumns,
-                        callback: function($$v) {
-                          _vm.visibleColumns = $$v
-                        },
-                        expression: "visibleColumns"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("q-toggle", {
-                      attrs: {
-                        "left-label": "",
-                        color: "green",
-                        "checked-icon": "check",
-                        "unchecked-icon": "clear",
-                        val: "monto",
-                        label: "Monto"
-                      },
-                      model: {
-                        value: _vm.visibleColumns,
-                        callback: function($$v) {
-                          _vm.visibleColumns = $$v
-                        },
-                        expression: "visibleColumns"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("q-toggle", {
-                      attrs: {
-                        "left-label": "",
-                        color: "green",
-                        "checked-icon": "check",
-                        "unchecked-icon": "clear",
-                        val: "fecha",
-                        label: "Fecha de Tope"
-                      },
-                      model: {
-                        value: _vm.visibleColumns,
-                        callback: function($$v) {
-                          _vm.visibleColumns = $$v
-                        },
-                        expression: "visibleColumns"
-                      }
-                    }),
-                    _vm._v(" "),
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "col-6 col-md-4" },
+                  [
                     _c("q-btn", {
                       staticClass: "q-ml-md",
                       attrs: {
@@ -89873,63 +89782,65 @@ var render = function() {
                       on: { click: pantalla.toggleFullscreen }
                     }),
                     _vm._v(" "),
-                    _c("label", [_vm._v("Pantalla Completa")]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "row justify-end" }, [
-                      _c(
-                        "div",
-                        { staticClass: "col-12 col-md-4" },
-                        [
-                          _c("q-input", {
-                            staticClass: "q-ml-md",
-                            attrs: {
-                              dark: "",
-                              borderless: "",
-                              "input-class": "text-right",
-                              placeholder: "Buscar"
-                            },
-                            scopedSlots: _vm._u(
-                              [
-                                {
-                                  key: "append",
-                                  fn: function() {
-                                    return [
-                                      _vm.filter === ""
-                                        ? _c("q-icon", {
-                                            attrs: { name: "search" }
-                                          })
-                                        : _c("q-icon", {
-                                            staticClass: "cursor-pointer",
-                                            attrs: { name: "clear" },
-                                            on: {
-                                              click: function($event) {
-                                                _vm.filter = ""
-                                              }
-                                            }
-                                          })
-                                    ]
-                                  },
-                                  proxy: true
-                                }
-                              ],
-                              null,
-                              true
-                            ),
-                            model: {
-                              value: _vm.filter,
-                              callback: function($$v) {
-                                _vm.filter = $$v
-                              },
-                              expression: "filter"
-                            }
-                          })
-                        ],
-                        1
-                      )
-                    ])
+                    _c("label", [_vm._v("Pantalla Completa")])
                   ],
                   1
-                )
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-12 col-md-6" }, [
+                  _c("div", { staticClass: "row justify-end" }, [
+                    _c(
+                      "div",
+                      { staticClass: "col-12 col-md-6" },
+                      [
+                        _c("q-input", {
+                          staticClass: "q-ml-md",
+                          attrs: {
+                            dark: "",
+                            borderless: "",
+                            "input-class": "text-right",
+                            placeholder: "Buscar"
+                          },
+                          scopedSlots: _vm._u(
+                            [
+                              {
+                                key: "append",
+                                fn: function() {
+                                  return [
+                                    _vm.filter === ""
+                                      ? _c("q-icon", {
+                                          attrs: { name: "search" }
+                                        })
+                                      : _c("q-icon", {
+                                          staticClass: "cursor-pointer",
+                                          attrs: { name: "clear" },
+                                          on: {
+                                            click: function($event) {
+                                              _vm.filter = ""
+                                            }
+                                          }
+                                        })
+                                  ]
+                                },
+                                proxy: true
+                              }
+                            ],
+                            null,
+                            true
+                          ),
+                          model: {
+                            value: _vm.filter,
+                            callback: function($$v) {
+                              _vm.filter = $$v
+                            },
+                            expression: "filter"
+                          }
+                        })
+                      ],
+                      1
+                    )
+                  ])
+                ])
               ]
             }
           },
@@ -89952,11 +89863,131 @@ var render = function() {
                       1
                     ),
                     _vm._v(" "),
-                    _c("q-td", { key: "tipo", attrs: { props: tabla } }, [
-                      _vm._v(
-                        "\n          " + _vm._s(tabla.row.tipo) + "\n          "
-                      )
-                    ]),
+                    _c(
+                      "q-td",
+                      { key: "tipo", attrs: { props: tabla } },
+                      [
+                        _vm._v(
+                          "\n          " +
+                            _vm._s(tabla.row.tipo) +
+                            "\n          "
+                        ),
+                        _c("q-popup-edit", {
+                          attrs: { title: "Modificar tipo de deuda" },
+                          scopedSlots: _vm._u(
+                            [
+                              {
+                                key: "default",
+                                fn: function(ref) {
+                                  var initialValue = ref.initialValue
+                                  var validate = ref.validate
+                                  var set = ref.set
+                                  var cancel = ref.cancel
+                                  return [
+                                    _c("q-select", {
+                                      attrs: {
+                                        standout: "bg-blue text-white",
+                                        options: _vm.selectTipoDeuda,
+                                        "option-value": "id",
+                                        "option-label": "tipo",
+                                        label: "Tipo de deuda"
+                                      },
+                                      on: {
+                                        keyup: function($event) {
+                                          if (
+                                            !$event.type.indexOf("key") &&
+                                            _vm._k(
+                                              $event.keyCode,
+                                              "enter",
+                                              13,
+                                              $event.key,
+                                              "Enter"
+                                            )
+                                          ) {
+                                            return null
+                                          }
+                                          $event.stopPropagation()
+                                        }
+                                      },
+                                      scopedSlots: _vm._u(
+                                        [
+                                          {
+                                            key: "after",
+                                            fn: function() {
+                                              return [
+                                                _c("q-btn", {
+                                                  attrs: {
+                                                    color: "red",
+                                                    round: "",
+                                                    dense: "",
+                                                    flat: "",
+                                                    icon: "edit"
+                                                  },
+                                                  on: {
+                                                    click: [
+                                                      function($event) {
+                                                        return _vm.actualizar_dato(
+                                                          tabla.row.id,
+                                                          "tipo_deuda_id",
+                                                          _vm.campoUpd.id
+                                                        )
+                                                      },
+                                                      function($event) {
+                                                        $event.stopPropagation()
+                                                        return set($event)
+                                                      }
+                                                    ]
+                                                  }
+                                                }),
+                                                _vm._v(" "),
+                                                _c("q-btn", {
+                                                  attrs: {
+                                                    flat: "",
+                                                    dense: "",
+                                                    color: "negative",
+                                                    icon: "cancel"
+                                                  },
+                                                  on: {
+                                                    click: function($event) {
+                                                      $event.stopPropagation()
+                                                      return cancel($event)
+                                                    }
+                                                  }
+                                                })
+                                              ]
+                                            },
+                                            proxy: true
+                                          }
+                                        ],
+                                        null,
+                                        true
+                                      ),
+                                      model: {
+                                        value: _vm.campoUpd,
+                                        callback: function($$v) {
+                                          _vm.campoUpd = $$v
+                                        },
+                                        expression: "campoUpd"
+                                      }
+                                    })
+                                  ]
+                                }
+                              }
+                            ],
+                            null,
+                            true
+                          ),
+                          model: {
+                            value: tabla.row.tipo,
+                            callback: function($$v) {
+                              _vm.$set(tabla.row, "tipo", $$v)
+                            },
+                            expression: "tabla.row.tipo"
+                          }
+                        })
+                      ],
+                      1
+                    ),
                     _vm._v(" "),
                     _c(
                       "q-td",
@@ -89966,25 +89997,427 @@ var render = function() {
                           "\n          " +
                             _vm._s(tabla.row.descripcion) +
                             "\n          "
-                        )
-                      ]
+                        ),
+                        _c("q-popup-edit", {
+                          attrs: {
+                            title: "Modificar Descripcion",
+                            validate: function(val) {
+                              return val.length >= 3
+                            }
+                          },
+                          scopedSlots: _vm._u(
+                            [
+                              {
+                                key: "default",
+                                fn: function(ref) {
+                                  var initialValue = ref.initialValue
+                                  var validate = ref.validate
+                                  var set = ref.set
+                                  var cancel = ref.cancel
+                                  return [
+                                    _c("q-input", {
+                                      attrs: {
+                                        type: "text",
+                                        maxlength: "80",
+                                        dense: "",
+                                        autofocus: "",
+                                        counter: "",
+                                        autogrow: "",
+                                        rules: [
+                                          function(val) {
+                                            return (
+                                              validate(_vm.campoUpd) ||
+                                              "Minimo 3 caracteres."
+                                            )
+                                          }
+                                        ]
+                                      },
+                                      on: {
+                                        keyup: function($event) {
+                                          if (
+                                            !$event.type.indexOf("key") &&
+                                            _vm._k(
+                                              $event.keyCode,
+                                              "enter",
+                                              13,
+                                              $event.key,
+                                              "Enter"
+                                            )
+                                          ) {
+                                            return null
+                                          }
+                                          $event.stopPropagation()
+                                        }
+                                      },
+                                      scopedSlots: _vm._u(
+                                        [
+                                          {
+                                            key: "after",
+                                            fn: function() {
+                                              return [
+                                                _c("q-btn", {
+                                                  attrs: {
+                                                    color: "red",
+                                                    round: "",
+                                                    dense: "",
+                                                    flat: "",
+                                                    icon: "edit",
+                                                    disable:
+                                                      validate(_vm.campoUpd) ===
+                                                        false ||
+                                                      initialValue === ""
+                                                  },
+                                                  on: {
+                                                    click: [
+                                                      function($event) {
+                                                        return _vm.actualizar_dato(
+                                                          tabla.row.id,
+                                                          "descripcion",
+                                                          _vm.campoUpd
+                                                        )
+                                                      },
+                                                      function($event) {
+                                                        $event.stopPropagation()
+                                                        return set($event)
+                                                      }
+                                                    ]
+                                                  }
+                                                }),
+                                                _vm._v(" "),
+                                                _c("q-btn", {
+                                                  attrs: {
+                                                    flat: "",
+                                                    dense: "",
+                                                    color: "negative",
+                                                    icon: "cancel"
+                                                  },
+                                                  on: {
+                                                    click: function($event) {
+                                                      $event.stopPropagation()
+                                                      return cancel($event)
+                                                    }
+                                                  }
+                                                })
+                                              ]
+                                            },
+                                            proxy: true
+                                          }
+                                        ],
+                                        null,
+                                        true
+                                      ),
+                                      model: {
+                                        value: _vm.campoUpd,
+                                        callback: function($$v) {
+                                          _vm.campoUpd = $$v
+                                        },
+                                        expression: "campoUpd"
+                                      }
+                                    })
+                                  ]
+                                }
+                              }
+                            ],
+                            null,
+                            true
+                          ),
+                          model: {
+                            value: tabla.row.rut,
+                            callback: function($$v) {
+                              _vm.$set(tabla.row, "rut", $$v)
+                            },
+                            expression: "tabla.row.rut"
+                          }
+                        })
+                      ],
+                      1
                     ),
                     _vm._v(" "),
-                    _c("q-td", { key: "monto", attrs: { props: tabla } }, [
-                      _vm._v(
-                        "\n          " +
-                          _vm._s(tabla.row.monto) +
-                          "\n          "
-                      )
-                    ]),
+                    _c(
+                      "q-td",
+                      { key: "monto", attrs: { props: tabla } },
+                      [
+                        _vm._v(
+                          "\n          " +
+                            _vm._s(tabla.row.monto) +
+                            "\n          "
+                        ),
+                        _c("q-popup-edit", {
+                          attrs: {
+                            title: "Modificar Monto",
+                            validate: function(val) {
+                              return val.length >= 1
+                            }
+                          },
+                          scopedSlots: _vm._u(
+                            [
+                              {
+                                key: "default",
+                                fn: function(ref) {
+                                  var initialValue = ref.initialValue
+                                  var validate = ref.validate
+                                  var set = ref.set
+                                  var cancel = ref.cancel
+                                  return [
+                                    _c("q-input", {
+                                      attrs: {
+                                        type: "number",
+                                        maxlength: "50",
+                                        dense: "",
+                                        autofocus: "",
+                                        counter: "",
+                                        rules: [
+                                          function(val) {
+                                            return (
+                                              validate(_vm.campoUpd) ||
+                                              "Minimo 1 caracter."
+                                            )
+                                          }
+                                        ]
+                                      },
+                                      on: {
+                                        keyup: function($event) {
+                                          if (
+                                            !$event.type.indexOf("key") &&
+                                            _vm._k(
+                                              $event.keyCode,
+                                              "enter",
+                                              13,
+                                              $event.key,
+                                              "Enter"
+                                            )
+                                          ) {
+                                            return null
+                                          }
+                                          $event.stopPropagation()
+                                        }
+                                      },
+                                      scopedSlots: _vm._u(
+                                        [
+                                          {
+                                            key: "after",
+                                            fn: function() {
+                                              return [
+                                                _c("q-btn", {
+                                                  attrs: {
+                                                    color: "red",
+                                                    round: "",
+                                                    dense: "",
+                                                    flat: "",
+                                                    icon: "edit",
+                                                    disable:
+                                                      validate(_vm.campoUpd) ===
+                                                        false ||
+                                                      initialValue === ""
+                                                  },
+                                                  on: {
+                                                    click: [
+                                                      function($event) {
+                                                        return _vm.actualizar_dato(
+                                                          tabla.row.id,
+                                                          "monto",
+                                                          _vm.campoUpd
+                                                        )
+                                                      },
+                                                      function($event) {
+                                                        $event.stopPropagation()
+                                                        return set($event)
+                                                      }
+                                                    ]
+                                                  }
+                                                }),
+                                                _vm._v(" "),
+                                                _c("q-btn", {
+                                                  attrs: {
+                                                    flat: "",
+                                                    dense: "",
+                                                    color: "negative",
+                                                    icon: "cancel"
+                                                  },
+                                                  on: {
+                                                    click: function($event) {
+                                                      $event.stopPropagation()
+                                                      return cancel($event)
+                                                    }
+                                                  }
+                                                })
+                                              ]
+                                            },
+                                            proxy: true
+                                          }
+                                        ],
+                                        null,
+                                        true
+                                      ),
+                                      model: {
+                                        value: _vm.campoUpd,
+                                        callback: function($$v) {
+                                          _vm.campoUpd = $$v
+                                        },
+                                        expression: "campoUpd"
+                                      }
+                                    })
+                                  ]
+                                }
+                              }
+                            ],
+                            null,
+                            true
+                          ),
+                          model: {
+                            value: tabla.row.monto,
+                            callback: function($$v) {
+                              _vm.$set(tabla.row, "monto", $$v)
+                            },
+                            expression: "tabla.row.monto"
+                          }
+                        })
+                      ],
+                      1
+                    ),
                     _vm._v(" "),
-                    _c("q-td", { key: "fecha", attrs: { props: tabla } }, [
-                      _vm._v(
-                        "\n          " +
-                          _vm._s(tabla.row.fecha) +
-                          "\n          "
-                      )
-                    ]),
+                    _c(
+                      "q-td",
+                      { key: "fecha", attrs: { props: tabla } },
+                      [
+                        _vm._v(
+                          "\n          " +
+                            _vm._s(tabla.row.fecha) +
+                            "\n          "
+                        ),
+                        _c("q-popup-edit", {
+                          attrs: {
+                            title: "Modificar Fecha de Tope",
+                            validate: function(val) {
+                              return val.length >= 10
+                            }
+                          },
+                          scopedSlots: _vm._u(
+                            [
+                              {
+                                key: "default",
+                                fn: function(ref) {
+                                  var initialValue = ref.initialValue
+                                  var validate = ref.validate
+                                  var set = ref.set
+                                  var cancel = ref.cancel
+                                  return [
+                                    _c("q-input", {
+                                      attrs: {
+                                        type: "date",
+                                        maxlength: "10",
+                                        dense: "",
+                                        autofocus: "",
+                                        counter: "",
+                                        rules: [
+                                          function(val) {
+                                            return (
+                                              validate(_vm.campoUpd) ||
+                                              "Minimo 10 caracteres."
+                                            )
+                                          }
+                                        ]
+                                      },
+                                      on: {
+                                        keyup: function($event) {
+                                          if (
+                                            !$event.type.indexOf("key") &&
+                                            _vm._k(
+                                              $event.keyCode,
+                                              "enter",
+                                              13,
+                                              $event.key,
+                                              "Enter"
+                                            )
+                                          ) {
+                                            return null
+                                          }
+                                          $event.stopPropagation()
+                                        }
+                                      },
+                                      scopedSlots: _vm._u(
+                                        [
+                                          {
+                                            key: "after",
+                                            fn: function() {
+                                              return [
+                                                _c("q-btn", {
+                                                  attrs: {
+                                                    color: "red",
+                                                    round: "",
+                                                    dense: "",
+                                                    flat: "",
+                                                    icon: "edit",
+                                                    disable:
+                                                      validate(_vm.campoUpd) ===
+                                                        false ||
+                                                      initialValue === ""
+                                                  },
+                                                  on: {
+                                                    click: [
+                                                      function($event) {
+                                                        return _vm.actualizar_dato(
+                                                          tabla.row.id,
+                                                          "fecha",
+                                                          _vm.campoUpd
+                                                        )
+                                                      },
+                                                      function($event) {
+                                                        $event.stopPropagation()
+                                                        return set($event)
+                                                      }
+                                                    ]
+                                                  }
+                                                }),
+                                                _vm._v(" "),
+                                                _c("q-btn", {
+                                                  attrs: {
+                                                    flat: "",
+                                                    dense: "",
+                                                    color: "negative",
+                                                    icon: "cancel"
+                                                  },
+                                                  on: {
+                                                    click: function($event) {
+                                                      $event.stopPropagation()
+                                                      return cancel($event)
+                                                    }
+                                                  }
+                                                })
+                                              ]
+                                            },
+                                            proxy: true
+                                          }
+                                        ],
+                                        null,
+                                        true
+                                      ),
+                                      model: {
+                                        value: _vm.campoUpd,
+                                        callback: function($$v) {
+                                          _vm.campoUpd = $$v
+                                        },
+                                        expression: "campoUpd"
+                                      }
+                                    })
+                                  ]
+                                }
+                              }
+                            ],
+                            null,
+                            true
+                          ),
+                          model: {
+                            value: tabla.row.fecha,
+                            callback: function($$v) {
+                              _vm.$set(tabla.row, "fecha", $$v)
+                            },
+                            expression: "tabla.row.fecha"
+                          }
+                        })
+                      ],
+                      1
+                    ),
                     _vm._v(" "),
                     _c(
                       "q-td",
@@ -90008,7 +90441,59 @@ var render = function() {
             }
           }
         ])
-      })
+      }),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "q-pa-md q-gutter-sm" },
+        _vm._l(_vm.errores, function(e) {
+          return _c(
+            "ul",
+            { key: e[0] },
+            [
+              _c(
+                "q-banner",
+                {
+                  staticClass: "bg-orange text-white",
+                  attrs: { "inline-actions": "", rounded: "" },
+                  scopedSlots: _vm._u(
+                    [
+                      {
+                        key: "action",
+                        fn: function() {
+                          return [
+                            _c("q-btn", {
+                              attrs: {
+                                flat: "",
+                                color: "white",
+                                label: "Advertencia!",
+                                disabled: ""
+                              }
+                            })
+                          ]
+                        },
+                        proxy: true
+                      }
+                    ],
+                    null,
+                    true
+                  )
+                },
+                [
+                  _c("li", [
+                    _c("i", { staticClass: "material-icons md-24" }, [
+                      _vm._v("info")
+                    ]),
+                    _vm._v("\n          " + _vm._s(e[0]) + "\n        ")
+                  ])
+                ]
+              )
+            ],
+            1
+          )
+        }),
+        0
+      )
     ],
     2
   )
@@ -90260,12 +90745,6 @@ var render = function() {
                                     val.length <= 20 ||
                                     "El maximo da caracteres es de 20"
                                   )
-                                },
-                                function(val) {
-                                  return (
-                                    val.length >= 2 ||
-                                    "El minimo de caracteres es de 2"
-                                  )
                                 }
                               ]
                             },
@@ -90298,12 +90777,6 @@ var render = function() {
                                   return (
                                     val.length <= 50 ||
                                     "El maximo da caracteres es de 50"
-                                  )
-                                },
-                                function(val) {
-                                  return (
-                                    val.length >= 3 ||
-                                    "El minimo de caracteres es de 3"
                                   )
                                 }
                               ]
@@ -90338,12 +90811,6 @@ var render = function() {
                                     val.length <= 50 ||
                                     "El maximo da caracteres es de 50"
                                   )
-                                },
-                                function(val) {
-                                  return (
-                                    val.length >= 3 ||
-                                    "El minimo de caracteres es de 3"
-                                  )
                                 }
                               ]
                             },
@@ -90376,12 +90843,6 @@ var render = function() {
                                   return (
                                     val.length <= 50 ||
                                     "El maximo da caracteres es de 50"
-                                  )
-                                },
-                                function(val) {
-                                  return (
-                                    val.length >= 3 ||
-                                    "El minimo de caracteres es de 3"
                                   )
                                 }
                               ]
@@ -93596,580 +94057,6 @@ var render = function() {
           ])
         ])
       ])
-    ])
-  ])
-}
-var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.vue?vue&type=template&id=f62203b4&":
-/*!************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.vue?vue&type=template&id=f62203b4& ***!
-  \************************************************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "q-pa-md" }, [
-    _c("div", { staticClass: "row justify-center" }, [
-      _c(
-        "div",
-        { staticClass: "col-12 col-md-8" },
-        [
-          _c(
-            "q-card",
-            [
-              _c("q-card-section", { staticClass: "bg-primary text-white" }, [
-                _c("div", { staticClass: "text-h6" }, [
-                  _vm._v("Solicitar Prestamo")
-                ])
-              ]),
-              _vm._v(" "),
-              _c(
-                "q-stepper",
-                {
-                  ref: "stepper",
-                  attrs: { color: "primary", animated: "" },
-                  scopedSlots: _vm._u([
-                    {
-                      key: "navigation",
-                      fn: function() {
-                        return [
-                          _c(
-                            "q-stepper-navigation",
-                            [
-                              _c("q-btn", {
-                                attrs: {
-                                  color: "primary",
-                                  disable:
-                                    (_vm.step === 1 && _vm.rut == "") ||
-                                    (_vm.step === 3 && _vm.monto == null),
-                                  label:
-                                    _vm.step === 4 ? "Solicitar" : "Continuar"
-                                },
-                                on: {
-                                  click: [
-                                    function($event) {
-                                      return _vm.$refs.stepper.next()
-                                    },
-                                    _vm.calcularIntereses
-                                  ]
-                                }
-                              }),
-                              _vm._v(" "),
-                              _vm.step > 1
-                                ? _c("q-btn", {
-                                    staticClass: "q-ml-sm",
-                                    attrs: {
-                                      flat: "",
-                                      color: "primary",
-                                      label: "Volver"
-                                    },
-                                    on: {
-                                      click: function($event) {
-                                        return _vm.$refs.stepper.previous()
-                                      }
-                                    }
-                                  })
-                                : _vm._e()
-                            ],
-                            1
-                          )
-                        ]
-                      },
-                      proxy: true
-                    }
-                  ]),
-                  model: {
-                    value: _vm.step,
-                    callback: function($$v) {
-                      _vm.step = $$v
-                    },
-                    expression: "step"
-                  }
-                },
-                [
-                  _c(
-                    "q-step",
-                    {
-                      attrs: {
-                        name: 1,
-                        title: "Ingrese el rut del cliente",
-                        icon: "account_circle",
-                        done: _vm.step > 1
-                      }
-                    },
-                    [
-                      _c("q-input", {
-                        attrs: {
-                          outlined: "",
-                          counter: "",
-                          maxlength: "20",
-                          label: "Ingrese rut del cliente",
-                          "stack-label": "",
-                          type: "text",
-                          hint: "El rut debe ser sin punto ni guion",
-                          rules: [
-                            function(val) {
-                              return (
-                                val.length <= 20 ||
-                                "El maximo da caracteres es de 20"
-                              )
-                            },
-                            function(val) {
-                              return (
-                                val.length >= 2 ||
-                                "El minimo de caracteres es de 2"
-                              )
-                            }
-                          ]
-                        },
-                        model: {
-                          value: _vm.rut,
-                          callback: function($$v) {
-                            _vm.rut = $$v
-                          },
-                          expression: "rut"
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "q-step",
-                    {
-                      attrs: {
-                        name: 2,
-                        title: "Tipo de Prestamo",
-                        icon: "create_new_folder",
-                        done: _vm.step > 2
-                      }
-                    },
-                    [
-                      _c(
-                        "q-list",
-                        [
-                          _c(
-                            "q-item",
-                            {
-                              directives: [
-                                { name: "ripple", rawName: "v-ripple" }
-                              ],
-                              attrs: { tag: "label" }
-                            },
-                            [
-                              _c(
-                                "q-item-section",
-                                { attrs: { avatar: "" } },
-                                [
-                                  _c("q-radio", {
-                                    attrs: { val: "0" },
-                                    model: {
-                                      value: _vm.tipo,
-                                      callback: function($$v) {
-                                        _vm.tipo = $$v
-                                      },
-                                      expression: "tipo"
-                                    }
-                                  })
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "q-item-section",
-                                [
-                                  _c("q-item-label", [_vm._v("Sin Intereses")]),
-                                  _vm._v(" "),
-                                  _c(
-                                    "q-item-label",
-                                    { attrs: { caption: "" } },
-                                    [
-                                      _vm._v(
-                                        "El prestamo solicitado no generara ningún tipo de interes"
-                                      )
-                                    ]
-                                  )
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "q-item",
-                            {
-                              directives: [
-                                { name: "ripple", rawName: "v-ripple" }
-                              ],
-                              attrs: { tag: "label" }
-                            },
-                            [
-                              _c(
-                                "q-item-section",
-                                { attrs: { avatar: "" } },
-                                [
-                                  _c("q-radio", {
-                                    attrs: { val: "1" },
-                                    model: {
-                                      value: _vm.tipo,
-                                      callback: function($$v) {
-                                        _vm.tipo = $$v
-                                      },
-                                      expression: "tipo"
-                                    }
-                                  })
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "q-item-section",
-                                [
-                                  _c("q-item-label", [_vm._v("Con Intereses")]),
-                                  _vm._v(" "),
-                                  _c(
-                                    "q-item-label",
-                                    { attrs: { caption: "" } },
-                                    [
-                                      _vm._v(
-                                        "El prestamo solicitado generara un interes con un valor que puede definir a continuación"
-                                      )
-                                    ]
-                                  )
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("q-slide-transition", [
-                        _c(
-                          "div",
-                          {
-                            directives: [
-                              {
-                                name: "show",
-                                rawName: "v-show",
-                                value: _vm.tipo == "1",
-                                expression: "tipo == '1'"
-                              }
-                            ]
-                          },
-                          [
-                            _c("q-input", {
-                              attrs: {
-                                outlined: "",
-                                counter: "",
-                                maxlength: "3",
-                                label: "Ingrese porcentaje",
-                                "stack-label": "",
-                                type: "number",
-                                hint:
-                                  "Ingrese el porcentaje que desea de interes sin simbolo",
-                                rules: [
-                                  function(val) {
-                                    return (
-                                      val.length <= 3 ||
-                                      "El maximo da caracteres es de 3"
-                                    )
-                                  },
-                                  function(val) {
-                                    return (
-                                      val.length >= 1 ||
-                                      "El minimo de caracteres es de 2"
-                                    )
-                                  }
-                                ]
-                              },
-                              model: {
-                                value: _vm.interes,
-                                callback: function($$v) {
-                                  _vm.interes = $$v
-                                },
-                                expression: "interes"
-                              }
-                            })
-                          ],
-                          1
-                        )
-                      ])
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "q-step",
-                    {
-                      attrs: {
-                        name: 3,
-                        title: "Monto y fecha",
-                        icon: "assignment"
-                      }
-                    },
-                    [
-                      _c(
-                        "div",
-                        { staticClass: "q-gutter-md" },
-                        [
-                          _c("q-input", {
-                            attrs: {
-                              outlined: "",
-                              counter: "",
-                              maxlength: "20",
-                              label: "Ingrese monto a solicitar",
-                              "stack-label": "",
-                              type: "number",
-                              hint: "El monto debe de ser ingresado sin puntos",
-                              rules: [
-                                function(val) {
-                                  return (
-                                    val.length <= 20 ||
-                                    "El maximo da caracteres es de 20"
-                                  )
-                                },
-                                function(val) {
-                                  return (
-                                    val.length >= 2 ||
-                                    "El minimo de caracteres es de 1"
-                                  )
-                                }
-                              ]
-                            },
-                            model: {
-                              value: _vm.monto,
-                              callback: function($$v) {
-                                _vm.monto = $$v
-                              },
-                              expression: "monto"
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("q-input", {
-                            attrs: {
-                              outlined: "",
-                              counter: "",
-                              label: "Fecha del prestamo",
-                              "stack-label": "",
-                              type: "date",
-                              hint:
-                                "Seleccione la fecha en la cual se genero el prestamo"
-                            },
-                            model: {
-                              value: _vm.fecha,
-                              callback: function($$v) {
-                                _vm.fecha = $$v
-                              },
-                              expression: "fecha"
-                            }
-                          })
-                        ],
-                        1
-                      )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "q-step",
-                    {
-                      attrs: {
-                        name: 4,
-                        title: "Confimar datos prestamo",
-                        icon: "add_comment"
-                      }
-                    },
-                    [
-                      _c(
-                        "q-list",
-                        [
-                          _c(
-                            "q-item",
-                            [
-                              _c(
-                                "q-item-section",
-                                [
-                                  _c("q-item-label", [
-                                    _vm._v("Solicitante del Prestamo")
-                                  ]),
-                                  _vm._v(" "),
-                                  _c(
-                                    "q-item-label",
-                                    { attrs: { caption: "", lines: "2" } },
-                                    [_vm._v(_vm._s(_vm.usuario))]
-                                  )
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c("q-separator", {
-                            attrs: { spaced: "", inset: "" }
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "q-item",
-                            [
-                              _c(
-                                "q-item-section",
-                                [
-                                  _c("q-item-label", [
-                                    _vm._v("Tipo de prestamo")
-                                  ]),
-                                  _vm._v(" "),
-                                  _c(
-                                    "q-item-label",
-                                    { attrs: { caption: "" } },
-                                    [
-                                      _c(
-                                        "q-label",
-                                        {
-                                          directives: [
-                                            {
-                                              name: "show",
-                                              rawName: "v-show",
-                                              value: _vm.tipo == "0",
-                                              expression: "tipo == '0'"
-                                            }
-                                          ]
-                                        },
-                                        [_vm._v("Sin Intereses")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "q-label",
-                                        {
-                                          directives: [
-                                            {
-                                              name: "show",
-                                              rawName: "v-show",
-                                              value: _vm.tipo == "1",
-                                              expression: "tipo == '1'"
-                                            }
-                                          ]
-                                        },
-                                        [_vm._v("Con Intereses")]
-                                      )
-                                    ],
-                                    1
-                                  )
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c("q-separator", {
-                            attrs: { spaced: "", inset: "" }
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "q-item",
-                            [
-                              _c(
-                                "q-item-section",
-                                [
-                                  _c("q-item-label", [
-                                    _vm._v("Monto Solicitado")
-                                  ]),
-                                  _vm._v(" "),
-                                  _c(
-                                    "q-item-label",
-                                    { attrs: { caption: "" } },
-                                    [_vm._v(_vm._s(_vm.monto))]
-                                  )
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c("q-separator", {
-                            attrs: { spaced: "", inset: "" }
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "q-item",
-                            [
-                              _c(
-                                "q-item-section",
-                                [
-                                  _c("q-item-label", [
-                                    _vm._v("Total con Intereses")
-                                  ]),
-                                  _vm._v(" "),
-                                  _c(
-                                    "q-item-label",
-                                    { attrs: { caption: "" } },
-                                    [_vm._v(_vm._s(_vm.monto))]
-                                  )
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c("q-separator", {
-                            attrs: { spaced: "", inset: "" }
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "q-item",
-                            [
-                              _c(
-                                "q-item-section",
-                                [
-                                  _c("q-item-label", [
-                                    _vm._v("Fecha Solicitud Prestamo")
-                                  ]),
-                                  _vm._v(" "),
-                                  _c(
-                                    "q-item-label",
-                                    { attrs: { caption: "" } },
-                                    [_vm._v(_vm._s(_vm.fecha))]
-                                  )
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
-            ],
-            1
-          )
-        ],
-        1
-      )
     ])
   ])
 }
@@ -111126,72 +111013,36 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.js?vue&type=script&lang=js&":
-/*!***********************************************************************************************************!*\
-  !*** ./resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.js?vue&type=script&lang=js& ***!
-  \***********************************************************************************************************/
+/***/ "./resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.js":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.js ***!
+  \**********************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_modulo_prestamos_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!./modulo_prestamos.js?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.js?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_modulo_prestamos_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.vue":
-/*!***********************************************************************************!*\
-  !*** ./resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.vue ***!
-  \***********************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _modulo_prestamos_vue_vue_type_template_id_f62203b4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modulo_prestamos.vue?vue&type=template&id=f62203b4& */ "./resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.vue?vue&type=template&id=f62203b4&");
-/* harmony import */ var _modulo_prestamos_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modulo_prestamos.js?vue&type=script&lang=js& */ "./resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.js?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _modulo_prestamos_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _modulo_prestamos_vue_vue_type_template_id_f62203b4___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _modulo_prestamos_vue_vue_type_template_id_f62203b4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.vue?vue&type=template&id=f62203b4&":
-/*!******************************************************************************************************************!*\
-  !*** ./resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.vue?vue&type=template&id=f62203b4& ***!
-  \******************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_modulo_prestamos_vue_vue_type_template_id_f62203b4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./modulo_prestamos.vue?vue&type=template&id=f62203b4& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.vue?vue&type=template&id=f62203b4&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_modulo_prestamos_vue_vue_type_template_id_f62203b4___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_modulo_prestamos_vue_vue_type_template_id_f62203b4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      //VARIABLES PARA EL STEPPER FORMULARIO
+      step: 1,
+      rut: '',
+      monto: null,
+      tipo: false,
+      interes: null,
+      fecha: '',
+      //VARIABLES QUE RESCATAN AL USUARIO
+      usuario: 'Bryan Vidal Díaz'
+    };
+  },
+  methods: {
+    calcularIntereses: function calcularIntereses() {
+      var valorConIneteres = monto * intereses;
+      console.log(valorConIneteres);
+    }
+  }
+});
 
 /***/ }),
 
@@ -111515,7 +111366,7 @@ var routes_empa = [{
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_404_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/404.vue */ "./resources/js/components/404.vue");
 /* harmony import */ var _components_auth_auth_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/auth/auth.vue */ "./resources/js/components/auth/auth.vue");
-/* harmony import */ var _components_auth_prestamos_prestamos_vue_modulo_prestamos__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/auth/prestamos/prestamos_vue/modulo_prestamos */ "./resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.vue");
+/* harmony import */ var _components_auth_prestamos_prestamos_vue_modulo_prestamos__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/auth/prestamos/prestamos_vue/modulo_prestamos */ "./resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.js");
  //loged
 
 
@@ -111786,7 +111637,6 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
 __webpack_require__(/*! C:\Users\david\Desktop\Proyectos NeoFox\neofox_contable\resources\js\app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! C:\Users\david\Desktop\Proyectos NeoFox\neofox_contable\resources\sass\app.scss */"./resources/sass/app.scss");
 
@@ -111810,10 +111660,6 @@ module.exports = __webpack_require__(/*! C:\Users\david\Desktop\Proyectos NeoFox
   \**********************/
 /*! no static exports found */
 /***/ (function(module, exports) {
-=======
-__webpack_require__(/*! C:\Users\v_and\Desktop\VUE\neofox_contable\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\v_and\Desktop\VUE\neofox_contable\resources\sass\app.scss */"./resources/sass/app.scss");
->>>>>>> 80d9f97386fa1333dd62269b55de45ea3f702306
 
 /* (ignored) */
 

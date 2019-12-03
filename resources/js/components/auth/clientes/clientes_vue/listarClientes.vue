@@ -50,7 +50,7 @@
       no-data-label="Aun no hay datos para mostrar."
       no-results-label="No se han encontrado resultados."
       rows-per-page-label="Cantidad:"
-      loading-label="Cargando"
+      loading-label="Cargando..."
       row-key="name"
       :data="listarClientes"
       :columns="clientes"
@@ -61,94 +61,58 @@
       :rows-per-page-options="[5,10,15,30,50,100,0]"
       class="my-sticky-header-table"
     >
-      <!-- funciones especiales -->
+        <!-- funciones especiales -->
       <template v-slot:top="pantalla">
         <q-space />
         <!-- filtro de datos -->
-        <div class="col">
-          <q-toggle
+        <div class="col-6 col-md-2">
+            <q-select
             v-model="visibleColumns"
-            left-label
-            color="green"
-            checked-icon="check"
-            unchecked-icon="clear"
-            val="id"
-            label="ID"
-          />
-          <q-toggle
-            v-model="visibleColumns"
-            left-label
-            color="green"
-            checked-icon="check"
-            unchecked-icon="clear"
-            val="fecha_nacimiento"
-            label="Fecha de Nacimiento"
-          />
-          <q-toggle
-            v-model="visibleColumns"
-            left-label
-            color="green"
-            checked-icon="check"
-            unchecked-icon="clear"
-            val="rut"
-            label="Rut"
-          />
-          <q-toggle
-            v-model="visibleColumns"
-            left-label
-            color="green"
-            checked-icon="check"
-            unchecked-icon="clear"
-            val="nombres"
-            label="Nombres"
-          />
-          <q-toggle
-            v-model="visibleColumns"
-            left-label
-            color="green"
-            checked-icon="check"
-            unchecked-icon="clear"
-            val="apellido_paterno"
-            label="Apellido Paterno"
-          />
-          <q-toggle
-            v-model="visibleColumns"
-            left-label
-            color="green"
-            checked-icon="check"
-            unchecked-icon="clear"
-            val="apellido_materno"
-            label="Apellido Materno"
-          />
-          <!-- full screen -->
-          <q-btn
-            flat
-            round
+            multiple
             dense
-            :icon="pantalla.inFullscreen ? 'fullscreen_exit' : 'fullscreen'"
-            @click="pantalla.toggleFullscreen"
-            class="q-ml-md"
+            filled 
+            display-value="Filtrar"
+            emit-value
+            map-options
+            :options="clientes"
+            option-value="name"
+            style="min-width: 150px;"
+            color="green"
+            bg-color="white"
           />
-          <label>Pantalla Completa</label>
+        </div>
+          <!-- full screen -->
+          <div class="col-6 col-md-4">
+            <q-btn
+              flat
+              round
+              dense
+              :icon="pantalla.inFullscreen ? 'fullscreen_exit' : 'fullscreen'"
+              @click="pantalla.toggleFullscreen"
+              class="q-ml-md"
+            />
+            <label>Pantalla Completa</label>
+          </div>
 
-          <div class="row justify-end">
-            <div class="col-12 col-md-4">
-              <q-input
-                dark
-                borderless
-                input-class="text-right"
-                v-model="filter"
-                placeholder="Buscar"
-                class="q-ml-md"
-              >
-                <template v-slot:append>
-                  <q-icon v-if="filter === ''" name="search" />
-                  <q-icon v-else name="clear" class="cursor-pointer" @click="filter = ''" />
-                </template>
-              </q-input>
+          <div class="col-12 col-md-6">
+            <div class="row justify-end">
+              <div class="col-12 col-md-6">
+                <q-input
+                  dark
+                  borderless
+                  input-class="text-right"
+                  v-model="filter"
+                  placeholder="Buscar"
+                  class="q-ml-md"
+                >
+                  <template v-slot:append>
+                    <q-icon v-if="filter === ''" name="search" />
+                    <q-icon v-else name="clear" class="cursor-pointer" @click="filter = ''" />
+                  </template>
+                </q-input>
+              </div>
             </div>
           </div>
-        </div>
       </template>
 
       <template v-slot:body="tabla">

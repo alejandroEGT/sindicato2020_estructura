@@ -17,10 +17,15 @@
                   <q-select
                     standout="bg-blue text-white"
                     v-model="clientes"
-                    :options="selectClientes"
+                    :options="options"
                     option-value="id"
                     option-label="cliente_deuda"
                     label="Clientes"
+                    @filter="filterFn"
+                    use-input
+                    fill-input
+                    hide-selected
+                    input-debounce="0"
                   />
                 </div>
 
@@ -35,7 +40,7 @@
                   />
                 </div>
                 <div class="col-12 col-md-4">
-                    <q-input
+                  <q-input
                     outlined
                     counter
                     maxlength="50"
@@ -46,7 +51,7 @@
                   />
                 </div>
                 <div class="col-12 col-md-8">
-                    <q-input
+                  <q-input
                     outlined
                     counter
                     maxlength="500"
@@ -58,7 +63,7 @@
                   />
                 </div>
                 <div class="col-12 col-md-4">
-                    <q-input
+                  <q-input
                     outlined
                     counter
                     maxlength="10"
@@ -68,7 +73,6 @@
                     type="date"
                   />
                 </div>
-
               </div>
             </q-card-section>
 
@@ -114,7 +118,7 @@
             </q-card-actions>
           </q-card>
 
-            <!-- alertas -->
+          <!-- alertas -->
           <div class="q-pa-md q-gutter-sm">
             <ul v-for="e in errores" :key="e[0]">
               <q-banner inline-actions rounded class="bg-orange text-white">
@@ -128,7 +132,6 @@
               </q-banner>
             </ul>
           </div>
-
         </div>
       </div>
     </div>

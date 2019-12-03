@@ -18,7 +18,7 @@ export default {
                 'opcion'
             ],
             clientes: [
-                { classes: 'ellipsis', name: 'id', align: 'center', label: 'id', field: 'id', sortable: true },
+                { classes: 'ellipsis', name: 'id', align: 'center', label: 'ID', field: 'id', sortable: true },
                 { classes: 'ellipsis', name: 'fecha_nacimiento', align: 'center', label: 'Fecha de Nacimiento', field: 'fecha_nacimiento', sortable: true },
                 { classes: 'ellipsis', name: 'rut', align: 'center', label: 'Rut', field: 'rut', sortable: true },
                 { classes: 'ellipsis', name: 'nombres', align: 'center', label: 'Nombres', field: 'nombres', sortable: true },
@@ -114,7 +114,7 @@ export default {
         },
 
         show(component) {
-            this.$refs[''+component+''].show()
+            this.$refs[''+component+''].show();
         },
 
         onDialogHide() {
