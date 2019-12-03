@@ -6,90 +6,69 @@
           <q-card class="my-card">
             <!-- titulo  -->
             <q-card-section class="bg-primary text-white">
-              <div class="text-h6">Registro de Clientes</div>
+              <div class="text-h6">Deudas de Clientes</div>
             </q-card-section>
 
             <q-separator />
 
-            <!-- formulario -->
             <q-card-section>
               <div class="row justify-start q-col-gutter-md">
                 <div class="col-12 col-md-4">
-                  <q-input
+                  <q-select
+                    standout="bg-blue text-white"
+                    v-model="clientes"
+                    :options="selectClientes"
+                    option-value="id"
+                    option-label="cliente_deuda"
+                    label="Clientes"
+                  />
+                </div>
+
+                <div class="col-12 col-md-4">
+                  <q-select
+                    standout="bg-blue text-white"
+                    v-model="tipoDeuda"
+                    :options="selectTipoDeuda"
+                    option-value="id"
+                    option-label="tipo"
+                    label="Tipo de deuda"
+                  />
+                </div>
+                <div class="col-12 col-md-4">
+                    <q-input
+                    outlined
+                    counter
+                    maxlength="50"
+                    v-model="monto"
+                    label="Monto que debe"
+                    stack-label
+                    type="number"
+                  />
+                </div>
+                <div class="col-12 col-md-8">
+                    <q-input
+                    outlined
+                    counter
+                    maxlength="500"
+                    v-model="descripcion"
+                    label="Descripcion de la deuda"
+                    stack-label
+                    autogrow
+                    type="text"
+                  />
+                </div>
+                <div class="col-12 col-md-4">
+                    <q-input
                     outlined
                     counter
                     maxlength="10"
-                    v-model="fechaNac"
-                    label="Ingrese fecha de nacimiento"
+                    v-model="fechaTope"
+                    label="fecha tope de pago"
                     stack-label
                     type="date"
                   />
                 </div>
 
-                <div class="col-12 col-md-4">
-                  <q-input
-                    outlined
-                    counter
-                    maxlength="20"
-                    v-model="rut"
-                    label="Ingrese rut del cliente"
-                    stack-label
-                    type="text"
-                    hint="El rut debe ser sin punto ni guion"
-                    :rules="[
-                              val => val.length <= 20 || 'El maximo da caracteres es de 20' , 
-                              val => val.length >= 2 || 'El minimo de caracteres es de 2'
-                            ]"
-                  />
-                </div>
-
-                <div class="col-12 col-md-4">
-                  <q-input
-                    outlined
-                    counter
-                    maxlength="50"
-                    v-model="nombres"
-                    label="Ingrese nombres"
-                    stack-label
-                    type="text"
-                    :rules="[
-                              val => val.length <= 50 || 'El maximo da caracteres es de 50',
-                              val => val.length >= 3 || 'El minimo de caracteres es de 3'
-                            ]"
-                  />
-                </div>
-
-                <div class="col-12 col-md-4">
-                  <q-input
-                    outlined
-                    counter
-                    maxlength="50"
-                    v-model="aPaterno"
-                    label="Ingrese apellido paterno"
-                    stack-label
-                    type="text"
-                    :rules="[
-                              val => val.length <= 50 || 'El maximo da caracteres es de 50',
-                              val => val.length >= 3 || 'El minimo de caracteres es de 3'
-                            ]"
-                  />
-                </div>
-
-                <div class="col-12 col-md-4">
-                  <q-input
-                    outlined
-                    counter
-                    maxlength="50"
-                    v-model="aMaterno"
-                    label="Ingrese apellido materno"
-                    stack-label
-                    type="text"
-                    :rules="[
-                              val => val.length <= 50 || 'El maximo da caracteres es de 50',
-                              val => val.length >= 3 || 'El minimo de caracteres es de 3'
-                            ]"
-                  />
-                </div>
               </div>
             </q-card-section>
 
@@ -100,7 +79,7 @@
               <q-btn
                 :loading="loading1"
                 color="secondary"
-                @click="simulateProgress(1),registrar_clientes()"
+                @click="simulateProgress(1), registrar_clientes_deudas()"
                 icon-right="send"
                 label="ingresar"
               >
@@ -111,15 +90,16 @@
 
               <q-btn
                 :loading="loading2"
-                color="primary"
-                @click="simulateProgress(2),url_listado_clientes()"
-                icon-right="table_chart"
-                label="tabla"
+                color="blue"
+                @click="simulateProgress(2), url_listar_deudas_clientes()"
+                icon-right="send"
+                label="Tabla"
               >
                 <template v-slot:loading>
                   <q-spinner-facebook />
                 </template>
               </q-btn>
+
               <q-btn
                 :loading="loading3"
                 color="red"
@@ -134,7 +114,7 @@
             </q-card-actions>
           </q-card>
 
-          <!-- alertas -->
+            <!-- alertas -->
           <div class="q-pa-md q-gutter-sm">
             <ul v-for="e in errores" :key="e[0]">
               <q-banner inline-actions rounded class="bg-orange text-white">
@@ -148,11 +128,13 @@
               </q-banner>
             </ul>
           </div>
+
         </div>
       </div>
     </div>
   </div>
 </template>
 
-<script src="../clientes_js/registroClientes.js"></script>
-<style src="../clientes_css/registroClientes.css"></style>
+
+<script src="../clientes_js/deudasClientes.js"></script>
+<style src="../clientes_css/deudasClientes.css"></style>

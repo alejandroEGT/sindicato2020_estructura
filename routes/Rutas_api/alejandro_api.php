@@ -17,6 +17,21 @@
 
 	Route::get('select_nombre','LiquidacionesController@select_nombre');
 	Route::get('traer_datos_persona/{id}','LiquidacionesController@traer_datos_persona');
+
+	Route::post('ingresar_detalle','DetallehaberesDescuentosController@insertar');
+	Route::get('listar_detalle','DetallehaberesDescuentosController@listar_detalle');
+	Route::get('eliminar_detalle_hd/{id}','DetallehaberesDescuentosController@eliminar_detalle_hd');
+	Route::get('detalle_h_d','DetallehaberesDescuentosController@select_detalle_h_d');
+
+	Route::get('afp_y_isapre','LiquidacionesController@afp_y_isapre');
+
+
+	
+	Route::get('listar_hh_dd','LiquidacionesController@listar_hh_dd');
+	Route::post('guardar_liquidacion_datos_basicos','LiquidacionesController@guardar_liquidacion_datos_basicos');
+	Route::post('guardar_liquidacion_detalle','LiquidacionesController@guardar_liquidacion_detalle');
+	Route::get('listar_liquidaciones','LiquidacionesController@listar_liquidaciones');
+	
 	
 	
 

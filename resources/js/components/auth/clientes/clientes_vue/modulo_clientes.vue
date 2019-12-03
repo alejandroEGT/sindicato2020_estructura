@@ -2,7 +2,7 @@
   <div>
     <div class="q-pa-md q-gutter-md">
       <div class="row justify-center">
-        <div class="col-12 col-md-6">
+        <div class="col-12 col-md-12">
           <q-card class="my-card">
             <!-- titulo  -->
             <q-card-section class="bg-primary text-white">
@@ -11,22 +11,53 @@
 
             <q-separator />
 
-            <div class="row justify-center">
-              <q-card-actions>
+            <q-card-actions class="q-col-gutter-md text-center">
+              <div class="col-12 col-md-3">
                 <q-btn
+                  class="full-width"
                   color="blue"
                   icon-right="person_add"
-                  @click="url_registro_clientes"
+                  @click="url_registro_clientes()"
                   label="Registro de Clientes"
                 />
+              </div>
+              <div class="col-12 col-md-3">
                 <q-btn
+                  class="full-width"
                   color="blue"
                   icon-right="format_list_numbered"
-                  @click="url_listado_clientes"
+                  @click="url_listado_clientes()"
                   label="Listado de Clientes"
                 />
-              </q-card-actions>
-            </div>
+              </div>
+              <div class="col-12 col-md-3">
+                <q-btn
+                  class="full-width"
+                  color="green"
+                  icon-right="format_list_numbered"
+                  @click="url_deudas_clientes()"
+                  label="Clientes con Deudas"
+                />
+              </div>
+              <div class="col-12 col-md-3">
+                <q-btn
+                  class="full-width"
+                  color="green"
+                  icon-right="format_list_numbered"
+                  @click="url_listado_deudas_clientes()"
+                  label="listado de Clientes con Deudas"
+                />
+              </div>
+              <div class="col-12 col-md-3">
+                <q-btn
+                  class="full-width"
+                  color="red"
+                  icon-right="settings_backup_restore"
+                  @click="url_index"
+                  label="Volver"
+                />
+              </div>
+            </q-card-actions>
           </q-card>
         </div>
       </div>

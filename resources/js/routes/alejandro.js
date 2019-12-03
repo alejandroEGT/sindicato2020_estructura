@@ -8,6 +8,8 @@ import ListarCuenta from "../components/auth/cuentas/cuentas_vue/listar_cuenta.v
 import Formulario from "../components/auth/cuentas/cuentas_vue/formulario.vue";
 import Liquidaciones from "../components/auth/liquidaciones/liquidaciones_vue/modulo_liquidaciones.vue";
 import FormularioLiq from "../components/auth/liquidaciones/liquidaciones_vue/formulario_liquidaciones.vue";
+import Detalle_H_D from "../components/auth/liquidaciones/liquidaciones_vue/detalle_haberes_descuentos.vue";
+import ListarLiqu from "../components/auth/liquidaciones/liquidaciones_vue/listar.vue"
 
 let routes_empa = [
 
@@ -26,6 +28,8 @@ let routes_empa = [
         { path: '/listar-cuenta', component: ListarCuenta, name: 'ListarCuenta' },
         { path: '/formulario-cuenta', component: Formulario, name: 'Formulario' },
         { path: '/formulario-liquidaciones', component: FormularioLiq, name: 'FormularioLiq' },
+        { path: '/detalle-haberes-descuentos', component: Detalle_H_D, name: 'Detalle_H_D' },
+        { path: '/listar-liquidaciones', component: ListarLiqu, name: 'ListarLiqu' },
         
        
     ]

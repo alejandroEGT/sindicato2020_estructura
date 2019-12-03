@@ -13,11 +13,14 @@
 
 			      <div class="q-pa-md">
 			        <div class="row q-col-gutter-md">
+						<div class="col-12 col-md-3">
+			        		<q-btn @click="url('/detalle-haberes-descuentos')" color="green" class="block" icon="create" label="det. haberes y descuentos" />
+			        	</div>
 			        	<div class="col-12 col-md-2">
 			        		<q-btn @click="url('/formulario-liquidaciones')" color="primary" class="block" icon="create" label="Formulario" />
 			        	</div>
 			        	<div class="col-12 col-md-2">
-			        		<q-btn @click="url" color="primary" class="block" icon="list" label="lista Generadas" />
+			        		<q-btn @click="url('/listar-liquidaciones')" color="primary" class="block" icon="list" label="lista Generadas" />
 			        	</div>
 			        	<!-- <div class="col-12 col-md-2">
 			        		<q-btn @click="url_formulario_cuenta" color="primary" class="block" icon="attach_file" label="Formulario" />
