@@ -3677,226 +3677,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/proveedores/proveedores_vue/modulo_proveedor.vue?vue&type=script&lang=js&":
-/*!************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/auth/proveedores/proveedores_vue/modulo_proveedor.vue?vue&type=script&lang=js& ***!
-  \************************************************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  methods: {
-    url_registro_proveedor: function url_registro_proveedor() {
-      this.$router.push("/ingreso_proveedor");
-    },
-    url_listar_proveedor: function url_listar_proveedor() {
-      this.$router.push("/listar_proveedor");
-    }
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/proveedores/proveedores_vue/registro_proveedores.vue?vue&type=script&lang=js&":
-/*!****************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/auth/proveedores/proveedores_vue/registro_proveedores.vue?vue&type=script&lang=js& ***!
-  \****************************************************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    var _ref;
-
-    return _ref = {
-      codigo: null,
-      razon_social: null,
-      telefono: null,
-      direccion: null,
-      ubicacion: null,
-      correo: null,
-      pagina: null,
-      rut: null,
-      detraccion: null,
-      contacto: null,
-      giro: null,
-      procedencia: null,
-      tipo: null,
-      giro_opt: [],
-      pro_opt: []
-    }, _defineProperty(_ref, "tipo", null), _defineProperty(_ref, "tipo_opt", []), _ref;
-  },
-  methods: {
-    registroProveedor: function registroProveedor() {
-      var datos = {
-        codigo: this.codigo,
-        razon_social: this.razon_social,
-        direccion: this.direccion,
-        ubicacion: this.ubicacion,
-        telefono: this.telefono,
-        correo: this.correo,
-        pagina: this.pagina,
-        giro: this.giro.id,
-        contacto: this.contacto,
-        procedencia: this.procedencia.id,
-        detraccion: this.detraccion,
-        rut: this.rut,
-        tipo: this.tipo.id
-      };
-      axios.post("api/ingresar_proveedor", datos).then(function (res) {
-        console.log(res.data.mensaje);
-
-        if (res.data.estado == 'success') {
-          alert(res.data.mensaje);
-        }
-      });
-    },
-    traerProcedencia: function traerProcedencia() {
-      var _this = this;
-
-      axios.get("api/traer_procedencia").then(function (res) {
-        console.log(res.data);
-        _this.pro_opt = res.data;
-        console.log(_this.pro_opt);
-      });
-    },
-    traerGiros: function traerGiros() {
-      var _this2 = this;
-
-      axios.get("api/traer_giros").then(function (res) {
-        _this2.giro_opt = res.data;
-      });
-    },
-    traerTipos: function traerTipos() {
-      var _this3 = this;
-
-      axios.get("api/traer_tipos").then(function (res) {
-        _this3.tipo_opt = res.data;
-      });
-    }
-  },
-  created: function created() {//this.traerProcedencia();
-  },
-  mounted: function mounted() {
-    this.traerProcedencia();
-    this.traerGiros();
-    this.traerTipos();
-  }
-});
-
-/***/ }),
-
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/proveedores/proveedores_vue/tabla_proveedor.vue?vue&type=script&lang=js&":
 /*!***********************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/auth/proveedores/proveedores_vue/tabla_proveedor.vue?vue&type=script&lang=js& ***!
@@ -5204,6 +4984,113 @@ __webpack_require__.r(__webpack_exports__);
     },
     url_formulario_cuenta: function url_formulario_cuenta() {
       this.$router.push('/formulario-cuenta');
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./resources/js/components/auth/proveedores/proveedores_js/moduloProveedores.js?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./resources/js/components/auth/proveedores/proveedores_js/moduloProveedores.js?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  methods: {
+    crear_reunion: function crear_reunion() {
+      this.$router.push('/ingreso_proveedor');
+    },
+    traer_reuniones: function traer_reuniones() {
+      this.$router.push('/listar_proveedor');
+    },
+    volver: function volver() {
+      this.$router.push('/index');
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./resources/js/components/auth/proveedores/proveedores_js/registroProveedores.js?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./resources/js/components/auth/proveedores/proveedores_js/registroProveedores.js?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      loading1: false,
+      loading2: false,
+      loading3: false,
+      progress: false,
+      showing: false,
+      fecha: null,
+      hora: null,
+      titulo: null,
+      cuerpo: null,
+      step: 1
+    };
+  },
+  methods: {
+    simulateProgress: function simulateProgress(number) {
+      var _this = this;
+
+      // we set loading state
+      this["loading".concat(number)] = true; // simulate a delay
+
+      setTimeout(function () {
+        // we're done, we reset loading state
+        _this["loading".concat(number)] = false;
+      }, 3000);
+    },
+    guardar: function guardar() {
+      var _this2 = this;
+
+      var data = {
+        'fecha': this.fecha,
+        'hora': this.hora,
+        'titulo': this.titulo,
+        'cuerpo': this.cuerpo
+      };
+      axios.post('api/ingresar_reunion', data).then(function (res) {
+        if (res.data.estado = 'success') {
+          _this2.limpiar();
+
+          _this2.$q.notify({
+            color: "green-4",
+            textColor: "white",
+            icon: "cloud_done",
+            message: res.data.mensaje
+          });
+        } else {
+          _this2.$q.notify({
+            color: "red-4",
+            textColor: "white",
+            icon: "cloud_done",
+            message: res.data.mensaje
+          });
+        }
+      });
+    },
+    limpiar: function limpiar() {
+      this.fecha = '';
+      this.hora = '';
+      this.titulo = '';
+      this.cuerpo = '';
+    },
+    traer_reuniones: function traer_reuniones() {
+      this.$router.push('/traer-reuniones');
+    },
+    volver: function volver() {
+      this.$router.push('/modulo-reunion');
     }
   }
 });
@@ -94319,67 +94206,67 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "q-pa-md" }, [
-    _c("div", { staticClass: "row justify-center" }, [
-      _c(
-        "div",
-        { staticClass: "col-12 col-md-10" },
-        [
-          _c(
-            "q-card",
-            { staticClass: "my-card" },
-            [
-              _c("q-card-section", { staticClass: "bg-primary text-white" }, [
-                _c("div", { staticClass: "text-h6" }, [_vm._v("Proveedores")])
-              ]),
-              _vm._v(" "),
-              _c("q-separator"),
-              _vm._v(" "),
-              _c("q-card-section", { staticClass: "text-white" }, [
-                _c("div", { staticClass: "q-pa-md" }, [
-                  _c("div", { staticClass: "row q-col-gutter-md" }, [
+  return _c("div", [
+    _c("div", { staticClass: "q-pa-md q-gutter-md" }, [
+      _c("div", { staticClass: "row justify-center" }, [
+        _c(
+          "div",
+          { staticClass: "col-12 col-md-6" },
+          [
+            _c(
+              "q-card",
+              { staticClass: "my-card" },
+              [
+                _c("q-card-section", { staticClass: "bg-primary text-white" }, [
+                  _c("div", { staticClass: "text-h5 text-center" }, [
+                    _vm._v("Proveedores")
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("q-separator"),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "row justify-center" },
+                  [
                     _c(
-                      "div",
-                      { staticClass: "col-12 col-md-2" },
+                      "q-card-actions",
                       [
                         _c("q-btn", {
-                          staticClass: "block",
-                          attrs: {
-                            color: "primary",
-                            icon: "create",
-                            label: "Ingresar Proveedores"
-                          },
-                          on: { click: _vm.url_registro_proveedor }
-                        })
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "col-12 col-md-2" },
-                      [
+                          attrs: { color: "blue", label: "Crear Proveedor" },
+                          on: { click: _vm.crear_reunion }
+                        }),
+                        _vm._v(" "),
                         _c("q-btn", {
-                          staticClass: "block",
                           attrs: {
-                            color: "primary",
-                            icon: "create",
+                            color: "blue",
+                            "icon-right": "format_list_numbered",
                             label: "Proveedores"
                           },
-                          on: { click: _vm.url_listar_proveedor }
+                          on: { click: _vm.traer_reuniones }
+                        }),
+                        _vm._v(" "),
+                        _c("q-btn", {
+                          attrs: {
+                            color: "red",
+                            "icon-right": "settings_backup_restore",
+                            label: "Volver"
+                          },
+                          on: { click: _vm.volver }
                         })
                       ],
                       1
                     )
-                  ])
-                ])
-              ])
-            ],
-            1
-          )
-        ],
-        1
-      )
+                  ],
+                  1
+                )
+              ],
+              1
+            )
+          ],
+          1
+        )
+      ])
     ])
   ])
 }
@@ -94417,7 +94304,7 @@ var render = function() {
             [
               _c("q-card-section", { staticClass: "bg-primary text-white" }, [
                 _c("div", { staticClass: "text-h6 text-center" }, [
-                  _vm._v("Proveedores/Ingreso")
+                  _vm._v("Formulario Proveedores")
                 ])
               ]),
               _vm._v(" "),
@@ -94426,209 +94313,305 @@ var render = function() {
               _c("q-card-section", [
                 _c(
                   "div",
-                  { staticClass: "q-pa-md" },
+                  { staticClass: "row justify-start q-col-gutter-md" },
                   [
-                    _c("q-input", {
-                      attrs: { label: "Ingrese el codigo", "stack-label": "" },
-                      model: {
-                        value: _vm.codigo,
-                        callback: function($$v) {
-                          _vm.codigo = $$v
-                        },
-                        expression: "codigo"
-                      }
-                    }),
+                    _c(
+                      "div",
+                      { staticClass: "col-4 col-md-4" },
+                      [
+                        _c("q-input", {
+                          attrs: {
+                            outlined: "",
+                            label: "Ingrese codigo identificador",
+                            "stack-label": "",
+                            type: "text",
+                            maxlength: "20",
+                            counter: ""
+                          },
+                          model: {
+                            value: _vm.codigo,
+                            callback: function($$v) {
+                              _vm.codigo = $$v
+                            },
+                            expression: "codigo"
+                          }
+                        })
+                      ],
+                      1
+                    ),
                     _vm._v(" "),
-                    _c("q-input", {
-                      attrs: {
-                        label: "Ingrese la razon social",
-                        "stack-label": ""
-                      },
-                      model: {
-                        value: _vm.razon_social,
-                        callback: function($$v) {
-                          _vm.razon_social = $$v
-                        },
-                        expression: "razon_social"
-                      }
-                    }),
+                    _c(
+                      "div",
+                      { staticClass: "col-4 col-md-4" },
+                      [
+                        _c("q-input", {
+                          attrs: {
+                            outlined: "",
+                            label: "Ingrese RUT empresa",
+                            "stack-label": "",
+                            type: "text",
+                            maxlength: "20",
+                            counter: ""
+                          },
+                          model: {
+                            value: _vm.rut,
+                            callback: function($$v) {
+                              _vm.rut = $$v
+                            },
+                            expression: "rut"
+                          }
+                        })
+                      ],
+                      1
+                    ),
                     _vm._v(" "),
-                    _c("q-input", {
-                      attrs: {
-                        label: "Ingrese la direccion",
-                        "stack-label": ""
-                      },
-                      model: {
-                        value: _vm.direccion,
-                        callback: function($$v) {
-                          _vm.direccion = $$v
-                        },
-                        expression: "direccion"
-                      }
-                    }),
+                    _c(
+                      "div",
+                      { staticClass: "col-4 col-md-4" },
+                      [
+                        _c("q-input", {
+                          attrs: {
+                            outlined: "",
+                            label: "GIRO",
+                            "stack-label": "",
+                            type: "text",
+                            maxlength: "20",
+                            counter: ""
+                          },
+                          model: {
+                            value: _vm.fono_emp,
+                            callback: function($$v) {
+                              _vm.fono_emp = $$v
+                            },
+                            expression: "fono_emp"
+                          }
+                        })
+                      ],
+                      1
+                    ),
                     _vm._v(" "),
-                    _c("q-input", {
-                      attrs: {
-                        label: "Ingrese la ubicacion",
-                        "stack-label": ""
-                      },
-                      model: {
-                        value: _vm.ubicacion,
-                        callback: function($$v) {
-                          _vm.ubicacion = $$v
-                        },
-                        expression: "ubicacion"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("q-input", {
-                      attrs: {
-                        label: "Ingrese el n° telefono",
-                        "stack-label": ""
-                      },
-                      model: {
-                        value: _vm.telefono,
-                        callback: function($$v) {
-                          _vm.telefono = $$v
-                        },
-                        expression: "telefono"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("q-input", {
-                      attrs: {
-                        type: "email",
-                        label: "Ingrese el correo",
-                        "stack-label": ""
-                      },
-                      model: {
-                        value: _vm.correo,
-                        callback: function($$v) {
-                          _vm.correo = $$v
-                        },
-                        expression: "correo"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("q-input", {
-                      attrs: {
-                        label: "Ingrese la pagina web",
-                        "stack-label": ""
-                      },
-                      model: {
-                        value: _vm.pagina,
-                        callback: function($$v) {
-                          _vm.pagina = $$v
-                        },
-                        expression: "pagina"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("q-select", {
-                      attrs: {
-                        options: _vm.giro_opt,
-                        "option-value": "id",
-                        "option-label": "descripcion",
-                        label: "Seleccione el giro",
-                        "stack-label": ""
-                      },
-                      model: {
-                        value: _vm.giro,
-                        callback: function($$v) {
-                          _vm.giro = $$v
-                        },
-                        expression: "giro"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("q-input", {
-                      attrs: {
-                        label: "Ingrese el contacto",
-                        "stack-label": ""
-                      },
-                      model: {
-                        value: _vm.contacto,
-                        callback: function($$v) {
-                          _vm.contacto = $$v
-                        },
-                        expression: "contacto"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("q-select", {
-                      attrs: {
-                        options: _vm.pro_opt,
-                        "option-value": "id",
-                        "option-label": "descripcion",
-                        label: "Seleccione la Procedencia",
-                        "stack-label": ""
-                      },
-                      model: {
-                        value: _vm.procedencia,
-                        callback: function($$v) {
-                          _vm.procedencia = $$v
-                        },
-                        expression: "procedencia"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("q-input", {
-                      attrs: {
-                        type: "number",
-                        label: "Seleccione la detraccion",
-                        "stack-label": ""
-                      },
-                      model: {
-                        value: _vm.detraccion,
-                        callback: function($$v) {
-                          _vm.detraccion = _vm._n($$v)
-                        },
-                        expression: "detraccion"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("q-input", {
-                      attrs: { label: "Ingrese el rut", "stack-label": "" },
-                      model: {
-                        value: _vm.rut,
-                        callback: function($$v) {
-                          _vm.rut = $$v
-                        },
-                        expression: "rut"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("q-select", {
-                      attrs: {
-                        options: _vm.tipo_opt,
-                        "option-value": "id",
-                        "option-label": "descripcion",
-                        label: "Seleccione el tipo proveedor",
-                        "stack-label": ""
-                      },
-                      model: {
-                        value: _vm.tipo,
-                        callback: function($$v) {
-                          _vm.tipo = $$v
-                        },
-                        expression: "tipo"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("br"),
-                    _vm._v(" "),
-                    _c("q-btn", {
-                      attrs: {
-                        color: "primary",
-                        label: "Ingresar",
-                        "stack-label": ""
-                      },
-                      on: { click: _vm.registroProveedor }
-                    })
-                  ],
-                  1
+                    _c(
+                      "div",
+                      { staticClass: "col-12 col-md-12" },
+                      [
+                        _c("q-input", {
+                          attrs: {
+                            outlined: "",
+                            label: "Ingrese razon social",
+                            "stack-label": "",
+                            type: "text",
+                            autogrow: "",
+                            maxlength: "200",
+                            counter: ""
+                          },
+                          model: {
+                            value: _vm.razon_social,
+                            callback: function($$v) {
+                              _vm.razon_social = $$v
+                            },
+                            expression: "razon_social"
+                          }
+                        })
+                      ],
+                      1
+                    )
+                  ]
                 )
-              ])
+              ]),
+              _vm._v(" "),
+              _c("q-separator"),
+              _vm._v(" "),
+              _c("div", { staticClass: "bg-primary text-white text-center" }, [
+                _vm._v("Contacto")
+              ]),
+              _vm._v(" "),
+              _c("q-separator"),
+              _vm._v(" "),
+              _c("q-card-section", [
+                _c(
+                  "div",
+                  { staticClass: "row justify-start q-col-gutter-md" },
+                  [
+                    _c(
+                      "div",
+                      { staticClass: "col-3 col-md-3" },
+                      [
+                        _c("q-input", {
+                          attrs: {
+                            outlined: "",
+                            label: "Ingrese nombres contacto",
+                            "stack-label": "",
+                            type: "text",
+                            maxlength: "20",
+                            counter: ""
+                          },
+                          model: {
+                            value: _vm.pagina,
+                            callback: function($$v) {
+                              _vm.pagina = $$v
+                            },
+                            expression: "pagina"
+                          }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "col-3 col-md-3" },
+                      [
+                        _c("q-input", {
+                          attrs: {
+                            outlined: "",
+                            label: "Ingrese apellidos contacto",
+                            "stack-label": "",
+                            type: "text",
+                            maxlength: "20",
+                            counter: ""
+                          },
+                          model: {
+                            value: _vm.pagina,
+                            callback: function($$v) {
+                              _vm.pagina = $$v
+                            },
+                            expression: "pagina"
+                          }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "col-3 col-md-3" },
+                      [
+                        _c("q-input", {
+                          attrs: {
+                            outlined: "",
+                            label: "Ingrese correo contacto",
+                            "stack-label": "",
+                            type: "text",
+                            maxlength: "20",
+                            counter: ""
+                          },
+                          model: {
+                            value: _vm.pagina,
+                            callback: function($$v) {
+                              _vm.pagina = $$v
+                            },
+                            expression: "pagina"
+                          }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "col-3 col-md-3" },
+                      [
+                        _c("q-input", {
+                          attrs: {
+                            outlined: "",
+                            label: "Ingrese telefono contacto",
+                            "stack-label": "",
+                            type: "text",
+                            maxlength: "20",
+                            counter: ""
+                          },
+                          model: {
+                            value: _vm.pagina,
+                            callback: function($$v) {
+                              _vm.pagina = $$v
+                            },
+                            expression: "pagina"
+                          }
+                        })
+                      ],
+                      1
+                    )
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("q-separator"),
+              _vm._v(" "),
+              _c(
+                "q-card-actions",
+                { attrs: { align: "center" } },
+                [
+                  _c("q-btn", {
+                    attrs: {
+                      loading: _vm.loading1,
+                      color: "secondary",
+                      "icon-right": "send",
+                      label: "Crear Reunion"
+                    },
+                    on: {
+                      click: function($event) {
+                        _vm.simulateProgress(1), _vm.guardar()
+                      }
+                    },
+                    scopedSlots: _vm._u([
+                      {
+                        key: "loading",
+                        fn: function() {
+                          return [_c("q-spinner-facebook")]
+                        },
+                        proxy: true
+                      }
+                    ])
+                  }),
+                  _vm._v(" "),
+                  _c("q-btn", {
+                    attrs: {
+                      loading: _vm.loading2,
+                      color: "primary",
+                      "icon-right": "table_chart",
+                      label: "Reuniones"
+                    },
+                    on: {
+                      click: function($event) {
+                        _vm.simulateProgress(2), _vm.traer_reuniones()
+                      }
+                    },
+                    scopedSlots: _vm._u([
+                      {
+                        key: "loading",
+                        fn: function() {
+                          return [_c("q-spinner-facebook")]
+                        },
+                        proxy: true
+                      }
+                    ])
+                  }),
+                  _vm._v(" "),
+                  _c("q-btn", {
+                    attrs: {
+                      loading: _vm.loading3,
+                      color: "red",
+                      "icon-right": "settings_backup_restore",
+                      label: "volver"
+                    },
+                    on: {
+                      click: function($event) {
+                        _vm.simulateProgress(3), _vm.volver()
+                      }
+                    },
+                    scopedSlots: _vm._u([
+                      {
+                        key: "loading",
+                        fn: function() {
+                          return [_c("q-spinner-facebook")]
+                        },
+                        proxy: true
+                      }
+                    ])
+                  })
+                ],
+                1
+              )
             ],
             1
           )
@@ -111953,6 +111936,34 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/auth/proveedores/proveedores_js/moduloProveedores.js?vue&type=script&lang=js&":
+/*!***************************************************************************************************************!*\
+  !*** ./resources/js/components/auth/proveedores/proveedores_js/moduloProveedores.js?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_moduloProveedores_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!./moduloProveedores.js?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./resources/js/components/auth/proveedores/proveedores_js/moduloProveedores.js?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_moduloProveedores_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/auth/proveedores/proveedores_js/registroProveedores.js?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************!*\
+  !*** ./resources/js/components/auth/proveedores/proveedores_js/registroProveedores.js?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_registroProveedores_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!./registroProveedores.js?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./resources/js/components/auth/proveedores/proveedores_js/registroProveedores.js?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_registroProveedores_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/auth/proveedores/proveedores_vue/modulo_proveedor.vue":
 /*!***************************************************************************************!*\
   !*** ./resources/js/components/auth/proveedores/proveedores_vue/modulo_proveedor.vue ***!
@@ -111963,7 +111974,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modulo_proveedor_vue_vue_type_template_id_7ade7b00___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modulo_proveedor.vue?vue&type=template&id=7ade7b00& */ "./resources/js/components/auth/proveedores/proveedores_vue/modulo_proveedor.vue?vue&type=template&id=7ade7b00&");
-/* harmony import */ var _modulo_proveedor_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modulo_proveedor.vue?vue&type=script&lang=js& */ "./resources/js/components/auth/proveedores/proveedores_vue/modulo_proveedor.vue?vue&type=script&lang=js&");
+/* harmony import */ var _proveedores_js_moduloProveedores_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../proveedores_js/moduloProveedores.js?vue&type=script&lang=js& */ "./resources/js/components/auth/proveedores/proveedores_js/moduloProveedores.js?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -111973,7 +111984,7 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _modulo_proveedor_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _proveedores_js_moduloProveedores_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _modulo_proveedor_vue_vue_type_template_id_7ade7b00___WEBPACK_IMPORTED_MODULE_0__["render"],
   _modulo_proveedor_vue_vue_type_template_id_7ade7b00___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
@@ -111987,20 +111998,6 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 if (false) { var api; }
 component.options.__file = "resources/js/components/auth/proveedores/proveedores_vue/modulo_proveedor.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/auth/proveedores/proveedores_vue/modulo_proveedor.vue?vue&type=script&lang=js&":
-/*!****************************************************************************************************************!*\
-  !*** ./resources/js/components/auth/proveedores/proveedores_vue/modulo_proveedor.vue?vue&type=script&lang=js& ***!
-  \****************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_modulo_proveedor_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./modulo_proveedor.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/proveedores/proveedores_vue/modulo_proveedor.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_modulo_proveedor_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
@@ -112032,7 +112029,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _registro_proveedores_vue_vue_type_template_id_ca8e55aa___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./registro_proveedores.vue?vue&type=template&id=ca8e55aa& */ "./resources/js/components/auth/proveedores/proveedores_vue/registro_proveedores.vue?vue&type=template&id=ca8e55aa&");
-/* harmony import */ var _registro_proveedores_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./registro_proveedores.vue?vue&type=script&lang=js& */ "./resources/js/components/auth/proveedores/proveedores_vue/registro_proveedores.vue?vue&type=script&lang=js&");
+/* harmony import */ var _proveedores_js_registroProveedores_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../proveedores_js/registroProveedores.js?vue&type=script&lang=js& */ "./resources/js/components/auth/proveedores/proveedores_js/registroProveedores.js?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -112042,7 +112039,7 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _registro_proveedores_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _proveedores_js_registroProveedores_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _registro_proveedores_vue_vue_type_template_id_ca8e55aa___WEBPACK_IMPORTED_MODULE_0__["render"],
   _registro_proveedores_vue_vue_type_template_id_ca8e55aa___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
@@ -112056,20 +112053,6 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 if (false) { var api; }
 component.options.__file = "resources/js/components/auth/proveedores/proveedores_vue/registro_proveedores.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/auth/proveedores/proveedores_vue/registro_proveedores.vue?vue&type=script&lang=js&":
-/*!********************************************************************************************************************!*\
-  !*** ./resources/js/components/auth/proveedores/proveedores_vue/registro_proveedores.vue?vue&type=script&lang=js& ***!
-  \********************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_registro_proveedores_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./registro_proveedores.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/proveedores/proveedores_vue/registro_proveedores.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_registro_proveedores_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
