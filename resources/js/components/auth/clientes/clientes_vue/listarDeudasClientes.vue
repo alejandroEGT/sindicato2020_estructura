@@ -99,7 +99,6 @@
       rows-per-page-label="Cantidad:"
       loading-label="Cargando..."
       row-key="name"
-      class="my-sticky-header-table"
       :data="listarDeudaCliente"
       :columns="clientes"
       :separator="separator"

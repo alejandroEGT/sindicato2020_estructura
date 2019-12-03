@@ -59,7 +59,6 @@
       :filter="filter"
       :visible-columns="visibleColumns"
       :rows-per-page-options="[5,10,15,30,50,100,0]"
-      class="my-sticky-header-table"
     >
         <!-- funciones especiales -->
       <template v-slot:top="pantalla">

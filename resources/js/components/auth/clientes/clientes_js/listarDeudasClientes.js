@@ -51,6 +51,9 @@ export default {
         url_registro() {
             this.$router.push('/deudas-clientes');
         },
+        url_registro_nuevo_cliente() {
+            this.$router.push('/registro-clientes');
+        },
 
         traer_cliente() {
             axios.get('api/buscar_cliente/' + this.buscadorCliente).then((response) => {
@@ -79,11 +82,23 @@ export default {
                     
                 } else {
                     this.$q.notify({
-                        color: "red-4",
+                        color: "orange-8",
                         textColor: "white",
                         icon: "error_outline",
-                        message: response.data.mensaje
+                        message: response.data.mensaje,
+                        timeout: 10000,
+                        actions:
+                        [{ 
+                            label: 'Ingresar Cliente', 
+                            color: 'white',
+                            handler: () => {  
+                                            this.url_registro_nuevo_cliente() 
+                                            } 
+                         }]
+                        
+
                     });
+
 
                 }
             }
@@ -188,6 +203,14 @@ export default {
             setTimeout(() => {
                 this.loading = false;
             }, 5000)
+        },
+
+        show(component) {
+            this.$refs[''+component+''].show();
+        },
+
+        onDialogHide() {
+            this.$emit('hide')
         },
 
     },

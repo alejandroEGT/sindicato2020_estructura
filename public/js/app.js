@@ -4420,6 +4420,9 @@ __webpack_require__.r(__webpack_exports__);
     url_registro: function url_registro() {
       this.$router.push('/deudas-clientes');
     },
+    url_registro_nuevo_cliente: function url_registro_nuevo_cliente() {
+      this.$router.push('/registro-clientes');
+    },
     traer_cliente: function traer_cliente() {
       var _this = this;
 
@@ -4447,10 +4450,18 @@ __webpack_require__.r(__webpack_exports__);
             });
           } else {
             _this.$q.notify({
-              color: "red-4",
+              color: "orange-8",
               textColor: "white",
               icon: "error_outline",
-              message: response.data.mensaje
+              message: response.data.mensaje,
+              timeout: 10000,
+              actions: [{
+                label: 'Ingresar Cliente',
+                color: 'white',
+                handler: function handler() {
+                  _this.url_registro_nuevo_cliente();
+                }
+              }]
             });
           }
         }
@@ -4549,6 +4560,12 @@ __webpack_require__.r(__webpack_exports__);
       setTimeout(function () {
         _this5.loading = false;
       }, 5000);
+    },
+    show: function show(component) {
+      this.$refs['' + component + ''].show();
+    },
+    onDialogHide: function onDialogHide() {
+      this.$emit('hide');
     }
   },
   mounted: function mounted() {
@@ -13728,7 +13745,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "\n.my-sticky-header-table\r\n  /* max height is important */\r\n  .q-table__middle{\r\n    max-height: 500px;\n}\n.q-table__top,\r\n  .q-table__bottom,\r\n  thead tr:first-child th{\r\n    /* bg color is important for th; just specify one */\r\n    background-color: #027be3;\r\n    color: #ffffff;\n}\n.fondo{\r\n    background-color: #ffffff;\n}\nthead tr th{\r\n    position: -webkit-sticky;\r\n    position: sticky;\r\n    z-index: 1;\n}\nthead tr:first-child th{\r\n    top: 0;\n}\r\n  /* this is when the loading indicator appears */\n.q-table--loading thead tr:last-child th{\r\n    /* height of all previous header rows */\r\n    top: 48px;\n}", ""]);
+exports.push([module.i, "\n.my-sticky-header-table\r\n  /* max height is important */\r\n  .q-table__middle{\r\n    max-height: 500px;\n}\n.q-table__top,\r\n  .q-table__bottom,\r\n  thead tr:first-child th{\r\n    /* bg color is important for th; just specify one */\r\n    background-color: blue;\r\n    color: #ffffff;\n}\n.fondo{\r\n    background-color: #ffffff;\n}\nthead tr th{\r\n    position: -webkit-sticky;\r\n    position: sticky;\r\n    z-index: 1;\n}\nthead tr:first-child th{\r\n    top: 0;\n}\r\n  /* this is when the loading indicator appears */\n.q-table--loading thead tr:last-child th{\r\n    /* height of all previous header rows */\r\n    top: 48px;\n}", ""]);
 
 // exports
 
@@ -88991,7 +89008,6 @@ var render = function() {
       _c("div", { staticClass: "q-pa-sm" }),
       _vm._v(" "),
       _c("q-table", {
-        staticClass: "my-sticky-header-table",
         attrs: {
           title: "Listado de Clientes",
           "no-data-label": "Aun no hay datos para mostrar.",
@@ -90244,7 +90260,6 @@ var render = function() {
       ],
       _vm._v(" "),
       _c("q-table", {
-        staticClass: "my-sticky-header-table",
         attrs: {
           title: "Listado de Clientes",
           "no-data-label":
@@ -113274,8 +113289,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\bryan\Desktop\Proyectos\neofox_contable\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\bryan\Desktop\Proyectos\neofox_contable\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\david\Desktop\Proyectos NeoFox\neofox_contable\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\david\Desktop\Proyectos NeoFox\neofox_contable\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ }),
