@@ -60,12 +60,12 @@ export default {
         this.cuerpo = '';
       },
   
-      traer_reuniones() {
-        this.$router.push('/traer-reuniones');
+      proveedores() {
+        this.$router.push('/listar_proveedor');
       },
   
       volver() {
-        this.$router.push('/modulo-reunion');
+        this.$router.push('/modulo-proveedor');
       }
   
     }

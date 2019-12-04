@@ -5086,11 +5086,11 @@ __webpack_require__.r(__webpack_exports__);
       this.titulo = '';
       this.cuerpo = '';
     },
-    traer_reuniones: function traer_reuniones() {
-      this.$router.push('/traer-reuniones');
+    proveedores: function proveedores() {
+      this.$router.push('/listar_proveedor');
     },
     volver: function volver() {
-      this.$router.push('/modulo-reunion');
+      this.$router.push('/modulo-proveedor');
     }
   }
 });
@@ -94369,21 +94369,21 @@ var render = function() {
                       "div",
                       { staticClass: "col-4 col-md-4" },
                       [
-                        _c("q-input", {
+                        _c("q-select", {
                           attrs: {
                             outlined: "",
-                            label: "GIRO",
                             "stack-label": "",
-                            type: "text",
-                            maxlength: "20",
-                            counter: ""
+                            options: _vm.select_giro,
+                            "option-value": "id",
+                            "option-label": "descripcion",
+                            label: "Seleccione Giro Empresa"
                           },
                           model: {
-                            value: _vm.fono_emp,
+                            value: _vm.giro,
                             callback: function($$v) {
-                              _vm.fono_emp = $$v
+                              _vm.giro = $$v
                             },
-                            expression: "fono_emp"
+                            expression: "giro"
                           }
                         })
                       ],
@@ -94414,6 +94414,81 @@ var render = function() {
                         })
                       ],
                       1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "col-4 col-md-4" },
+                      [
+                        _c("q-input", {
+                          attrs: {
+                            outlined: "",
+                            label: "Ingrese telefono empresa",
+                            "stack-label": "",
+                            type: "text",
+                            maxlength: "20",
+                            counter: ""
+                          },
+                          model: {
+                            value: _vm.fono_emp,
+                            callback: function($$v) {
+                              _vm.fono_emp = $$v
+                            },
+                            expression: "fono_emp"
+                          }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "col-4 col-md-4" },
+                      [
+                        _c("q-input", {
+                          attrs: {
+                            outlined: "",
+                            label: "Ingrese pagina web",
+                            "stack-label": "",
+                            type: "text",
+                            maxlength: "20",
+                            counter: ""
+                          },
+                          model: {
+                            value: _vm.pagina,
+                            callback: function($$v) {
+                              _vm.pagina = $$v
+                            },
+                            expression: "pagina"
+                          }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "col-4 col-md-4" },
+                      [
+                        _c("q-input", {
+                          attrs: {
+                            outlined: "",
+                            label: "Ingrese correo empresa",
+                            "stack-label": "",
+                            type: "text",
+                            maxlength: "20",
+                            counter: ""
+                          },
+                          model: {
+                            value: _vm.correo_emp,
+                            callback: function($$v) {
+                              _vm.correo_emp = $$v
+                            },
+                            expression: "correo_emp"
+                          }
+                        })
+                      ],
+                      1
                     )
                   ]
                 )
@@ -94422,7 +94497,73 @@ var render = function() {
               _c("q-separator"),
               _vm._v(" "),
               _c("div", { staticClass: "bg-primary text-white text-center" }, [
-                _vm._v("Contacto")
+                _vm._v("Direccion Empresa")
+              ]),
+              _vm._v(" "),
+              _c("q-separator"),
+              _vm._v(" "),
+              _c("q-card-section", [
+                _c(
+                  "div",
+                  { staticClass: "row justify-start q-col-gutter-md" },
+                  [
+                    _c(
+                      "div",
+                      { staticClass: "col-6 col-md-6" },
+                      [
+                        _c("q-input", {
+                          attrs: {
+                            outlined: "",
+                            label: "Ingrese direccion",
+                            "stack-label": "",
+                            type: "text",
+                            maxlength: "20",
+                            counter: ""
+                          },
+                          model: {
+                            value: _vm.direccion,
+                            callback: function($$v) {
+                              _vm.direccion = $$v
+                            },
+                            expression: "direccion"
+                          }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "col-6 col-md-6" },
+                      [
+                        _c("q-input", {
+                          attrs: {
+                            outlined: "",
+                            label: "Ingrese Ciudad",
+                            "stack-label": "",
+                            type: "text",
+                            maxlength: "20",
+                            counter: ""
+                          },
+                          model: {
+                            value: _vm.ciudad,
+                            callback: function($$v) {
+                              _vm.ciudad = $$v
+                            },
+                            expression: "ciudad"
+                          }
+                        })
+                      ],
+                      1
+                    )
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("q-separator"),
+              _vm._v(" "),
+              _c("div", { staticClass: "bg-primary text-white text-center" }, [
+                _vm._v("Persona de Contacto")
               ]),
               _vm._v(" "),
               _c("q-separator"),
@@ -94546,7 +94687,7 @@ var render = function() {
                       loading: _vm.loading1,
                       color: "secondary",
                       "icon-right": "send",
-                      label: "Crear Reunion"
+                      label: "Ingresar Proveedor"
                     },
                     on: {
                       click: function($event) {
@@ -94569,11 +94710,11 @@ var render = function() {
                       loading: _vm.loading2,
                       color: "primary",
                       "icon-right": "table_chart",
-                      label: "Reuniones"
+                      label: "Proveedores"
                     },
                     on: {
                       click: function($event) {
-                        _vm.simulateProgress(2), _vm.traer_reuniones()
+                        _vm.simulateProgress(2), _vm.proveedores()
                       }
                     },
                     scopedSlots: _vm._u([

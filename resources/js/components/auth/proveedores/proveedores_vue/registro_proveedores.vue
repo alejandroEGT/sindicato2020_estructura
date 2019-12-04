@@ -34,14 +34,14 @@
               </div>
 
               <div class="col-4 col-md-4">
-                <q-input
+                <q-select
                   outlined
-                  v-model="fono_emp"
-                  label="GIRO"
                   stack-label
-                  type="text"
-                  maxlength="20"
-                  counter
+                  v-model="giro"
+                  :options="select_giro"
+                  option-value="id"
+                  option-label="descripcion"
+                  label="Seleccione Giro Empresa"
                 />
               </div>
 
@@ -57,7 +57,7 @@
                   counter
                 />
               </div>
-              <!--  <div class="col-3 col-md-3">
+              <div class="col-4 col-md-4">
                 <q-input
                   outlined
                   v-model="fono_emp"
@@ -69,7 +69,7 @@
                 />
               </div>
 
-              <div class="col-3 col-md-3">
+              <div class="col-4 col-md-4">
                 <q-input
                   outlined
                   v-model="pagina"
@@ -81,7 +81,7 @@
                 />
               </div>
 
-              <div class="col-3 col-md-3">
+              <div class="col-4 col-md-4">
                 <q-input
                   outlined
                   v-model="correo_emp"
@@ -91,11 +91,40 @@
                   maxlength="20"
                   counter
                 />
-              </div>-->
+              </div>
             </div>
           </q-card-section>
           <q-separator />
-          <div class="bg-primary text-white text-center">Contacto</div>
+          <div class="bg-primary text-white text-center">Direccion Empresa</div>
+          <q-separator />
+          <q-card-section>
+            <div class="row justify-start q-col-gutter-md">
+              <div class="col-6 col-md-6">
+                <q-input
+                  outlined
+                  v-model="direccion"
+                  label="Ingrese direccion"
+                  stack-label
+                  type="text"
+                  maxlength="20"
+                  counter
+                />
+              </div>
+              <div class="col-6 col-md-6">
+                <q-input
+                  outlined
+                  v-model="ciudad"
+                  label="Ingrese Ciudad"
+                  stack-label
+                  type="text"
+                  maxlength="20"
+                  counter
+                />
+              </div>
+            </div>
+          </q-card-section>
+          <q-separator />
+          <div class="bg-primary text-white text-center">Persona de Contacto</div>
           <q-separator />
           <q-card-section>
             <div class="row justify-start q-col-gutter-md">
@@ -146,14 +175,14 @@
             </div>
           </q-card-section>
           <q-separator />
-          
+
           <q-card-actions align="center">
             <q-btn
               :loading="loading1"
               color="secondary"
               @click="simulateProgress(1), guardar()"
               icon-right="send"
-              label="Crear Reunion"
+              label="Ingresar Proveedor"
             >
               <template v-slot:loading>
                 <q-spinner-facebook />
@@ -162,9 +191,9 @@
             <q-btn
               :loading="loading2"
               color="primary"
-              @click="simulateProgress(2),traer_reuniones()"
+              @click="simulateProgress(2),proveedores()"
               icon-right="table_chart"
-              label="Reuniones"
+              label="Proveedores"
             >
               <template v-slot:loading>
                 <q-spinner-facebook />
