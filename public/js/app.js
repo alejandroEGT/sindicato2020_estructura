@@ -4964,7 +4964,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-<<<<<<< HEAD
 /***/ "./node_modules/babel-loader/lib/index.js?!./resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.js?vue&type=script&lang=js&":
 /*!*****************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.js?vue&type=script&lang=js& ***!
@@ -4974,6 +4973,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -4981,21 +4983,74 @@ __webpack_require__.r(__webpack_exports__);
       step: 1,
       rut: '',
       monto: null,
-      tipo: false,
+      tipo: '1',
       interes: null,
+      valorConInteres: 0,
       fecha: '',
       //VARIABLES QUE RESCATAN AL USUARIO
-      usuario: 'Bryan Vidal Díaz'
+      usuario: ''
     };
   },
   methods: {
     calcularIntereses: function calcularIntereses() {
-      var valorConIneteres = monto * intereses;
-      console.log(valorConIneteres);
+      console.log(this.monto, this.interes);
+      this.valorConInteres = parseInt(this.monto) + parseInt(this.monto * (this.interes / 100));
+      console.log(this.valorConInteres);
+      console.log('step: ' + this.step);
+    },
+    getUsuario: function getUsuario() {
+      var _this = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/getClientePrestamo/' + this.rut).then(function (response) {
+        if (response.data.estado == 'failed' || response.data.estado == 'failed_v') {
+          alert(response.data.mensaje);
+        } else if (response.data.estado == 'failed_unr') {
+          _this.$q.notify({
+            color: "green-4",
+            textColor: "white",
+            icon: "cloud_done",
+            message: response.data.mensaje
+          });
+        } else {
+          _this.usuario = response.data.cliente;
+          console.log(response);
+        }
+      });
+    },
+    setPrestamo: function setPrestamo() {
+      var _this2 = this;
+
+      this.calcularIntereses();
+      var data = {
+        'idCliente': this.usuario.id,
+        'idTipo': this.tipo,
+        'fecha': this.fecha,
+        'montoSolicitado': this.monto,
+        'totalInteres': this.valorConInteres
+      };
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('api/setPrestamo', data).then(function (response) {
+        if (response.data.estado == 'failed' || response.data.estado == 'failed_v') {
+          _this2.$q.notify({
+            color: "red-4",
+            textColor: "white",
+            icon: "cloud_done",
+            message: response.data.mensaje
+          });
+        } else {
+          _this2.$q.notify({
+            color: "green-4",
+            textColor: "white",
+            icon: "cloud_done",
+            message: response.data.mensaje
+          });
+        }
+      });
     }
   }
 });
-=======
+
+/***/ }),
+
 /***/ "./node_modules/base64-js/index.js":
 /*!*****************************************!*\
   !*** ./node_modules/base64-js/index.js ***!
@@ -5157,7 +5212,6 @@ function fromByteArray (uint8) {
   return parts.join('')
 }
 
->>>>>>> empa
 
 /***/ }),
 
@@ -93653,17 +93707,24 @@ var render = function() {
                                 attrs: {
                                   color: "primary",
                                   disable:
-                                    (_vm.step === 1 && _vm.rut == "") ||
-                                    (_vm.step === 3 && _vm.monto == null),
+                                    (_vm.step === 1 && _vm.usuario == "") ||
+                                    (_vm.step === 3 &&
+                                      (_vm.monto == null ||
+                                        _vm.fecha == "" ||
+                                        _vm.monto == "")),
                                   label:
                                     _vm.step === 4 ? "Solicitar" : "Continuar"
                                 },
                                 on: {
                                   click: [
                                     function($event) {
-                                      return _vm.$refs.stepper.next()
+                                      _vm.step === 4
+                                        ? _vm.setPrestamo()
+                                        : _vm.calcularIntereses()
                                     },
-                                    _vm.calcularIntereses
+                                    function($event) {
+                                      return _vm.$refs.stepper.next()
+                                    }
                                   ]
                                 }
                               }),
@@ -93711,40 +93772,70 @@ var render = function() {
                       }
                     },
                     [
-                      _c("q-input", {
-                        attrs: {
-                          outlined: "",
-                          counter: "",
-                          maxlength: "20",
-                          label: "Ingrese rut del cliente",
-                          "stack-label": "",
-                          type: "text",
-                          hint: "El rut debe ser sin punto ni guion",
-                          rules: [
-                            function(val) {
-                              return (
-                                val.length <= 20 ||
-                                "El maximo da caracteres es de 20"
-                              )
+                      _c(
+                        "div",
+                        { staticClass: "q-gutter-md" },
+                        [
+                          _c("q-input", {
+                            attrs: {
+                              outlined: "",
+                              counter: "",
+                              maxlength: "20",
+                              label: "Ingrese rut del cliente",
+                              "stack-label": "",
+                              type: "text",
+                              rules: [
+                                function(val) {
+                                  return (
+                                    val.length <= 20 ||
+                                    "El maximo da caracteres es de 20"
+                                  )
+                                },
+                                function(val) {
+                                  return (
+                                    val.length >= 2 ||
+                                    "El minimo de caracteres es de 2"
+                                  )
+                                }
+                              ]
                             },
-                            function(val) {
-                              return (
-                                val.length >= 2 ||
-                                "El minimo de caracteres es de 2"
-                              )
+                            model: {
+                              value: _vm.rut,
+                              callback: function($$v) {
+                                _vm.rut = $$v
+                              },
+                              expression: "rut"
                             }
-                          ]
-                        },
-                        model: {
-                          value: _vm.rut,
-                          callback: function($$v) {
-                            _vm.rut = $$v
-                          },
-                          expression: "rut"
-                        }
-                      })
-                    ],
-                    1
+                          }),
+                          _vm._v(" "),
+                          _c("q-separator"),
+                          _vm._v(" "),
+                          _c("q-input", {
+                            attrs: {
+                              filled: "",
+                              hint: "Nombre del Cliente",
+                              readonly: ""
+                            },
+                            model: {
+                              value: _vm.usuario.nombrecliente,
+                              callback: function($$v) {
+                                _vm.$set(_vm.usuario, "nombrecliente", $$v)
+                              },
+                              expression: "usuario.nombrecliente"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("q-btn", {
+                            attrs: {
+                              color: "primary",
+                              label: "Buscar Usuario"
+                            },
+                            on: { click: _vm.getUsuario }
+                          })
+                        ],
+                        1
+                      )
+                    ]
                   ),
                   _vm._v(" "),
                   _c(
@@ -93775,7 +93866,7 @@ var render = function() {
                                 { attrs: { avatar: "" } },
                                 [
                                   _c("q-radio", {
-                                    attrs: { val: "0" },
+                                    attrs: { val: "1" },
                                     model: {
                                       value: _vm.tipo,
                                       callback: function($$v) {
@@ -93823,7 +93914,7 @@ var render = function() {
                                 { attrs: { avatar: "" } },
                                 [
                                   _c("q-radio", {
-                                    attrs: { val: "1" },
+                                    attrs: { val: "2" },
                                     model: {
                                       value: _vm.tipo,
                                       callback: function($$v) {
@@ -93868,8 +93959,8 @@ var render = function() {
                               {
                                 name: "show",
                                 rawName: "v-show",
-                                value: _vm.tipo == "1",
-                                expression: "tipo == '1'"
+                                value: _vm.tipo == "2",
+                                expression: "tipo == '2'"
                               }
                             ]
                           },
@@ -94012,7 +94103,7 @@ var render = function() {
                                   _c(
                                     "q-item-label",
                                     { attrs: { caption: "", lines: "2" } },
-                                    [_vm._v(_vm._s(_vm.usuario))]
+                                    [_vm._v(_vm._s(_vm.usuario.nombrecliente))]
                                   )
                                 ],
                                 1
@@ -94040,22 +94131,7 @@ var render = function() {
                                     { attrs: { caption: "" } },
                                     [
                                       _c(
-                                        "q-label",
-                                        {
-                                          directives: [
-                                            {
-                                              name: "show",
-                                              rawName: "v-show",
-                                              value: _vm.tipo == "0",
-                                              expression: "tipo == '0'"
-                                            }
-                                          ]
-                                        },
-                                        [_vm._v("Sin Intereses")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "q-label",
+                                        "b",
                                         {
                                           directives: [
                                             {
@@ -94066,10 +94142,24 @@ var render = function() {
                                             }
                                           ]
                                         },
+                                        [_vm._v("Sin Intereses")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "b",
+                                        {
+                                          directives: [
+                                            {
+                                              name: "show",
+                                              rawName: "v-show",
+                                              value: _vm.tipo == "2",
+                                              expression: "tipo == '2'"
+                                            }
+                                          ]
+                                        },
                                         [_vm._v("Con Intereses")]
                                       )
-                                    ],
-                                    1
+                                    ]
                                   )
                                 ],
                                 1
@@ -94121,7 +94211,7 @@ var render = function() {
                                   _c(
                                     "q-item-label",
                                     { attrs: { caption: "" } },
-                                    [_vm._v(_vm._s(_vm.monto))]
+                                    [_vm._v(_vm._s(_vm.valorConInteres))]
                                   )
                                 ],
                                 1
@@ -94158,6 +94248,74 @@ var render = function() {
                         ],
                         1
                       )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "q-dialog",
+            {
+              attrs: { persistent: "" },
+              model: {
+                value: _vm.confirm,
+                callback: function($$v) {
+                  _vm.confirm = $$v
+                },
+                expression: "confirm"
+              }
+            },
+            [
+              _c(
+                "q-card",
+                [
+                  _c(
+                    "q-card-section",
+                    { staticClass: "row items-center" },
+                    [
+                      _c("q-avatar", {
+                        attrs: {
+                          icon: "signal_wifi_off",
+                          color: "primary",
+                          "text-color": "white"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "q-ml-sm" }, [
+                        _vm._v(
+                          "El usuario ingresado no se encuentra en la base de datos. ¿Desea registrarlo?."
+                        )
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "q-card-actions",
+                    { attrs: { align: "right" } },
+                    [
+                      _c("q-btn", {
+                        directives: [
+                          { name: "close-popup", rawName: "v-close-popup" }
+                        ],
+                        attrs: { flat: "", label: "Cancelar", color: "primary" }
+                      }),
+                      _vm._v(" "),
+                      _c("q-btn", {
+                        directives: [
+                          { name: "close-popup", rawName: "v-close-popup" }
+                        ],
+                        attrs: {
+                          flat: "",
+                          label: "Registrar",
+                          color: "primary"
+                        }
+                      })
                     ],
                     1
                   )
@@ -111515,7 +111673,7 @@ var routes_empa = [{
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_404_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/404.vue */ "./resources/js/components/404.vue");
 /* harmony import */ var _components_auth_auth_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/auth/auth.vue */ "./resources/js/components/auth/auth.vue");
-/* harmony import */ var _components_auth_prestamos_prestamos_vue_modulo_prestamos__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/auth/prestamos/prestamos_vue/modulo_prestamos */ "./resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.vue");
+/* harmony import */ var _components_auth_prestamos_prestamos_vue_modulo_prestamos_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/auth/prestamos/prestamos_vue/modulo_prestamos.vue */ "./resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.vue");
  //loged
 
 
@@ -111531,7 +111689,7 @@ var routes_empa = [{
   },
   children: [{
     path: '/modulo-prestamos',
-    component: _components_auth_prestamos_prestamos_vue_modulo_prestamos__WEBPACK_IMPORTED_MODULE_2__["default"],
+    component: _components_auth_prestamos_prestamos_vue_modulo_prestamos_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
     name: 'ModuloPrestamos'
   } //aqui las rutas con permiso de auth
   ]
@@ -111786,12 +111944,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
 __webpack_require__(/*! C:\Users\v_and\Desktop\VUE\neofox_contable\resources\js\app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! C:\Users\v_and\Desktop\VUE\neofox_contable\resources\sass\app.scss */"./resources/sass/app.scss");
-=======
-__webpack_require__(/*! C:\Users\david\Desktop\Proyectos NeoFox\neofox_contable\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\david\Desktop\Proyectos NeoFox\neofox_contable\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ }),
@@ -111813,7 +111967,6 @@ module.exports = __webpack_require__(/*! C:\Users\david\Desktop\Proyectos NeoFox
   \**********************/
 /*! no static exports found */
 /***/ (function(module, exports) {
->>>>>>> empa
 
 /* (ignored) */
 

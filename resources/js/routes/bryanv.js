@@ -2,7 +2,7 @@ import NotFound from '../components/404.vue'
 //loged
 
 import Auth from "../components/auth/auth.vue";
-import ModuloPrestamos from "../components/auth/prestamos/prestamos_vue/modulo_prestamos";
+import ModuloPrestamos from "../components/auth/prestamos/prestamos_vue/modulo_prestamos.vue";
 
 let routes_empa = [
 
