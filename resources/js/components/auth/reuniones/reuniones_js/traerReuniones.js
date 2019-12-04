@@ -18,10 +18,6 @@ export default {
                 'opcion',
             ],
 
-            title:[
-                { align: 'center', label: 'id', field: 'id', sortable: true },
-            ],
-
             tabla: [
                 { classes: 'ellipsis', name: 'id', align: 'center', label: 'ID', field: 'id', sortable: true },
                 { classes: 'ellipsis', name: 'fecha_inicio', align: 'center', label: 'Fecha Reunion', field: 'fecha_inicio', sortable: true },

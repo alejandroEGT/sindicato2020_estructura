@@ -14,7 +14,7 @@ class CreateProveedoresTable extends Migration
     public function up()
     {
         Schema::create('proveedores', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('codigo');
             $table->string('rut');
             $table->text('razon_social');
@@ -22,8 +22,8 @@ class CreateProveedoresTable extends Migration
             $table->string('correo');
             $table->string('pagina_web');
             $table->integer('giro_prov_id');
-            $table->integer('direccion_prov_id')->nullable();
-            /* $table->string('contacto_prov_id')->nullable(); */
+            $table->string('direccion');
+            $table->string('ciudad');
             $table->integer('estado_prov_id')->nullable();
             $table->char('activo', 1);
             $table->timestamps();

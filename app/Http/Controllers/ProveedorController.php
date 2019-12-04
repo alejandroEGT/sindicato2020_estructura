@@ -17,18 +17,9 @@ class ProveedorController extends Controller
         return Proveedor::traerProveedores();
     }
 
-    public function TraerProcedencia()
-    {
-        return Proveedor::traerProcedencia();
-    }
-
     public function TraerGiros()
     {
         return Proveedor::traerGiros();
     }
 
-    public function TraerTipos()
-    {
-        return Proveedor::traerTipos();
-    }
 }

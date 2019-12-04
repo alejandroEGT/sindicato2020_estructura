@@ -131,7 +131,7 @@
               <div class="col-3 col-md-3">
                 <q-input
                   outlined
-                  v-model="pagina"
+                  v-model="nombres"
                   label="Ingrese nombres contacto"
                   stack-label
                   type="text"
@@ -142,7 +142,7 @@
               <div class="col-3 col-md-3">
                 <q-input
                   outlined
-                  v-model="pagina"
+                  v-model="apellidos"
                   label="Ingrese apellidos contacto"
                   stack-label
                   type="text"
@@ -153,7 +153,7 @@
               <div class="col-3 col-md-3">
                 <q-input
                   outlined
-                  v-model="pagina"
+                  v-model="correo_con"
                   label="Ingrese correo contacto"
                   stack-label
                   type="text"
@@ -164,7 +164,7 @@
               <div class="col-3 col-md-3">
                 <q-input
                   outlined
-                  v-model="pagina"
+                  v-model="fono_con"
                   label="Ingrese telefono contacto"
                   stack-label
                   type="text"

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\ContactoProv;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,26 +12,32 @@ class Proveedor extends Model
 
     protected function ingresarProveedor($request)
     {
-        $proveedor = new Proveedor;
         $limpiar = $this->limpiarRut($request->rut);
         $validarRut = $this->validarRut($limpiar);
         if ($validarRut == true) {
+            $proveedor = new Proveedor;
+            DB::beginTransaction();
             $proveedor->codigo = $request->codigo;
-            $proveedor->razon_social = $request->razon_social;
-            $proveedor->direccion = $request->direccion;
-            $proveedor->ubicacion = $request->ubicacion;
-            $proveedor->telefono = $request->telefono;
-            $proveedor->correo = $request->correo;
-            $proveedor->pagina_web = $request->pagina;
-            $proveedor->giro = $request->giro;
-            $proveedor->contacto = $request->contacto;
-            $proveedor->procedencia = $request->procedencia;
-            $proveedor->detraccion = $request->detraccion;
             $proveedor->rut = $limpiar;
-            $proveedor->tipo_proveedor = $request->tipo;
+            $proveedor->razon_social = $request->razon_social;
+            $proveedor->telefono = $request->fono_emp;
+            $proveedor->correo = $request->correo_emp;
+            $proveedor->pagina_web = $request->pagina;
+            $proveedor->giro_prov_id = $request->giro;
+            $proveedor->direccion = $request->direccion;
+            $proveedor->ciudad = $request->ciudad;
+            $proveedor->estado_prov_id = 1;
             $proveedor->activo = 'S';
+            /* dd($proveedor); */
             if ($proveedor->save()) {
-                return ['estado' => 'success', 'mensaje' => 'Proveedor ingresado correctamente.'];
+                $contacto = ContactoProv::ingresarContactoProv($proveedor->id, $request->nombres, $request->apellidos, $request->fono_con, $request->correo_con);
+                if ($contacto == true) {
+                    DB::commit();
+                    return ['estado' => 'success', 'mensaje' => 'Proveedor ingresado correctamente.'];
+                } else {
+                    DB::rollBack();
+                    return ['estado' => 'failed', 'mensaje' => 'A ocurrido un error, intenta nuevamente.'];
+                }
             } else {
                 return ['estado' => 'failed', 'mensaje' => 'A ocurrido un error, intenta nuevamente.'];
             }
@@ -45,23 +52,19 @@ class Proveedor extends Model
             ->select([
                 'p.id',
                 'p.codigo',
+                'p.rut',
                 'p.razon_social',
-                'p.direccion',
-                'p.ubicacion',
                 'p.telefono',
                 'p.correo',
-                'p.pagina_web as pagina',
-                'p.contacto',
-                'p.rut',
-                DB::raw("concat(p.detraccion, '%') as detraccion"),
-                'p.activo',
+                'p.pagina_web',
+                'p.direccion',
+                'p.ciudad',
                 'g.descripcion as giro',
-                'pro.descripcion as procedencia',
-                't.descripcion as tipo'
+                'ep.descripcion as estado'
+
             ])
-            ->join('giros as g', 'g.id', 'p.giro')
-            ->join('procedencia as pro', 'pro.id', 'p.procedencia')
-            ->join('tipo as t', 't.id', 'p.tipo_proveedor')
+            ->join('giros_prov as g', 'g.id', 'p.giro_prov_id')
+            ->join('estado_prov as ep', 'ep.id', 'p.estado_prov_id')
             ->get();
 
         if (!$prov->isEmpty()) {
@@ -71,24 +74,9 @@ class Proveedor extends Model
         }
     }
 
-    protected function traerProcedencia()
-    {
-        $proc = DB::table('procedencia')
-            ->select([
-                'id',
-                'descripcion'
-            ])
-            ->where([
-                'activo' => 'S'
-            ])
-            ->get();
-
-        return $proc;
-    }
-
     protected function traerGiros()
     {
-        $giros = DB::table('giros')
+        $giros = DB::table('giros_prov')
             ->select([
                 'id',
                 'descripcion'
@@ -99,21 +87,6 @@ class Proveedor extends Model
             ->get();
 
         return $giros;
-    }
-
-    protected function traerTipos()
-    {
-        $tipos = DB::table('tipo')
-            ->select([
-                'id',
-                'descripcion'
-            ])
-            ->where([
-                'activo' => 'S'
-            ])
-            ->get();
-
-        return $tipos;
     }
 
     protected function validarRut($rut)

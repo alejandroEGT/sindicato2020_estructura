@@ -1,171 +1,97 @@
 <template>
   <div class="q-pa-md">
-    <div class="row justify-center">
-      <div class="col-12 col-md-10">
-        <q-card class="my-card">
-          <q-card-section class="bg-primary text-white">
-            <div class="text-h6 text-center">Proveedores/Tabla</div>
-          </q-card-section>
+    <template>
+      <q-banner inline-actions class="bg-grey-3">
+        <template v-slot:avatar>
+          <q-icon name="local_shipping" color="primary" />
+        </template>
+        PROVEEDORES
+        <template v-slot:action>
+          <!-- boton refrescar -->
+          <q-btn
+            flat
+            label="Refrescar"
+            icon-right="refresh"
+            color="primary"
+            @click="onRefresh()"
+            class="q-mb-md"
+          />
 
-          <q-separator />
+          <q-btn
+            flat
+            label="Volver"
+            icon-right="settings_backup_restore"
+            color="red"
+            @click="volver()"
+            class="q-mb-md"
+          />
+        </template>
+      </q-banner>
+    </template>
 
-          <q-card-section>
-            <div class="q-pa-md">
-              <q-table
-                class="my-sticky-header-table"
-                title="Proveedores"
-                :data="data"
-                :columns="columns"
-                row-key="name"
-                flat
-                bordered
-              />
-            </div>
-          </q-card-section>
-        </q-card>
-      </div>
-    </div>
+    <!-- propiedades de la tabla -->
+    <q-table
+      no-data-label="Aun no hay datos para mostrar."
+      no-results-label="No se han encontrado resultados."
+      rows-per-page-label="Cantidad:"
+      loading-label="Cargando"
+      row-key="name"
+      :data="proveedores"
+      :columns="tabla"
+      :separator="separator"
+      :loading="loading"
+      :filter="filter"
+      :visible-columns="visibleColumns"
+      :rows-per-page-options="[5,10,15,30,50,100,0]"
+    >
+      <template v-slot:body="tabla">
+        <q-tr :props="tabla">
+          <q-td key="id" :props="tabla">
+            <q-badge color="green">{{tabla.row.id}}</q-badge>
+          </q-td>
+
+          <q-td key="codigo" :props="tabla">{{tabla.row.codigo}}</q-td>
+
+          <q-td key="rut" :props="tabla">{{tabla.row.rut}}</q-td>
+
+          <q-td key="razon_social" :props="tabla">{{tabla.row.razon_social}}</q-td>
+
+          <q-td key="giro" :props="tabla">{{tabla.row.giro}}</q-td>
+
+          <q-td key="telefono" :props="tabla">{{tabla.row.telefono}}</q-td>
+
+          <q-td key="correo" :props="tabla">{{tabla.row.correo}}</q-td>
+
+          <q-td key="pagina_web" :props="tabla">{{tabla.row.pagina_web}}</q-td>
+
+          <q-td key="direccion" :props="tabla">{{tabla.row.direccion}}</q-td>
+
+          <q-td key="ciudad" :props="tabla">{{tabla.row.ciudad}}</q-td>
+
+          <q-td key="estado" :props="tabla">{{tabla.row.estado}}</q-td>
+
+          <q-td key="opciones" :props="tabla">
+            <q-btn label="Ver Contactos" color="blue" />
+          </q-td>
+        </q-tr>
+      </template>
+    </q-table>
+
+    <!-- alertas -->
+    <template>
+      <ul v-for="e in errores" :key="e[0]">
+        <q-banner inline-actions class="bg-orange text-white">
+          <li>
+            <i class="material-icons md-24">info</i>
+            {{e[0]}}
+          </li>
+          <template v-slot:action>
+            <q-btn flat color="white" label="Advertencia!" disabled />
+          </template>
+        </q-banner>
+      </ul>
+    </template>
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      columns: [
-        {
-          name: "id",
-          required: true,
-          label: "ID",
-          field: "id",
-          align: "left",
-          sortable: true
-        },
-        {
-          name: "activo",
-          label: "Activo",
-          field: "activo",
-          sortable: true
-        },
-        {
-          name: "codigo",
-          align: "center",
-          label: "Codigo",
-          field: "codigo",
-          sortable: true
-        },
-        {
-          name: "rut",
-          label: "Rut",
-          field: "rut",
-          sortable: true
-        },
-        {
-          name: "razon_social",
-          label: "Razon Social",
-          field: "razon_social",
-          sortable: true
-        },
-        {
-          name: "direccion",
-          label: "Direccion",
-          field: "direccion",
-          sortable: true
-        },
-        {
-          name: "telefono",
-          label: "Telefono",
-          field: "telefono",
-          sortable: true
-        },
-        {
-          name: "correo",
-          label: "Correo",
-          field: "correo",
-          sortable: true
-        },
-        {
-          name: "pagina",
-          label: "Pagina Web",
-          field: "pagina",
-          sortable: true
-        },
-        {
-          name: "contacto",
-          label: "Contacto",
-          field: "contacto",
-          sortable: true
-        },
-        {
-          name: "detraccion",
-          label: "Detraccion",
-          field: "detraccion",
-          sortable: true
-        },
-        {
-          name: "giro",
-          label: "Giro",
-          field: "giro",
-          sortable: true
-        },
-        {
-          name: "procedencia",
-          label: "Procedencia",
-          field: "procedencia",
-          sortable: true
-        },
-        {
-          name: "tipo",
-          label: "Tipo Proveedor",
-          field: "tipo",
-          sortable: true
-        }
-      ],
-
-      data: []
-    };
-  },
-  methods: {
-    traerProveedores() {
-      axios.get("api/traer_proveedores").then(res => {
-        if (res.data.estado == "success") {
-          this.data = res.data.proveedores;
-        } else {
-          alert(res.data.mensaje);
-        }
-      });
-    }
-  },
-  created() {
-    //this.traerProveedores();
-  },
-
-  mounted() {
-    this.traerProveedores();
-  }
-};
-</script>
-
-<style lang="sass">
-.my-sticky-header-table
-  /* max height is important */
-  .q-table__middle
-    max-height: 200px
-
-  .q-table__top,
-  .q-table__bottom,
-  thead tr:first-child th
-    /* bg color is important for th; just specify one */
-    background-color: #c1f4cd
-
-  thead tr th
-    position: sticky
-    z-index: 1
-  thead tr:first-child th
-    top: 0
-
-  /* this is when the loading indicator appears */
-  &.q-table--loading thead tr:last-child th
-    /* height of all previous header rows */
-    top: 48px
-</style>
+<script src="../proveedores_js/tablaProveedor.js"></script>
