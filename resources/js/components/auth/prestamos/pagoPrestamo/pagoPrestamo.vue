@@ -4,7 +4,7 @@
       <div class="col-12 col-md-8">
         <q-card>
           <q-card-section class="bg-primary text-white">
-            <div class="text-h6">Solicitar Prestamo</div>
+            <div class="text-h6">Pagar Prestamo</div>
           </q-card-section>
           <q-stepper v-model="step" ref="stepper" color="primary" animated>
             <q-step
@@ -32,63 +32,32 @@
 
                 <q-input filled v-model="usuario.nombrecliente" hint="Nombre del Cliente" readonly />
 
-                <q-btn color="primary" label="Buscar Usuario" v-on:click="getUsuario" />
+                <q-btn color="primary" label="Buscar Cliente" v-on:click="getUsuario" />
               </div>
             </q-step>
 
-            <q-step :name="2" title="Tipo de Prestamo" icon="create_new_folder" :done="step > 2">
+            <q-step :name="2" title="Lista de prestamos" icon="create_new_folder" :done="step > 2">
               <q-list>
-                <q-item tag="label" v-ripple>
+                <q-item v-for="itemPrestamo in prestamos" v-bind:key="itemPrestamo.id" tag="label" v-ripple>
                   <q-item-section avatar>
-                    <q-radio v-model="tipo" val="1" />
+                    <q-radio v-model="idPrestamo" :val="itemPrestamo.id" />
                   </q-item-section>
                   <q-item-section>
-                    <q-item-label>Sin Intereses</q-item-label>
-                    <q-item-label caption>El prestamo solicitado no generara ningún tipo de interes</q-item-label>
-                  </q-item-section>
-                </q-item>
-
-                <q-item tag="label" v-ripple>
-                  <q-item-section avatar>
-                    <q-radio v-model="tipo" val="2" />
-                  </q-item-section>
-                  <q-item-section>
-                    <q-item-label>Con Intereses</q-item-label>
-                    <q-item-label
-                      caption
-                    >El prestamo solicitado generara un interes con un valor que puede definir a continuación</q-item-label>
+                    <q-item-label><b>Prestamo N°:</b>{{itemPrestamo.id}} <b>Monto Solicitado:</b> {{itemPrestamo.monto_solicitado}}</q-item-label>
+                    <q-item-label caption>Fecha: {{itemPrestamo.fecha}} Cuotas Totales: {{itemPrestamo.cuotas}}</q-item-label>
                   </q-item-section>
                 </q-item>
               </q-list>
-
-              <q-slide-transition>
-                <div v-show="tipo == '2'">
-                  <q-input
-                    outlined
-                    counter
-                    maxlength="3"
-                    v-model="interes"
-                    label="Ingrese porcentaje"
-                    stack-label
-                    type="number"
-                    hint="Ingrese el porcentaje que desea de interes sin simbolo"
-                    :rules="[
-                              val => val.length <= 3 || 'El maximo da caracteres es de 3' , 
-                              val => val.length >= 1 || 'El minimo de caracteres es de 2'
-                            ]"
-                  />
-                </div>
-              </q-slide-transition>
             </q-step>
 
-            <q-step :name="3" title="Monto y fecha" icon="assignment">
+            <q-step :name="3" title="Detalle del prestamo" icon="assignment">
               <div class="q-gutter-md">
                 <q-input
                   outlined
                   counter
                   maxlength="20"
                   v-model="monto"
-                  label="Ingrese monto a solicitar"
+                  label="Ingrese monto a pagar"
                   stack-label
                   type="number"
                   hint="El monto debe de ser ingresado sin puntos"
@@ -101,26 +70,11 @@
                 <q-input
                   outlined
                   counter
-                  maxlength="2"
-                  v-model="cuotas"
-                  label="Ingrese numero de cuotas"
-                  stack-label
-                  type="number"
-                  hint="El monto debe de ser ingresado sin puntos"
-                  :rules="[
-                              val => val.length <= 2 || 'El maximo da caracteres es de 2' , 
-                              val => val.length >= 1 || 'El minimo de caracteres es de 1'
-                            ]"
-                />
-
-                <q-input
-                  outlined
-                  counter
                   v-model="fecha"
-                  label="Fecha del prestamo"
+                  label="Fecha del pago"
                   stack-label
                   type="date"
-                  hint="Seleccione la fecha en la cual se genero el prestamo"
+                  hint="Seleccione la fecha en la cual se pagará la cuota"
                 />
               </div>
             </q-step>
@@ -129,7 +83,7 @@
               <q-list>
                 <q-item>
                   <q-item-section>
-                    <q-item-label>Solicitante del Prestamo</q-item-label>
+                    <q-item-label>Solicitante del pago</q-item-label>
                     <q-item-label caption lines="2">{{usuario.nombrecliente}}</q-item-label>
                   </q-item-section>
                 </q-item>
@@ -138,11 +92,8 @@
 
                 <q-item>
                   <q-item-section>
-                    <q-item-label>Tipo de prestamo</q-item-label>
-                    <q-item-label caption>
-                      <b v-show="tipo == '1'">Sin Intereses</b>
-                      <b v-show="tipo == '2'">Con Intereses</b>
-                    </q-item-label>
+                    <q-item-label>Cuota a pagar</q-item-label>
+                    <q-item-label caption>1/3</q-item-label>
                   </q-item-section>
                 </q-item>
 
@@ -150,7 +101,7 @@
 
                 <q-item>
                   <q-item-section>
-                    <q-item-label>Monto Solicitado</q-item-label>
+                    <q-item-label>Monto del pago</q-item-label>
                     <q-item-label caption>{{monto}}</q-item-label>
                   </q-item-section>
                 </q-item>
@@ -159,8 +110,8 @@
 
                 <q-item>
                   <q-item-section>
-                    <q-item-label>Total con Intereses</q-item-label>
-                    <q-item-label caption>{{valorConInteres}}</q-item-label>
+                    <q-item-label>Monto restante si se paga la cuota</q-item-label>
+                    <q-item-label caption>{{montoMenosCuota}}</q-item-label>
                   </q-item-section>
                 </q-item>
 
@@ -168,16 +119,7 @@
 
                 <q-item>
                   <q-item-section>
-                    <q-item-label>Numero de cuotas</q-item-label>
-                    <q-item-label caption>{{cuotas}}</q-item-label>
-                  </q-item-section>
-                </q-item>
-
-                <q-separator spaced inset />
-
-                <q-item>
-                  <q-item-section>
-                    <q-item-label>Fecha Solicitud Prestamo</q-item-label>
+                    <q-item-label>Fecha de pago</q-item-label>
                     <q-item-label caption>{{fecha}}</q-item-label>
                   </q-item-section>
                 </q-item>
@@ -187,7 +129,7 @@
             <template v-slot:navigation>
               <q-stepper-navigation>
                 <q-btn
-                  v-on:click="step === 4 ? setPrestamo() : calcularIntereses()"
+                  v-on:click="procesarDatos()"
                   @click="$refs.stepper.next()"
                   color="primary"
                   :disable="(step === 1 && usuario == '') || (step === 3 && (monto == null || fecha == '' || monto == ''))"
@@ -218,7 +160,7 @@
               <q-btn flat label="Cancelar" color="primary" v-close-popup />
               <q-btn
                 flat
-                @click="url_crear_cliente"
+                @click="url_crear_cliente2"
                 label="Registrar"
                 color="primary"
                 v-close-popup
@@ -231,4 +173,4 @@
   </div>
 </template>
 
-<script src="./modulo_prestamos.js"></script>
+<script src="./pagoPrestamo.js"></script>

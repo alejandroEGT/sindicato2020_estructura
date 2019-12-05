@@ -7,12 +7,14 @@ export default {
       step: 1,
       rut: '',
       monto: null,
+      cuotas: null,
       tipo: '1',
       interes: null,
       valorConInteres: 0,
       fecha: '',
       //VARIABLES QUE RESCATAN AL USUARIO
-      usuario: ''
+      usuario: '',
+      confirm: false
     };
   },
   methods: {
@@ -28,12 +30,7 @@ export default {
         if (response.data.estado == 'failed' || response.data.estado == 'failed_v') {
           alert(response.data.mensaje);
         } else if (response.data.estado == 'failed_unr') {
-          this.$q.notify({
-            color: "green-4",
-            textColor: "white",
-            icon: "cloud_done",
-            message: response.data.mensaje
-          });
+          this.confirm = true;
         } else {
           this.usuario = response.data.cliente;
           console.log(response);
@@ -49,7 +46,8 @@ export default {
         'idTipo': this.tipo,
         'fecha': this.fecha,
         'montoSolicitado': this.monto,
-        'totalInteres': this.valorConInteres
+        'totalInteres': this.valorConInteres,
+        'cuotas': this.cuotas
       }
 
       Axios.post('api/setPrestamo', data).then((response) => {
@@ -69,6 +67,11 @@ export default {
           });
         }
       });
-    }
+    },
+
+    //RUTAS DE DIRECCIONAMIENTO
+    url_crear_cliente(){
+      this.$router.push('/registro-clientes');
+     }
   },
 };

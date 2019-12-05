@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Cliente;
+use App\DetallePrestamo;
 use App\Prestamo;
 use App\TipoPrestamo;
 use Illuminate\Http\Request;
@@ -25,6 +26,7 @@ class PrestamoController extends Controller
             $request->all(),
             [
                 'montoSolicitado' => 'required',
+                'cuotas' => 'required',
                 'totalInteres' => 'required',
                 'fecha' => 'required',
                 'idCliente' => 'required',
@@ -32,6 +34,7 @@ class PrestamoController extends Controller
             ],
             [
                 'montoSolicitado.required' => 'El monto es necesario',
+                'cuotas.required' => 'El numero de cuotas es necesario',
                 'totalInteres.required' => 'El valor del interes es necesario',
                 'fecha.required' => 'debe de ingresar una fecha',
                 'idCliente.required' => 'No se ha encontrado el identificador del usuario',
@@ -52,12 +55,14 @@ class PrestamoController extends Controller
         if ($validador['estado'] == 'success') {
             //ingresar el nuevo prestamo
             $prestamo = new Prestamo;
-            $prestamo->montoSolicitado = $request->montoSolicitado;
-            $prestamo->totalInteres = $request->totalInteres;
+            $prestamo->monto_solicitado = $request->montoSolicitado;
+            $prestamo->cuotas = $request->cuotas;
+            $prestamo->total_interes = $request->totalInteres;
             $prestamo->fecha = $request->fecha;
-            $prestamo->idCliente = $request->idCliente;
-            $prestamo->idUsuario = Auth::user()->id;
-            $prestamo->idTipo = $request->idTipo;
+            $prestamo->cliente_id = $request->idCliente;
+            $prestamo->usuario_id = Auth::user()->id;
+            $prestamo->tipo_id = $request->idTipo;
+            $prestamo->estado = 'Vigente';
             $prestamo->activo = 'S';
             if ($prestamo->save()) {
                 return ['estado' => 'success', 'mensaje' => 'Prestamo ingresado correctamente'];
@@ -69,6 +74,90 @@ class PrestamoController extends Controller
         }
     }
 
+    public function setPagoPrestamo(Request $request)
+    {
+
+        //Verificar si existe detalle del prestamo
+        $consultaDetalle = DetallePrestamo::where([
+            'prestamo_id' => $request->idPrestamo,
+            'activo' => 'S'
+        ])
+            ->count();
+        //Definir el numero de cuota en el detalle
+        if ($consultaDetalle == 0) {
+            $cuota = $consultaDetalle + 1;
+            $estado = 'Vigente';
+        } else {
+            //obtener el numero de cuotas del prestamo
+            $numeroCuotasPrestamo = Prestamo::select(
+                'cuotas',
+                'total_interes'
+            )
+                ->where([
+                    'id' => $request->idPrestamo
+                ])
+                ->first();
+            $cuota = $consultaDetalle + 1;
+            $estado = 'Vigente';
+        }
+
+        //verificar los montos a pagar del prestamo con los detalles
+        $sumaDetalles = DetallePrestamo::where([
+            'prestamo_id' => $request->idPrestamo
+        ])
+            ->sum('monto');
+
+        //monto que falta por pagar
+        $totalRestantePorPagar = $numeroCuotasPrestamo->total_interes - $sumaDetalles;
+
+        if ($cuota == $numeroCuotasPrestamo->cuotas && $request->monto != $totalRestantePorPagar) {
+            return ['estado' => 'failed', 'mensaje' => 'El monto de la cuota final debe de cubir toda la deuda faltante.'];
+        } else {
+            if ($cuota <= $numeroCuotasPrestamo->cuotas) {
+                $pagoPrestamo = new DetallePrestamo;
+                $pagoPrestamo->fecha = $request->fecha;
+                $pagoPrestamo->cuota = $cuota;
+                $pagoPrestamo->monto = $request->monto;
+                $pagoPrestamo->estado = $estado;
+                $pagoPrestamo->prestamo_id = $request->idPrestamo;
+                $pagoPrestamo->activo = 'S';
+                if ($pagoPrestamo->save()) {
+                    if($cuota == $numeroCuotasPrestamo->cuotas || $totalRestantePorPagar == $request->monto){
+                        $terminarPrestamo = Prestamo::find($request->idPrestamo);
+                        $terminarPrestamo->estado = 'Pagado';
+                        $terminarPrestamo->save();
+                        dd($terminarPrestamo);
+                    }
+                    return ['estado' => 'success', 'mensaje' => 'Cuota de prestamo pagado correctamente'];
+                } else {
+                    return ['estado' => 'failed', 'mensaje' => 'Se ha producido un error intentar nuevamente.'];
+                }
+            } else {
+                return ['estado' => 'failed', 'mensaje' => 'Ya se ha pagado el numero de cuotas correspondiente al prestamo.'];
+            }
+        }
+    }
+
+    public function getPrestamoPorCliente($id)
+    {
+        return Prestamo::select(
+            'id',
+            'monto_solicitado',
+            'total_interes',
+            'fecha',
+            'cliente_id',
+            'usuario_id',
+            'tipo_id',
+            'cuotas',
+            'estado'
+        )
+            ->where([
+                'cliente_id' => $id,
+                'estado' => 'Vigente'
+            ])
+            ->get();
+    }
+
     public function getPrestamosTodos()
     {
         return Prestamo::all();
@@ -76,8 +165,8 @@ class PrestamoController extends Controller
 
     public function getPrestamosPorTipo($id)
     {
-        return Prestamo::select('montoSolicitado', 'totalInteres', 'fecha', 'idCliente', 'idUsuario', 'idTipo')
-            ->where('idTipo', $id)
+        return Prestamo::select('monto_solicitado', 'total_interes', 'fecha', 'cliente_id', 'usuario_id', 'tipo_id')
+            ->where('tipo_id', $id)
             ->get();
     }
 
