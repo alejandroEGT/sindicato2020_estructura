@@ -130,13 +130,12 @@ export default {
             })
         },
 
-        show(component) {
-            this.$refs[''+component+''].show();
-        },
-
-        onDialogHide() {
-            this.$emit('hide')
-        },
+        show (modal) {
+            this.$modal.show(modal);
+            },
+            hide (modal) {
+              this.$modal.hide(modal);
+            },
 
         onRefresh() {
             this.loading = true;

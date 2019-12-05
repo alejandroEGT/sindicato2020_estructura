@@ -187,7 +187,9 @@
                 class="my-sticky-header-table"
                 flat
                 bordered
-        
+                :pagination.sync="pagination"
+              
+                binary-state-sort
               
               > 
                 <template v-slot:body="props">
@@ -197,11 +199,41 @@
                     <q-td key="fecha" :props="props">{{ props.row.fecha }}</q-td>
                     <q-td key="archivo" :props="props">
                      
-                      <q-btn @click="show('dialog'+props.row.__index)" flat icon="file_copy"  />
-                            <q-dialog :ref="'dialog'+props.row.__index" @hide="onDialogHide" full-width full-height :no-backdrop-dismiss="true">
+                      <q-btn @click="show('modal'+props.row.id)" flat icon="file_copy"  />
+
+                      <modal 
+                     
+                        :name="'modal'+props.row.id"
+                        :clickToClose="false"
+                        :pivot-y="0.5"
+                        :adaptive="true"
+                        :scrollable="true"
+                        :reset="true"
+                        width="60%"
+                        height="100%"
+                      >
+                          <q-card>
+                                  <q-card-section>
+                                    <div class="row">
+                                      <div class="col-10 col-md-11">
+                                          <div class="text-h6">Archivo</div>
+                                      </div>
+                                      <div class="col-10 col-md-1">
+                                        <q-btn label="Volver" icon="keyboard_backspace" flat @click="hide('modal'+props.row.id)" />
+                                      
+                                      </div>
+                                    </div>
+                                    
+                                  </q-card-section>
+
+                                </q-card>
+
+                                  <iframe style="height:100%; width:100%;" :src="'../'+props.row.archivo" frameborder="0" allowfullscreen></iframe>
+                      </modal>
+                            <!-- <q-dialog :ref="'dialog'+props.row.__index" @hide="onDialogHide" full-width full-height :no-backdrop-dismiss="true"> -->
                               <!-- <vue-friendly-iframe :src="'../'+props.row.archivo"></vue-friendly-iframe> -->
                             
-                                  <q-card>
+                                  <!-- <q-card>
                                   <q-card-section>
                                     <div class="row">
                                       <div class="col-10 col-md-11">
@@ -209,20 +241,20 @@
                                       </div>
                                       <div class="col-10 col-md-1">
                                         <q-btn label="Volver" icon="keyboard_backspace" flat v-close-popup />
-                                          <!-- <q-btn class="text-right" flat v-close-popup round dense icon="close" /> -->
+                                      
                                       </div>
                                     </div>
                                     
                                   </q-card-section>
 
                                   
-                                    <!-- {{ cuenta_id.id }} -->
+                                   
                                     <iframe style="height:100%; width:100%;" :src="'../'+props.row.archivo" frameborder="0" allowfullscreen></iframe>
 
                               
 
                                 </q-card>
-                            </q-dialog>
+                            </q-dialog> -->
                             
 
                     </q-td>
@@ -231,7 +263,7 @@
                     <q-td key="egreso" :props="props">{{ formatPrice(props.row.monto_egreso) }}</q-td>
                     <q-td key="view" :props="props">
                       
-                      <q-btn @click="show('edit'+props.row.__index);
+                      <q-btn id="show-modal"  @click="show('modal2'+props.row.id);
                             llenar_inputs(props.row.fecha, props.row.descripcion,props.row.monto_ingreso, props.row.monto_egreso)" 
                       color="primary" icon="edit">
                         <template v-slot:loading>
@@ -239,18 +271,29 @@
                         </template>
                       </q-btn>
 
+                    
+                      <modal 
+                     
+                        :name="'modal2'+props.row.id"
+                        :clickToClose="false"
+                        :pivot-y="0.5"
+                        :adaptive="true"
+                        :scrollable="true"
+                        :reset="true"
+                        width="60%"
+                 
+                        height="auto" 
 
-                      <q-dialog :ref="'edit'+props.row.__index" @hide="onDialogHide" :no-backdrop-dismiss="true">
-                              <!-- <vue-friendly-iframe :src="'../'+props.row.archivo"></vue-friendly-iframe> -->
-                            
-                               <q-card style="width: 700px; max-width: 80vw;">
+                      >
+
+                               <q-card>
                                   <q-card-section>
                                     <div class="row">
                                       <div class="col-10 col-md-11">
                                           <div class="text-h6">Modificación</div>
                                       </div>
                                       <div class="col-10 col-md-1">
-                                        <q-btn label="Volver" icon="keyboard_backspace" flat v-close-popup />
+                                        <q-btn label="Volver" icon="keyboard_backspace" flat @click="hide('modal2'+props.row.id)" />
                                           <!-- <q-btn class="text-right" flat v-close-popup round dense icon="close" /> -->
                                       </div>
                                     </div>
@@ -420,12 +463,8 @@
                                       </div>
                                     </template>
                                 
-                                  
-                                    
-                                   
-
                                 </q-card>
-                            </q-dialog>
+                      </modal>
                     </q-td>
                   
                   

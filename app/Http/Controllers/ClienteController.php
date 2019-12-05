@@ -46,4 +46,8 @@ class ClienteController extends Controller
     public function modificar_campo_deuda(Request $datos){
         return DeudasCliente::modificar_campo_deuda($datos);
     }
+
+    public function pagar_deuda(Request $datos){
+        return DeudasCliente::pagar_deuda($datos);
+    }
 }

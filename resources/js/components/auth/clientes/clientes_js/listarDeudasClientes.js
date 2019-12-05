@@ -31,7 +31,8 @@ export default {
                 'descripcion',
                 'monto',
                 'fecha',
-                'opcion'
+                'opcion',
+                'estado_deuda'
             ],
 
             clientes: [
@@ -43,6 +44,7 @@ export default {
                 { classes: 'ellipsis', name: 'monto', align: 'center', label: 'Monto', field: 'monto', sortable: true },
                 { classes: 'ellipsis', name: 'fecha', align: 'center', label: 'Fecha de Tope', field: 'fecha', sortable: true },
                 { classes: 'ellipsis', name: 'opcion', align: 'center', label: 'Opcion', field: 'opcion', sortable: true },
+                { classes: 'ellipsis', name: 'estado_deuda', align: 'center', label: 'Estado de Deuda', field: 'estado_deuda', sortable: true },
 
             ],
         }
@@ -203,13 +205,56 @@ export default {
             }, 5000)
         },
 
-        show(component) {
-            this.$refs[''+component+''].show();
+        pagar_deuda(id){
+
+            const data = {
+                'id': id,
+            }
+            this.loading = true;
+            axios.post('api/pagar_deuda',data).then((response) => {
+                if (response.data.estado == 'success') {
+                    this.$q.notify({
+                      color: "green-4",
+                      textColor: "white",
+                      icon: "cloud_done",
+                      message: response.data.mensaje
+                    });
+                    this.loading = false;
+                    this.traer_clientes();
+                }
+                if (response.data.estado == 'failed') {
+                    this.$q.notify({
+                        color: "red-4",
+                        textColor: "white",
+                        icon: "delete_forever",
+                        message: response.data.mensaje
+                      });
+                      this.loading = false;
+                }
+                if (response.data.estado == 'failed_p') {
+                    this.$q.notify({
+                        color: "orange-8",
+                        textColor: "white",
+                        icon: "info",
+                        message: response.data.mensaje
+                      });
+                      this.loading = false;
+                }
+                
+            })
+            .catch(error => {
+                alert(error);
+      
+              })
         },
 
-        onDialogHide() {
-            this.$emit('hide')
+        show (modal) {
+            this.$modal.show(modal);
+            },
+        hide (modal) {
+            this.$modal.hide(modal);
         },
+
 
         formatPrice(value) {
             let val = (value / 1).toFixed(0).replace('.', ',')

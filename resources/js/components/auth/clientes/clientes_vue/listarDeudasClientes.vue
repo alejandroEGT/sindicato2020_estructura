@@ -5,7 +5,7 @@
           <q-banner inline-actions class="bg-grey-3">
             <div class="row">
               <div class="col-12 col-md-7">
-                <q-icon style="font-size: 3rem;" name="account_circle" color="primary" />
+                <q-icon style="font-size: 3rem;" name="monetization_on" color="primary" />
               LISTADO DE CLIENTES
               </div>
               
@@ -257,7 +257,7 @@
           </q-td>
 
           <q-td key="monto" :props="tabla">
-            {{'$ ' + formatPrice(tabla.row.monto)}}
+            <b><span class="green_noPagado">$ </span>{{formatPrice(tabla.row.monto)}}</b>
             <q-popup-edit
               v-model="tabla.row.monto"
               title="Modificar Monto"
@@ -332,9 +332,51 @@
             </q-popup-edit>
           </q-td>
 
-          <q-td key="opcion" :props="tabla">
-            <q-btn label="Pagar" color="green" @click="eliminar_cliente_estado(tabla.row.id)" />
+         <q-td key="opcion" :props="tabla">
+            <q-btn label="Pagar" color="green" @click="show('modal'+tabla.row.id)"/>
+
+              <modal       
+                        :name="'modal'+tabla.row.id"
+                        :clickToClose="false"
+                        :pivot-y="0.5"
+                        :adaptive="true"
+                        :scrollable="true"
+                        :reset="true"
+                        height="auto"
+                      >
+
+              <div class="col-12">
+              	<q-card>
+              	  <q-card-section class="row items-center">
+              	    <q-avatar icon="monetization_on" color="danger" text-color="white" />
+              	    <span
+              	      class="q-ml-sm"
+              	    >¿Esta seguro que desea registrar la deuda pagada del cliente: <br>
+                     <b>{{tabla.row.cliente_deuda}}?</b></span>
+              	  </q-card-section>
+              
+              	  <q-card-actions align="right">
+              	    <q-btn flat label="Cancel" color="red" @click="hide('modal'+tabla.row.id)" />
+              	    <q-btn
+              	      flat
+              	      label="Aceptar"
+              	      color="green"
+              	      v-close-popup
+              	      @click="pagar_deuda(tabla.row.id),hide('modal'+tabla.row.id)"
+              	    />
+              	  </q-card-actions>
+              	</q-card>
+              </div>
+
+            </modal>
           </q-td>
+
+            <q-td key="estado_deuda" :props="tabla">
+              <div v-bind:class="{ 'red_pagado': tabla.row.estado_deuda == 'NO PAGADO', 'green_noPagado': tabla.row.estado_deuda == 'PAGADO' }">
+              <b>{{tabla.row.estado_deuda}}</b>
+              </div>
+            </q-td>
+
         </q-tr>
       </template>
     </q-table>

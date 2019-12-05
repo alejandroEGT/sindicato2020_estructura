@@ -13,6 +13,7 @@ Route::post('registro_cliente_deudas', 'ClienteController@registro_cliente_deuda
 Route::get('buscar_cliente/{rut}', 'ClienteController@buscar_cliente');
 Route::get('deudas_cliente/{id}/{request}', 'ClienteController@deudas_cliente');
 Route::post('modificar_campo_deuda', 'ClienteController@modificar_campo_deuda');
+Route::post('pagar_deuda', 'ClienteController@pagar_deuda');
 
 
 ?>

@@ -166,6 +166,7 @@ class DeudasCliente extends Model
                     'deudas_cliente.monto',
                     'deudas_cliente.descripcion',
                     'deudas_cliente.fecha',
+                    'deudas_cliente.estado_deuda',
                     'tdc.tipo',
                     'cliente.rut',
                     DB::raw("INITCAP(concat(cliente.nombres ,' ', 
@@ -174,7 +175,7 @@ class DeudasCliente extends Model
                     as cliente_deuda")
                     ])
                     ->join('tipo_deuda_cliente as tdc', 'tdc.id', 'deudas_cliente.tipo_deuda_id')
-                    ->join('cliente','cliente.id','deudas_cliente.cliente_id')
+                    ->join('cliente', 'cliente.id', 'deudas_cliente.cliente_id')
                     ->orderBy('fecha', 'asc')
                     ->where([
                         'deudas_cliente.activo'=>'S',
@@ -211,7 +212,7 @@ class DeudasCliente extends Model
                     as cliente_deuda")
                     ])
                     ->join('tipo_deuda_cliente as tdc', 'tdc.id', 'deudas_cliente.tipo_deuda_id')
-                    ->join('cliente','cliente.id','deudas_cliente.cliente_id')
+                    ->join('cliente', 'cliente.id', 'deudas_cliente.cliente_id')
                     ->orderBy('fecha', 'asc')
                     ->where([
                         'deudas_cliente.activo'=>'S',
@@ -373,6 +374,35 @@ class DeudasCliente extends Model
             }
         } else {
             return $validarDatos;
+        }
+    }
+
+    protected function pagar_deuda($request)
+    {
+        // dd($request->all());
+        $deudaCliente = DeudasCliente::where([
+                                             'id'=>$request->id,
+                                             'activo'=>'S',
+                                             'estado_deuda'=>'PAGADO'
+
+                                            ])
+                                            ->get();
+        // dd($deudaCliente);
+
+        if($deudaCliente[0]->estado_deuda == 'PAGADO'){
+            return ['estado'=>'failed_p', 'mensaje'=>'El pago ya fue realizado.'];
+        }
+
+        if ($deudaCliente->isEmpty()) {
+            $pagar = $this::find($request->id);
+            $pagar->estado_deuda = 'PAGADO';
+
+            if ($pagar->save()) {
+                {
+            return ['estado'=>'success', 'mensaje'=>'Pago registrado con exito!.'];
+                }
+                return ['estado'=>'failed', 'mensaje'=>'A ocurrido un error al pagar la deuda.'];
+            }
         }
     }
 }
