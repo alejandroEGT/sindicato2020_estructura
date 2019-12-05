@@ -58,20 +58,19 @@
 
           <q-td key="giro" :props="tabla">{{tabla.row.giro}}</q-td>
 
-          <q-td key="telefono" :props="tabla">{{tabla.row.telefono}}</q-td>
-
-          <q-td key="correo" :props="tabla">{{tabla.row.correo}}</q-td>
-
-          <q-td key="pagina_web" :props="tabla">{{tabla.row.pagina_web}}</q-td>
-
-          <q-td key="direccion" :props="tabla">{{tabla.row.direccion}}</q-td>
-
-          <q-td key="ciudad" :props="tabla">{{tabla.row.ciudad}}</q-td>
-
           <q-td key="estado" :props="tabla">{{tabla.row.estado}}</q-td>
 
           <q-td key="opciones" :props="tabla">
-            <q-btn label="Ver Contactos" color="blue" />
+            <q-btn flat icon-right="visibility" @click="verProveedor()" color="blue" class="q-mb-md">
+              <q-tooltip anchor="bottom middle" self="top middle" :offset="[10, 10]">Ver Proveedor</q-tooltip>
+            </q-btn>
+
+            <q-btn flat icon-right="contacts" color="blue" class="q-mb-md">
+              <q-tooltip anchor="bottom middle" self="top middle" :offset="[10, 10]">Contactos</q-tooltip>
+            </q-btn>
+            <!-- <q-btn flat icon-right="visibility" color="blue" @click="volver()" class="q-mb-md" />
+
+            <q-btn flat icon-right="contacts" color="green" @click="volver()" class="q-mb-md" />-->
           </q-td>
         </q-tr>
       </template>

@@ -17,9 +17,13 @@ class ProveedorController extends Controller
         return Proveedor::traerProveedores();
     }
 
+    public function VerProveedor($id)
+    {
+        return Proveedor::verProveedor($id);
+    }
+
     public function TraerGiros()
     {
         return Proveedor::traerGiros();
     }
-
 }

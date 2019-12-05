@@ -74,6 +74,35 @@ class Proveedor extends Model
         }
     }
 
+    protected function verProveedor($id)
+    {
+        $prov = DB::table('proveedores')
+            ->select([
+                'id',
+                'codigo',
+                'rut',
+                'razon_social',
+                'telefono',
+                'correo',
+                'pagina_web',
+                'direccion',
+                'ciudad',
+                'giro_prov_id',
+                'estado_prov_id'
+            ])
+            ->where([
+                'activo' => 'S',
+                'id' => $id
+            ])
+            ->get();
+
+        if (!$prov->isEmpty()) {
+            return ['estado' => 'success', 'proveedor' => $prov[0]];
+        } else {
+            return ['estado' => 'failed', 'mensaje' => 'No se encuentra el Proveedor.'];
+        }
+    }
+
     protected function traerGiros()
     {
         $giros = DB::table('giros_prov')

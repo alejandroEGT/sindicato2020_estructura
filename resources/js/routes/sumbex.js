@@ -6,6 +6,7 @@ import Auth from "../components/auth/auth.vue";
 import ModuloProveedores from "../components/auth/proveedores/proveedores_vue/modulo_proveedor.vue";
 import RegistroProveedor from "../components/auth/proveedores/proveedores_vue/registro_proveedores.vue";
 import TablaProveedor from "../components/auth/proveedores/proveedores_vue/tabla_proveedor.vue";
+import VerProveedor from "../components/auth/proveedores/proveedores_vue/ver_proveedor.vue";
 
 //Reuniones
 import ModuloReunion from "../components/auth/reuniones/reuniones_vue/modulo_reuniones.vue";
@@ -28,6 +29,7 @@ let routes_sumbex = [
             { path: '/modulo-reunion', component: ModuloReunion, name: 'ModuloReunion' },
             { path: '/crear-reunion', component: CrearReunion, name: 'CrearReunion' },
             { path: '/traer-reuniones', component: TraerReuniones, name: 'TraerReuniones' },
+            { path: '/ver-provedor', component: VerProveedor, name: 'VerProveedor' },
             //aqui las rutas con permiso de auth
         ]
     },
