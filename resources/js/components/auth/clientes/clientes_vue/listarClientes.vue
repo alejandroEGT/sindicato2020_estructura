@@ -1,45 +1,54 @@
 
 <template>
   <div class="q-pa-md">
-
     <template>
-          <q-banner inline-actions class="bg-grey-3">
-            <template v-slot:avatar>
-              <q-icon name="account_circle" color="primary" />
-            </template>
-            LISTADO DE CLIENTES
-            <template v-slot:action>
+      <q-banner inline-actions class="bg-grey-3">
+        <div class="row">
+          <div class="col-12 col-md-7">
+            <q-icon style="font-size: 3rem;" name="account_circle" color="primary" />LISTADO DE CLIENTES
+          </div>
+
+          <div class="col-12 col-md-5">
+            <div class="row">
               <!-- boton refrescar -->
-              <q-btn
-                flat
-                label="Refrescar"
-                icon-right="refresh"
-                color="primary"
-                @click="onRefresh()"
-                class="q-mb-md"
-              />
-  
+              <div class="col-4 col-md-4">
+                <q-btn
+                  flat
+                  label="Refrescar"
+                  icon-right="refresh"
+                  color="primary"
+                  @click="onRefresh()"
+                  class="q-mb-md"
+                />
+              </div>
+
               <!-- boton Formulario -->
-              <q-btn
-                flat
-                label="Formulario"
-                icon-right="person_add"
-                color="green"
-                @click="url_registro()"
-                class="q-mb-md"
-              />
-  
+              <div class="col-4 col-md-4">
+                <q-btn
+                  flat
+                  label="Formulario"
+                  icon-right="person_add"
+                  color="green"
+                  @click="url_registro()"
+                  class="q-mb-md"
+                />
+              </div>
+
               <!-- boton volver -->
-              <q-btn
-                flat
-                label="Volver"
-                icon-right="settings_backup_restore"
-                color="red"
-                @click="url_volver2()"
-                class="q-mb-md"
-              />
-            </template>
-          </q-banner>
+              <div class="col-4 col-md-4">
+                <q-btn
+                  flat
+                  label="Volver"
+                  icon-right="settings_backup_restore"
+                  color="red"
+                  @click="url_volver2()"
+                  class="q-mb-md"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </q-banner>
     </template>
 
     <div class="q-pa-sm"></div>
@@ -50,7 +59,7 @@
       no-data-label="Aun no hay datos para mostrar."
       no-results-label="No se han encontrado resultados."
       rows-per-page-label="Cantidad:"
-      loading-label="Cargando"
+      loading-label="Cargando..."
       row-key="name"
       :data="listarClientes"
       :columns="clientes"
@@ -59,68 +68,29 @@
       :filter="filter"
       :visible-columns="visibleColumns"
       :rows-per-page-options="[5,10,15,30,50,100,0]"
-      class="my-sticky-header-table"
     >
       <!-- funciones especiales -->
       <template v-slot:top="pantalla">
         <q-space />
         <!-- filtro de datos -->
-        <div class="col">
-          <q-toggle
+        <div class="col-6 col-md-2">
+          <q-select
             v-model="visibleColumns"
-            left-label
+            multiple
+            dense
+            filled
+            display-value="Filtrar"
+            emit-value
+            map-options
+            :options="clientes"
+            option-value="name"
+            style="min-width: 150px;"
             color="green"
-            checked-icon="check"
-            unchecked-icon="clear"
-            val="id"
-            label="ID"
+            bg-color="white"
           />
-          <q-toggle
-            v-model="visibleColumns"
-            left-label
-            color="green"
-            checked-icon="check"
-            unchecked-icon="clear"
-            val="fecha_nacimiento"
-            label="Fecha de Nacimiento"
-          />
-          <q-toggle
-            v-model="visibleColumns"
-            left-label
-            color="green"
-            checked-icon="check"
-            unchecked-icon="clear"
-            val="rut"
-            label="Rut"
-          />
-          <q-toggle
-            v-model="visibleColumns"
-            left-label
-            color="green"
-            checked-icon="check"
-            unchecked-icon="clear"
-            val="nombres"
-            label="Nombres"
-          />
-          <q-toggle
-            v-model="visibleColumns"
-            left-label
-            color="green"
-            checked-icon="check"
-            unchecked-icon="clear"
-            val="apellido_paterno"
-            label="Apellido Paterno"
-          />
-          <q-toggle
-            v-model="visibleColumns"
-            left-label
-            color="green"
-            checked-icon="check"
-            unchecked-icon="clear"
-            val="apellido_materno"
-            label="Apellido Materno"
-          />
-          <!-- full screen -->
+        </div>
+        <!-- full screen -->
+        <div class="col-6 col-md-4">
           <q-btn
             flat
             round
@@ -130,9 +100,11 @@
             class="q-ml-md"
           />
           <label>Pantalla Completa</label>
+        </div>
 
+        <div class="col-12 col-md-6">
           <div class="row justify-end">
-            <div class="col-12 col-md-4">
+            <div class="col-12 col-md-6">
               <q-input
                 dark
                 borderless
@@ -153,7 +125,6 @@
 
       <template v-slot:body="tabla">
         <q-tr :props="tabla">
-
           <q-td key="id" :props="tabla">
             <q-badge color="green">{{tabla.row.id}}</q-badge>
           </q-td>
@@ -196,7 +167,7 @@
           </q-td>
 
           <q-td key="rut" :props="tabla">
-            {{tabla.row.rut}}
+            {{formateaRut(tabla.row.rut)}}
             <q-popup-edit
               v-model="tabla.row.rut"
               title="Modificar Rut"
@@ -348,50 +319,57 @@
           </q-td>
 
           <q-td key="opcion" :props="tabla">
-            <q-btn label="Eliminar" color="red" @click="show('eliminarCliente'+tabla.row.__index)"/>
-            <q-dialog :ref="'eliminarCliente'+tabla.row.__index" @hide="onDialogHide" persistent>
+            <q-btn rounded label="Eliminar" color="red" @click="show('modal'+tabla.row.id)" />
+
+            <modal
+              :name="'modal'+tabla.row.id"
+              :clickToClose="false"
+              :pivot-y="0.5"
+              :adaptive="true"
+              :scrollable="true"
+              :reset="true"
+              height="auto"
+            >
               <q-card>
                 <q-card-section class="row items-center">
                   <q-avatar icon="delete" color="primary" text-color="white" />
-                  <span
-                    class="q-ml-sm"
-                  >¿Esta seguro que desea eliminar al cliente <b>{{tabla.row.nombres}} {{tabla.row.apellido_paterno}} {{tabla.row.apellido_materno}}</b>?</span>
+                  <span class="q-ml-sm">
+                    ¿Esta seguro que desea eliminar al cliente?
+                    <br />
+                    <b>{{tabla.row.nombres}} {{tabla.row.apellido_paterno}} {{tabla.row.apellido_materno}}</b>
+                  </span>
                 </q-card-section>
 
                 <q-card-actions align="right">
-                  <q-btn flat label="Cancel" color="red" v-close-popup />
+                  <q-btn outline  label="Cancel" color="red" @click="hide('modal'+tabla.row.id)" />
                   <q-btn
-                    flat
+                    outline     
                     label="Aceptar"
                     color="green"
-                    v-close-popup
-                    @click="eliminar_cliente_estado(tabla.row.id)"
+                    @click="eliminar_cliente_estado(tabla.row.id),hide('modal'+tabla.row.id)"
                   />
                 </q-card-actions>
               </q-card>
-            </q-dialog>
+            </modal>
           </q-td>
-
         </q-tr>
       </template>
-      
     </q-table>
 
     <!-- alertas -->
-      <template>
-        <ul v-for="e in errores" :key="e[0]">
-          <q-banner inline-actions class="bg-orange text-white">
-            <li>
-              <i class="material-icons md-24">info</i>
-              {{e[0]}}
-            </li>
-            <template v-slot:action>
-              <q-btn flat color="white" label="Advertencia!" disabled />
-            </template>
-          </q-banner>
-        </ul>
-      </template>
-  
+    <template>
+      <ul v-for="e in errores" :key="e[0]">
+        <q-banner inline-actions class="bg-orange text-white">
+          <li>
+            <i class="material-icons md-24">info</i>
+            {{e[0]}}
+          </li>
+          <template v-slot:action>
+            <q-btn flat color="white" label="Advertencia!" disabled />
+          </template>
+        </q-banner>
+      </ul>
+    </template>
   </div>
 </template>
 

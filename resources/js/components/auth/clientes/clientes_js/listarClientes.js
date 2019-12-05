@@ -18,7 +18,7 @@ export default {
                 'opcion'
             ],
             clientes: [
-                { classes: 'ellipsis', name: 'id', align: 'center', label: 'id', field: 'id', sortable: true },
+                { classes: 'ellipsis', name: 'id', align: 'center', label: 'ID', field: 'id', sortable: true },
                 { classes: 'ellipsis', name: 'fecha_nacimiento', align: 'center', label: 'Fecha de Nacimiento', field: 'fecha_nacimiento', sortable: true },
                 { classes: 'ellipsis', name: 'rut', align: 'center', label: 'Rut', field: 'rut', sortable: true },
                 { classes: 'ellipsis', name: 'nombres', align: 'center', label: 'Nombres', field: 'nombres', sortable: true },
@@ -71,8 +71,25 @@ export default {
                     this.loading = false
                     this.traer_clientes();
                 }
+                if (response.data.estado == 'failed') {
+                    this.$q.notify({
+                      color: "red-4",
+                      textColor: "white",
+                      icon: "cloud_done",
+                      message: response.data.mensaje
+                    });
+                    this.campoUpd = '';
+                    this.errores = [];
+                    this.loading = false
+                }
                 if (response.data.estado == 'failed_v') {
-                    this.errores = response.data.mensaje;
+                    this.$q.notify({
+                        color: "red-4",
+                        textColor: "white",
+                        icon: "cloud_done",
+                        message: response.data.mensaje.input[0]
+                      });
+                    // this.errores = response.data.mensaje;
                     this.campoUpd = '';
                     this.loading = false;
                   }
@@ -113,20 +130,44 @@ export default {
             })
         },
 
-        show(component) {
-            this.$refs[''+component+''].show()
-        },
-
-        onDialogHide() {
-            this.$emit('hide')
-        },
+        show (modal) {
+            this.$modal.show(modal);
+            },
+            hide (modal) {
+              this.$modal.hide(modal);
+            },
 
         onRefresh() {
             this.loading = true;
             this.traer_clientes();
+            this.errores = [];
             setTimeout(() => {
                 this.loading = false;
             }, 5000)
+        },
+
+        formateaRut(rut) {
+
+            var actual = rut.replace(/^0+/, "");
+            if (actual != '' && actual.length > 1) {
+                var sinPuntos = actual.replace(/\./g, "");
+                var actualLimpio = sinPuntos.replace(/-/g, "");
+                var inicio = actualLimpio.substring(0, actualLimpio.length - 1);
+                var rutPuntos = "";
+                var i = 0;
+                var j = 1;
+                for (i = inicio.length - 1; i >= 0; i--) {
+                    var letra = inicio.charAt(i);
+                    rutPuntos = letra + rutPuntos;
+                    if (j % 3 == 0 && j <= inicio.length - 1) {
+                        rutPuntos = "." + rutPuntos;
+                    }
+                    j++;
+                }
+                var dv = actualLimpio.substring(actualLimpio.length - 1);
+                rutPuntos = rutPuntos + "-" + dv;
+            }
+            return rutPuntos;
         },
 
     },

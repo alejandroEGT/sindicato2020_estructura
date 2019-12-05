@@ -76,23 +76,24 @@ class Proveedor extends Model
 
     protected function verProveedor($id)
     {
-        $prov = DB::table('proveedores')
+        $prov = DB::table('proveedores as p')
             ->select([
-                'id',
-                'codigo',
-                'rut',
-                'razon_social',
-                'telefono',
-                'correo',
-                'pagina_web',
-                'direccion',
-                'ciudad',
-                'giro_prov_id',
-                'estado_prov_id'
+                'p.id',
+                'p.codigo',
+                'p.rut',
+                'p.razon_social',
+                'p.telefono',
+                'p.correo',
+                'p.pagina_web',
+                'p.direccion',
+                'p.ciudad',
+                'p.giro_prov_id',
+                'g.descripcion'
             ])
+            ->join('giros_prov as g', 'g.id', 'p.giro_prov_id')
             ->where([
-                'activo' => 'S',
-                'id' => $id
+                'p.activo' => 'S',
+                'p.id' => $id
             ])
             ->get();
 
