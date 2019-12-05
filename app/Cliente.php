@@ -370,8 +370,13 @@ class Cliente extends Model
                 return ['estado'=>'failed', 'mensaje'=>'A ocurrido un error al eliminar el cliente.'];
             }
         } else {
-            return ['estado'=>'failed', 'mensaje'=>'No es posible eliminar a este cliente ya que tiene deudas pendientes.'];
+            return ['estado'=>'failed', 'mensaje'=>'No es posible eliminar a este cliente ya que tiene deudas registradas.'];
         }
+    }
+
+    protected function prestamo_cliente($request)
+    {
+        
     }
 
     protected function traer_clientes_deudas()

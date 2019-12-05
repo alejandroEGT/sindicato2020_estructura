@@ -115,7 +115,7 @@ class DeudasCliente extends Model
             $r->descripcion=$datos->descripcion;
             $r->fecha=$datos->fecha;
             $r->activo='S';
-            $r->estado_deuda='N';
+            $r->estado_deuda='NO PAGADO';
 
             if ($r->save()) {
                 return ['estado'=>'success', 'mensaje'=>'Deuda de cliente guardado con exito.'];
@@ -204,6 +204,7 @@ class DeudasCliente extends Model
                     'deudas_cliente.monto',
                     'deudas_cliente.descripcion',
                     'deudas_cliente.fecha',
+                    'deudas_cliente.estado_deuda',
                     'tdc.tipo',
                     'cliente.rut',
                     DB::raw("INITCAP(concat(cliente.nombres ,' ', 
@@ -216,6 +217,7 @@ class DeudasCliente extends Model
                     ->orderBy('fecha', 'asc')
                     ->where([
                         'deudas_cliente.activo'=>'S',
+                        'deudas_cliente.estado_deuda'=>'NO PAGADO',
                         'deudas_cliente.cliente_id' =>$id
                     ])
                     ->get();
@@ -228,7 +230,7 @@ class DeudasCliente extends Model
                     if (!$listar->isEmpty()) {
                         return ['estado'=>'success' , 'cliente' => $listar];
                     } else {
-                        return ['estado'=>'failed', 'mensaje'=>'El cliente no posee deudas vigentes.'];
+                        return ['estado'=>'failed_c', 'mensaje'=>'El cliente no posee deudas vigentes.'];
                     }
                 break;
             
@@ -307,8 +309,18 @@ class DeudasCliente extends Model
 
     protected function modificar_campo_deuda($request)
     {
-        $validarDatos = DeudasCliente::validar_modificar_campo_deuda($request);
 
+        $estadoCliente = DeudasCliente::where([
+            'id'=>$request->id,
+            'activo'=>'S',
+           ])
+           ->get();
+
+        if ($estadoCliente[0]->estado_deuda == 'PAGADO') {
+            return ['estado'=>'failed_p', 'mensaje'=>'El pago ya fue realizado, no puede modificar ningun campo.'];
+        }
+
+        $validarDatos = DeudasCliente::validar_modificar_campo_deuda($request);
         if ($validarDatos['estado'] == 'success') {
             $modificar = DeudasCliente::find($request->id);
 
@@ -354,16 +366,6 @@ class DeudasCliente extends Model
                       return ['estado'=>'failed', 'mensaje'=>'A ocurrido un error al igreso de datos.'];
                   }
                   break;
-
-                // case 'activo':
-                //   $modificar->activo = $request->input;
-
-                //   if ($modificar->save()) {
-                //       return ['estado'=>'success', 'mensaje'=>'cliente eliminado con exito.'];
-                //   } else {
-                //       return ['estado'=>'failed', 'mensaje'=>'A ocurrido un error al eliminar el cliente.'];
-                //   }
-                //   break;
                 
                 default:
                   return null;
@@ -383,26 +385,27 @@ class DeudasCliente extends Model
         $deudaCliente = DeudasCliente::where([
                                              'id'=>$request->id,
                                              'activo'=>'S',
-                                             'estado_deuda'=>'PAGADO'
-
                                             ])
                                             ->get();
-        // dd($deudaCliente);
 
-        if($deudaCliente[0]->estado_deuda == 'PAGADO'){
-            return ['estado'=>'failed_p', 'mensaje'=>'El pago ya fue realizado.'];
-        }
+        if (count($deudaCliente) > 0) {
 
-        if ($deudaCliente->isEmpty()) {
-            $pagar = $this::find($request->id);
-            $pagar->estado_deuda = 'PAGADO';
-
-            if ($pagar->save()) {
-                {
-            return ['estado'=>'success', 'mensaje'=>'Pago registrado con exito!.'];
+            if ($deudaCliente[0]->estado_deuda == 'PAGADO') {
+                return ['estado'=>'failed_p', 'mensaje'=>'El pago ya fue realizado.'];
+            }
+    
+            if (!$deudaCliente->isEmpty()) {
+                $pagar = $this::find($request->id);
+                $pagar->estado_deuda = 'PAGADO';
+    
+                if ($pagar->save()) {
+                    {
+                return ['estado'=>'success', 'mensaje'=>'Pago registrado con exito!.'];
+                    }
+                    return ['estado'=>'failed', 'mensaje'=>'A ocurrido un error al pagar la deuda.'];
                 }
-                return ['estado'=>'failed', 'mensaje'=>'A ocurrido un error al pagar la deuda.'];
             }
         }
+        return ['estado'=>'failed', 'mensaje'=>'A ocurrido un error al pagar la deuda.'];
     }
 }
