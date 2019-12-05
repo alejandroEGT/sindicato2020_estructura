@@ -40,8 +40,8 @@ class ClienteController extends Controller
     public function buscar_cliente($rut){
         return DeudasCliente::buscar_cliente($rut);
     }
-    public function deudas_cliente($id){
-        return DeudasCliente::deudas_cliente($id);
+    public function deudas_cliente($id,$request){
+        return DeudasCliente::deudas_cliente($id,$request);
     }
     public function modificar_campo_deuda(Request $datos){
         return DeudasCliente::modificar_campo_deuda($datos);

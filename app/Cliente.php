@@ -110,8 +110,16 @@ class Cliente extends Model
         $limpiar = $this->limpiarRut($datos->rut);
         $verificar = $this->validarRut($limpiar);
 
-        if ($verificar == true) {
+        $verificarRut = Cliente::select([
+                                        'rut',
+                                    ])
+                                        ->where('rut', $limpiar)
+                                        ->get();
+        if (count($verificarRut) > 0) {
+            return ['estado'=>'failed', 'mensaje'=>'El rut ya existe en los registros.'];
+        }
 
+        if ($verificar == true) {
             $validarDatos = $this->validar_datos_cliente($datos);
             if ($validarDatos['estado'] == 'success') {
                 $r = $this;
@@ -150,19 +158,18 @@ class Cliente extends Model
                                     ->get();
         if (count($listar) > 0) {
             foreach ($listar as $key) {
-                $key->fecha_nacimiento = Carbon::parse($key->fecha_nacimiento)->format('d-m-Y');
+                $key->fecha_nacimiento = Carbon::parse($key->fecha_nacimiento)->format('d/m/Y');
                 $key->nombres = ucwords($key->nombres);
                 $key->apellido_paterno = ucfirst($key->apellido_paterno);
                 $key->apellido_materno = ucfirst($key->apellido_materno);
             }
         }
 
-            if (!$listar->isEmpty()) {
-              return ['estado'=>'success' , $listar];
-          } else {
-              return ['estado'=>'failed', 'mensaje'=>'Aun no existen datos para mostrar.'];
-          }
-
+        if (!$listar->isEmpty()) {
+            return ['estado'=>'success' , $listar];
+        } else {
+            return ['estado'=>'failed', 'mensaje'=>'Aun no existen datos para mostrar.'];
+        }
     }
 
     protected function validar_modificar_campo_cliente($request)
@@ -181,7 +188,7 @@ class Cliente extends Model
           break;
         
           case 'rut':
-            $validator = Validator::make(
+                $validator = Validator::make(
                 $request->all(),
                 [
               'input' => 'required|unique:cliente,rut|min:2|max:20'
@@ -250,7 +257,8 @@ class Cliente extends Model
     protected function modificar_campo_cliente($request)
     {
         $validarDatos = $this->validar_modificar_campo_cliente($request);
-
+       
+        
         if ($validarDatos['estado'] == 'success') {
             $modificar = $this::find($request->id);
 
@@ -268,13 +276,29 @@ class Cliente extends Model
                   break;
 
                 case 'rut':
-                  $modificar->rut = $request->input;
+                  $limpiar = $this->limpiarRut($request->input);
+                  $verificar = $this->validarRut($limpiar);
 
-                  if ($modificar->save()) {
-                      return ['estado'=>'success', 'mensaje'=>'Rut del cliente actualizado.'];
-                  } else {
-                      return ['estado'=>'failed', 'mensaje'=>'A ocurrido un error al igreso de datos.'];
+                  $verificarRut = Cliente::select([
+                                                  'rut',
+                                              ])
+                                                  ->where('rut', $limpiar)
+                                                  ->get();
+                  if (count($verificarRut) > 0) {
+                      return ['estado'=>'failed', 'mensaje'=>'El rut ya existe en los registros.'];
                   }
+                      if ($verificar == true) {
+                          $modificar->rut = $limpiar;
+
+                          if ($modificar->save()) {
+                              return ['estado'=>'success', 'mensaje'=>'Rut del cliente actualizado.'];
+                          } else {
+                              return ['estado'=>'failed', 'mensaje'=>'A ocurrido un error al igreso de datos.'];
+                          }
+                      }
+                      return ['estado'=>'failed', 'mensaje'=>'El rut ingresado no es valido.'];
+                    
+                   
                   break;
 
                 case 'nombres':
@@ -321,20 +345,17 @@ class Cliente extends Model
                   return null;
                   break;
               }
-            } else {
-                return ['estado'=>'failed', 'mensaje'=>'El item que intentas modificar no existe.'];
             }
-        } else {
-            return $validarDatos;
+            return ['estado'=>'failed', 'mensaje'=>'El item que intentas modificar no existe.'];
         }
+        return $validarDatos; 
     }
 
     protected function eliminar_cliente($request)
     {
-
-      $deudaCliente = DeudasCliente::where([
+        $deudaCliente = DeudasCliente::where([
                                              'cliente_id'=>$request->id,
-                                             'activo'=>'S'               
+                                             'activo'=>'S'
                                             ])
                                             ->get();
         
@@ -348,49 +369,43 @@ class Cliente extends Model
         }
                 return ['estado'=>'failed', 'mensaje'=>'A ocurrido un error al eliminar el cliente.'];
             }
-        }else{
-          return ['estado'=>'failed', 'mensaje'=>'No es posible eliminar a este cliente ya que tiene deudas pendientes.'];
-
+        } else {
+            return ['estado'=>'failed', 'mensaje'=>'No es posible eliminar a este cliente ya que tiene deudas pendientes.'];
         }
-        
     }
 
     protected function traer_clientes_deudas()
     {
-      $listar = $this::select([
+        $listar = $this::select([
                               'id',
                               DB::raw("INITCAP(concat(nombres ,' ', 
                                                       apellido_paterno ,' ', 
                                                       apellido_materno)) 
-                                                      as cliente_deuda")             
+                                                      as cliente_deuda")
                               ])
                               ->where('activo', 'S')
                               ->get();
                               
-     if (count($listar) > 0) {
-         return $listar;
-     }else{
-       return "no hay clientes para mostrar";
-     }
-
-
+        if (count($listar) > 0) {
+            return $listar;
+        } else {
+            return "no hay clientes para mostrar";
+        }
     }
 
     protected function traer_tipo_deuda()
     {
-      $listar = TipoDeudaCliente::select([
+        $listar = TipoDeudaCliente::select([
                             'id',
                             'tipo'
                             ])
-                            ->where('activo','S')
+                            ->where('activo', 'S')
                             ->get();
       
-      if(count($listar) > 0){
-        return $listar;
-      }else{
-        return ("no hay datos para mostrar");
-      }
-
+        if (count($listar) > 0) {
+            return $listar;
+        } else {
+            return ("no hay datos para mostrar");
+        }
     }
-
 }

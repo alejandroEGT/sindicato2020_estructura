@@ -1,44 +1,55 @@
 <template>
   <div class="q-pa-md">
     <!-- cabecera -->
-    <template>
-      <q-banner inline-actions class="bg-grey-3">
-        <template v-slot:avatar>
-          <q-icon name="monetization_on" color="primary" />
-        </template>
-        LISTADO DE CLIENTES CON DEUDAS
-        <template v-slot:action>
-          <!-- boton refrescar -->
-          <q-btn
-            flat
-            label="Limpiar"
-            icon-right="refresh"
-            color="primary"
-            @click="onRefresh()"
-            class="q-mb-md"
-          />
-
-          <!-- boton Formulario -->
-          <q-btn
-            flat
-            label="Formulario"
-            icon-right="person_add"
-            color="green"
-            @click="url_registro()"
-            class="q-mb-md"
-          />
-
-          <!-- boton volver -->
-          <q-btn
-            flat
-            label="Volver"
-            icon-right="settings_backup_restore"
-            color="red"
-            @click="url_volver2()"
-            class="q-mb-md"
-          />
-        </template>
-      </q-banner>
+   <template>
+          <q-banner inline-actions class="bg-grey-3">
+            <div class="row">
+              <div class="col-12 col-md-7">
+                <q-icon style="font-size: 3rem;" name="account_circle" color="primary" />
+              LISTADO DE CLIENTES
+              </div>
+              
+                <div class="col-12 col-md-5">
+                  <div class="row">
+                    <!-- boton refrescar -->
+                    <div class="col-4 col-md-4">
+                      <q-btn
+                        flat
+                        label="Refrescar"
+                        icon-right="refresh"
+                        color="primary"
+                        @click="onRefresh()"
+                        class="q-mb-md"
+                      />
+                    </div>
+        
+                    <!-- boton Formulario -->
+                    <div class="col-4 col-md-4">
+                      <q-btn
+                        flat
+                        label="Formulario"
+                        icon-right="person_add"
+                        color="green"
+                        @click="url_registro()"
+                        class="q-mb-md"
+                      />
+                    </div>
+        
+                    <!-- boton volver -->
+                    <div class="col-4 col-md-4">
+                      <q-btn
+                        flat
+                        label="Volver"
+                        icon-right="settings_backup_restore"
+                        color="red"
+                        @click="url_volver2()"
+                        class="q-mb-md"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </q-banner>
     </template>
 
     <!-- buscador -->
@@ -63,7 +74,7 @@
             </template>
 
             <template v-slot:after>
-              <q-btn round dense flat icon="search" @click="traer_cliente()" />
+              <q-btn round dense flat icon="search" @click="traer_cliente();traerDeudas='cliente'"/>
             </template>
           </q-input>
         </div>
@@ -168,6 +179,12 @@
           <q-td key="id" :props="tabla">
             <q-badge color="green">{{tabla.row.id}}</q-badge>
           </q-td>
+          <q-td key="rut" :props="tabla">
+            {{formateaRut(tabla.row.rut)}}
+          </q-td>
+          <q-td key="cliente" :props="tabla">
+           {{tabla.row.cliente_deuda}}
+          </q-td>
 
           <q-td key="tipo" :props="tabla">
             {{tabla.row.tipo}}
@@ -203,7 +220,7 @@
           <q-td key="descripcion" :props="tabla">
             {{tabla.row.descripcion}}
             <q-popup-edit
-              v-model="tabla.row.rut"
+              v-model="tabla.row.descripcion"
               title="Modificar Descripcion"
               :validate="val => val.length >= 3"
             >
@@ -240,7 +257,7 @@
           </q-td>
 
           <q-td key="monto" :props="tabla">
-            {{tabla.row.monto}}
+            {{'$ ' + formatPrice(tabla.row.monto)}}
             <q-popup-edit
               v-model="tabla.row.monto"
               title="Modificar Monto"
@@ -342,3 +359,4 @@
 
 <script src="../clientes_js/listarDeudasClientes.js"></script>
 <style src="../clientes_css/listarDeudasClientes.css"></style>
+

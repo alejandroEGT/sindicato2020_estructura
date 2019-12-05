@@ -14,14 +14,19 @@ export default {
             buscadorCliente: '',
             rutCliente: '',
             nombreCliente: '',
-            idCliente: '',
+            idCliente: '0',
             selectTipoDeuda: [],
             tipoDeuda: '',
+            traerDeudas:'todos',
+            listarDeudaCliente: [],
+
 
 
 
             visibleColumns: [
                 'id',
+                'rut',
+                'cliente',
                 'tipo',
                 'descripcion',
                 'monto',
@@ -31,6 +36,8 @@ export default {
 
             clientes: [
                 { classes: 'ellipsis', name: 'id', align: 'center', label: 'ID', field: 'id', sortable: true },
+                { classes: 'ellipsis', name: 'rut', align: 'center', label: 'Rut', field: 'rut', sortable: true },
+                { classes: 'ellipsis', name: 'cliente', align: 'center', label: 'Cliente', field: 'cliente', sortable: true },
                 { classes: 'ellipsis', name: 'tipo', align: 'center', label: 'Tipo de Deuda', field: 'tipo', sortable: true },
                 { classes: 'ellipsis', name: 'descripcion', align: 'center', label: 'Descripción', field: 'descripcion', sortable: true },
                 { classes: 'ellipsis', name: 'monto', align: 'center', label: 'Monto', field: 'monto', sortable: true },
@@ -38,8 +45,6 @@ export default {
                 { classes: 'ellipsis', name: 'opcion', align: 'center', label: 'Opcion', field: 'opcion', sortable: true },
 
             ],
-            listarDeudaCliente: [],
-
         }
     },
 
@@ -112,7 +117,7 @@ export default {
 
         listar_deudas_cliente() {
             this.loading = true;
-            axios.get('api/deudas_cliente/' + this.idCliente).then((response) => {
+            axios.get('api/deudas_cliente/' + this.idCliente +'/'+ this.traerDeudas).then((response) => {
 
                 if (response.data.estado == 'success') {
                     this.listarDeudaCliente = response.data.cliente;
@@ -183,23 +188,16 @@ export default {
               })
           },
 
-
         onRefresh() {
             this.loading = true;
             this.rutCliente = '';
             this.nombreCliente = '';
-            this.idCliente = '';
+            this.idCliente = '0';
+            this.traerDeudas = 'todos',
             this.listarDeudaCliente = [];
             this.errores = [];
-
-            this.$q.notify({
-                color: "green-4",
-                textColor: "white",
-                icon: "cloud_done",
-                message: "Datos limpiados, si desea ver un nuevo cliente ingrese nuevamente el rut correspondiente."
-            });
+            this.listar_deudas_cliente();
             
-
             setTimeout(() => {
                 this.loading = false;
             }, 5000)
@@ -213,9 +211,39 @@ export default {
             this.$emit('hide')
         },
 
+        formatPrice(value) {
+            let val = (value / 1).toFixed(0).replace('.', ',')
+            return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+          },
+
+          formateaRut(rut) {
+
+            var actual = rut.replace(/^0+/, "");
+            if (actual != '' && actual.length > 1) {
+                var sinPuntos = actual.replace(/\./g, "");
+                var actualLimpio = sinPuntos.replace(/-/g, "");
+                var inicio = actualLimpio.substring(0, actualLimpio.length - 1);
+                var rutPuntos = "";
+                var i = 0;
+                var j = 1;
+                for (i = inicio.length - 1; i >= 0; i--) {
+                    var letra = inicio.charAt(i);
+                    rutPuntos = letra + rutPuntos;
+                    if (j % 3 == 0 && j <= inicio.length - 1) {
+                        rutPuntos = "." + rutPuntos;
+                    }
+                    j++;
+                }
+                var dv = actualLimpio.substring(actualLimpio.length - 1);
+                rutPuntos = rutPuntos + "-" + dv;
+            }
+            return rutPuntos;
+        },
+
     },
 
     mounted() {
         this.actualizar_tipo_deudas();
+        this.listar_deudas_cliente();
     }
 }

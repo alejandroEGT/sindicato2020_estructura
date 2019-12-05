@@ -156,32 +156,84 @@ class DeudasCliente extends Model
         }
     }
 
-    protected function deudas_cliente($id)
+    protected function deudas_cliente($id, $request)
     {
-        $listar = DeudasCliente::select([
-                                        'deudas_cliente.id',
-                                        'deudas_cliente.monto',
-                                        'deudas_cliente.descripcion',
-                                        'deudas_cliente.fecha',
-                                        'tdc.tipo',
-                                        ])
-                                        ->join('tipo_deuda_cliente as tdc', 'tdc.id', 'deudas_cliente.tipo_deuda_id')
-                                        ->orderBy('fecha', 'asc')
-                                        ->where([
-                                            'deudas_cliente.activo'=>'S',
-                                            'deudas_cliente.cliente_id' =>$id
-                                        ])
-                                        ->get();
+        switch ($request) {
 
-        if (count($listar) > 0) {
-            foreach ($listar as $key) {
-                $key->fecha = Carbon::parse($key->fecha)->format('d-m-Y');
-            }
-        }
-        if (!$listar->isEmpty()) {
-            return ['estado'=>'success' , 'cliente' => $listar];
-        } else {
-            return ['estado'=>'failed', 'mensaje'=>'El cliente no posee deudas vigentes.'];
+            case 'todos':
+                $listarTodos = DeudasCliente::select([
+                    'deudas_cliente.id',
+                    'deudas_cliente.monto',
+                    'deudas_cliente.descripcion',
+                    'deudas_cliente.fecha',
+                    'tdc.tipo',
+                    'cliente.rut',
+                    DB::raw("INITCAP(concat(cliente.nombres ,' ', 
+                    cliente.apellido_paterno ,' ', 
+                    cliente.apellido_materno)) 
+                    as cliente_deuda")
+                    ])
+                    ->join('tipo_deuda_cliente as tdc', 'tdc.id', 'deudas_cliente.tipo_deuda_id')
+                    ->join('cliente','cliente.id','deudas_cliente.cliente_id')
+                    ->orderBy('fecha', 'asc')
+                    ->where([
+                        'deudas_cliente.activo'=>'S',
+                    ])
+                    ->get();
+                    // ->toSql();
+
+
+                    if (count($listarTodos) > 0) {
+                        foreach ($listarTodos as $key) {
+                            $key->fecha = Carbon::parse($key->fecha)->format('d/m/Y');
+                        }
+                    }
+                    if (!$listarTodos->isEmpty()) {
+                        return ['estado'=>'success' , 'cliente' => $listarTodos];
+                    } else {
+                        return ['estado'=>'failed', 'mensaje'=>'No existen clientes con deudas.'];
+                    }
+                
+                break;
+
+            case 'cliente':
+
+                $listar = DeudasCliente::select([
+                    'deudas_cliente.id',
+                    'deudas_cliente.monto',
+                    'deudas_cliente.descripcion',
+                    'deudas_cliente.fecha',
+                    'tdc.tipo',
+                    'cliente.rut',
+                    DB::raw("INITCAP(concat(cliente.nombres ,' ', 
+                    cliente.apellido_paterno ,' ', 
+                    cliente.apellido_materno)) 
+                    as cliente_deuda")
+                    ])
+                    ->join('tipo_deuda_cliente as tdc', 'tdc.id', 'deudas_cliente.tipo_deuda_id')
+                    ->join('cliente','cliente.id','deudas_cliente.cliente_id')
+                    ->orderBy('fecha', 'asc')
+                    ->where([
+                        'deudas_cliente.activo'=>'S',
+                        'deudas_cliente.cliente_id' =>$id
+                    ])
+                    ->get();
+
+                    if (count($listar) > 0) {
+                        foreach ($listar as $key) {
+                            $key->fecha = Carbon::parse($key->fecha)->format('d-m-Y');
+                        }
+                    }
+                    if (!$listar->isEmpty()) {
+                        return ['estado'=>'success' , 'cliente' => $listar];
+                    } else {
+                        return ['estado'=>'failed', 'mensaje'=>'El cliente no posee deudas vigentes.'];
+                    }
+                break;
+            
+            default:
+                return null;
+                break;
         }
     }
 

@@ -1,4 +1,5 @@
 import Axios from "axios";
+import { all } from "q";
 
 export default {
   data() {
@@ -62,6 +63,11 @@ export default {
           this.errores = '';
 
         }
+
+        if ( response.data.estado == 'failed_v') {
+          this.errores = response.data.mensaje;
+        }
+
         if (response.data.estado == 'failed') {
           this.$q.notify({
             color: "red-4",
@@ -69,11 +75,8 @@ export default {
             icon: "delete_forever",
             message:  response.data.mensaje
           });
+          this.errores = '';
         }
-         if ( response.data.estado == 'failed_v') {
-          this.errores = response.data.mensaje;
-        }
-
 
       });
     },

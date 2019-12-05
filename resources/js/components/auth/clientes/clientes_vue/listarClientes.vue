@@ -4,41 +4,52 @@
 
     <template>
           <q-banner inline-actions class="bg-grey-3">
-            <template v-slot:avatar>
-              <q-icon name="account_circle" color="primary" />
-            </template>
-            LISTADO DE CLIENTES
-            <template v-slot:action>
-              <!-- boton refrescar -->
-              <q-btn
-                flat
-                label="Refrescar"
-                icon-right="refresh"
-                color="primary"
-                @click="onRefresh()"
-                class="q-mb-md"
-              />
-  
-              <!-- boton Formulario -->
-              <q-btn
-                flat
-                label="Formulario"
-                icon-right="person_add"
-                color="green"
-                @click="url_registro()"
-                class="q-mb-md"
-              />
-  
-              <!-- boton volver -->
-              <q-btn
-                flat
-                label="Volver"
-                icon-right="settings_backup_restore"
-                color="red"
-                @click="url_volver2()"
-                class="q-mb-md"
-              />
-            </template>
+            <div class="row">
+              <div class="col-12 col-md-7">
+                <q-icon style="font-size: 3rem;" name="account_circle" color="primary" />
+              LISTADO DE CLIENTES
+              </div>
+              
+                <div class="col-12 col-md-5">
+                  <div class="row">
+                    <!-- boton refrescar -->
+                    <div class="col-4 col-md-4">
+                      <q-btn
+                        flat
+                        label="Refrescar"
+                        icon-right="refresh"
+                        color="primary"
+                        @click="onRefresh()"
+                        class="q-mb-md"
+                      />
+                    </div>
+        
+                    <!-- boton Formulario -->
+                    <div class="col-4 col-md-4">
+                      <q-btn
+                        flat
+                        label="Formulario"
+                        icon-right="person_add"
+                        color="green"
+                        @click="url_registro()"
+                        class="q-mb-md"
+                      />
+                    </div>
+        
+                    <!-- boton volver -->
+                    <div class="col-4 col-md-4">
+                      <q-btn
+                        flat
+                        label="Volver"
+                        icon-right="settings_backup_restore"
+                        color="red"
+                        @click="url_volver2()"
+                        class="q-mb-md"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
           </q-banner>
     </template>
 
@@ -159,7 +170,7 @@
           </q-td>
 
           <q-td key="rut" :props="tabla">
-            {{tabla.row.rut}}
+            {{formateaRut(tabla.row.rut)}}
             <q-popup-edit
               v-model="tabla.row.rut"
               title="Modificar Rut"
