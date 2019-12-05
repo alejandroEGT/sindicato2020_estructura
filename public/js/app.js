@@ -4965,6 +4965,232 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/***/ "./node_modules/babel-loader/lib/index.js?!./resources/js/components/auth/prestamos/pagoPrestamo/pagoPrestamo.js?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./resources/js/components/auth/prestamos/pagoPrestamo/pagoPrestamo.js?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      //VARIABLE PARA ALMACENAR LOS PRESTAMOS DEL CLIENTE
+      prestamos: '',
+      step: 1,
+      rut: '',
+      monto: null,
+      cuotas: null,
+      idPrestamo: '1',
+      interes: null,
+      valorConInteres: 0,
+      fecha: '',
+      //variable para resultados de confirmacion
+      montoMenosCuota: null,
+      //VARIABLES QUE RESCATAN AL USUARIO
+      usuario: '',
+      //variable modal
+      confirm: false
+    };
+  },
+  methods: {
+    getUsuario: function getUsuario() {
+      var _this = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/getClientePrestamo/' + this.rut).then(function (response) {
+        if (response.data.estado == 'failed' || response.data.estado == 'failed_v') {
+          alert(response.data.mensaje);
+        } else if (response.data.estado == 'failed_unr') {
+          _this.confirm = true;
+        } else {
+          _this.usuario = response.data.cliente;
+          console.log(response);
+        }
+      });
+    },
+    procesarDatos: function procesarDatos() {
+      switch (this.step) {
+        case 1:
+          this.getPrestamosPorCliente();
+          break;
+
+        case 2:
+          this.montoMenosCuota = this.prestamos[0].monto_solicitado - this.monto;
+          break;
+
+        case 4:
+          this.montoMenosCuota = this.prestamos[0].monto_solicitado - this.monto;
+          this.setPagoPrestamo();
+
+        default:
+          break;
+      }
+    },
+    getPrestamosPorCliente: function getPrestamosPorCliente() {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/getPrestamoPorCliente/' + this.usuario.id).then(function (response) {
+        if (response.data.estado == 'failed' || response.data.estado == 'failed_v') {
+          alert(response.data.mensaje);
+        } else {
+          _this2.prestamos = response.data;
+          console.log(_this2.prestamos);
+        }
+      });
+    },
+    setPagoPrestamo: function setPagoPrestamo() {
+      var data = {
+        'fecha': this.fecha,
+        'monto': this.monto,
+        'idPrestamo': this.idPrestamo
+      };
+      console.log(data);
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('api/setPagoPrestamo', data).then(function (response) {
+        if (response.data.estado == 'failed' || response.data.estado == 'failed_v') {
+          alert(response.data.mensaje);
+        } else {
+          alert(response.data.mensaje);
+        }
+      });
+    },
+    //RUTAS DE DIRECCIONAMIENTO
+    url_crear_cliente2: function url_crear_cliente2() {
+      this.$router.push('/registro-clientes');
+    },
+    formatPrice: function formatPrice(value) {
+      var val = (value / 1).toFixed(0).replace('.', ',');
+      return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    },
+    formateaRut: function formateaRut(rut) {
+      var actual = rut.replace(/^0+/, "");
+
+      if (actual != '' && actual.length > 1) {
+        var sinPuntos = actual.replace(/\./g, "");
+        var actualLimpio = sinPuntos.replace(/-/g, "");
+        var inicio = actualLimpio.substring(0, actualLimpio.length - 1);
+        var rutPuntos = "";
+        var i = 0;
+        var j = 1;
+
+        for (i = inicio.length - 1; i >= 0; i--) {
+          var letra = inicio.charAt(i);
+          rutPuntos = letra + rutPuntos;
+
+          if (j % 3 == 0 && j <= inicio.length - 1) {
+            rutPuntos = "." + rutPuntos;
+          }
+
+          j++;
+        }
+
+        var dv = actualLimpio.substring(actualLimpio.length - 1);
+        rutPuntos = rutPuntos + "-" + dv;
+      }
+
+      return rutPuntos;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.js?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.js?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      //VARIABLES PARA EL STEPPER FORMULARIO
+      step: 1,
+      rut: '',
+      monto: null,
+      cuotas: null,
+      tipo: '1',
+      interes: null,
+      valorConInteres: 0,
+      fecha: '',
+      //VARIABLES QUE RESCATAN AL USUARIO
+      usuario: '',
+      confirm: false
+    };
+  },
+  methods: {
+    calcularIntereses: function calcularIntereses() {
+      console.log(this.monto, this.interes);
+      this.valorConInteres = parseInt(this.monto) + parseInt(this.monto * (this.interes / 100));
+      console.log(this.valorConInteres);
+      console.log('step: ' + this.step);
+    },
+    getUsuario: function getUsuario() {
+      var _this = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/getClientePrestamo/' + this.rut).then(function (response) {
+        if (response.data.estado == 'failed' || response.data.estado == 'failed_v') {
+          alert(response.data.mensaje);
+        } else if (response.data.estado == 'failed_unr') {
+          _this.confirm = true;
+        } else {
+          _this.usuario = response.data.cliente;
+          console.log(response);
+        }
+      });
+    },
+    setPrestamo: function setPrestamo() {
+      var _this2 = this;
+
+      this.calcularIntereses();
+      var data = {
+        'idCliente': this.usuario.id,
+        'idTipo': this.tipo,
+        'fecha': this.fecha,
+        'montoSolicitado': this.monto,
+        'totalInteres': this.valorConInteres,
+        'cuotas': this.cuotas
+      };
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('api/setPrestamo', data).then(function (response) {
+        if (response.data.estado == 'failed' || response.data.estado == 'failed_v') {
+          _this2.$q.notify({
+            color: "red-4",
+            textColor: "white",
+            icon: "cloud_done",
+            message: response.data.mensaje
+          });
+        } else {
+          _this2.$q.notify({
+            color: "green-4",
+            textColor: "white",
+            icon: "cloud_done",
+            message: response.data.mensaje
+          });
+        }
+      });
+    },
+    //RUTAS DE DIRECCIONAMIENTO
+    url_crear_cliente: function url_crear_cliente() {
+      this.$router.push('/registro-clientes');
+    }
+  }
+});
+
+/***/ }),
+
+>>>>>>> 184a9d72d76d36a7c559ff25e7d925e45bb83fdd
 /***/ "./node_modules/base64-js/index.js":
 /*!*****************************************!*\
   !*** ./node_modules/base64-js/index.js ***!
@@ -5126,6 +5352,7 @@ function fromByteArray (uint8) {
   return parts.join('')
 }
 
+<<<<<<< HEAD
 =======
 /***/ "./node_modules/babel-loader/lib/index.js?!./resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.js?vue&type=script&lang=js&":
 /*!*****************************************************************************************************************************************************!*\
@@ -5158,6 +5385,8 @@ __webpack_require__.r(__webpack_exports__);
   }
 });
 >>>>>>> 80d9f97386fa1333dd62269b55de45ea3f702306
+=======
+>>>>>>> 184a9d72d76d36a7c559ff25e7d925e45bb83fdd
 
 /***/ }),
 
@@ -93606,10 +93835,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.vue?vue&type=template&id=f62203b4&":
-/*!************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.vue?vue&type=template&id=f62203b4& ***!
-  \************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/prestamos/pagoPrestamo/pagoPrestamo.vue?vue&type=template&id=22344998&":
+/*!*******************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/auth/prestamos/pagoPrestamo/pagoPrestamo.vue?vue&type=template&id=22344998& ***!
+  \*******************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -93632,7 +93861,7 @@ var render = function() {
             [
               _c("q-card-section", { staticClass: "bg-primary text-white" }, [
                 _c("div", { staticClass: "text-h6" }, [
-                  _vm._v("Solicitar Prestamo")
+                  _vm._v("Pagar Prestamo")
                 ])
               ]),
               _vm._v(" "),
@@ -93653,17 +93882,22 @@ var render = function() {
                                 attrs: {
                                   color: "primary",
                                   disable:
-                                    (_vm.step === 1 && _vm.rut == "") ||
-                                    (_vm.step === 3 && _vm.monto == null),
+                                    (_vm.step === 1 && _vm.usuario == "") ||
+                                    (_vm.step === 3 &&
+                                      (_vm.monto == null ||
+                                        _vm.fecha == "" ||
+                                        _vm.monto == "")),
                                   label:
                                     _vm.step === 4 ? "Solicitar" : "Continuar"
                                 },
                                 on: {
                                   click: [
                                     function($event) {
-                                      return _vm.$refs.stepper.next()
+                                      return _vm.procesarDatos()
                                     },
-                                    _vm.calcularIntereses
+                                    function($event) {
+                                      return _vm.$refs.stepper.next()
+                                    }
                                   ]
                                 }
                               }),
@@ -93711,40 +93945,614 @@ var render = function() {
                       }
                     },
                     [
-                      _c("q-input", {
-                        attrs: {
-                          outlined: "",
-                          counter: "",
-                          maxlength: "20",
-                          label: "Ingrese rut del cliente",
-                          "stack-label": "",
-                          type: "text",
-                          hint: "El rut debe ser sin punto ni guion",
-                          rules: [
-                            function(val) {
-                              return (
-                                val.length <= 20 ||
-                                "El maximo da caracteres es de 20"
-                              )
+                      _c(
+                        "div",
+                        { staticClass: "q-gutter-md" },
+                        [
+                          _c("q-input", {
+                            attrs: {
+                              outlined: "",
+                              counter: "",
+                              maxlength: "20",
+                              label: "Ingrese rut del cliente",
+                              "stack-label": "",
+                              type: "text",
+                              rules: [
+                                function(val) {
+                                  return (
+                                    val.length <= 20 ||
+                                    "El maximo da caracteres es de 20"
+                                  )
+                                },
+                                function(val) {
+                                  return (
+                                    val.length >= 2 ||
+                                    "El minimo de caracteres es de 2"
+                                  )
+                                }
+                              ]
                             },
-                            function(val) {
-                              return (
-                                val.length >= 2 ||
-                                "El minimo de caracteres es de 2"
-                              )
+                            model: {
+                              value: _vm.rut,
+                              callback: function($$v) {
+                                _vm.rut = $$v
+                              },
+                              expression: "rut"
                             }
-                          ]
+                          }),
+                          _vm._v(" "),
+                          _c("q-separator"),
+                          _vm._v(" "),
+                          _c("q-input", {
+                            attrs: {
+                              filled: "",
+                              hint: "Nombre del Cliente",
+                              readonly: ""
+                            },
+                            model: {
+                              value: _vm.usuario.nombrecliente,
+                              callback: function($$v) {
+                                _vm.$set(_vm.usuario, "nombrecliente", $$v)
+                              },
+                              expression: "usuario.nombrecliente"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("q-btn", {
+                            attrs: {
+                              color: "primary",
+                              label: "Buscar Cliente"
+                            },
+                            on: { click: _vm.getUsuario }
+                          })
+                        ],
+                        1
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "q-step",
+                    {
+                      attrs: {
+                        name: 2,
+                        title: "Lista de prestamos",
+                        icon: "create_new_folder",
+                        done: _vm.step > 2
+                      }
+                    },
+                    [
+                      _c(
+                        "q-list",
+                        _vm._l(_vm.prestamos, function(itemPrestamo) {
+                          return _c(
+                            "q-item",
+                            {
+                              directives: [
+                                { name: "ripple", rawName: "v-ripple" }
+                              ],
+                              key: itemPrestamo.id,
+                              attrs: { tag: "label" }
+                            },
+                            [
+                              _c(
+                                "q-item-section",
+                                { attrs: { avatar: "" } },
+                                [
+                                  _c("q-radio", {
+                                    attrs: { val: itemPrestamo.id },
+                                    model: {
+                                      value: _vm.idPrestamo,
+                                      callback: function($$v) {
+                                        _vm.idPrestamo = $$v
+                                      },
+                                      expression: "idPrestamo"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "q-item-section",
+                                [
+                                  _c("q-item-label", [
+                                    _c("b", [_vm._v("Prestamo N°:")]),
+                                    _vm._v(_vm._s(itemPrestamo.id) + " "),
+                                    _c("b", [_vm._v("Monto Solicitado:")]),
+                                    _vm._v(
+                                      " " +
+                                        _vm._s(itemPrestamo.monto_solicitado)
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "q-item-label",
+                                    { attrs: { caption: "" } },
+                                    [
+                                      _vm._v(
+                                        "Fecha: " +
+                                          _vm._s(itemPrestamo.fecha) +
+                                          " Cuotas Totales: " +
+                                          _vm._s(itemPrestamo.cuotas)
+                                      )
+                                    ]
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        }),
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "q-step",
+                    {
+                      attrs: {
+                        name: 3,
+                        title: "Detalle del prestamo",
+                        icon: "assignment"
+                      }
+                    },
+                    [
+                      _c(
+                        "div",
+                        { staticClass: "q-gutter-md" },
+                        [
+                          _c("q-input", {
+                            attrs: {
+                              outlined: "",
+                              counter: "",
+                              maxlength: "20",
+                              label: "Ingrese monto a pagar",
+                              "stack-label": "",
+                              type: "number",
+                              hint: "El monto debe de ser ingresado sin puntos",
+                              rules: [
+                                function(val) {
+                                  return (
+                                    val.length <= 20 ||
+                                    "El maximo da caracteres es de 20"
+                                  )
+                                },
+                                function(val) {
+                                  return (
+                                    val.length >= 2 ||
+                                    "El minimo de caracteres es de 1"
+                                  )
+                                }
+                              ]
+                            },
+                            model: {
+                              value: _vm.monto,
+                              callback: function($$v) {
+                                _vm.monto = $$v
+                              },
+                              expression: "monto"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("q-input", {
+                            attrs: {
+                              outlined: "",
+                              counter: "",
+                              label: "Fecha del pago",
+                              "stack-label": "",
+                              type: "date",
+                              hint:
+                                "Seleccione la fecha en la cual se pagará la cuota"
+                            },
+                            model: {
+                              value: _vm.fecha,
+                              callback: function($$v) {
+                                _vm.fecha = $$v
+                              },
+                              expression: "fecha"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "q-step",
+                    {
+                      attrs: {
+                        name: 4,
+                        title: "Confimar datos prestamo",
+                        icon: "add_comment"
+                      }
+                    },
+                    [
+                      _c(
+                        "q-list",
+                        [
+                          _c(
+                            "q-item",
+                            [
+                              _c(
+                                "q-item-section",
+                                [
+                                  _c("q-item-label", [
+                                    _vm._v("Solicitante del pago")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "q-item-label",
+                                    { attrs: { caption: "", lines: "2" } },
+                                    [_vm._v(_vm._s(_vm.usuario.nombrecliente))]
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("q-separator", {
+                            attrs: { spaced: "", inset: "" }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "q-item",
+                            [
+                              _c(
+                                "q-item-section",
+                                [
+                                  _c("q-item-label", [_vm._v("Cuota a pagar")]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "q-item-label",
+                                    { attrs: { caption: "" } },
+                                    [_vm._v("1/3")]
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("q-separator", {
+                            attrs: { spaced: "", inset: "" }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "q-item",
+                            [
+                              _c(
+                                "q-item-section",
+                                [
+                                  _c("q-item-label", [
+                                    _vm._v("Monto del pago")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "q-item-label",
+                                    { attrs: { caption: "" } },
+                                    [_vm._v(_vm._s(_vm.monto))]
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("q-separator", {
+                            attrs: { spaced: "", inset: "" }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "q-item",
+                            [
+                              _c(
+                                "q-item-section",
+                                [
+                                  _c("q-item-label", [
+                                    _vm._v("Monto restante si se paga la cuota")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "q-item-label",
+                                    { attrs: { caption: "" } },
+                                    [_vm._v(_vm._s(_vm.montoMenosCuota))]
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("q-separator", {
+                            attrs: { spaced: "", inset: "" }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "q-item",
+                            [
+                              _c(
+                                "q-item-section",
+                                [
+                                  _c("q-item-label", [_vm._v("Fecha de pago")]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "q-item-label",
+                                    { attrs: { caption: "" } },
+                                    [_vm._v(_vm._s(_vm.fecha))]
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "q-dialog",
+            {
+              attrs: { persistent: "" },
+              model: {
+                value: _vm.confirm,
+                callback: function($$v) {
+                  _vm.confirm = $$v
+                },
+                expression: "confirm"
+              }
+            },
+            [
+              _c(
+                "q-card",
+                [
+                  _c("q-card-section", { staticClass: "row items-center" }, [
+                    _c("span", { staticClass: "q-ml-sm" }, [
+                      _vm._v(
+                        "El usuario ingresado no se encuentra en la base de datos. ¿Desea registrarlo?."
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "q-card-actions",
+                    { attrs: { align: "right" } },
+                    [
+                      _c("q-btn", {
+                        directives: [
+                          { name: "close-popup", rawName: "v-close-popup" }
+                        ],
+                        attrs: { flat: "", label: "Cancelar", color: "primary" }
+                      }),
+                      _vm._v(" "),
+                      _c("q-btn", {
+                        directives: [
+                          { name: "close-popup", rawName: "v-close-popup" }
+                        ],
+                        attrs: {
+                          flat: "",
+                          label: "Registrar",
+                          color: "primary"
                         },
-                        model: {
-                          value: _vm.rut,
-                          callback: function($$v) {
-                            _vm.rut = $$v
-                          },
-                          expression: "rut"
-                        }
+                        on: { click: _vm.url_crear_cliente2 }
                       })
                     ],
                     1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.vue?vue&type=template&id=f62203b4&":
+/*!************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.vue?vue&type=template&id=f62203b4& ***!
+  \************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "q-pa-md" }, [
+    _c("div", { staticClass: "row justify-center" }, [
+      _c(
+        "div",
+        { staticClass: "col-12 col-md-8" },
+        [
+          _c(
+            "q-card",
+            [
+              _c("q-card-section", { staticClass: "bg-primary text-white" }, [
+                _c("div", { staticClass: "text-h6" }, [
+                  _vm._v("Solicitar Prestamo")
+                ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "q-stepper",
+                {
+                  ref: "stepper",
+                  attrs: { color: "primary", animated: "" },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "navigation",
+                      fn: function() {
+                        return [
+                          _c(
+                            "q-stepper-navigation",
+                            [
+                              _c("q-btn", {
+                                attrs: {
+                                  color: "primary",
+                                  disable:
+                                    (_vm.step === 1 && _vm.usuario == "") ||
+                                    (_vm.step === 3 &&
+                                      (_vm.monto == null ||
+                                        _vm.fecha == "" ||
+                                        _vm.monto == "")),
+                                  label:
+                                    _vm.step === 4 ? "Solicitar" : "Continuar"
+                                },
+                                on: {
+                                  click: [
+                                    function($event) {
+                                      _vm.step === 4
+                                        ? _vm.setPrestamo()
+                                        : _vm.calcularIntereses()
+                                    },
+                                    function($event) {
+                                      return _vm.$refs.stepper.next()
+                                    }
+                                  ]
+                                }
+                              }),
+                              _vm._v(" "),
+                              _vm.step > 1
+                                ? _c("q-btn", {
+                                    staticClass: "q-ml-sm",
+                                    attrs: {
+                                      flat: "",
+                                      color: "primary",
+                                      label: "Volver"
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.$refs.stepper.previous()
+                                      }
+                                    }
+                                  })
+                                : _vm._e()
+                            ],
+                            1
+                          )
+                        ]
+                      },
+                      proxy: true
+                    }
+                  ]),
+                  model: {
+                    value: _vm.step,
+                    callback: function($$v) {
+                      _vm.step = $$v
+                    },
+                    expression: "step"
+                  }
+                },
+                [
+                  _c(
+                    "q-step",
+                    {
+                      attrs: {
+                        name: 1,
+                        title: "Ingrese el rut del cliente",
+                        icon: "account_circle",
+                        done: _vm.step > 1
+                      }
+                    },
+                    [
+                      _c(
+                        "div",
+                        { staticClass: "q-gutter-md" },
+                        [
+                          _c("q-input", {
+                            attrs: {
+                              outlined: "",
+                              counter: "",
+                              maxlength: "20",
+                              label: "Ingrese rut del cliente",
+                              "stack-label": "",
+                              type: "text",
+                              rules: [
+                                function(val) {
+                                  return (
+                                    val.length <= 20 ||
+                                    "El maximo da caracteres es de 20"
+                                  )
+                                },
+                                function(val) {
+                                  return (
+                                    val.length >= 2 ||
+                                    "El minimo de caracteres es de 2"
+                                  )
+                                }
+                              ]
+                            },
+                            model: {
+                              value: _vm.rut,
+                              callback: function($$v) {
+                                _vm.rut = $$v
+                              },
+                              expression: "rut"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("q-separator"),
+                          _vm._v(" "),
+                          _c("q-input", {
+                            attrs: {
+                              filled: "",
+                              hint: "Nombre del Cliente",
+                              readonly: ""
+                            },
+                            model: {
+                              value: _vm.usuario.nombrecliente,
+                              callback: function($$v) {
+                                _vm.$set(_vm.usuario, "nombrecliente", $$v)
+                              },
+                              expression: "usuario.nombrecliente"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("q-btn", {
+                            attrs: {
+                              color: "primary",
+                              label: "Buscar Usuario"
+                            },
+                            on: { click: _vm.getUsuario }
+                          })
+                        ],
+                        1
+                      )
+                    ]
                   ),
                   _vm._v(" "),
                   _c(
@@ -93775,7 +94583,7 @@ var render = function() {
                                 { attrs: { avatar: "" } },
                                 [
                                   _c("q-radio", {
-                                    attrs: { val: "0" },
+                                    attrs: { val: "1" },
                                     model: {
                                       value: _vm.tipo,
                                       callback: function($$v) {
@@ -93823,7 +94631,7 @@ var render = function() {
                                 { attrs: { avatar: "" } },
                                 [
                                   _c("q-radio", {
-                                    attrs: { val: "1" },
+                                    attrs: { val: "2" },
                                     model: {
                                       value: _vm.tipo,
                                       callback: function($$v) {
@@ -93868,8 +94676,8 @@ var render = function() {
                               {
                                 name: "show",
                                 rawName: "v-show",
-                                value: _vm.tipo == "1",
-                                expression: "tipo == '1'"
+                                value: _vm.tipo == "2",
+                                expression: "tipo == '2'"
                               }
                             ]
                           },
@@ -93966,6 +94774,39 @@ var render = function() {
                             attrs: {
                               outlined: "",
                               counter: "",
+                              maxlength: "2",
+                              label: "Ingrese numero de cuotas",
+                              "stack-label": "",
+                              type: "number",
+                              hint: "El monto debe de ser ingresado sin puntos",
+                              rules: [
+                                function(val) {
+                                  return (
+                                    val.length <= 2 ||
+                                    "El maximo da caracteres es de 2"
+                                  )
+                                },
+                                function(val) {
+                                  return (
+                                    val.length >= 1 ||
+                                    "El minimo de caracteres es de 1"
+                                  )
+                                }
+                              ]
+                            },
+                            model: {
+                              value: _vm.cuotas,
+                              callback: function($$v) {
+                                _vm.cuotas = $$v
+                              },
+                              expression: "cuotas"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("q-input", {
+                            attrs: {
+                              outlined: "",
+                              counter: "",
                               label: "Fecha del prestamo",
                               "stack-label": "",
                               type: "date",
@@ -94012,7 +94853,7 @@ var render = function() {
                                   _c(
                                     "q-item-label",
                                     { attrs: { caption: "", lines: "2" } },
-                                    [_vm._v(_vm._s(_vm.usuario))]
+                                    [_vm._v(_vm._s(_vm.usuario.nombrecliente))]
                                   )
                                 ],
                                 1
@@ -94040,22 +94881,7 @@ var render = function() {
                                     { attrs: { caption: "" } },
                                     [
                                       _c(
-                                        "q-label",
-                                        {
-                                          directives: [
-                                            {
-                                              name: "show",
-                                              rawName: "v-show",
-                                              value: _vm.tipo == "0",
-                                              expression: "tipo == '0'"
-                                            }
-                                          ]
-                                        },
-                                        [_vm._v("Sin Intereses")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "q-label",
+                                        "b",
                                         {
                                           directives: [
                                             {
@@ -94066,10 +94892,24 @@ var render = function() {
                                             }
                                           ]
                                         },
+                                        [_vm._v("Sin Intereses")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "b",
+                                        {
+                                          directives: [
+                                            {
+                                              name: "show",
+                                              rawName: "v-show",
+                                              value: _vm.tipo == "2",
+                                              expression: "tipo == '2'"
+                                            }
+                                          ]
+                                        },
                                         [_vm._v("Con Intereses")]
                                       )
-                                    ],
-                                    1
+                                    ]
                                   )
                                 ],
                                 1
@@ -94121,7 +94961,33 @@ var render = function() {
                                   _c(
                                     "q-item-label",
                                     { attrs: { caption: "" } },
-                                    [_vm._v(_vm._s(_vm.monto))]
+                                    [_vm._v(_vm._s(_vm.valorConInteres))]
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("q-separator", {
+                            attrs: { spaced: "", inset: "" }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "q-item",
+                            [
+                              _c(
+                                "q-item-section",
+                                [
+                                  _c("q-item-label", [
+                                    _vm._v("Numero de cuotas")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "q-item-label",
+                                    { attrs: { caption: "" } },
+                                    [_vm._v(_vm._s(_vm.cuotas))]
                                   )
                                 ],
                                 1
@@ -94158,6 +95024,62 @@ var render = function() {
                         ],
                         1
                       )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "q-dialog",
+            {
+              attrs: { persistent: "" },
+              model: {
+                value: _vm.confirm,
+                callback: function($$v) {
+                  _vm.confirm = $$v
+                },
+                expression: "confirm"
+              }
+            },
+            [
+              _c(
+                "q-card",
+                [
+                  _c("q-card-section", { staticClass: "row items-center" }, [
+                    _c("span", { staticClass: "q-ml-sm" }, [
+                      _vm._v(
+                        "El usuario ingresado no se encuentra en la base de datos. ¿Desea registrarlo?."
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "q-card-actions",
+                    { attrs: { align: "right" } },
+                    [
+                      _c("q-btn", {
+                        directives: [
+                          { name: "close-popup", rawName: "v-close-popup" }
+                        ],
+                        attrs: { flat: "", label: "Cancelar", color: "primary" }
+                      }),
+                      _vm._v(" "),
+                      _c("q-btn", {
+                        directives: [
+                          { name: "close-popup", rawName: "v-close-popup" }
+                        ],
+                        attrs: {
+                          flat: "",
+                          label: "Registrar",
+                          color: "primary"
+                        },
+                        on: { click: _vm.url_crear_cliente }
+                      })
                     ],
                     1
                   )
@@ -111126,6 +112048,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/auth/prestamos/pagoPrestamo/pagoPrestamo.js?vue&type=script&lang=js&":
+/*!******************************************************************************************************!*\
+  !*** ./resources/js/components/auth/prestamos/pagoPrestamo/pagoPrestamo.js?vue&type=script&lang=js& ***!
+  \******************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_pagoPrestamo_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!./pagoPrestamo.js?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./resources/js/components/auth/prestamos/pagoPrestamo/pagoPrestamo.js?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_pagoPrestamo_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/auth/prestamos/pagoPrestamo/pagoPrestamo.vue":
+/*!******************************************************************************!*\
+  !*** ./resources/js/components/auth/prestamos/pagoPrestamo/pagoPrestamo.vue ***!
+  \******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _pagoPrestamo_vue_vue_type_template_id_22344998___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./pagoPrestamo.vue?vue&type=template&id=22344998& */ "./resources/js/components/auth/prestamos/pagoPrestamo/pagoPrestamo.vue?vue&type=template&id=22344998&");
+/* harmony import */ var _pagoPrestamo_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./pagoPrestamo.js?vue&type=script&lang=js& */ "./resources/js/components/auth/prestamos/pagoPrestamo/pagoPrestamo.js?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _pagoPrestamo_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _pagoPrestamo_vue_vue_type_template_id_22344998___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _pagoPrestamo_vue_vue_type_template_id_22344998___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/auth/prestamos/pagoPrestamo/pagoPrestamo.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/auth/prestamos/pagoPrestamo/pagoPrestamo.vue?vue&type=template&id=22344998&":
+/*!*************************************************************************************************************!*\
+  !*** ./resources/js/components/auth/prestamos/pagoPrestamo/pagoPrestamo.vue?vue&type=template&id=22344998& ***!
+  \*************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_pagoPrestamo_vue_vue_type_template_id_22344998___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./pagoPrestamo.vue?vue&type=template&id=22344998& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/prestamos/pagoPrestamo/pagoPrestamo.vue?vue&type=template&id=22344998&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_pagoPrestamo_vue_vue_type_template_id_22344998___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_pagoPrestamo_vue_vue_type_template_id_22344998___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.js?vue&type=script&lang=js&":
 /*!***********************************************************************************************************!*\
   !*** ./resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.js?vue&type=script&lang=js& ***!
@@ -111515,8 +112506,10 @@ var routes_empa = [{
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_404_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/404.vue */ "./resources/js/components/404.vue");
 /* harmony import */ var _components_auth_auth_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/auth/auth.vue */ "./resources/js/components/auth/auth.vue");
-/* harmony import */ var _components_auth_prestamos_prestamos_vue_modulo_prestamos__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/auth/prestamos/prestamos_vue/modulo_prestamos */ "./resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.vue");
+/* harmony import */ var _components_auth_prestamos_prestamos_vue_modulo_prestamos_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/auth/prestamos/prestamos_vue/modulo_prestamos.vue */ "./resources/js/components/auth/prestamos/prestamos_vue/modulo_prestamos.vue");
+/* harmony import */ var _components_auth_prestamos_pagoPrestamo_pagoPrestamo_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/auth/prestamos/pagoPrestamo/pagoPrestamo.vue */ "./resources/js/components/auth/prestamos/pagoPrestamo/pagoPrestamo.vue");
  //loged
+
 
 
 
@@ -111531,8 +112524,12 @@ var routes_empa = [{
   },
   children: [{
     path: '/modulo-prestamos',
-    component: _components_auth_prestamos_prestamos_vue_modulo_prestamos__WEBPACK_IMPORTED_MODULE_2__["default"],
+    component: _components_auth_prestamos_prestamos_vue_modulo_prestamos_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
     name: 'ModuloPrestamos'
+  }, {
+    path: '/pago-prestamos',
+    component: _components_auth_prestamos_pagoPrestamo_pagoPrestamo_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
+    name: 'PagoPrestamo'
   } //aqui las rutas con permiso de auth
   ]
 }, {
@@ -111787,8 +112784,13 @@ var routes = [{
 /***/ (function(module, exports, __webpack_require__) {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 __webpack_require__(/*! C:\Users\david\Desktop\Proyectos NeoFox\neofox_contable\resources\js\app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! C:\Users\david\Desktop\Proyectos NeoFox\neofox_contable\resources\sass\app.scss */"./resources/sass/app.scss");
+=======
+__webpack_require__(/*! C:\Users\v_and\Desktop\VUE\neofox_contable\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\v_and\Desktop\VUE\neofox_contable\resources\sass\app.scss */"./resources/sass/app.scss");
+>>>>>>> 184a9d72d76d36a7c559ff25e7d925e45bb83fdd
 
 
 /***/ }),
@@ -111810,10 +112812,13 @@ module.exports = __webpack_require__(/*! C:\Users\david\Desktop\Proyectos NeoFox
   \**********************/
 /*! no static exports found */
 /***/ (function(module, exports) {
+<<<<<<< HEAD
 =======
 __webpack_require__(/*! C:\Users\v_and\Desktop\VUE\neofox_contable\resources\js\app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! C:\Users\v_and\Desktop\VUE\neofox_contable\resources\sass\app.scss */"./resources/sass/app.scss");
 >>>>>>> 80d9f97386fa1333dd62269b55de45ea3f702306
+=======
+>>>>>>> 184a9d72d76d36a7c559ff25e7d925e45bb83fdd
 
 /* (ignored) */
 
