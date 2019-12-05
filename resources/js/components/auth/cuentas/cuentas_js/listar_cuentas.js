@@ -93,7 +93,15 @@ export default {
       e_fecha: '',
       e_descripcion: '',
       e_ingreso :'',
-      e_egreso :''
+      e_egreso :'',
+
+      pagination: {
+        sortBy: 'name',
+        descending: false,
+        //page: 2,
+        // rowsPerPage: 3
+        // rowsNumber: xx if getting data from a server
+      },
     }
   },
   methods: {
@@ -191,17 +199,26 @@ export default {
     ruta(ruta){
         this.$router.push(ruta);
     },
-  
-    show(component) {
-      console.log(this.$refs);
-      this.$refs[''+component+''].show()
+
+    show (modal) {
+    this.$modal.show(modal);
     },
+    hide (modal) {
+      this.$modal.hide(modal);
+    },
+  
+    // show(component) {
+    //   console.log(component)
+    //   console.log(this.$refs);
+    //   //console.log(this.$refs);
+    //   this.$refs[''+component+''].show()
+    // },
 
     // following method is REQUIRED
     // (don't change its name --> "hide")
-    hide(component){
-      this.$refs['' + component + ''].hide()
-    },
+    // hide(component){
+    //   this.$refs['' + component + ''].hide()
+    // },
 
     // hide() {
     //   this.$refs.dialog.hide()

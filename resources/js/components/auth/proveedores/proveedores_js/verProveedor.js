@@ -20,6 +20,7 @@ export default {
         apellidos: null,
         correo_con: null,
         fono_con: null,
+        id: this.$route.params.id,
       }
     },
   
@@ -102,6 +103,7 @@ export default {
   
     mounted() {
       this.traerGiros();
+      console.log(this.id);
     }
   }
   

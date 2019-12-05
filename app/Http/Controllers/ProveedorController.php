@@ -26,4 +26,9 @@ class ProveedorController extends Controller
     {
         return Proveedor::traerGiros();
     }
+
+    public function TraerEstados()
+    {
+        return Proveedor::traerEstados();
+    }
 }

@@ -58,10 +58,31 @@
 
           <q-td key="giro" :props="tabla">{{tabla.row.giro}}</q-td>
 
-          <q-td key="estado" :props="tabla">{{tabla.row.estado}}</q-td>
+          <q-td key="estado" :props="tabla">
+            {{tabla.row.estado}}
+            <q-popup-edit v-model="tabla.row.estado" buttons>
+              <q-select
+                outlined
+                stack-label
+                v-model="campoUpd"
+                :options="select_estado"
+                option-value="id"
+                option-label="descripcion"
+                label="Seleccione Estado"
+              />
+            </q-popup-edit>
+          </q-td>
 
           <q-td key="opciones" :props="tabla">
-            <q-btn flat icon-right="visibility" @click="verProveedor()" color="blue" class="q-mb-md">
+            <q-btn
+              flat
+              icon-right="visibility"
+              @click="verProveedor({
+                id: tabla.row.id
+              })"
+              color="blue"
+              class="q-mb-md"
+            >
               <q-tooltip anchor="bottom middle" self="top middle" :offset="[10, 10]">Ver Proveedor</q-tooltip>
             </q-btn>
 

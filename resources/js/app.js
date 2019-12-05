@@ -56,6 +56,11 @@ require('quasar/dist/quasar.css');
 
 import langDe from 'quasar/dist/lang/es.umd.min.js'
 
+
+import VModal from 'vue-js-modal'
+
+Vue.use(VModal)
+
 Vue.use(Quasar, {
     components: All,
     directives: All,

@@ -6,6 +6,7 @@ export default {
             confirm: false,
             filter: '',
             campoUpd: '',
+            select_estado: [],
             errores: [],
 
             visibleColumns: [
@@ -60,13 +61,23 @@ export default {
             this.$router.push('/modulo-proveedor');
         },
 
-        verProveedor(){
-            this.$router.push('/ver-provedor');
-        }
+        traerEstado() {
+            axios.get('api/traer_estados_prov').then((res) => {
+                this.select_estado = res.data;
+            });
+        },
 
+        verProveedor(id) {
+            this.$router.push({
+                name: 'VerProveedor',
+                params: id,
+            });
+        }
+        /* VerProveedor */
     },
 
     mounted() {
         this.traerProveedores();
+        this.traerEstado();
     }
 }

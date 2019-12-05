@@ -29,7 +29,7 @@ let routes_sumbex = [
             { path: '/modulo-reunion', component: ModuloReunion, name: 'ModuloReunion' },
             { path: '/crear-reunion', component: CrearReunion, name: 'CrearReunion' },
             { path: '/traer-reuniones', component: TraerReuniones, name: 'TraerReuniones' },
-            { path: '/ver-provedor', component: VerProveedor, name: 'VerProveedor' },
+            { path: '/ver-provedor/:id', component: VerProveedor, name: 'VerProveedor' },
             //aqui las rutas con permiso de auth
         ]
     },

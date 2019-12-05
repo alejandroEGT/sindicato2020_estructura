@@ -118,6 +118,21 @@ class Proveedor extends Model
         return $giros;
     }
 
+    protected function traerEstados()
+    {
+        $estados = DB::table('estado_prov')
+            ->select([
+                'id',
+                'descripcion'
+            ])
+            ->where([
+                'activo' => 'S'
+            ])
+            ->get();
+
+        return $estados;
+    }
+
     protected function validarRut($rut)
     {
         try {
