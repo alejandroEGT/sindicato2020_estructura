@@ -52,6 +52,19 @@
 
             <q-step :name="3" title="Detalle del prestamo" icon="assignment">
               <div class="q-gutter-md">
+                
+                <q-list>
+                <q-item v-for="itemCuotas in cuotasPagadas" v-bind:key="itemCuotas.id">
+                  <q-item-section>
+                    <q-item-label>Cuota N°: {{itemCuotas.cuota}} Fue Cancelada en la fecha: {{itemCuotas.fecha}}</q-item-label>
+                    <q-item-label caption lines="2"> Valor Cancelado {{itemCuotas.monto}}</q-item-label>
+                  </q-item-section>
+                </q-item>
+
+                </q-list>
+
+                <q-separator />
+
                 <q-input
                   outlined
                   counter
@@ -93,7 +106,7 @@
                 <q-item>
                   <q-item-section>
                     <q-item-label>Cuota a pagar</q-item-label>
-                    <q-item-label caption>1/3</q-item-label>
+                    <q-item-label caption>{{cuotasPagadas.length+1}}/{{totalCuotas}}</q-item-label>
                   </q-item-section>
                 </q-item>
 

@@ -88,18 +88,19 @@ class PrestamoController extends Controller
             $cuota = $consultaDetalle + 1;
             $estado = 'Vigente';
         } else {
-            //obtener el numero de cuotas del prestamo
-            $numeroCuotasPrestamo = Prestamo::select(
-                'cuotas',
-                'total_interes'
-            )
-                ->where([
-                    'id' => $request->idPrestamo
-                ])
-                ->first();
             $cuota = $consultaDetalle + 1;
             $estado = 'Vigente';
         }
+        
+        //obtener el numero de cuotas del prestamo
+        $numeroCuotasPrestamo = Prestamo::select(
+            'cuotas',
+            'total_interes'
+        )
+            ->where([
+                'id' => $request->idPrestamo
+            ])
+            ->first();
 
         //verificar los montos a pagar del prestamo con los detalles
         $sumaDetalles = DetallePrestamo::where([
@@ -126,7 +127,6 @@ class PrestamoController extends Controller
                         $terminarPrestamo = Prestamo::find($request->idPrestamo);
                         $terminarPrestamo->estado = 'Pagado';
                         $terminarPrestamo->save();
-                        dd($terminarPrestamo);
                     }
                     return ['estado' => 'success', 'mensaje' => 'Cuota de prestamo pagado correctamente'];
                 } else {
@@ -156,6 +156,28 @@ class PrestamoController extends Controller
                 'estado' => 'Vigente'
             ])
             ->get();
+    }
+
+    public function getDetallePrestamosPorPrestamo($id){
+        $cuotasPagadas = DetallePrestamo::select(
+            'fecha',
+            'cuota',
+            'monto'
+        )
+        ->where([
+            'prestamo_id' => $id,
+            'activo' => 'S'
+        ])->get();
+
+        $totalCuotas = Prestamo::where([
+            'id' => $id,
+            'activo' => 'S'
+        ])
+        ->first();
+
+        $restante = $this->obtenerRestanteFuncion($id);
+
+        return ['estado' => 'success', 'cuotasPagadas' => $cuotasPagadas, 'totalCuotas' => $totalCuotas->cuotas, 'restante' => $restante];
     }
 
     public function getPrestamosTodos()
@@ -191,6 +213,27 @@ class PrestamoController extends Controller
         } else {
             return ['estado' => 'failed', 'mensaje' => 'El rut ingresado no es valido.'];
         }
+    }
+
+    public function obtenerRestanteFuncion($id){
+        //obtener el numero de cuotas del prestamo
+        $numeroCuotasPrestamo = Prestamo::select(
+            'cuotas',
+            'total_interes'
+        )
+            ->where([
+                'id' => $id
+            ])
+            ->first();
+
+        //verificar los montos a pagar del prestamo con los detalles
+        $sumaDetalles = DetallePrestamo::where([
+            'prestamo_id' => $id
+        ])
+            ->sum('monto');
+
+        //monto que falta por pagar
+        return $numeroCuotasPrestamo->total_interes - $sumaDetalles;
     }
 
     //FUNCION PARA LIMPIAR EL RUT

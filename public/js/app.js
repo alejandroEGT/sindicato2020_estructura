@@ -4989,12 +4989,17 @@ __webpack_require__.r(__webpack_exports__);
       interes: null,
       valorConInteres: 0,
       fecha: '',
+      //variable para almacenar las cuotas pagadas
+      cuotasPagadas: '',
       //variable para resultados de confirmacion
       montoMenosCuota: null,
       //VARIABLES QUE RESCATAN AL USUARIO
       usuario: '',
       //variable modal
-      confirm: false
+      confirm: false,
+      //VARIABLES PARA EL RESUMEN A PAGAR
+      totalCuotas: '',
+      restantePorPagar: ''
     };
   },
   methods: {
@@ -5019,12 +5024,17 @@ __webpack_require__.r(__webpack_exports__);
           break;
 
         case 2:
-          this.montoMenosCuota = this.prestamos[0].monto_solicitado - this.monto;
+          this.getDetallePrestamoPorPrestamo();
+          break;
+
+        case 3:
+          this.montoMenosCuota = this.restantePorPagar - this.monto;
           break;
 
         case 4:
-          this.montoMenosCuota = this.prestamos[0].monto_solicitado - this.monto;
+          this.montoMenosCuota = this.restantePorPagar - this.monto;
           this.setPagoPrestamo();
+          break;
 
         default:
           break;
@@ -5039,6 +5049,19 @@ __webpack_require__.r(__webpack_exports__);
         } else {
           _this2.prestamos = response.data;
           console.log(_this2.prestamos);
+        }
+      });
+    },
+    getDetallePrestamoPorPrestamo: function getDetallePrestamoPorPrestamo() {
+      var _this3 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/getDetallePrestamosPorPrestamo/' + this.idPrestamo).then(function (response) {
+        if (response.data.estado == 'failed' || response.data.estado == 'failed_v') {
+          alert(response.data.mensaje);
+        } else {
+          _this3.cuotasPagadas = response.data.cuotasPagadas;
+          _this3.totalCuotas = response.data.totalCuotas;
+          _this3.restantePorPagar = response.data.restante;
         }
       });
     },
@@ -94066,6 +94089,47 @@ var render = function() {
                         "div",
                         { staticClass: "q-gutter-md" },
                         [
+                          _c(
+                            "q-list",
+                            _vm._l(_vm.cuotasPagadas, function(itemCuotas) {
+                              return _c(
+                                "q-item",
+                                { key: itemCuotas.id },
+                                [
+                                  _c(
+                                    "q-item-section",
+                                    [
+                                      _c("q-item-label", [
+                                        _vm._v(
+                                          "Cuota N°: " +
+                                            _vm._s(itemCuotas.cuota) +
+                                            " Fue Cancelada en la fecha: " +
+                                            _vm._s(itemCuotas.fecha)
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c(
+                                        "q-item-label",
+                                        { attrs: { caption: "", lines: "2" } },
+                                        [
+                                          _vm._v(
+                                            " Valor Cancelado " +
+                                              _vm._s(itemCuotas.monto)
+                                          )
+                                        ]
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            }),
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("q-separator"),
+                          _vm._v(" "),
                           _c("q-input", {
                             attrs: {
                               outlined: "",
@@ -94173,7 +94237,13 @@ var render = function() {
                                   _c(
                                     "q-item-label",
                                     { attrs: { caption: "" } },
-                                    [_vm._v("1/3")]
+                                    [
+                                      _vm._v(
+                                        _vm._s(_vm.cuotasPagadas.length + 1) +
+                                          "/" +
+                                          _vm._s(_vm.totalCuotas)
+                                      )
+                                    ]
                                   )
                                 ],
                                 1

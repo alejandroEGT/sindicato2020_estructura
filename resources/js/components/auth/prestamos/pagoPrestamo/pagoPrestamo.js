@@ -13,12 +13,17 @@ export default {
       interes: null,
       valorConInteres: 0,
       fecha: '',
+      //variable para almacenar las cuotas pagadas
+      cuotasPagadas: '',
       //variable para resultados de confirmacion
       montoMenosCuota: null,
       //VARIABLES QUE RESCATAN AL USUARIO
       usuario: '',
       //variable modal
-      confirm: false
+      confirm: false,
+      //VARIABLES PARA EL RESUMEN A PAGAR
+      totalCuotas: '',
+      restantePorPagar: ''
     }
   },
   methods: {
@@ -42,12 +47,17 @@ export default {
           break;
         
         case 2:
-          this.montoMenosCuota = this.prestamos[0].monto_solicitado - this.monto;
+          this.getDetallePrestamoPorPrestamo();
+          break;
+
+        case 3:
+          this.montoMenosCuota = this.restantePorPagar - this.monto;
           break;
 
         case 4:
-            this.montoMenosCuota = this.prestamos[0].monto_solicitado - this.monto;
+          this.montoMenosCuota = this.restantePorPagar - this.monto;
           this.setPagoPrestamo();
+          break;
 
         default:
           break;
@@ -61,6 +71,18 @@ export default {
         } else {
           this.prestamos = response.data;
           console.log(this.prestamos);
+        }
+      });
+    },
+
+    getDetallePrestamoPorPrestamo(){
+      Axios.get('api/getDetallePrestamosPorPrestamo/' + this.idPrestamo).then((response) => {
+        if(response.data.estado == 'failed' || response.data.estado == 'failed_v'){
+          alert(response.data.mensaje);
+        }else{
+          this.cuotasPagadas = response.data.cuotasPagadas;
+          this.totalCuotas = response.data.totalCuotas;
+          this.restantePorPagar = response.data.restante;
         }
       });
     },
