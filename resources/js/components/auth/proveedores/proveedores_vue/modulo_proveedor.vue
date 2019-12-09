@@ -1,51 +1,43 @@
 <template>
-  <div class="q-pa-md">
-    <div class="row justify-center">
-      <div class="col-12 col-md-10">
-        <q-card class="my-card">
-          <q-card-section class="bg-primary text-white">
-            <div class="text-h6">Proveedores</div>
-          </q-card-section>
+  <div>
+    <div class="q-pa-md q-gutter-md">
+      <div class="row justify-center">
+        <div class="col-12 col-md-6">
+          <q-card class="my-card">
+            <!-- titulo  -->
+            <q-card-section class="bg-primary text-white">
+              <div class="text-h5 text-center">Proveedores</div>
+            </q-card-section>
 
-          <q-separator />
+            <q-separator />
 
-          <q-card-section class="text-white">
-            <div class="q-pa-md">
-              <div class="row q-col-gutter-md">
-                <div class="col-12 col-md-2">
-                  <q-btn
-                    @click="url_registro_proveedor"
-                    color="primary"
-                    class="block"
-                    icon="create"
-                    label="Ingresar Proveedores"
-                  />
-                </div>
+            <div class="row justify-center">
+              <q-card-actions>
+                <q-btn
+                  color="blue"
+                  @click="crear_reunion"
+                  label="Crear Proveedor"
+                />
+                <q-btn
+                  color="blue"
+                  icon-right="format_list_numbered"
+                  @click="traer_reuniones"
+                  label="Proveedores"
+                />
 
-                <div class="col-12 col-md-2">
-                  <q-btn
-                    color="primary"
-                    class="block"
-                    icon="create"
-                    label="Proveedores"
-                  />
-                </div>
-              </div>
+                <q-btn
+                  color="red"
+                  icon-right="settings_backup_restore"
+                  @click="volver"
+                  label="Volver"
+                />
+              </q-card-actions>
             </div>
-          </q-card-section>
-        </q-card>
+          </q-card>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
-
-<script>
-export default {
-  methods: {
-    url_registro_proveedor() {
-      this.$router.push("/ingreso_proveedor");
-    }
-  }
-};
-</script>
+<script src="../proveedores_js/moduloProveedores.js"></script>

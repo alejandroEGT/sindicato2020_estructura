@@ -38,7 +38,6 @@
                     hint="El rut debe ser sin punto ni guion"
                     :rules="[
                               val => val.length <= 20 || 'El maximo da caracteres es de 20' , 
-                              val => val.length >= 2 || 'El minimo de caracteres es de 2'
                             ]"
                   />
                 </div>
@@ -54,7 +53,6 @@
                     type="text"
                     :rules="[
                               val => val.length <= 50 || 'El maximo da caracteres es de 50',
-                              val => val.length >= 3 || 'El minimo de caracteres es de 3'
                             ]"
                   />
                 </div>
@@ -70,7 +68,6 @@
                     type="text"
                     :rules="[
                               val => val.length <= 50 || 'El maximo da caracteres es de 50',
-                              val => val.length >= 3 || 'El minimo de caracteres es de 3'
                             ]"
                   />
                 </div>
@@ -86,7 +83,6 @@
                     type="text"
                     :rules="[
                               val => val.length <= 50 || 'El maximo da caracteres es de 50',
-                              val => val.length >= 3 || 'El minimo de caracteres es de 3'
                             ]"
                   />
                 </div>

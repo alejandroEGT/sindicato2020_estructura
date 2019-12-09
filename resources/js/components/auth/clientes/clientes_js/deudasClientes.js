@@ -14,6 +14,7 @@ export default {
       monto: '',
       descripcion: '',
       fechaTope: '',
+      options: []
 
     }
   },
@@ -39,6 +40,7 @@ export default {
     mostrar_clientes_deudas() {
       axios.get('api/traer_clientes_deudas').then((response) => {
         this.selectClientes = response.data;
+        this.options = this.selectClientes;
       })
         .catch(error => {
           alert(error);
@@ -77,7 +79,7 @@ export default {
           this.tipoDeuda = '';
           this.monto = '';
           this.descripcion = '';
-          this.fecha = '';
+          this.fechaTope = '';
 
 
         }
@@ -89,7 +91,15 @@ export default {
       });
     },
 
-
+    filterFn (val, update) {
+      console.log(this.filterFn);
+      update(() => {
+        const needle = val.toLowerCase();
+        console.log(needle);
+        this.options = this.selectClientes.filter(v => v.cliente_deuda.toLowerCase().indexOf(needle) > -1);
+      })
+    },
+  
   },
 
   mounted() {

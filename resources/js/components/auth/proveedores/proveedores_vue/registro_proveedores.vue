@@ -1,117 +1,221 @@
 <template>
   <div class="q-pa-md">
-    {{pro_opt}}
-    {{procedencia}}
     <div class="row justify-center">
       <div class="col-12 col-md-10">
         <q-card class="my-card">
           <q-card-section class="bg-primary text-white">
-            <div class="text-h6">Proveedores/Ingreso</div>
+            <div class="text-h6 text-center">Formulario Proveedores</div>
           </q-card-section>
-
           <q-separator />
-
           <q-card-section>
-            <div class="q-pa-md">
-              <q-input v-model="codigo" label="Ingrese el codigo" stack-label />
+            <div class="row justify-start q-col-gutter-md">
+              <div class="col-4 col-md-4">
+                <q-input
+                  outlined
+                  v-model="codigo"
+                  label="Ingrese codigo identificador"
+                  stack-label
+                  type="text"
+                  maxlength="20"
+                  counter
+                />
+              </div>
 
-              <q-input v-model="razon_social" label="Ingrese la razon social" stack-label />
+              <div class="col-4 col-md-4">
+                <q-input
+                  outlined
+                  v-model="rut"
+                  label="Ingrese RUT empresa"
+                  stack-label
+                  type="text"
+                  maxlength="20"
+                  counter
+                />
+              </div>
 
-              <q-input v-model="direccion" label="Ingrese la direccion" stack-label />
-              <q-select
-                v-model="ubicacion"
-                :options="ubi_opt"
-                label="Seleccione la ubicacion"
-                stack-label
-              />
-              <q-input v-model="telefono" label="Ingrese el n° telefono" stack-label />
+              <div class="col-4 col-md-4">
+                <q-select
+                  outlined
+                  stack-label
+                  v-model="giro"
+                  :options="select_giro"
+                  option-value="id"
+                  option-label="descripcion"
+                  label="Seleccione Giro Empresa"
+                />
+              </div>
 
-              <q-input v-model="correo" type="email" label="Ingrese el correo" stack-label />
+              <div class="col-12 col-md-12">
+                <q-input
+                  outlined
+                  v-model="razon_social"
+                  label="Ingrese razon social"
+                  stack-label
+                  type="text"
+                  autogrow
+                  maxlength="200"
+                  counter
+                />
+              </div>
+              <div class="col-4 col-md-4">
+                <q-input
+                  outlined
+                  v-model="fono_emp"
+                  label="Ingrese telefono empresa"
+                  stack-label
+                  type="text"
+                  maxlength="20"
+                  counter
+                />
+              </div>
 
-              <q-input v-model="pagina" label="Ingrese la pagina web" stack-label />
-              <q-select v-model="giro" :options="giro_opt" label="Seleccione el giro" stack-label />
+              <div class="col-4 col-md-4">
+                <q-input
+                  outlined
+                  v-model="pagina"
+                  label="Ingrese pagina web"
+                  stack-label
+                  type="text"
+                  maxlength="20"
+                  counter
+                />
+              </div>
 
-              <q-input v-model="contacto" label="Ingrese el contacto" stack-label />
-
-              <!-- dsdsds -->
-              
-              <q-select
-                v-model="procedencia"
-                :options="pro_opt"
-                option-value="id"
-                option-label="descripcion"
-                label="Seleccione la Procedencia"
-                stack-label
-              />
-              <!-- dsdsds -->
-
-              <q-input
-                v-model.number="detraccion"
-                type="number"
-                label="Seleccione la detraccion"
-                stack-label
-              />
-
-              <q-input v-model="rut" label="Ingrese el rut" stack-label />
-  
-              <q-select
-                v-model="tipo"
-                :options="tipo"
-                label="Seleccione el tipo proveedor"
-                stack-label
-              />
-              <br />
-              <q-btn color="primary" label="Ingresar" stack-label />
+              <div class="col-4 col-md-4">
+                <q-input
+                  outlined
+                  v-model="correo_emp"
+                  label="Ingrese correo empresa"
+                  stack-label
+                  type="text"
+                  maxlength="20"
+                  counter
+                />
+              </div>
             </div>
           </q-card-section>
+          <q-separator />
+          <div class="bg-primary text-white text-center">Direccion Empresa</div>
+          <q-separator />
+          <q-card-section>
+            <div class="row justify-start q-col-gutter-md">
+              <div class="col-6 col-md-6">
+                <q-input
+                  outlined
+                  v-model="direccion"
+                  label="Ingrese direccion"
+                  stack-label
+                  type="text"
+                  maxlength="20"
+                  counter
+                />
+              </div>
+              <div class="col-6 col-md-6">
+                <q-input
+                  outlined
+                  v-model="ciudad"
+                  label="Ingrese Ciudad"
+                  stack-label
+                  type="text"
+                  maxlength="20"
+                  counter
+                />
+              </div>
+            </div>
+          </q-card-section>
+          <q-separator />
+          <div class="bg-primary text-white text-center">Persona de Contacto</div>
+          <q-separator />
+          <q-card-section>
+            <div class="row justify-start q-col-gutter-md">
+              <div class="col-3 col-md-3">
+                <q-input
+                  outlined
+                  v-model="nombres"
+                  label="Ingrese nombres contacto"
+                  stack-label
+                  type="text"
+                  maxlength="20"
+                  counter
+                />
+              </div>
+              <div class="col-3 col-md-3">
+                <q-input
+                  outlined
+                  v-model="apellidos"
+                  label="Ingrese apellidos contacto"
+                  stack-label
+                  type="text"
+                  maxlength="20"
+                  counter
+                />
+              </div>
+              <div class="col-3 col-md-3">
+                <q-input
+                  outlined
+                  v-model="correo_con"
+                  label="Ingrese correo contacto"
+                  stack-label
+                  type="text"
+                  maxlength="20"
+                  counter
+                />
+              </div>
+              <div class="col-3 col-md-3">
+                <q-input
+                  outlined
+                  v-model="fono_con"
+                  label="Ingrese telefono contacto"
+                  stack-label
+                  type="text"
+                  maxlength="20"
+                  counter
+                />
+              </div>
+            </div>
+          </q-card-section>
+          <q-separator />
+
+          <q-card-actions align="center">
+            <q-btn
+              :loading="loading1"
+              color="secondary"
+              @click="simulateProgress(1), guardar()"
+              icon-right="send"
+              label="Ingresar Proveedor"
+            >
+              <template v-slot:loading>
+                <q-spinner-facebook />
+              </template>
+            </q-btn>
+            <q-btn
+              :loading="loading2"
+              color="primary"
+              @click="simulateProgress(2),proveedores()"
+              icon-right="table_chart"
+              label="Proveedores"
+            >
+              <template v-slot:loading>
+                <q-spinner-facebook />
+              </template>
+            </q-btn>
+
+            <q-btn
+              :loading="loading3"
+              color="red"
+              @click="simulateProgress(3), volver()"
+              icon-right="settings_backup_restore"
+              label="volver"
+            >
+              <template v-slot:loading>
+                <q-spinner-facebook />
+              </template>
+            </q-btn>
+          </q-card-actions>
         </q-card>
       </div>
     </div>
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      codigo: null,
-      razon_social: null,
-      telefono: null,
-      direccion: null,
-      correo: null,
-      pagina: null,
-      rut: null,
-      ubicacion: null,
-      detraccion: null,
-      contacto: null,
-      giro: null,
-      procedencia: null,
-      tipo: null,
-      ubi_opt: ["Mi Casa", "La Tuya", "EEE"],
-      giro_opt: ["Fiambre", "Yogurth", "EEE"],
-      pro_opt: [],
-      tipo: ["Compra/Importacion", "Gasto", "H.P."]
-    };
-  },
-  methods: {
-    traerProcedencia() {
-      axios.get("api/traer_procedencia").then(res => {
-        console.log(res.data);
-        this.pro_opt = res.data;
-        console.log(this.pro_opt);
-      });
-    }
-    
-  },
-  created() {
-    //this.traerProcedencia();
-  },
-
-  mounted(){
-this.traerProcedencia();
-  }
-};
-</script>
-
-<style>
-</style>
+<script src="../proveedores_js/registroProveedores.js"></script>

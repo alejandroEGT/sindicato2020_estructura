@@ -1,4 +1,5 @@
 import Axios from "axios";
+import { all } from "q";
 
 export default {
   data() {
@@ -51,7 +52,7 @@ export default {
             color: "green-4",
             textColor: "white",
             icon: "cloud_done",
-            message: "Cliente Registrado con exito!"
+            message: response.data.mensaje
           });
 
           this.fechaNac = '';
@@ -62,10 +63,20 @@ export default {
           this.errores = '';
 
         }
-         if (response.data.estado == 'failed_v') {
+
+        if ( response.data.estado == 'failed_v') {
           this.errores = response.data.mensaje;
         }
 
+        if (response.data.estado == 'failed') {
+          this.$q.notify({
+            color: "red-4",
+            textColor: "white",
+            icon: "delete_forever",
+            message:  response.data.mensaje
+          });
+          this.errores = '';
+        }
 
       });
     },
