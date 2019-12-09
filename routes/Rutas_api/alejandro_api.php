@@ -31,9 +31,13 @@
 	Route::post('guardar_liquidacion_datos_basicos','LiquidacionesController@guardar_liquidacion_datos_basicos');
 	Route::post('guardar_liquidacion_detalle','LiquidacionesController@guardar_liquidacion_detalle');
 	Route::get('listar_liquidaciones','LiquidacionesController@listar_liquidaciones');
+	Route::get('listar_liquidaciones_edit','LiquidacionesController@listar_liquidaciones_edit');
+	Route::get('datos_liqu_edit/{liq_id}','LiquidacionesController@datos_liqu_edit');
+	Route::get('tabla_haberes_descuentos_edit/{liq_id}','LiquidacionesController@tabla_haberes_descuentos_edit');
 	
 	
 	
+	Route::post('insertar_empleado','EmpleadosController@insertar');
 
 	
  ?>

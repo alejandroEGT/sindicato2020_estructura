@@ -11,6 +11,7 @@ export default{
             stringOptions:[],
             rut:'',
             fecha_nacimiento:'',
+            puesto_trabajo:'',
             cargo:'',
             cargos:[
                 {'id':'1','nombre':'Informatica'},
@@ -70,7 +71,8 @@ export default{
             console.log(this.empleado.id);
             axios.get('api/traer_datos_persona/' + this.empleado.id).then((res)=>{
                 this.rut = res.data.rut;
-                this.fecha_nacimiento = res.data.fecha_nacimiento
+                this.fecha_nacimiento = res.data.fecha_contrato;
+                this.puesto_trabajo = res.data.puesto_trabajo
                 console.log(res.data);
                 this.loading2 = false;
             });
@@ -93,7 +95,7 @@ export default{
             
             const data = {
                 'empleado_id': this.empleado.id,
-                'cargo_id':this.cargo.id,
+                'puesto_trabajo': this.puesto_trabajo,
                 'fecha_emicion': this.fecha_emicion,
                 'sueldo_base_mensual':this.sueldo_base_mensual,
                 'dias_trabajados': this.dias_trabajados,
@@ -132,6 +134,9 @@ export default{
 
         getSelectedString() {
             return this.selected.length === 0 ? '' : `${this.selected.length} record${this.selected.length > 1 ? 's' : ''} selected of ${this.data.length}`
+        },
+        url(url) {
+            this.$router.push(url);
         }
        
     }

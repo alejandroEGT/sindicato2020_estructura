@@ -95,13 +95,14 @@
                    <q-card class="my-card">
                       <q-img src="https://cdn.quasar.dev/img/parallax2.jpg">
                         <div class="absolute-bottom">
-                          <div class="text-h6">Clientes y proveedores</div>
-                          <div class="text-subtitle2">Registro de clientes y proveedores</div>
+                          <div class="text-h6">Clientes, empleados y proveedores</div>
+                          <div class="text-subtitle2">Registro de clientes, empleados y proveedores</div>
                         </div>
                       </q-img>
 
                       <q-card-actions>
                         <q-btn flat @click="url_modulo_clientes">Clientes</q-btn><br>
+                        <q-btn flat @click="url_modulo_empleados">Empleados</q-btn><br>
                         <q-btn flat @click="url_modulo_proveedor">Proveedores</q-btn>
 
                         <!-- <q-btn flat>Action 2</q-btn> -->
@@ -218,7 +219,11 @@ export default {
        },
        url_modulo_reunion(){
          this.$router.push('/modulo-reunion');
+       },
+       url_modulo_empleados(){
+         this.$router.push('/modulo-empleados');
        }
+
 
     // async onCapture () {
     //   this.img = await this.$refs.webcam.capture()

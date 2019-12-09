@@ -1,12 +1,51 @@
 <template>
     <div class="q-pa-md">
+        <q-banner inline-actions class="bg-grey-3">
+            <div class="row">
+                <div class="col-md-7">
+                  
+                    <q-icon style="font-size: 3rem;" name="monetization_on" color="primary" />
+                 
+                    Liquidaciones/formulario
+                </div>
+
+                <div class="col-md-5">
+                     <!-- boton refrescar -->
+                    <div class="row">
+                        <div class="col-4 col-md-6">
+                            <q-btn
+                                    flat
+                                    label="Listar Liquidaciones"
+                                    icon-right="person_add"
+                                    color="green"
+                                    @click="url('/listar-liquidaciones')"
+                                    
+                                />
+                        </div>
+                        <div class="col-4 col-md-4">
+                            <q-btn
+                                flat
+                                label="VOLVER"
+                                icon-right="settings_backup_restore"
+                                color="red"
+                                @click="url('/modulo-liquidaciones')"
+                                
+                            />
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </q-banner>
+
+
         <div class="row justify-center">
 	    
 	      <div class="col-12">
 
               <q-card class="my-card">
 		            <q-card-section class="bg-primary text-white">
-		              <div class="text-h6">Liquidaciones/formulario</div>
+		              <div class="text-h6">Formulario</div>
 		             
 		            </q-card-section>
 
@@ -71,13 +110,15 @@
                                     </div>
 
                                     <div class="col-12 col-md-3">
-                                       <q-select 
-                                            standout="bg-primary text-white" 
-                                            v-model="cargo" 
-                                            :options="cargos" 
-                                            label="Seleccione un cargo"
-                                            option-label="nombre"
-                                            option-value="id"
+                                        <q-input
+                                            :loading="loading2"
+                                            v-model="puesto_trabajo"
+                                            outlined
+                                            label="Cargo"
+                                            stack-label
+                                            type="text"
+                                            :disable="true"
+                                            
                                         />
                                     </div>
                                 </div>

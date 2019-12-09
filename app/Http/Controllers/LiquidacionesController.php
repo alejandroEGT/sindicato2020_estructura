@@ -13,7 +13,7 @@ class LiquidacionesController extends Controller
     {
         $select = DB::select("SELECT
                                  id, concat(nombres,' ',apellido_paterno,' ',apellido_materno) nombre 
-                            from cliente");
+                            from empleados");
 
         if(count($select)>0){
             return $select;
@@ -21,8 +21,9 @@ class LiquidacionesController extends Controller
     }
     public function traer_datos_persona($id)
     {
-        $datos = DB::select("SELECT id, concat(nombres,' ',apellido_paterno,' ',apellido_materno) nombre, rut, fecha_nacimiento
-                                FROM cliente where id = $id and activo = 'S'
+        $datos = DB::select("SELECT id, concat(nombres,' ',apellido_paterno,' ',apellido_materno) nombre, rut,
+                             fecha_contrato, puesto_trabajo
+                                FROM empleados where id = $id and activo = 'S'
                             ");
         if (count($datos) > 0) {
             return response()->json($datos[0]);
@@ -69,7 +70,7 @@ class LiquidacionesController extends Controller
         $l->empleado_id = $r->empleado_id;
         $l->empresa = 'NeoFox'; // cambiar despues este campo;
         $l->rut = '770652995';
-        $l->cargo_id = $r->cargo_id;
+        $l->puesto_trabajo = $r->puesto_trabajo;
         $l->sueldo_base_mensual = $r->sueldo_base_mensual;
         $l->dias_trabajados = $r->dias_trabajados;
         $l->horas_extras = $r->horas_extras;
@@ -140,7 +141,15 @@ class LiquidacionesController extends Controller
 //         id
 // fecha
 // empresa
-        $listar = Liquidacion::all();
+        $listar = DB::select("SELECT 
+    
+                                l.id,
+                                to_char(l.fecha,'dd/mm/YYYY') fecha,
+                                l.empresa,
+                                concat(nombres,' ',apellido_paterno,' ',apellido_materno) empleado
+
+                            from liquidacion l
+                            inner join empleados e on e.id = l.empleado_id where e.activo = 'S'");
 
         if (count($listar)>0) {
             return [
@@ -148,5 +157,93 @@ class LiquidacionesController extends Controller
                 'tabla'=>$listar
             ];
         }
+    }
+
+    public function listar_liquidaciones_edit()
+    {   
+        $query=[];
+         $listar = DB::select("SELECT x.id, concat(x.fecha,'-',x.empleado,'-',x.id) texto, 'insert_drive_file' as icon
+                        from ( SELECT 
+                            
+                            l.id,
+                            to_char(l.fecha,'dd/mm/YYYY') fecha,
+                            l.empresa,
+                            concat(nombres,' ',apellido_paterno,' ',apellido_materno) empleado
+
+                            from liquidacion l
+                            inner join empleados e on e.id = l.empleado_id where e.activo = 'S') x");
+
+        if (count($listar)>0) {
+            $i=0;
+            foreach ($listar as $key) {
+                $query[$i]['label'] = $key->texto;
+                $query[$i]['icon'] = $key->icon;
+                $i++;
+            }
+
+
+            return [
+                'estado'=>'success',
+                'tabla'=>$query
+            ];
+        }
+    }
+    public function datos_liqu_edit($liq_id)
+    {
+        $listar = DB::select("SELECT 
+                    l.id,
+                    l.empresa,
+                    concat(nombres,' ',apellido_paterno,' ',apellido_materno) empleado,
+                    e.rut,
+                    fecha_contrato,
+                    l.puesto_trabajo,
+                    l.dias_trabajados,
+                    l.fecha as fecha_emicion,
+                    l.sueldo_base_mensual,
+                    l.horas_extras,
+                    l.valor_horas_extras,
+                    l.valor_horas_ordinarias,
+                    l.afp_id,
+                    a.nombre afp,
+                    l.isapre_id,
+                    i.nombre isapre
+
+                    from liquidacion l
+                    inner join afp  a on a.id = l.afp_id
+                    inner join isapre i on i.id = l.isapre_id 
+                    inner join empleados e on e.id = l.empleado_id where l.activo = 'S'
+                    
+                    and l.id = $liq_id");
+        
+        if (count($listar)>0) {
+            return response()->json($listar[0]);
+        }
+    }
+
+    public function tabla_haberes_descuentos_edit($liquidacion_id)
+    {
+         $listar_h_d = DB::select("SELECT 
+                                 dhd.id,
+                                tipo,
+                                concepto AS tipo_detalle, 
+                                monto,
+                                case 
+                                    when monto is null then 'N' 
+                                    else 'S'
+                                 end as verify
+
+                                from liq_detalle_haberes_descuentos as dhd
+                                inner join tipo_haberes_descuentos thd 
+                                on thd.id = dhd.tipo_detalle 
+                                left join liq_detalle_haberes_descuentos_empleado le 
+                                on le.liq_detalle_haberes_descuentos_id = dhd.id 
+                                and liquidacion_id = $liquidacion_id
+
+                                where dhd.activo = 'S'");
+                                
+            if (count($listar_h_d)>0) {
+                return $listar_h_d;
+            }
+            
     }
 }

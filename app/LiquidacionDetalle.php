@@ -17,7 +17,14 @@ class LiquidacionDetalle extends Model
             'liq_detalle_haberes_descuentos_id'=>$r->id_h_d
         ])->first();
 
+        //dd($verify);
+
         if ($verify) {
+
+            $verify->monto = $r->monto;
+            if ($verify->save()) {
+                return true;
+            }
             return false;
         }else{
              $l = $this;
