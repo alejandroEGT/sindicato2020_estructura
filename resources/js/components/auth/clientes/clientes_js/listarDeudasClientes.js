@@ -17,7 +17,7 @@ export default {
             idCliente: '0',
             selectTipoDeuda: [],
             tipoDeuda: '',
-            traerDeudas:'todos',
+            traerDeudas: 'todos',
             listarDeudaCliente: [],
 
 
@@ -65,50 +65,59 @@ export default {
         traer_cliente() {
             axios.get('api/buscar_cliente/' + this.buscadorCliente).then((response) => {
 
-                if(this.buscadorCliente == ''){
-                    this.$q.notify({
-                        color: "red-4",
-                        textColor: "white",
-                        icon: "error_outline",
-                        message: "El campo no puede quedar vacio, ingrese un rut porfavor."
-                    });
-                }else{
-
-                if (response.data.estado == 'success') {
-
-                    this.rutCliente = response.data.cliente['rut'];
-                    this.nombreCliente = response.data.cliente['cliente_deuda'];
-                    this.idCliente = response.data.cliente['id'];
-                    this.listar_deudas_cliente();
-                    this.$q.notify({
-                        color: "green-4",
-                        textColor: "white",
-                        icon: "cloud_done",
-                        message: "Este cliente si posee deudas, se estan cargando la informacion."
-                    });
-                    
-                } else {
+                if (this.buscadorCliente == '') {
                     this.$q.notify({
                         color: "orange-8",
                         textColor: "white",
                         icon: "error_outline",
-                        message: response.data.mensaje,
-                        timeout: 10000,
-                        actions:
-                        [{ 
-                            label: 'Ingresar Cliente', 
-                            color: 'white',
-                            handler: () => {  
-                                            this.url_registro_nuevo_cliente() 
-                                            } 
-                         }]
-                        
-
+                        message: "El campo no puede quedar vacio, ingrese un rut porfavor."
                     });
+                } else {
+
+                    if (response.data.estado == 'success') {
+
+                        this.rutCliente = response.data.cliente['rut'];
+                        this.nombreCliente = response.data.cliente['cliente_deuda'];
+                        this.idCliente = response.data.cliente['id'];
+                        this.listar_deudas_cliente();
+
+                    }
+                    else {
+
+                        if (response.data.estado == 'failed_c') {
+
+                            this.$q.notify({
+                                color: "orange-8",
+                                textColor: "white",
+                                icon: "error_outline",
+                                message: response.data.mensaje
+                            });
+
+                        } else {
+                            if (response.data.estado == 'failed') {
+                                this.$q.notify({
+                                    color: "orange-8",
+                                    textColor: "white",
+                                    icon: "error_outline",
+                                    message: response.data.mensaje,
+                                    timeout: 10000,
+                                    actions:
+                                        [{
+                                            label: 'Ingresar Cliente',
+                                            color: 'white',
+                                            handler: () => {
+                                                this.url_registro_nuevo_cliente()
+                                            }
+                                        }]
 
 
+                                });
+                            }
+
+
+                        }
+                    }
                 }
-            }
 
             })
                 .catch(error => {
@@ -119,7 +128,7 @@ export default {
 
         listar_deudas_cliente() {
             this.loading = true;
-            axios.get('api/deudas_cliente/' + this.idCliente +'/'+ this.traerDeudas).then((response) => {
+            axios.get('api/deudas_cliente/' + this.idCliente + '/' + this.traerDeudas).then((response) => {
 
                 if (response.data.estado == 'success') {
                     this.listarDeudaCliente = response.data.cliente;
@@ -130,13 +139,20 @@ export default {
                         color: "red-4",
                         textColor: "white",
                         icon: "error_outline",
-                        message: response.data.mensaje
+                        message: response.data.mensaje,
+                        actions:
+                                        [{
+                                            label: 'refrescando...',
+                                            color: 'white',
+                                            handler: ( this.onRefresh())
+                                        }]
                     });
 
                     this.rutCliente = '';
                     this.nombreCliente = '';
                     this.idCliente = '';
                     this.listarDeudaCliente = [];
+                    // this.onRefresh();
 
                 }
                 this.loading = false;
@@ -158,10 +174,10 @@ export default {
             axios.post('api/modificar_campo_deuda', data).then((response) => {
                 if (response.data.estado == 'success') {
                     this.$q.notify({
-                      color: "green-4",
-                      textColor: "white",
-                      icon: "cloud_done",
-                      message: response.data.mensaje
+                        color: "green-4",
+                        textColor: "white",
+                        icon: "cloud_done",
+                        message: response.data.mensaje
                     });
                     this.campoUpd = '';
                     this.errores = [];
@@ -172,8 +188,18 @@ export default {
                     this.errores = response.data.mensaje;
                     this.campoUpd = '';
                     this.loading = false;
-                  }
-                })
+                }
+                if (response.data.estado == 'failed_p') {
+                    this.$q.notify({
+                        color: "orange-8",
+                        textColor: "white",
+                        icon: "info",
+                        message: response.data.mensaje
+                    });
+                    this.campoUpd = '';
+                    this.loading = false;
+                }
+            })
                 .catch(error => {
                     alert(error);
                     this.loading = false;
@@ -182,45 +208,30 @@ export default {
 
         actualizar_tipo_deudas() {
             axios.get('api/traer_tipo_deuda').then((response) => {
-              this.selectTipoDeuda = response.data;
+                this.selectTipoDeuda = response.data;
             })
-              .catch(error => {
-                alert(error);
-      
-              })
-          },
+                .catch(error => {
+                    alert(error);
 
-        onRefresh() {
-            this.loading = true;
-            this.rutCliente = '';
-            this.nombreCliente = '';
-            this.idCliente = '0';
-            this.traerDeudas = 'todos',
-            this.listarDeudaCliente = [];
-            this.errores = [];
-            this.listar_deudas_cliente();
-            
-            setTimeout(() => {
-                this.loading = false;
-            }, 5000)
+                })
         },
 
-        pagar_deuda(id){
+        pagar_deuda(id) {
 
             const data = {
                 'id': id,
             }
             this.loading = true;
-            axios.post('api/pagar_deuda',data).then((response) => {
+            axios.post('api/pagar_deuda', data).then((response) => {
                 if (response.data.estado == 'success') {
                     this.$q.notify({
-                      color: "green-4",
-                      textColor: "white",
-                      icon: "cloud_done",
-                      message: response.data.mensaje
+                        color: "green-4",
+                        textColor: "white",
+                        icon: "cloud_done",
+                        message: response.data.mensaje
                     });
                     this.loading = false;
-                    this.traer_clientes();
+                    this.listar_deudas_cliente();
                 }
                 if (response.data.estado == 'failed') {
                     this.$q.notify({
@@ -228,8 +239,8 @@ export default {
                         textColor: "white",
                         icon: "delete_forever",
                         message: response.data.mensaje
-                      });
-                      this.loading = false;
+                    });
+                    this.loading = false;
                 }
                 if (response.data.estado == 'failed_p') {
                     this.$q.notify({
@@ -237,31 +248,47 @@ export default {
                         textColor: "white",
                         icon: "info",
                         message: response.data.mensaje
-                      });
-                      this.loading = false;
+                    });
+                    this.loading = false;
                 }
-                
+
             })
-            .catch(error => {
-                alert(error);
-      
-              })
+                .catch(error => {
+                    alert(error);
+
+                })
         },
 
-        show (modal) {
+
+        onRefresh() {
+            this.loading = true;
+            this.rutCliente = '';
+            this.nombreCliente = '';
+            this.idCliente = '0';
+            this.traerDeudas = 'todos',
+                this.listarDeudaCliente = [];
+            this.errores = [];
+            this.listar_deudas_cliente();
+
+            setTimeout(() => {
+                this.loading = false;
+            }, 5000)
+        },
+
+        show(modal) {
             this.$modal.show(modal);
-            },
-        hide (modal) {
+        },
+
+        hide(modal) {
             this.$modal.hide(modal);
         },
-
 
         formatPrice(value) {
             let val = (value / 1).toFixed(0).replace('.', ',')
             return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
-          },
+        },
 
-          formateaRut(rut) {
+        formateaRut(rut) {
 
             var actual = rut.replace(/^0+/, "");
             if (actual != '' && actual.length > 1) {
