@@ -13,27 +13,34 @@
               icon="account_circle"
               :done="step > 1"
             >
-              <q-input
-                outlined
-                counter
-                maxlength="20"
-                v-model="rut"
-                label="Ingrese rut del cliente"
-                stack-label
-                type="text"
-                hint="El rut debe ser sin punto ni guion"
-                :rules="[
+              <div class="q-gutter-md">
+                <q-input
+                  outlined
+                  counter
+                  maxlength="20"
+                  v-model="rut"
+                  label="Ingrese rut del cliente"
+                  stack-label
+                  type="text"
+                  :rules="[
                               val => val.length <= 20 || 'El maximo da caracteres es de 20' , 
                               val => val.length >= 2 || 'El minimo de caracteres es de 2'
                             ]"
-              />
+                />
+
+                <q-separator />
+
+                <q-input filled v-model="usuario.nombrecliente" hint="Nombre del Cliente" readonly />
+
+                <q-btn color="primary" label="Buscar Usuario" v-on:click="getUsuario" />
+              </div>
             </q-step>
 
             <q-step :name="2" title="Tipo de Prestamo" icon="create_new_folder" :done="step > 2">
               <q-list>
                 <q-item tag="label" v-ripple>
                   <q-item-section avatar>
-                    <q-radio v-model="tipo" val="0" />
+                    <q-radio v-model="tipo" val="1" />
                   </q-item-section>
                   <q-item-section>
                     <q-item-label>Sin Intereses</q-item-label>
@@ -43,7 +50,7 @@
 
                 <q-item tag="label" v-ripple>
                   <q-item-section avatar>
-                    <q-radio v-model="tipo" val="1" />
+                    <q-radio v-model="tipo" val="2" />
                   </q-item-section>
                   <q-item-section>
                     <q-item-label>Con Intereses</q-item-label>
@@ -55,7 +62,7 @@
               </q-list>
 
               <q-slide-transition>
-                <div v-show="tipo == '1'">
+                <div v-show="tipo == '2'">
                   <q-input
                     outlined
                     counter
@@ -76,29 +83,45 @@
 
             <q-step :name="3" title="Monto y fecha" icon="assignment">
               <div class="q-gutter-md">
-              <q-input
-                outlined
-                counter
-                maxlength="20"
-                v-model="monto"
-                label="Ingrese monto a solicitar"
-                stack-label
-                type="number"
-                hint="El monto debe de ser ingresado sin puntos"
-                :rules="[
+                <q-input
+                  outlined
+                  counter
+                  maxlength="20"
+                  v-model="monto"
+                  label="Ingrese monto a solicitar"
+                  stack-label
+                  type="number"
+                  hint="El monto debe de ser ingresado sin puntos"
+                  :rules="[
                               val => val.length <= 20 || 'El maximo da caracteres es de 20' , 
                               val => val.length >= 2 || 'El minimo de caracteres es de 1'
                             ]"
-              />
-              <q-input
-                outlined
-                counter
-                v-model="fecha"
-                label="Fecha del prestamo"
-                stack-label
-                type="date"
-                hint="Seleccione la fecha en la cual se genero el prestamo"
-              />
+                />
+
+                <q-input
+                  outlined
+                  counter
+                  maxlength="2"
+                  v-model="cuotas"
+                  label="Ingrese numero de cuotas"
+                  stack-label
+                  type="number"
+                  hint="El monto debe de ser ingresado sin puntos"
+                  :rules="[
+                              val => val.length <= 2 || 'El maximo da caracteres es de 2' , 
+                              val => val.length >= 1 || 'El minimo de caracteres es de 1'
+                            ]"
+                />
+
+                <q-input
+                  outlined
+                  counter
+                  v-model="fecha"
+                  label="Fecha del prestamo"
+                  stack-label
+                  type="date"
+                  hint="Seleccione la fecha en la cual se genero el prestamo"
+                />
               </div>
             </q-step>
 
@@ -107,10 +130,7 @@
                 <q-item>
                   <q-item-section>
                     <q-item-label>Solicitante del Prestamo</q-item-label>
-                    <q-item-label
-                      caption
-                      lines="2"
-                    >{{usuario}}</q-item-label>
+                    <q-item-label caption lines="2">{{usuario.nombrecliente}}</q-item-label>
                   </q-item-section>
                 </q-item>
 
@@ -119,9 +139,10 @@
                 <q-item>
                   <q-item-section>
                     <q-item-label>Tipo de prestamo</q-item-label>
-                    <q-item-label
-                      caption
-                    > <q-label v-show="tipo == '0'">Sin Intereses</q-label> <q-label v-show="tipo == '1'">Con Intereses</q-label></q-item-label>
+                    <q-item-label caption>
+                      <b v-show="tipo == '1'">Sin Intereses</b>
+                      <b v-show="tipo == '2'">Con Intereses</b>
+                    </q-item-label>
                   </q-item-section>
                 </q-item>
 
@@ -130,9 +151,7 @@
                 <q-item>
                   <q-item-section>
                     <q-item-label>Monto Solicitado</q-item-label>
-                    <q-item-label
-                      caption
-                    >{{monto}}</q-item-label>
+                    <q-item-label caption>{{monto}}</q-item-label>
                   </q-item-section>
                 </q-item>
 
@@ -141,9 +160,16 @@
                 <q-item>
                   <q-item-section>
                     <q-item-label>Total con Intereses</q-item-label>
-                    <q-item-label
-                      caption
-                    >{{monto}}</q-item-label>
+                    <q-item-label caption>{{valorConInteres}}</q-item-label>
+                  </q-item-section>
+                </q-item>
+
+                <q-separator spaced inset />
+
+                <q-item>
+                  <q-item-section>
+                    <q-item-label>Numero de cuotas</q-item-label>
+                    <q-item-label caption>{{cuotas}}</q-item-label>
                   </q-item-section>
                 </q-item>
 
@@ -152,9 +178,7 @@
                 <q-item>
                   <q-item-section>
                     <q-item-label>Fecha Solicitud Prestamo</q-item-label>
-                    <q-item-label
-                      caption
-                    >{{fecha}}</q-item-label>
+                    <q-item-label caption>{{fecha}}</q-item-label>
                   </q-item-section>
                 </q-item>
               </q-list>
@@ -163,10 +187,10 @@
             <template v-slot:navigation>
               <q-stepper-navigation>
                 <q-btn
+                  v-on:click="step === 4 ? setPrestamo() : calcularIntereses()"
                   @click="$refs.stepper.next()"
                   color="primary"
-                  v-on:click="calcularIntereses"
-                  :disable="step === 1 && rut == '' || step === 3 && monto == null"
+                  :disable="(step === 1 && usuario == '') || (step === 3 && (monto == null || fecha == '' || monto == ''))"
                   :label="step === 4 ? 'Solicitar' : 'Continuar'"
                 />
                 <q-btn
@@ -181,6 +205,27 @@
             </template>
           </q-stepper>
         </q-card>
+
+        <q-dialog v-model="confirm" persistent>
+          <q-card>
+            <q-card-section class="row items-center">
+              <span
+                class="q-ml-sm"
+              >El usuario ingresado no se encuentra en la base de datos. ¿Desea registrarlo?.</span>
+            </q-card-section>
+
+            <q-card-actions align="right">
+              <q-btn flat label="Cancelar" color="primary" v-close-popup />
+              <q-btn
+                flat
+                @click="url_crear_cliente"
+                label="Registrar"
+                color="primary"
+                v-close-popup
+              />
+            </q-card-actions>
+          </q-card>
+        </q-dialog>
       </div>
     </div>
   </div>
