@@ -138,23 +138,36 @@
 
                   <q-separator />
 
+			      <div class="q-pa-md">
+			        <div class="row q-col-gutter-md">
+			        	<div class="col-12 col-md-3">
+			        		<q-btn
+								class="full-width"
+								:loading="loading1"
+								color="secondary"
+								@click="ingresar_empleado()"
+								icon-right="send"
+								label="ingresar"
+							>
+								<template v-slot:loading>
+								<q-spinner-facebook />
+								</template>
+							</q-btn>
+			        	</div>
+			        	
+			        	<!-- <div class="col-12 col-md-2">
+			        		<q-btn @click="" color="primary" class="block" icon="attach_file" label="Formulario" />
+			        	</div> -->
+			        </div>
+			      </div>
+
             <!-- botones -->
-            <q-card-actions align="right">
+      
                 <!-- <button @click="ingresar_empleado">clickme</button> -->
-              <q-btn
-                :loading="loading1"
-                color="secondary"
-                @click="ingresar_empleado()"
-                icon-right="send"
-                label="ingresar"
-              >
-                <template v-slot:loading>
-                  <q-spinner-facebook />
-                </template>
-              </q-btn>
+             
 
               
-            </q-card-actions>
+           
 			    </q-card>
 			</div>
 		</div>

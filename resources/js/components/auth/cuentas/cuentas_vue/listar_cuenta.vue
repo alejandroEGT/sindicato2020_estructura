@@ -153,19 +153,19 @@
 						  </q-list>
                 <br>
                 <div class="row justify-center">
-                   <div class="col-2 col-md-2">
+                   <div class="col-12 col-md-2">
                       
-                     <q-btn @click="listar" label="Buscar" icon="search" />
+                     <q-btn  class="full-width" @click="listar" label="Buscar" icon="search" />
                   </div>
 
-                  <div class="col-2 col-md-2">
+                  <div class="col-12 col-md-2">
                       
-                     <q-btn @click="limpiar" label="Limpiar" icon="clear" />
+                     <q-btn  class="full-width" @click="limpiar" label="Limpiar" icon="clear" />
                   </div>
 
-                  <div class="col-2 col-md-2">
+                  <div class="col-12 col-md-2">
                       
-                     <q-btn @click="ruta('/modulo-cuentas')" label="Volver" icon="keyboard_backspace" />
+                     <q-btn  class="full-width" @click="ruta('/modulo-cuentas')" label="Volver" icon="keyboard_backspace" />
                   </div>
                 </div>
 						    <!-- <div class="q-mt-md">

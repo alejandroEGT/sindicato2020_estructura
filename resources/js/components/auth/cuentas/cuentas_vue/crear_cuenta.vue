@@ -34,17 +34,17 @@
 
 
                         
-                              <div class="row justify-left">
-                                  <div class="col-2">
-                                    <q-btn class="" label="Crear cuenta" type="submit" color="primary" />
+                              <div class="row justify-left q-gutter-md">
+                                  <div class="col-12 col-md-2">
+                                    <q-btn class="full-width" label="Crear cuenta" type="submit" color="primary" />
+                                  </div>
+
+                                  <div class="col-12 col-md-2">
+                                    <q-btn class="full-width" @click="fixed = true" label="subCuenta" color="purple" />
                                   </div>
                             
 
-                                <div class="row justify-center">
-                                  <div class="col-2">
-                                    <q-btn @click="fixed = true" label="subCuenta" color="purple" />
-                                  </div>
-                                </div>
+                               
                               </div>  
                              
                           </q-form>
