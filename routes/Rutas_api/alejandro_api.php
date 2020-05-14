@@ -45,6 +45,6 @@
 	Route::get('listar_socios/{buscar?}','SocioController@listar_socios');
 	Route::get('listar_socio/{buscar?}','SocioController@listar_socio');
 	Route::get('entorno_familiar','SocioController@entorno_familiar');
-
+	Route::post('crear_persona','PersonaController@crear_persona');
 	
  ?>

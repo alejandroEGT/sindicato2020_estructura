@@ -74,7 +74,7 @@
                             size="sm"
                             >
                             <template  v-slot:first>
-                                <b-form-select-option :value="''" >--Seleccione tipo de familiar--</b-form-select-option>
+                                <b-form-select-option :value="''">--Seleccione tipo de familiar--</b-form-select-option>
                             </template>
 
                         </b-form-select>
@@ -165,7 +165,7 @@
                         
                         </div>
                         <hr>
-                        <b-button @click="crear" size="sm" variant="primary"><i class="fas fa-save"></i> Registrar</b-button>
+                        <b-button @click="crear(socio_id)" size="sm" variant="primary"><i class="fas fa-save"></i> Registrar</b-button>
                         <b-button  size="sm" @click="ruta('socios')"><i class="fas fa-undo-alt"></i> Volver</b-button>
                         </div>
                     </b-card-body>
@@ -193,6 +193,7 @@ export default {
             fam:'',
             f:[],
             socio:[],
+            socio_id:'',
             nombre:'',
             rut:'',
             condicion:false,
@@ -243,6 +244,7 @@ export default {
                     this.nombre = this.socio.nombres+' '+this.socio.apellidos;
                     this.rut = this.socio.rut;
                     this.condicion = true;
+                    this.socio_id = res.data.socio_id;
 
                 }
             });
@@ -303,8 +305,26 @@ export default {
             
             console.log(this.becana);
         },
-        crear(){
-            console.log("crear");
+        crear(socio_id){//registrar persona
+            const data = {
+                 socio_id: socio_id,
+                 familiar: this.fam,
+                 nombres: this.nombres, 
+                 apellidos: this.apellidos, 
+                 rut: this.rut,
+                 direccion: this.direccion,
+                 fecha_nacimiento: this.fecha_nacimiento,
+                 celular: this.celular,
+                 certificado_matrimonio:null,
+                 certificado_carga:null,
+                 orden_beneficio: this.beneficio,
+                 becana: this.becana
+
+            };
+
+            axios.post("api/crear_persona", data).then((res)=>{
+
+            });
         }
     }
 }

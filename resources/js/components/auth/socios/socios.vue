@@ -9,7 +9,6 @@
                     SOCIOS
                     </b-card-header>
                     <b-card-body>
-                        
                             <b-list-group>
                             <b-list-group-item>
                                 <b-button @click="ruta('crear_socios')" variant="light"><i class="fas fa-address-card"></i> Crear socio</b-button>
@@ -24,17 +23,9 @@
                              <b-button class="float-right" @click="ruta('index')"><i class="fas fa-undo-alt"></i> Volver</b-button>
                     </b-card-body> 
                  </b-card>
-
-
-
-
-              
-                
-              
-               
+   
             </div>
        </div>
-       
     </div>
 </template>
 
