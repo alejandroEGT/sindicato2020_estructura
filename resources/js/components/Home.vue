@@ -1,121 +1,67 @@
 <template>
-  <div class="row justify-center">
-    <div class="col-11 col-md-4">
-      <q-card
-        class="my-card text-white t-10"
-        style="background: radial-gradient(circle, #35a2ff 0%, #014a88 100%)"
-      >
-        <q-tabs v-model="tab" class="text-white">
-          <q-tab class="text-h6" label="Login" name="login" />
-          <q-tab class="text-h6" label="Registro" name="registro" />
-        </q-tabs>
+  
+    <b-container >
+      <b-row class="justify-content-md-center">
+        <b-col cols="12" md="5">
+          <b-card no-body>
+            <b-card-header :style="header_color" >
+              ADMIN - LOGIN
+            </b-card-header>
 
-        <q-tab-panels v-model="tab" animated>
-          <q-tab-panel name="login">
-            <q-input
-              v-model="email"
-              label="Ingrese su correo"
-              outlined
-              counter
-              maxlength="100"
-              type="email"
-            />
-            <q-input
-              v-model="password"
-              outlined
-              counter
-              maxlength="25"
-              label="Ingrese su contraseña"
-              :type="isPwd ? 'password' : 'text'"
-            >
-              <template v-slot:append>
-                <q-icon
-                  :name="isPwd ? 'visibility_off' : 'visibility'"
-                  class="cursor-pointer"
-                  @click="isPwd = !isPwd"
-                />
-              </template>
-            </q-input>
-            <br />
-            <q-card-actions align="right">
-              <q-btn
-                class="content-center"
-                color="primary"
+            <b-card-body class="text-center">
+              <b-form-input v-model="email" size="sm" placeholder="Ingrese su rut"></b-form-input>
+              <br>
+              <b-form-input v-model="password" type="password"  size="sm" placeholder="Ingrese su contraseña"></b-form-input>
+              <br>
+              <b-button href="#" 
+                variant="primary" :loading="loading1"
+                    @click="simulateProgress(1),login()">Entrar</b-button>
+            </b-card-body>
+          </b-card>
+
+          <br>
+          
+            <b-card no-body>
+            <b-card-header :style="header_color" >
+              SOCIO - LOGIN
+            </b-card-header>
+
+            <b-card-body class="text-center">
+              <b-form-input v-model="email2" size="sm" placeholder="Ingrese su rut"></b-form-input>
+              <br>
+              <b-form-input v-model="password2" type="password"  size="sm" placeholder="Ingrese su contraseña"></b-form-input>
+              <br>
+              <b-button href="#" 
+                variant="primary" :loading="loading1"
+                    @click="simulateProgress(1),login2()">Entrar</b-button>
+            </b-card-body>
+          
+            </b-card>
+
+            
+          
+
+          
+        </b-col>
+      </b-row>
+      <br><br><br><br><br>
+    </b-container>
+  
+</template>
+
                 :loading="loading1"
                 @click="simulateProgress(1),login()"
-                icon-right="mail"
-                label="Ingresar"
-              >
-                <template v-slot:loading>
-                  <q-spinner-facebook />
-                </template>
-              </q-btn>
-            </q-card-actions>
 
-            <!--  </q-card-section> -->
-          </q-tab-panel>
 
-          <q-tab-panel name="registro">
-            <q-input
-              v-model="nombre"
-              label="Ingrese su nombre"
-              outlined
-              counter
-              maxlength="100"
-              type="text"
-            />
-            <q-input
-              v-model="email"
-              label="Ingrese su correo"
-              outlined
-              counter
-              maxlength="100"
-              type="email"
-            />
-            <q-input
-              v-model="password"
-              outlined
-              counter
-              maxlength="25"
-              label="Ingrese su contraseña"
-              :type="isPwd ? 'password' : 'text'"
-            >
-              <template v-slot:append>
-                <q-icon
-                  :name="isPwd ? 'visibility_off' : 'visibility'"
-                  class="cursor-pointer"
-                  @click="isPwd = !isPwd"
-                />
-              </template>
-            </q-input>
-            <br />
-
-            <q-card-actions align="right">
-              <q-btn
-                class="content-center"
-                color="primary"
                 :loading="loading2"
                 @click="simulateProgress(2),registrar()"
-                icon-right="mail"
-                label="Registrarse"
-              >
-                <template v-slot:loading>
-                  <q-spinner-facebook />
-                </template>
-              </q-btn>
-            </q-card-actions>
-          </q-tab-panel>
-        </q-tab-panels>
-      </q-card>
-    </div>
-  </div>
-</template>
 
 <script>
 export default {
   name: "Media",
   data() {
     return {
+      header_color:"color:white; background: rgb(0,0,0);background: linear-gradient(90deg, rgba(0,0,0,0.7413340336134453) 0%, rgba(4,8,9,1) 9%, rgba(46,39,96,1) 90%);",
       nombre: "",
       email: "",
       password: "",
@@ -123,7 +69,9 @@ export default {
       tab: "login",
       isPwd: true,
       loading1: false,
-      loading2: false
+      loading2: false,
+      email2: "",
+      password2: "",
     };
   },
 
@@ -142,6 +90,21 @@ export default {
         error: function() {},
         rememberMe: true,
         redirect: "/index",
+        fetchUser: true
+      });
+    },
+
+    login2() {
+      var app = this;
+      this.$auth.login({
+        params: {
+          email: app.email2,
+          password: app.password2
+        },
+        success: function() {},
+        error: function() {},
+        rememberMe: true,
+        redirect: "/index_socio",
         fetchUser: true
       });
     },
@@ -168,3 +131,7 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+  $kkck: red;
+</style>

@@ -37,12 +37,7 @@ import VueAxios from 'vue-axios';
 import App from './App.vue';
 Vue.use(VueAxios, axios);
 
-// import VueMaterial from 'vue-material'
-// import 'vue-material/dist/vue-material.min.css'
 
-import VueAuth from '@websanova/vue-auth'
-
-// Vue.use(VueMaterial)
 
 import "quasar-extras/material-icons"
 import "quasar-extras/fontawesome"
@@ -55,6 +50,25 @@ import Quasar, * as All from 'quasar/dist/quasar.umd'
 require('quasar/dist/quasar.css');
 
 import langDe from 'quasar/dist/lang/es.umd.min.js'
+
+
+
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+
+// Install BootstrapVue
+Vue.use(BootstrapVue)
+// Optionally install the BootstrapVue icon components plugin
+Vue.use(IconsPlugin)
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+
+// import VueMaterial from 'vue-material'
+// import 'vue-material/dist/vue-material.min.css'
+
+import VueAuth from '@websanova/vue-auth'
+
+// Vue.use(VueMaterial)
+
 
 
 import VModal from 'vue-js-modal'
@@ -98,7 +112,7 @@ Vue.use(require('@websanova/vue-auth'), {
    auth: require('@websanova/vue-auth/drivers/auth/bearer.js'),
    http: require('@websanova/vue-auth/drivers/http/axios.1.x.js'),
    router: require('@websanova/vue-auth/drivers/router/vue-router.2.x.js'),
-   rolesVar: 'type',//aqui va la columna rol de users
+   rolesVar: 'rol',//aqui va la columna rol de users
    loginData: {url: ' api/auth/login'},
    logoutData: {url: ' api/auth/logout'},
    fetchData: {url: ' api/auth/user'},

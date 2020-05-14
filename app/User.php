@@ -36,4 +36,23 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    protected function insertar($r)
+    {
+        $u = $this;
+        $u->name = $r->nombres.' '.$r->apellidos;
+        $u->email = $r->nombres[0].$r->apellidos[0].rand(1,9999).'@gmail.com';
+        $u->password = bcrypt('123456');
+        $u->rol = 2;
+        if ($u->save()) {
+            return [
+                'estado' => true,
+                'user' => $u
+            ];
+        }
+        return [
+            'estado' => false,
+            'user' => null
+        ];
+    }
 }

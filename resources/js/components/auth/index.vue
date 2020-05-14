@@ -4,7 +4,7 @@
     <div class="q-pa-md">
       <div class="q-gutter-sm">
       
-      <q-btn round>
+      <!-- <q-btn round>
       <q-avatar size="42px">
         <img src="https://scontent.fccp1-1.fna.fbcdn.net/v/t1.0-1/c2.0.40.40a/p40x40/69244077_2495071723872301_9078154412278415360_n.jpg?_nc_cat=102&_nc_oc=AQlmjeCvAF6D92WEjAkYQ9Q2Fi2WHuvafEZRLgxQwP7G-O46o6wd8hJ_63jCXa92bIA&_nc_ht=scontent.fccp1-1.fna&oh=44bb370b2f92430bd85a7ea32fd616ee&oe=5E62CCE1">
       </q-avatar>
@@ -39,9 +39,9 @@
               </div>
             </div>
           </q-menu>
-        </q-btn>
+        </q-btn> -->
 
-        <q-btn color="black" label="contenido">
+        <!-- <q-btn color="black" label="contenido">
         <q-menu
           transition-show="flip-right"
           transition-hide="flip-left"
@@ -62,79 +62,80 @@
             </q-item>
           </q-list>
         </q-menu>
-      </q-btn>
+      </q-btn> -->
     </div>
     </div>
 
     
     <div class="row justify-center">
-      <div class="col-12 col-md-10">
+      <div class="col-12 col-md-11">
           
           <div class="row q-col-gutter-md">
             
-                <div class="col-12 col-md-6">
-                   <q-card class="my-card">
-                      <q-img src="https://cdn.quasar.dev/img/parallax2.jpg">
-                        <div class="absolute-bottom">
-                          <div class="text-h6">Contabilidad</div>
-                          <div class="text-subtitle2">Registro de cuentas y prestamos</div>
-                        </div>
-                      </q-img>
-
-                      <q-card-actions>
-                        <q-btn flat @click="url_modulo_cuenta">Cuentas</q-btn><br>
-                        <q-btn flat @click="url_modulo_prestamos">Prestamos</q-btn><br>
-                        <q-btn flat @click="url_modulo_Liquidaciones">Liquidaciones</q-btn>
-                         <!-- <q-btn flat @click="url_modulo_prestamos">Liquidaciones</q-btn> -->
-                        <!-- <q-btn flat>Action 2</q-btn> -->
-                      </q-card-actions>
-                    </q-card>
+                <div class="col-12 col-md-4">
+                  
+                      <div @click="ruta('socios')" style="width:100%;  border:2px solid #E5E8E8; ">
+                        <q-img  style="height: 200px; max-width: 100%; "  src="https://informativohoy.com.ar/wp-content/uploads/2019/05/casadei-artesanalaes.jpg">
+                          <div class="absolute-bottom">
+                            <div class="text-h6">Socios</div>
+                            <div class="text-subtitle2">Registro y lista de socios</div>
+                          </div>
+                        </q-img>
+                      </div>
                 </div>
 
-                <div class="col-12 col-md-6">
-                   <q-card class="my-card">
-                      <q-img src="https://cdn.quasar.dev/img/parallax2.jpg">
+                <div class="col-12 col-md-4">
+                    <div @click="url_crear_cliente" style="width:100%;  border:2px solid #E5E8E8; ">
+                      <q-img  style="height: 200px; max-width: 100% "
+                      src="https://billibfinance.com/wp-content/uploads/2019/02/estado-de-flujos-de-tesorer%C3%ADa-1200x565.jpg">
                         <div class="absolute-bottom">
-                          <div class="text-h6">Clientes, empleados y proveedores</div>
-                          <div class="text-subtitle2">Registro de clientes, empleados y proveedores</div>
+                          <div class="text-h6">Tesorería</div>
+                          <div class="text-subtitle2">Registro y lista de cuentas sindicales</div>
                         </div>
                       </q-img>
+                    </div>
+                </div>
 
-                      <q-card-actions>
-                        <q-btn flat @click="url_modulo_clientes">Clientes</q-btn><br>
-                        <q-btn flat @click="url_modulo_empleados">Empleados</q-btn><br>
-                        <q-btn flat @click="url_modulo_proveedor">Proveedores</q-btn>
-
-                        <!-- <q-btn flat>Action 2</q-btn> -->
-                      </q-card-actions>
-                    </q-card>
+                <div class="col-12 col-md-4">
+                    <div @click="url_crear_cliente" style="width:100%;  border:2px solid #E5E8E8; ">
+                      <q-img 
+                      style="height: 200px; max-width: 100%; " 
+                      src="https://www.compartirpalabramaestra.org/sites/default/files/field/image/secretaria-de-educacion-y-organizaciones-sindicales-instalan-mesa-de-negociacion-2019.jpg">
+                        <div class="absolute-bottom">
+                          <div class="text-h6">Secretaría</div>
+                          <div class="text-subtitle2">Registro y lista de reuniones, actas, votaciones</div>
+                        </div>
+                      </q-img>
+                    </div>
                 </div>
 
 
           </div>
 
           <div>
-            <div class="col-12 col-md-6">
-                   <q-card class="my-card">
-                      <q-img src="https://cdn.quasar.dev/img/parallax2.jpg">
-                        <div class="absolute-bottom">
-                          <div class="text-h6">Gestión y Administración</div>
-                          <div class="text-subtitle2">Registro de reuniones, monitoreo de tareas administrativas</div>
-                        </div>
-                      </q-img>
 
-                      <q-card-actions>
-                        <q-btn flat @click="url_modulo_reunion">Reuniones</q-btn><br>
-                        <!-- <q-btn flat @click="url_modulo_proveedor">Proveedores</q-btn> -->
-
-                        <!-- <q-btn flat>Action 2</q-btn> -->
-                      </q-card-actions>
-                    </q-card>
-                </div>
-          </div>
+      </div>
 
 
       </div>
+    </div>
+
+    <div class="row justify-center">
+       <div class="col-12 col-md-11">
+          <div class="row q-col-gutter-md">
+            <div class="col-12 col-md-12">
+                    <div @click="url_crear_cliente" style="width:100%;  border:2px solid #E5E8E8; ">
+                      <q-img  style="height: 200px; max-width: 100%; "  src="https://informativohoy.com.ar/wp-content/uploads/2019/05/casadei-artesanalaes.jpg">
+                        <div class="absolute-bottom">
+                          <div class="text-h6">Administracion / configuración</div>
+                          <div class="text-subtitle2">Configuraciones internas de la compañia</div>
+                        </div>
+                      </q-img>
+                    </div>
+            </div>
+            
+          </div>
+       </div>
     </div>
    
   
@@ -222,7 +223,11 @@ export default {
        },
        url_modulo_empleados(){
          this.$router.push('/modulo-empleados');
-       }
+       },
+
+       ruta(ruta){
+        this.$router.push('/'+ruta);
+      },
 
 
     // async onCapture () {

@@ -39,5 +39,12 @@
 	
 	Route::post('insertar_empleado','EmpleadosController@insertar');
 
+	//SINDICATO
+
+	Route::post('insertar_socio','SocioController@insertar_socio');
+	Route::get('listar_socios/{buscar?}','SocioController@listar_socios');
+	Route::get('listar_socio/{buscar?}','SocioController@listar_socio');
+	Route::get('entorno_familiar','SocioController@entorno_familiar');
+
 	
  ?>
