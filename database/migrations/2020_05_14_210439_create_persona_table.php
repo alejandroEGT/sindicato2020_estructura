@@ -21,14 +21,14 @@ class CreatePersonaTable extends Migration
             $table->text('apellidos');
             $table->string('rut');
             $table->date('fecha_nacimiento');
-            $table->text('dirección');
+            $table->text('direccion');
             $table->text('celular');
             $table->text('certificado_conyuge')->nullable();
             $table->char('beneficiario', 1)->nullable();
-            $table->integer('orden_beneficiario');
+            $table->integer('orden_beneficiario')->nullable();
             $table->char('carga', 1)->nullable();
             $table->text('certificado_carga')->nullable();
-            $table->char('activo');
+            $table->char('activo',1);
             $table->timestamps();
         });
     }

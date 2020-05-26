@@ -1,107 +1,13 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[1],{
 
-/***/ "./node_modules/quasar/lang/bg.js":
-/*!****************************************!*\
-  !*** ./node_modules/quasar/lang/bg.js ***!
-  \****************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ "./node_modules/dr-vue-echarts/theme/purple-passion.json":
+/*!***************************************************************!*\
+  !*** ./node_modules/dr-vue-echarts/theme/purple-passion.json ***!
+  \***************************************************************/
+/*! exports provided: color, backgroundColor, textStyle, title, line, radar, bar, pie, scatter, boxplot, parallel, sankey, funnel, gauge, candlestick, graph, map, geo, categoryAxis, valueAxis, logAxis, timeAxis, toolbox, legend, tooltip, timeline, visualMap, dataZoom, markPoint, default */
+/***/ (function(module) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ({
-  isoName: 'bg',
-  nativeName: 'български език',
-  label: {
-    clear: 'Изчисти',
-    ok: 'OK',
-    cancel: 'Отказ',
-    close: 'Затвори',
-    set: 'Задай',
-    select: 'Избери',
-    reset: 'Наново',
-    remove: 'Изтрий',
-    update: 'Обнови',
-    create: 'Създай',
-    search: 'Търси',
-    filter: 'Филтър',
-    refresh: 'Обнови'
-  },
-  date: {
-    days: 'Неделя_Понеделник_Вторник_Сряда_Четвъртък_Петък_Събота'.split('_'),
-    daysShort: 'Нд_Пн_Вт_Ср_Чт_Пт_Сб'.split('_'),
-    months: 'Януари_Февруари_Март_Април_Май_Юни_Юли_Август_Септември_Октомври_Ноември_Декември'.split('_'),
-    monthsShort: 'Яну_Фев_Мар_Апр_Май_Юни_Юли_Авг_Сеп_Окт_Ное_Дек'.split('_'),
-    firstDayOfWeek: 1, // 0-6, 0 - Sunday, 1 Monday, ...
-    format24h: true
-  },
-  table: {
-    noData: 'Няма данни',
-    noResults: 'Нищо не е намерено',
-    loading: 'Зареждане...',
-    selectedRecords: function (rows) {
-      return rows > 1
-        ? rows + ' избрани реда.'
-        : (rows === 0 ? 'Няма' : '1') + ' избрани редове.'
-    },
-    recordsPerPage: 'Редове на страница:',
-    allRows: 'Всички',
-    pagination: function (start, end, total) {
-      return start + '-' + end + ' от ' + total
-    },
-    columns: 'Колони'
-  },
-  editor: {
-    url: 'URL',
-    bold: 'Удебелен',
-    italic: 'Курсив',
-    strikethrough: 'Задраскан',
-    underline: 'Подчертан',
-    unorderedList: 'Неподреден списък',
-    orderedList: 'Номериран списък',
-    subscript: 'Под-редово',
-    superscript: 'Над-редово',
-    hyperlink: 'Линк',
-    toggleFullscreen: 'На цял екран',
-    quote: 'Цитат',
-    left: 'Ляво подравняване',
-    center: 'Центриране',
-    right: 'Дясно подравняване',
-    justify: 'Подравняване по ширина',
-    print: 'Отпечатване',
-    outdent: 'Намали отстъпа',
-    indent: 'Увеличи отстъпа',
-    removeFormat: 'Без форматиране',
-    formatting: 'Форматиране',
-    fontSize: 'Размер на шрифта',
-    align: 'Подравняване',
-    hr: 'Вмъкни хоризонтална линия',
-    undo: 'Отмени',
-    redo: 'Повтори',
-    header1: 'Заглавие 1',
-    header2: 'Заглавие 2',
-    header3: 'Заглавие 3',
-    header4: 'Заглавие 4',
-    header5: 'Заглавие 5',
-    header6: 'Заглавие 6',
-    paragraph: 'Параграф',
-    code: 'Код',
-    size1: 'Много малък',
-    size2: 'Малък',
-    size3: 'Нормален',
-    size4: 'Среден',
-    size5: 'Голям',
-    size6: 'Много голям',
-    size7: 'Огромен',
-    defaultFont: 'Шрифт по подразбиране',
-    viewSource: 'Виж източника'
-  },
-  tree: {
-    noNodes: 'Няма повече възли',
-    noResults: 'Нищо не е намерено'
-  }
-});
-
+module.exports = JSON.parse("{\"color\":[\"#9b8bba\",\"#e098c7\",\"#8fd3e8\",\"#71669e\",\"#cc70af\",\"#7cb4cc\"],\"backgroundColor\":\"rgba(91,92,110,1)\",\"textStyle\":{},\"title\":{\"textStyle\":{\"color\":\"#ffffff\"},\"subtextStyle\":{\"color\":\"#cccccc\"}},\"line\":{\"itemStyle\":{\"normal\":{\"borderWidth\":\"2\"}},\"lineStyle\":{\"normal\":{\"width\":\"3\"}},\"symbolSize\":\"7\",\"symbol\":\"circle\",\"smooth\":true},\"radar\":{\"itemStyle\":{\"normal\":{\"borderWidth\":\"2\"}},\"lineStyle\":{\"normal\":{\"width\":\"3\"}},\"symbolSize\":\"7\",\"symbol\":\"circle\",\"smooth\":true},\"bar\":{\"itemStyle\":{\"normal\":{\"barBorderWidth\":0,\"barBorderColor\":\"#ccc\"},\"emphasis\":{\"barBorderWidth\":0,\"barBorderColor\":\"#ccc\"}}},\"pie\":{\"itemStyle\":{\"normal\":{\"borderWidth\":0,\"borderColor\":\"#ccc\"},\"emphasis\":{\"borderWidth\":0,\"borderColor\":\"#ccc\"}}},\"scatter\":{\"itemStyle\":{\"normal\":{\"borderWidth\":0,\"borderColor\":\"#ccc\"},\"emphasis\":{\"borderWidth\":0,\"borderColor\":\"#ccc\"}}},\"boxplot\":{\"itemStyle\":{\"normal\":{\"borderWidth\":0,\"borderColor\":\"#ccc\"},\"emphasis\":{\"borderWidth\":0,\"borderColor\":\"#ccc\"}}},\"parallel\":{\"itemStyle\":{\"normal\":{\"borderWidth\":0,\"borderColor\":\"#ccc\"},\"emphasis\":{\"borderWidth\":0,\"borderColor\":\"#ccc\"}}},\"sankey\":{\"itemStyle\":{\"normal\":{\"borderWidth\":0,\"borderColor\":\"#ccc\"},\"emphasis\":{\"borderWidth\":0,\"borderColor\":\"#ccc\"}}},\"funnel\":{\"itemStyle\":{\"normal\":{\"borderWidth\":0,\"borderColor\":\"#ccc\"},\"emphasis\":{\"borderWidth\":0,\"borderColor\":\"#ccc\"}}},\"gauge\":{\"itemStyle\":{\"normal\":{\"borderWidth\":0,\"borderColor\":\"#ccc\"},\"emphasis\":{\"borderWidth\":0,\"borderColor\":\"#ccc\"}}},\"candlestick\":{\"itemStyle\":{\"normal\":{\"color\":\"#e098c7\",\"color0\":\"transparent\",\"borderColor\":\"#e098c7\",\"borderColor0\":\"#8fd3e8\",\"borderWidth\":\"2\"}}},\"graph\":{\"itemStyle\":{\"normal\":{\"borderWidth\":0,\"borderColor\":\"#ccc\"}},\"lineStyle\":{\"normal\":{\"width\":1,\"color\":\"#aaaaaa\"}},\"symbolSize\":\"7\",\"symbol\":\"circle\",\"smooth\":true,\"color\":[\"#9b8bba\",\"#e098c7\",\"#8fd3e8\",\"#71669e\",\"#cc70af\",\"#7cb4cc\"],\"label\":{\"normal\":{\"textStyle\":{\"color\":\"#eeeeee\"}}}},\"map\":{\"itemStyle\":{\"normal\":{\"areaColor\":\"#eeeeee\",\"borderColor\":\"#444444\",\"borderWidth\":0.5},\"emphasis\":{\"areaColor\":\"rgba(224,152,199,1)\",\"borderColor\":\"#444444\",\"borderWidth\":1}},\"label\":{\"normal\":{\"textStyle\":{\"color\":\"#000000\"}},\"emphasis\":{\"textStyle\":{\"color\":\"rgb(255,255,255)\"}}}},\"geo\":{\"itemStyle\":{\"normal\":{\"areaColor\":\"#eeeeee\",\"borderColor\":\"#444444\",\"borderWidth\":0.5},\"emphasis\":{\"areaColor\":\"rgba(224,152,199,1)\",\"borderColor\":\"#444444\",\"borderWidth\":1}},\"label\":{\"normal\":{\"textStyle\":{\"color\":\"#000000\"}},\"emphasis\":{\"textStyle\":{\"color\":\"rgb(255,255,255)\"}}}},\"categoryAxis\":{\"axisLine\":{\"show\":true,\"lineStyle\":{\"color\":\"#cccccc\"}},\"axisTick\":{\"show\":false,\"lineStyle\":{\"color\":\"#333\"}},\"axisLabel\":{\"show\":true,\"textStyle\":{\"color\":\"#cccccc\"}},\"splitLine\":{\"show\":false,\"lineStyle\":{\"color\":[\"#eeeeee\",\"#333333\"]}},\"splitArea\":{\"show\":true,\"areaStyle\":{\"color\":[\"rgba(250,250,250,0.05)\",\"rgba(200,200,200,0.02)\"]}}},\"valueAxis\":{\"axisLine\":{\"show\":true,\"lineStyle\":{\"color\":\"#cccccc\"}},\"axisTick\":{\"show\":false,\"lineStyle\":{\"color\":\"#333\"}},\"axisLabel\":{\"show\":true,\"textStyle\":{\"color\":\"#cccccc\"}},\"splitLine\":{\"show\":false,\"lineStyle\":{\"color\":[\"#eeeeee\",\"#333333\"]}},\"splitArea\":{\"show\":true,\"areaStyle\":{\"color\":[\"rgba(250,250,250,0.05)\",\"rgba(200,200,200,0.02)\"]}}},\"logAxis\":{\"axisLine\":{\"show\":true,\"lineStyle\":{\"color\":\"#cccccc\"}},\"axisTick\":{\"show\":false,\"lineStyle\":{\"color\":\"#333\"}},\"axisLabel\":{\"show\":true,\"textStyle\":{\"color\":\"#cccccc\"}},\"splitLine\":{\"show\":false,\"lineStyle\":{\"color\":[\"#eeeeee\",\"#333333\"]}},\"splitArea\":{\"show\":true,\"areaStyle\":{\"color\":[\"rgba(250,250,250,0.05)\",\"rgba(200,200,200,0.02)\"]}}},\"timeAxis\":{\"axisLine\":{\"show\":true,\"lineStyle\":{\"color\":\"#cccccc\"}},\"axisTick\":{\"show\":false,\"lineStyle\":{\"color\":\"#333\"}},\"axisLabel\":{\"show\":true,\"textStyle\":{\"color\":\"#cccccc\"}},\"splitLine\":{\"show\":false,\"lineStyle\":{\"color\":[\"#eeeeee\",\"#333333\"]}},\"splitArea\":{\"show\":true,\"areaStyle\":{\"color\":[\"rgba(250,250,250,0.05)\",\"rgba(200,200,200,0.02)\"]}}},\"toolbox\":{\"iconStyle\":{\"normal\":{\"borderColor\":\"#999999\"},\"emphasis\":{\"borderColor\":\"#666666\"}}},\"legend\":{\"textStyle\":{\"color\":\"#cccccc\"}},\"tooltip\":{\"axisPointer\":{\"lineStyle\":{\"color\":\"#cccccc\",\"width\":1},\"crossStyle\":{\"color\":\"#cccccc\",\"width\":1}}},\"timeline\":{\"lineStyle\":{\"color\":\"#8fd3e8\",\"width\":1},\"itemStyle\":{\"normal\":{\"color\":\"#8fd3e8\",\"borderWidth\":1},\"emphasis\":{\"color\":\"#8fd3e8\"}},\"controlStyle\":{\"normal\":{\"color\":\"#8fd3e8\",\"borderColor\":\"#8fd3e8\",\"borderWidth\":0.5},\"emphasis\":{\"color\":\"#8fd3e8\",\"borderColor\":\"#8fd3e8\",\"borderWidth\":0.5}},\"checkpointStyle\":{\"color\":\"#8fd3e8\",\"borderColor\":\"rgba(138,124,168,0.37)\"},\"label\":{\"normal\":{\"textStyle\":{\"color\":\"#8fd3e8\"}},\"emphasis\":{\"textStyle\":{\"color\":\"#8fd3e8\"}}}},\"visualMap\":{\"color\":[\"#8a7ca8\",\"#e098c7\",\"#cceffa\"]},\"dataZoom\":{\"backgroundColor\":\"rgba(0,0,0,0)\",\"dataBackgroundColor\":\"rgba(255,255,255,0.3)\",\"fillerColor\":\"rgba(167,183,204,0.4)\",\"handleColor\":\"#a7b7cc\",\"handleSize\":\"100%\",\"textStyle\":{\"color\":\"#333333\"}},\"markPoint\":{\"label\":{\"normal\":{\"textStyle\":{\"color\":\"#eeeeee\"}},\"emphasis\":{\"textStyle\":{\"color\":\"#eeeeee\"}}}}}");
 
 /***/ })
 

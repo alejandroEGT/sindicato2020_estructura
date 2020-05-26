@@ -36,4 +36,20 @@ class SocioController extends Controller
 
         ];
     }
+
+    public function listar_socio_id($id)
+    {
+       
+        $socio = Socio::find($id);
+        if ($socio) {
+            return [
+                'estado' => 'success',
+                'socio' => $socio
+            ];
+        }
+        return [
+                'estado' => 'failed',
+                'socio' => null
+            ];
+    }
 }

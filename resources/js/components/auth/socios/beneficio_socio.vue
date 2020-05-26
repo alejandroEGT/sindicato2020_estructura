@@ -9,6 +9,7 @@
                     LISTAR SOCIOS
                     </b-card-header>
                     <b-card-body>
+                          <form  enctype="multipart/form-data">
                          <b-row>
                             <b-col cols="12" md="12">
                                 <label for="">Rut o nombre completo del socio:</label>
@@ -40,7 +41,7 @@
                                     </td>
                                     <td style="color:#1F618D">Rut:</td>
                                     <td style="#CCD1D1">
-                                        {{ rut }}
+                                        {{ g_rut }}
                                     </td>
                                     <!-- <td style="color:#1F618D">Email:</td>
                                     <td style="#CCD1D1">
@@ -49,7 +50,7 @@
 
                                     <td style="color:#1F618D">Vista:</td>
                                     <td style="#CCD1D1">
-                                        <b-button size="sm" variant="info"><i class="fas fa-list-alt"></i> Personas asociadas</b-button>
+                                        <b-button @click="url_params('personas_socios',{id:socio_id})" size="sm" variant="info"><i class="fas fa-list-alt"></i> Personas asociadas</b-button>
                                     </td>
                                 </tr>
                                 <!-- <tr :style="header_color">
@@ -72,6 +73,7 @@
                             value-field="id"
                             text-field="nombre"
                             size="sm"
+                            @change="familiar_cambio"
                             >
                             <template  v-slot:first>
                                 <b-form-select-option :value="''">--Seleccione tipo de familiar--</b-form-select-option>
@@ -118,7 +120,7 @@
                         <div class="row">
                             <div v-if="fam=='1'" class="col-md-6">
                                 <label for="">Certificado matrimonial o pareja:</label>
-                                <b-form-file v-model="certificado_matrimonio" size="sm"  placeholder="Dirección"></b-form-file>
+                                <b-form-file ref="cony" id="cony" @change="arch_cony" size="sm"  placeholder="Certificado conyuge"></b-form-file>
                             </div>
 
                             <div v-if="fam!=''" class="col-md-6">
@@ -160,14 +162,17 @@
 
                             <div class="col-md-6" v-if="exist_ch_carga"> 
                                  <label for="">Certificado de la carga:</label>
-                                <b-form-file v-model="certificado_carga" size="sm"  placeholder="seleccione certificado de la carga"></b-form-file>
+                                <b-form-file id="carga" ref="carga"  @change="arch_carga"  size="sm"  placeholder="seleccione certificado de la carga"></b-form-file>
+                            {{certificado_carga}}
                             </div>
                         
                         </div>
                         <hr>
+                        {{ 'hola: '+socio_id }}
                         <b-button @click="crear(socio_id)" size="sm" variant="primary"><i class="fas fa-save"></i> Registrar</b-button>
                         <b-button  size="sm" @click="ruta('socios')"><i class="fas fa-undo-alt"></i> Volver</b-button>
                         </div>
+                          </form>
                     </b-card-body>
                 </b-card>
         
@@ -196,6 +201,7 @@ export default {
             socio_id:'',
             nombre:'',
             rut:'',
+            g_rut:'',
             condicion:false,
 
             exist_checked:false,
@@ -231,8 +237,23 @@ export default {
         this.familiar();
     },
     methods:{
+        arch_carga(event){
+            console.log(event.target.files[0]);
+            this.certificado_carga = event.target.files[0];
+        },
+        arch_cony(event){
+            console.log(event.target.files[0]);
+            this.certificado_matrimonio = event.target.files[0];
+        },
         ruta(ruta){
             this.$router.push('/'+ruta);
+        },
+         url_params(name, json){
+    		this.$router.push({name:name, params:json}).catch(error => {
+			  if (error.name != "NavigationDuplicated") {
+			    throw error;
+			  }
+			});
         },
 
         listar(){
@@ -242,9 +263,9 @@ export default {
                 if (res.data.estado =='success') {
                     this.socio = res.data.tabla;
                     this.nombre = this.socio.nombres+' '+this.socio.apellidos;
-                    this.rut = this.socio.rut;
+                    this.g_rut = this.socio.rut;
                     this.condicion = true;
-                    this.socio_id = res.data.socio_id;
+                    this.socio_id = this.socio.socio_id;
 
                 }
             });
@@ -306,25 +327,71 @@ export default {
             console.log(this.becana);
         },
         crear(socio_id){//registrar persona
-            const data = {
-                 socio_id: socio_id,
-                 familiar: this.fam,
-                 nombres: this.nombres, 
-                 apellidos: this.apellidos, 
-                 rut: this.rut,
-                 direccion: this.direccion,
-                 fecha_nacimiento: this.fecha_nacimiento,
-                 celular: this.celular,
-                 certificado_matrimonio:null,
-                 certificado_carga:null,
-                 orden_beneficio: this.beneficio,
-                 becana: this.becana
+            console.log(this.certificado_carga);
+            
+            const data = new FormData();
+            data.append('socio_id', this.socio_id);
+            data.append('familiar', this.fam);
+            data.append('nombres', this.nombres);
+            data.append('apellidos', this.apellidos);
+            data.append('rut', this.rut);
+            data.append('direccion', this.direccion);
+            data.append('fecha_nacimiento', this.fecha_nacimiento);
+            data.append('celular', this.celular);
+            data.append('certificado_matrimonio',this.certificado_matrimonio);
+            data.append('certificado_carga', this.certificado_carga);
+            data.append('orden_beneficio', this.beneficio);
+            data.append('becana', this.becana);
 
-            };
-
+           
             axios.post("api/crear_persona", data).then((res)=>{
+                if(res.data.estado == 'success'){
+                    this.$q.notify({
+                        color: "green-4",
+                        textColor: "white",
+                        icon: "cloud_done",
+                        message: ""+res.data.mensaje+""
+                    });
 
+                    this.fam ='';
+                    this.limpiar();
+                }else{
+                    this.$q.notify({
+                        color: "red-4",
+                        textColor: "white",
+                        icon: "cloud_done",
+                        message: ""+res.data.mensaje+""
+                    });
+                }
             });
+        },
+        familiar_cambio(){
+            console.log("limpiando..")
+            this.certificado_carga =null;
+            this.certificado_matrimonio =null;
+
+           
+            $("#cony").val(null).clone(true);;
+            $("#carga").val(null).clone(true);;
+
+            this.$refs.carga.reset();
+            // this.$refs.cony.reset();
+            // this.$refs.carga.reset();
+        },
+
+        limpiar(){
+            this.certificado_carga =null;
+            this.certificado_matrimonio =null;
+            // this.socio_id = '';
+            this.fam = '';
+            this.nombres = '';
+            this.apellidos = '';
+            this.rut = '';
+            this.direccion = '';
+            this.fecha_nacimiento = '';
+            this.celular = '';
+            this.beneficio = '';
+            this.becana = [];
         }
     }
 }

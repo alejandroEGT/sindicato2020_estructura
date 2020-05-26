@@ -97,7 +97,7 @@
                 </div>
 
                 <div class="col-12 col-md-4">
-                    <div @click="url_crear_cliente" style="width:100%;  border:2px solid #E5E8E8; ">
+                    <div @click="ruta('secretaria')" style="width:100%;  border:2px solid #E5E8E8; ">
                       <q-img 
                       style="height: 200px; max-width: 100%; " 
                       src="https://www.compartirpalabramaestra.org/sites/default/files/field/image/secretaria-de-educacion-y-organizaciones-sindicales-instalan-mesa-de-negociacion-2019.jpg">

@@ -44,7 +44,19 @@
 	Route::post('insertar_socio','SocioController@insertar_socio');
 	Route::get('listar_socios/{buscar?}','SocioController@listar_socios');
 	Route::get('listar_socio/{buscar?}','SocioController@listar_socio');
+	Route::get('listar_socio_id/{id}','SocioController@listar_socio_id');
 	Route::get('entorno_familiar','SocioController@entorno_familiar');
 	Route::post('crear_persona','PersonaController@crear_persona');
+	Route::get('listar_personas/{socio}','PersonaController@listar_personas');
+	Route::post('insertar_tema_votacion','SecretariaController@insertar_tema_votacion');
+	Route::get('listar_tema_votacion','SecretariaController@listar_tema_votacion');
+
+
+	//SOCIOS
+
+	Route::post('votar','VotarController@votar');
+	Route::get('obtener_votos/{id}','VotarController@obtener_votos');
+	
+	
 	
  ?>

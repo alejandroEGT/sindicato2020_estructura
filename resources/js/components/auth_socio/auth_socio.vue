@@ -2,14 +2,16 @@
    <template>
   <div  v-if="$auth.check()">
     
-     <q-bar dark class="bg-primary text-white">
-      
+     <b-navbar style="background: rgb(0,0,0);
+  background: linear-gradient(90deg, rgba(0,0,0,0.7413340336134453) 0%, rgba(4,8,9,1) 9%, rgba(46,39,96,1) 90%);">
+    <b-nav-form>
       <div class="col text-center text-weight-bold">
         <b-button class="float-left" size="sm" @click="logout" variant="primary">Salir</b-button>
-         <label style="font-size:13px; margin-top:6px" class="float-left"> | Alejandro Godoy</label>
-       <label style="margin-top:6px">SINDICATO SOCIOS</label>
+         <label style="font-size:13px; margin-top:6px; color:#fff" class="float-left"> | Socio -> Alejandro Godoy</label>
+       
       </div>
-    </q-bar>
+    </b-nav-form>
+  </b-navbar>
 
     
   

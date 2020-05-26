@@ -16,11 +16,13 @@
         <script>
           Quasar.lang.set(Quasar.lang.de)
         </script> --}}
+        
     </head>
     <body>
         <div id="app">
         
         </div>
+        
         <script src="{{ mix('js/app.js') }}" type="text/javascript"></script>
     </body>
 </html>

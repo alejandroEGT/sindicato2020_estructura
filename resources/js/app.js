@@ -62,6 +62,10 @@ Vue.use(IconsPlugin)
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
+import { Bar } from 'vue-chartjs'
+Vue.use(Bar)
+
+
 // import VueMaterial from 'vue-material'
 // import 'vue-material/dist/vue-material.min.css'
 

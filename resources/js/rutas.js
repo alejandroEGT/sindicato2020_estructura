@@ -26,12 +26,20 @@ import Socios from './components/auth/socios/socios.vue';
 import crear_socios from './components/auth/socios/crear_socio.vue';
 import listar_socios from './components/auth/socios/listar_socios.vue';
 import beneficio_socios from './components/auth/socios/beneficio_socio.vue';
+import personas_socios from "./components/auth/socios/personas_socios.vue";
+import secretaria from "./components/auth/secretaria/secretaria.vue";
+import crear_tema_votacion from "./components/auth/secretaria/crear_tema_votacion.vue";
+import listar_tema_votacion from "./components/auth/secretaria/listar_tema_votacion.vue";
 // import crearCuenta from './components/auth/cuentas/crearCuenta.vue';
 // import listarCuenta from './components/auth/cuentas/listarCuenta.vue';
 
 // beneficio_sociossocio
 import AuthSocio from "./components/auth_socio/auth_socio.vue";
 import IndexSocio from "./components/auth_socio/index_socio.vue";
+import s_secretaria from "./components/auth_socio/secretaria/secretaria.vue"
+import s_listar_tema_votacion from "./components/auth_socio/secretaria/s_listar_tema_votacion.vue"
+
+// import { Component } from 'react';
 
 const routes = [
   {
@@ -79,7 +87,10 @@ const routes = [
       { path: '/crear_socios', component: crear_socios, name: 'crear_socios' },
       { path: '/listar_socios', component: listar_socios, name: 'listar_socios' },
       { path: '/beneficio_socios', component: beneficio_socios, name: 'beneficio_socios' },
-
+      { path: '/personas_socios/:id', component: personas_socios, name: 'personas_socios' },
+      { path: '/secretaria', component: secretaria, name: 'secretaria' },
+      { path: '/crear_tema_votacion', component: crear_tema_votacion, name: 'crear_tema_votacion' },
+      { path: '/listar_tema_votacion', component: listar_tema_votacion, name: 'listar_tema_votacion' },
     ]
   },
 
@@ -98,6 +109,14 @@ const routes = [
       //socios
       { path: '/socios_xx', component: Socios, name: 'socios' },
       { path: '/crear_socios', component: crear_socios, name: 'crear_socios' },
+      { path: '/s_secretaria', component: s_secretaria, name: 's_secretaria' },
+      { path: '/s_listar_tema_votacion', component: s_listar_tema_votacion, name: 's_listar_tema_votacion' },
+      
+
+     
+  
+
+      // { path: '/personas_socios/:id', component: personas_socios, name: 'personas_socios' },
       
 
     ]
