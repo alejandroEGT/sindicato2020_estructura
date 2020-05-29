@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Votaciones;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -45,21 +46,27 @@ class VotarController extends Controller
             'votacion'=>'MA'
         ])->count();
 
+        $socios = User::where('rol','2')
+                    ->orWhere('rol','3')
+                    ->count();  
+        
+        $null = $socios - $a - $r - $ma;
+
         return [
             'labels' => [
                         'Apruebo: '.$a,
                         'Rechazo: '.$r,
                         'Me abstengo: '.$ma,
-                        'nulo: '.(10)
+                        'nulo: '.($null)
                        
             ],
             'datasets' =>[
                
                 [
                     'label' => 'Ocupaciones',
-                    'backgroundColor' => ['#58D68D','#EC7063'],
+                    'backgroundColor' => ['#58D68D','#EC7063', '#7F8C8D'],
                     'data' => [ 
-                                $a, $r, $ma, 10
+                                $a, $r, $ma, $null
                                ]
                 ]
             ]

@@ -72,7 +72,12 @@
                                        {{ t.votacion }}</label></td>
                                <!--   <td :style="border">{{ t.fecha_egreso }}</td> -->
                                <td :style="border">
-                                   <b-button size="sm" pill ><i class="fas fa-pencil-alt"></i> Editar</b-button>
+                                   <p><b-button @click="fillData(t.id)" size="sm" variant="light" v-b-modal="'graf'+i"><i class="fas fa-chart-pie"></i> Estado</b-button></p>
+
+                                   <b-modal hide-footer size="md" :id="'graf'+i" :title="t.titulo">
+                                         <line-chart :chart-data="datacollection"></line-chart>
+
+                                    </b-modal>
                                </td>
                            </tr>
                        </table>
@@ -88,7 +93,11 @@
 </template>
 
 <script>
+import LineChart from '../../auth_socio/secretaria/LineChart.js'
 export default {
+    components: {
+      LineChart
+    },
     data(){
         return{
             header_color:"border:1px solid #A6ACAF; color:white; background: rgb(0,0,0);background: linear-gradient(90deg, rgba(0,0,0,0.7413340336134453) 0%, rgba(4,8,9,1) 9%, rgba(46,39,96,1) 90%);",
@@ -99,7 +108,10 @@ export default {
             select_tema:'',
             select_votacion:'',
             buscar:'',
-            tabla:[]
+            tabla:[],
+
+            tema_id:'',
+            datacollection: null
         }
     },
     created(){
@@ -118,7 +130,16 @@ export default {
                     this.tabla = res.data.tabla
                 }
             });
-        }
+        },
+
+        fillData (id) {
+       
+        
+            axios.get('api/obtener_votos/'+id).then((res)=>{
+                this.datacollection = res.data
+                console.log(this.datacollection);
+            })
+        },
     }
 }
 </script>
