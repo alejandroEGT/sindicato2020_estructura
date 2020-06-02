@@ -85,7 +85,7 @@
                 </div>
 
                 <div class="col-12 col-md-4">
-                    <div @click="url_crear_cliente" style="width:100%;  border:2px solid #E5E8E8; ">
+                    <div @click="url_modulo_cuenta" style="width:100%;  border:2px solid #E5E8E8; ">
                       <q-img  style="height: 200px; max-width: 100% "
                       src="https://billibfinance.com/wp-content/uploads/2019/02/estado-de-flujos-de-tesorer%C3%ADa-1200x565.jpg">
                         <div class="absolute-bottom">

@@ -25,12 +25,12 @@ let routes_empa = [
     iconCls: 'el-icon-message',
     meta: { auth: true },
     children: [
-        { path: '/modulo-cuentas', component: ModuloCuentas, name: 'ModuloCuentas' },
+        // { path: '/modulo-cuentas', component: ModuloCuentas, name: 'ModuloCuentas' },
         { path: '/modulo-liquidaciones', component: Liquidaciones, name: 'Liquidaciones' },
         { path: '/modulo-empleados', component: ModuloEmpleados, name: 'ModuloEmpleados' },
         //aqui las rutas con permiso de auth
-        { path: '/crear-cuenta', component: CrearCuenta, name: 'CrearCuenta' },
-        { path: '/listar-cuenta', component: ListarCuenta, name: 'ListarCuenta' },
+        // { path: '/crear-cuenta', component: CrearCuenta, name: 'CrearCuenta' },
+        // { path: '/listar-cuenta', component: ListarCuenta, name: 'ListarCuenta' },
         { path: '/formulario-cuenta', component: Formulario, name: 'Formulario' },
         { path: '/formulario-liquidaciones', component: FormularioLiq, name: 'FormularioLiq' },
         { path: '/detalle-haberes-descuentos', component: Detalle_H_D, name: 'Detalle_H_D' },
