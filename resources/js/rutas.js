@@ -26,6 +26,7 @@ import Socios from './components/auth/socios/socios.vue';
 import crear_socios from './components/auth/socios/crear_socio.vue';
 import listar_socios from './components/auth/socios/listar_socios.vue';
 import beneficio_socios from './components/auth/socios/beneficio_socio.vue';
+import Entrega_beneficio from "./components/auth/socios/entrega_beneficio.vue";
 import personas_socios from "./components/auth/socios/personas_socios.vue";
 import secretaria from "./components/auth/secretaria/secretaria.vue";
 import crear_tema_votacion from "./components/auth/secretaria/crear_tema_votacion.vue";
@@ -34,15 +35,19 @@ import Cuenta from "./components/auth/cuentas/cuentas_vue/modulo_cuentas.vue"
 
 import CrearCuenta from "./components/auth/cuentas/cuentas_vue/crear_cuenta.vue";
 // import crearCuenta from './components/auth/cuentas/crearCuenta.vue';
- import ListarCuenta from './components/auth/cuentas/listarCuenta.vue';
+ import ListarCuenta from './components/auth/cuentas/cuentas_vue/listar_cuenta.vue';
 
 // beneficio_sociossocio
 import AuthSocio from "./components/auth_socio/auth_socio.vue";
 import IndexSocio from "./components/auth_socio/index_socio.vue";
+
+
+
+
 //socio
 import s_secretaria from "./components/auth_socio/secretaria/secretaria.vue"
 import s_listar_tema_votacion from "./components/auth_socio/secretaria/s_listar_tema_votacion.vue"
-
+import Cuentas from "./components/auth_socio/tesoreria/cuentas.vue"
 // import { Component } from 'react';
 
 const routes = [
@@ -92,6 +97,7 @@ const routes = [
       { path: '/listar_socios', component: listar_socios, name: 'listar_socios' },
       { path: '/beneficio_socios', component: beneficio_socios, name: 'beneficio_socios' },
       { path: '/personas_socios/:id', component: personas_socios, name: 'personas_socios' },
+      { path: '/entrega_beneficio/:id', component: Entrega_beneficio, name: 'entrega_beneficio' },
       { path: '/secretaria', component: secretaria, name: 'secretaria' },
       { path: '/crear_tema_votacion', component: crear_tema_votacion, name: 'crear_tema_votacion' },
       { path: '/listar_tema_votacion', component: listar_tema_votacion, name: 'listar_tema_votacion' },
@@ -102,6 +108,11 @@ const routes = [
       { path: '/listar-cuenta', component: ListarCuenta, name: 'ListarCuenta' },
     ]
   },
+
+
+
+
+
 
  //PORTAL SOCIO
   {
@@ -120,6 +131,7 @@ const routes = [
       { path: '/crear_socios', component: crear_socios, name: 'crear_socios' },
       { path: '/s_secretaria', component: s_secretaria, name: 's_secretaria' },
       { path: '/s_listar_tema_votacion', component: s_listar_tema_votacion, name: 's_listar_tema_votacion' },
+      { path: '/Cuentas', component: Cuentas, name: 'cuentas' },
       
 
      

@@ -32,7 +32,7 @@
                             <b-col cols="12" md="10">
                                 <table class="table table-striped table-bordered" >
                                     <tr :style="header_color">
-                                        <td colspan="6"><center>Resultado de busqueda del socio</center></td>
+                                        <td colspan="8"><center>Resultado de busqueda del socio</center></td>
                                     </tr>
                                 <tr >
                                     <td style="color:#1F618D">Nombre:</td>
@@ -51,6 +51,12 @@
                                     <td style="color:#1F618D">Vista:</td>
                                     <td style="#CCD1D1">
                                         <b-button @click="url_params('personas_socios',{id:socio_id})" size="sm" variant="info"><i class="fas fa-list-alt"></i> Personas asociadas</b-button>
+                                    </td>
+
+                                    <td style="color:#1F618D">Entrega:</td>
+                                    <td style="#CCD1D1">
+                                         <b-button @click="url_params('entrega_beneficio',{id:socio_id})" size="sm"
+                                     variant="primary"><i class="fas fa-hand-holding-usd"></i> Beneficio</b-button>
                                     </td>
                                 </tr>
                                 <!-- <tr :style="header_color">
@@ -163,12 +169,12 @@
                             <div class="col-md-6" v-if="exist_ch_carga"> 
                                  <label for="">Certificado de la carga:</label>
                                 <b-form-file id="carga" ref="carga"  @change="arch_carga"  size="sm"  placeholder="seleccione certificado de la carga"></b-form-file>
-                            {{certificado_carga}}
+                            <!-- {{certificado_carga}} -->
                             </div>
                         
                         </div>
                         <hr>
-                        {{ 'hola: '+socio_id }}
+                       
                         <b-button @click="crear(socio_id)" size="sm" variant="primary"><i class="fas fa-save"></i> Registrar</b-button>
                         <b-button  size="sm" @click="ruta('socios')"><i class="fas fa-undo-alt"></i> Volver</b-button>
                         </div>

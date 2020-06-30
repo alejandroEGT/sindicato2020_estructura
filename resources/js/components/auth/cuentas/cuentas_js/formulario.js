@@ -1,14 +1,15 @@
 export default{
 	data(){
 		return{
-			cuenta_id: null,
+			header_color: "color:white; background: rgb(0,0,0);background: linear-gradient(90deg, rgba(0,0,0,0.7413340336134453) 0%, rgba(4,8,9,1) 9%, rgba(46,39,96,1) 90%);",
+			cuenta_id: '',
 			loading2: false,
 			fecha:'', codigo:'', descripcion:'', monto:'', file:null,
       		options:[],
       		tipo_monto_id:'',
       		subcuenta:'',
       		subcuentas:[],
-
+			load:false,
 
 
 		}
@@ -34,11 +35,13 @@ export default{
 	    },
 
 	    change_cuenta(dos){
-	    	this[`loading${dos}`] = true
-	    	axios.get('api/traer_subcuenta/'+this.cuenta_id.id).then((res)=>{
+			this[`loading${dos}`] = true
+			this.load = true;
+	    	axios.get('api/traer_subcuenta/'+this.cuenta_id).then((res)=>{
 	          if (res.data.estado=='success') {
 	          	 this.subcuentas = res.data.lista;
-	          	 this[`loading${dos}`] = false
+				   this[`loading${dos}`] = false;
+				  this.load = false;
 	          }
 	          
 	      	});
@@ -46,12 +49,12 @@ export default{
 
 	    guardar(){
 	    	const data = new FormData();
-	    	data.append('cuenta_id', this.cuenta_id.id);
+	    	data.append('cuenta_id', this.cuenta_id);
 	    	data.append('fecha', this.fecha);
 	    	data.append('codigo', this.codigo);
 	    	data.append('descripcion', this.descripcion);
-	    	data.append('sub_cuenta_id', this.subcuenta.id);
-	    	data.append('tipo_monto_id', this.tipo_monto_id.id);
+	    	data.append('sub_cuenta_id', this.subcuenta);
+	    	data.append('tipo_monto_id', this.tipo_monto_id);
 	    	data.append('archivo', this.file);
 	    	data.append('monto', this.monto);
 
@@ -65,14 +68,22 @@ export default{
 					  message: "" + res.data.mensaje + ""
 				  });
 				  this.limpiar_mdelos();
-	          }
+			  }
+			  if (res.data.estado=='failed') {
+				  this.$q.notify({
+					  color: "danger-4",
+					  textColor: "white",
+					  icon: "cloud_done",
+					  message: "" + res.data.mensaje + ""
+				  });
+			  }
 	          
 	      	});
 	    	
 		},
 		
 		limpiar_mdelos(){
-			this.cuenta_id = null;
+			this.cuenta_id = '';
 			this.fecha = '';
 			this.codigo = '';
 			this.descripcion = '';
@@ -80,7 +91,10 @@ export default{
 			this.tipo_monto_id = '';
 			this.file = null;
 			this.monto = '';
-		}
+		},
+		ruta(ruta) {
+			this.$router.push('/' + ruta);
+		},
 	   
 	}
 }

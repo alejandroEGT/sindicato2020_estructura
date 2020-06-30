@@ -32,7 +32,7 @@
                                <td>
                                    <!-- <b-button @click="buscar='';listar()" size="sm" variant="info"><i class="fas fa-sync-alt"></i> Refrezcar</b-button> -->
                                </td>
-                               <td>
+                               <td colspan="2">
                                    <b-button size="sm" @click="ruta('secretaria')"><i class="fas fa-undo-alt"></i> Volver</b-button>
                                </td>
                                <td colspan="3"></td>
@@ -45,7 +45,8 @@
                                <td>Estado Tema</td>
                                <td>Estado Votacion</td>
                               
-                               <td>Opción</td>
+                               <td colspan="2">Opción</td>
+                              
                            </tr>
 
                            <tr :style="tr_style" v-for="(t,i) in tabla" :key='t.id' >
@@ -74,9 +75,41 @@
                                <td :style="border">
                                    <p><b-button @click="fillData(t.id)" size="sm" variant="light" v-b-modal="'graf'+i"><i class="fas fa-chart-pie"></i> Estado</b-button></p>
 
-                                   <b-modal hide-footer size="md" :id="'graf'+i" :title="t.titulo">
+                                   <b-modal header-bg-variant="dark"
+                                   header-text-variant="white"
+                                   hide-footer   size="md" :id="'graf'+i" :title="t.titulo">
                                          <line-chart :chart-data="datacollection"></line-chart>
 
+                                    </b-modal>
+                               </td>
+
+                               <td :style="border">
+                                   <p><b-button @click="fillData2(t.id)" size="sm" variant="light" v-b-modal="'graf2'+i"><i class="fas fa-toolbox"></i>Opción</b-button></p>
+
+                                   <b-modal header-bg-variant="dark"
+                                   header-text-variant="white"
+                                   hide-footer  size="md" :id="'graf2'+i" :title="'Opción'">
+                                        
+                                         <label>Apruebo: {{votos.apruebo}}</label>
+                                         <b-progress :value="votos.apruebo" :max="votos.socios" variant="success" striped ></b-progress>
+                                        <br>
+                                         <label>Rechazo: {{votos.rechazo}}</label>
+                                         <b-progress :value="votos.rechazo" :max="votos.socios" variant="danger" striped  class="mt-2"></b-progress>
+                                        <br>
+                                         <label>Me abstengo: {{votos.abstengo}}</label>
+                                         <b-progress :value="votos.abstengo" :max="votos.socios" variant="dark" striped  class="mt-2"></b-progress>
+                                        <br>
+                                         <label>Nulos / no Votaron: {{votos.nulo}}</label>
+                                         <b-progress :value="votos.nulo" :max="votos.socios" variant="secondary"  class="mt-3"></b-progress>
+                                        <hr>
+                                        <p><b>Cerrar</b> tema con estado: <b-form-select size="sm" v-model="estado_voto" :options="[
+                                        { value: '', text: '-Seleccione-' },
+                                        { value: '2', text: 'APROBADA' },
+                                        { value: '3', text: 'RECHAZADA' },
+                                        { value: '4', text: 'ABSTENCION' },]"></b-form-select>
+                                        <br> <br>
+                                        <b-button block @click="finalizar(t.id)" size="sm" variant="danger" >Finalizar</b-button>
+                                        </p>
                                     </b-modal>
                                </td>
                            </tr>
@@ -84,7 +117,7 @@
                        </div>
                        
 
-                        <b-button @click="ruta('secretaria')"><i class="fas fa-undo-alt"></i> Volver</b-button>
+                        <b-button size="sm" @click="ruta('secretaria')"><i class="fas fa-undo-alt"></i> Volver</b-button>
                     </b-card-body>
                </b-card>
            </div>
@@ -111,7 +144,9 @@ export default {
             tabla:[],
 
             tema_id:'',
-            datacollection: null
+            datacollection: null,
+            votos:[],
+            estado_voto:''
         }
     },
     created(){
@@ -140,6 +175,37 @@ export default {
                 console.log(this.datacollection);
             })
         },
+
+        fillData2 (id) {
+       
+        
+            axios.get('api/obtener_votos_2/'+id).then((res)=>{
+                this.votos = res.data
+                console.log(this.votos);
+            })
+        },
+
+        finalizar(id){
+            
+            var r = confirm("Quiere cerrar el tema de votación?");
+            if (r == true) {
+
+                const data = new FormData();
+                data.append('id', id);
+                data.append('estado_voto',this.estado_voto);
+                
+                axios.post('api/finalizar_tema', data).then((res)=>{
+                    if(res.data.estado == 'success'){
+                        this.listar();
+                        alert(res.data.mensaje);
+                    }else{
+                        alert(res.data.mensaje);
+                    }
+                });
+            } else {
+                alert("Proceso cancelado!");
+            }
+        }
     }
 }
 </script>

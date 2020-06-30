@@ -9,7 +9,7 @@
     <b-nav-form>
       <div class="col text-center text-weight-bold">
         <b-button class="float-left" size="sm" @click="logout" variant="primary">Salir</b-button>
-         <label style="font-size:13px; margin-top:6px; color:#fff" class="float-left"> | Admin -> Alejandro Godoy</label>
+         <label style="font-size:13px; margin-top:6px; color:#fff" class="float-left"> | Admin -> {{ $auth.user().name }}</label>
        
       </div>
     </b-nav-form>
@@ -17,7 +17,7 @@
 
     
   
-    <div class="container">
+    <div class="container-fluid">
         <router-view :key="$route.path"></router-view>  
     </div>
     <br><br><br><br>

@@ -42,7 +42,7 @@ class TemaVotacion extends Model
                                 when estado_votacion = 1 then 'ABIERTA'
                                 when estado_votacion = 2 then 'APROBADA'
                                 when estado_votacion = 3 then 'RECHAZADA'
-                                when estado_votacion = 4 then 'ME ABSTENGO'
+                                when estado_votacion = 4 then 'ABSTENCION'
                             END AS votacion,
                             estado_tema,
                             case 
@@ -50,7 +50,7 @@ class TemaVotacion extends Model
                                 when estado_tema = 2 then 'CERRADA'
                             
                             END AS tema
-                        from tema_votacion");
+                        from tema_votacion ORDER BY CREATED_AT desc");
         if (count($tv)>0) {
             return ['estado'=>'success', 'tabla'=>$tv];
         }

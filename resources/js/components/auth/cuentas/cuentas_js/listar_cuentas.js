@@ -4,6 +4,10 @@ import languages from 'quasar/lang/index.json'
 export default {
   data () {
     return {
+      header_color: "color:white; background: rgb(0,0,0);background: linear-gradient(90deg, rgba(0,0,0,0.7413340336134453) 0%, rgba(4,8,9,1) 9%, rgba(46,39,96,1) 90%);",
+      body_color: "background: rgb(23,26,84);background: linear-gradient(170deg, rgba(23,26,84,1) 0%, rgba(160,163,187,1) 11%, rgba(251,254,255,1) 25%, rgba(251,254,255,0.15309873949579833) 59%, rgba(190,193,209,1) 94%, rgba(23,26,84,1) 100%);",
+      tr_style: "background:#EAEDED; border:1px solid #A6ACAF",
+      border: 'border:1px solid #A6ACAF',   
       monto_inicio:'',
       arrastre:0,
       view_tabla:false,
@@ -62,7 +66,7 @@ export default {
           sortable: true,
           classes: 'bg-grey-2 ellipsis',
           style: 'max-width: 100px',
-          headerClasses: 'bg-primary text-white'
+          headerClasses: 'text-white'
         },
         { name: 'valor', align: 'center', label: 'Valor', field: 'valor', sortable: true },
         
@@ -119,7 +123,7 @@ export default {
       },
     listar() {
 
-      axios.get('api/listar_cuenta_detalle/' + this.mes.id + '/' + this.anio.id + '/' + this.cuenta_id.id).then((res) => {
+      axios.get('api/listar_cuenta_detalle/' + this.mes + '/' + this.anio + '/' + this.cuenta_id).then((res) => {
         if (res.data.estado == 'success') {
           this.tabla = res.data.lista;
           var sumar_i = 0;
@@ -146,7 +150,7 @@ export default {
             }
           ];
 
-          this.traer_inicio_mensual(this.mes.id,this.anio.id,this.cuenta_id.id);
+          this.traer_inicio_mensual(this.mes,this.anio,this.cuenta_id);
           this.view_tabla = true;
           // this[`loading${dos}`] = false
         } else {
@@ -158,9 +162,9 @@ export default {
 
     ingresar_inicio_mes(){
         const data = {
-        'cuenta_id': this.cuenta_id.id,
-        'anio': this.anio.id,
-        'mes': this.mes.id,
+        'cuenta_id': this.cuenta_id,
+        'anio': this.anio,
+        'mes': this.mes,
         'monto_inicio':  this.monto_inicio
         };
         axios.post('api/ini_cie_ingresar', data).then((res) => {
@@ -232,7 +236,12 @@ export default {
 
     formatPrice(value) {
       let val = (value / 1).toFixed(0).replace('.', ',')
-      return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+      if(val == 0){
+          return '';
+      }else{
+        return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+      }
+      
     },
 
     llenar_inputs(fecha, descripcion, monto_ingreso, monto_egreso){
@@ -265,6 +274,10 @@ export default {
         }
       });
     },
+    arch_carga(event) {
+      console.log(event.target.files[0]);
+      this.file = event.target.files[0];
+    },
     editar_archivo(id, nombre){
       const data = new FormData();
       data.append('id', id);
@@ -274,6 +287,13 @@ export default {
         if (res.data.estado == 'success') {
           this.$q.notify({
             color: "green-4",
+            textColor: "white",
+            icon: "cloud_done",
+            message: "" + res.data.mensaje + ""
+          });
+        }else{
+          this.$q.notify({
+            color: "danger-4",
             textColor: "white",
             icon: "cloud_done",
             message: "" + res.data.mensaje + ""

@@ -45,17 +45,24 @@
 	Route::get('listar_socios/{buscar?}','SocioController@listar_socios');
 	Route::get('listar_socio/{buscar?}','SocioController@listar_socio');
 	Route::get('listar_socio_id/{id}','SocioController@listar_socio_id');
+	Route::post('actualizar_socio','SocioController@actualizar');
 	Route::get('entorno_familiar','SocioController@entorno_familiar');
 	Route::post('crear_persona','PersonaController@crear_persona');
 	Route::get('listar_personas/{socio}','PersonaController@listar_personas');
+	Route::post('actualizar_archivo_con','PersonaController@actualizar_archivo_con');
+	Route::post('actualizar_archivo_car','PersonaController@actualizar_archivo_car');
+	Route::post('actualizar_persona','PersonaController@actualizar');
 	Route::post('insertar_tema_votacion','SecretariaController@insertar_tema_votacion');
 	Route::get('listar_tema_votacion','SecretariaController@listar_tema_votacion');
-
+	Route::post('finalizar_tema', 'VotarController@finalizar_tema');
+	Route::post('entregar_beneficio', 'SocioController@entregar_beneficio');
 
 	//SOCIOS
 
 	Route::post('votar','VotarController@votar');
 	Route::get('obtener_votos/{id}','VotarController@obtener_votos');
+	Route::get('obtener_votos_2/{id}','VotarController@obtener_votos_2');
+	
 	
 	
 	

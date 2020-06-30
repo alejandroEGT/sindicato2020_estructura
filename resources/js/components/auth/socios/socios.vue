@@ -20,7 +20,7 @@
                                 <b-button @click="ruta('beneficio_socios')" variant="light"><i class="fas fa-grin-squint-tears"></i> Beneficios del socio</b-button>
                             </b-list-group-item>
                             </b-list-group><br>
-                             <b-button class="float-right" @click="ruta('index')"><i class="fas fa-undo-alt"></i> Volver</b-button>
+                             <b-button size="sm" class="float-right" @click="ruta('index')"><i class="fas fa-undo-alt"></i> Volver</b-button>
                     </b-card-body> 
                  </b-card>
    

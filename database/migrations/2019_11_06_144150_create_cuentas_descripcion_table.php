@@ -16,12 +16,14 @@ class CreateCuentasDescripcionTable extends Migration
         Schema::create('cuentas_descripcion', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('cuenta_id');
-            $table->text('fecha');
+            $table->date('fecha');
             $table->text('codigo')->nullable();
             $table->text('descripcion');
             $table->integer('sub_cuenta_id');
             $table->integer('tipo_monto_id');
-            $table->bigInteger('monto');
+            $table->bigInteger('monto_ingreso')->nullable();
+            $table->bigInteger('monto_egreso')->nullable();
+            $table->bigInteger('user_crea')->nullable();
             $table->text('archivo')->nullable();
             $table->char('activo', 1);
             $table->timestamps();

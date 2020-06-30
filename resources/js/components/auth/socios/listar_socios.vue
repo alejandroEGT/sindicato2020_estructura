@@ -46,7 +46,158 @@
                                <td :style="border">{{ t.fecha_ingreso }}</td>
                                <td :style="border">{{ t.fecha_egreso }}</td>
                                <td :style="border">
-                                   <b-button size="sm" pill ><i class="fas fa-pencil-alt"></i> Editar</b-button>
+                                    <b-button 
+                                   @click="nombres= t.nombres;
+                                                        apellidos=t.apellidos;
+                                                        rut=t.rut;
+                                                        fecha_nacimiento=t.fecha_nacimiento_e;
+                                                        email=t.email;
+                                                        fecha_ingreso=t.fecha_ingreso_e;
+                                                        fecha_egreso=t.fecha_egreso_e
+                                   "  v-b-modal="'graf'+t.socio_id" variant="light">Editar</b-button>
+                                   
+                                   <b-modal 
+                                   header-bg-variant="dark"
+                                   header-text-variant="white"
+                                   hide-footer 
+                                   size="lg" :id="'graf'+t.socio_id" :title="'Editar persona con ID '+(i+1)">
+                                    
+                                        
+                                            <div class="row justify-center">
+                                                <div class="col-10 col-md-10">
+                                                     <label for="">Nombres</label>
+                                                     <b-form-input 
+                                                          v-model="nombres"
+                                                          size="sm">
+                                                    </b-form-input>
+                                                </div>
+                                                <div class="col-2 col-md-2">
+                                                        <br>
+                                                        <b-button 
+                                                        size="sm"
+                                                        @click="editar(t.socio_id,'nombres', nombres)"
+                                                          variant="dark"
+                                                        ><i class="fas fa-pen-alt"></i>
+                                                        </b-button>
+                                                </div>
+                                            </div>
+                                            <div class="row justify-center">
+                                                <div class="col-10 col-md-10">
+                                                     <label for="">Apellidos</label>
+                                                     <b-form-input 
+                                                          v-model="apellidos"
+                                                          size="sm">
+                                                    </b-form-input>
+                                                </div>
+                                                <div class="col-2 col-md-2">
+                                                        <br>
+                                                        <b-button 
+                                                        size="sm"
+                                                        @click="editar(t.socio_id,'apellidos', apellidos)"
+                                                          variant="dark"
+                                                        ><i class="fas fa-pen-alt"></i>
+                                                        </b-button>
+                                                </div>
+                                            </div>
+
+                                            <div class="row justify-center">
+                                                <div class="col-10 col-md-10">
+                                                     <label for="">Rut</label>
+                                                     <b-form-input 
+                                                          v-model="rut"
+                                                          size="sm">
+                                                    </b-form-input>
+                                                </div>
+                                                <div class="col-2 col-md-2">
+                                                        <br>
+                                                        <b-button 
+                                                        size="sm"
+                                                        @click="editar(t.socio_id,'rut', rut)"
+                                                          variant="dark"
+                                                        ><i class="fas fa-pen-alt"></i>
+                                                        </b-button>
+                                                </div>
+                                            </div>
+
+                                            <div class="row justify-center">
+                                                <div class="col-10 col-md-10">
+                                                     <label for="">Email</label>
+                                                     <b-form-input 
+                                                          v-model="email"
+                                                          size="sm">
+                                                    </b-form-input>
+                                                </div>
+                                                <div class="col-2 col-md-2">
+                                                        <br>
+                                                        <b-button 
+                                                        size="sm"
+                                                        @click="editar(t.socio_id,'email', email)"
+                                                          variant="dark"
+                                                        ><i class="fas fa-pen-alt"></i>
+                                                        </b-button>
+                                                </div>
+                                            </div>
+
+                                            <div class="row justify-center">
+                                                <div class="col-10 col-md-10">
+                                                     <label for="">Fecha nacimiento</label>
+                                                     <b-form-input
+                                                        v-model="fecha_nacimiento" 
+                                                        size="sm" 
+                                                        type="date">
+                                                      </b-form-input>
+                                                </div>
+                                                <div class="col-2 col-md-2">
+                                                        <br>
+                                                        <b-button 
+                                                        size="sm"
+                                                        @click="editar(t.socio_id,'fecha_nacimiento', fecha_nacimiento)"
+                                                          variant="dark"
+                                                        ><i class="fas fa-pen-alt"></i>
+                                                        </b-button>
+                                                </div>
+                                            </div>
+
+                                            <div class="row justify-center">
+                                                <div class="col-10 col-md-10">
+                                                     <label for="">Fecha ingreso</label>
+                                                     <b-form-input 
+                                                          v-model="fecha_ingreso"
+                                                          size="sm"  type="date">
+                                                    </b-form-input>
+                                                </div>
+                                                <div class="col-2 col-md-2">
+                                                        <br>
+                                                        <b-button 
+                                                        size="sm"
+                                                        @click="editar(t.socio_id,'fecha_ingreso', fecha_ingreso)"
+                                                          variant="dark"
+                                                        ><i class="fas fa-pen-alt"></i>
+                                                        </b-button>
+                                                </div>
+                                            </div>
+
+                                            <div class="row justify-center">
+                                                <div class="col-10 col-md-10">
+                                                     <label for="">fecha egreso</label>
+                                                     <b-form-input 
+                                                          v-model="fecha_egreso"
+                                                          size="sm"  type="date">
+                                                    </b-form-input>
+                                                </div>
+                                                <div class="col-2 col-md-2">
+                                                        <br>
+                                                        <b-button 
+                                                        size="sm"
+                                                        @click="editar(t.socio_id,'fecha_egreso', fecha_egreso)"
+                                                          variant="dark"
+                                                        ><i class="fas fa-pen-alt"></i>
+                                                        </b-button>
+                                                </div>
+                                            </div>
+                                           
+
+                                    </b-modal>
                                </td>
                            </tr>
                        </table>
@@ -71,7 +222,16 @@ export default {
             border:'border:1px solid #A6ACAF',
             
             buscar:'',
-            tabla:[]
+            tabla:[],
+
+            //datos socio
+            nombres:'',
+            apellidos:'',
+            fecha_nacimiento:'',
+            rut:'',
+            email:'',
+            fecha_ingreso:'',
+            fecha_egreso:'',
         }
     },
     created(){
@@ -90,7 +250,26 @@ export default {
                     this.tabla = res.data.tabla
                 }
             });
-        }
+        },
+
+        editar(id, nombre, valor) {
+        
+            const data = new FormData();
+            data.append('id', id);
+            data.append('nombre',nombre);
+            data.append('valor',valor);
+            axios.post('api/actualizar_socio', data).then((res) => {
+                if (res.data.estado == 'success') {
+                this.$q.notify({
+                    color: "green-4",
+                    textColor: "white",
+                    icon: "cloud_done",
+                    message: ""+res.data.mensaje+""
+                });
+                this.listar();
+                }
+            });
+        },
     }
 }
 </script>

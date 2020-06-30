@@ -32,10 +32,10 @@
                                <td>
                                    <!-- <b-button @click="buscar='';listar()" size="sm" variant="info"><i class="fas fa-sync-alt"></i> Refrezcar</b-button> -->
                                </td>
-                               <td>
-                                   <b-button size="sm" @click="ruta('secretaria')"><i class="fas fa-undo-alt"></i> Volver</b-button>
+                               <td colspan="2">
+                                   <b-button size="sm" @click="ruta('s_secretaria')"><i class="fas fa-undo-alt"></i> Volver</b-button>
                                </td>
-                               <td colspan="3"></td>
+                              
                            </tr>
                            <tr :style="header_color">
                                <!-- <td>Nº</td> -->
@@ -97,7 +97,7 @@
                        </div>
                        
 
-                        <b-button @click="ruta('secretaria')"><i class="fas fa-undo-alt"></i> Volver</b-button>
+                        <b-button @click="ruta('s_secretaria')"><i class="fas fa-undo-alt"></i> Volver</b-button>
                     </b-card-body>
                </b-card>
            </div>

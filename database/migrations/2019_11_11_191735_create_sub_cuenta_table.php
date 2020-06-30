@@ -17,6 +17,7 @@ class CreateSubCuentaTable extends Migration
             $table->increments('id');
             $table->text('titulo');
             $table->text('descripcion');
+            $table->integer('cuenta_id');
             $table->char('activo', 1);
             $table->timestamps();
         });

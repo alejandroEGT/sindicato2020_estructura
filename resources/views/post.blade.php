@@ -24,5 +24,11 @@
         </div>
         
         <script src="{{ mix('js/app.js') }}" type="text/javascript"></script>
+
+        <style>
+        bg-dark {
+            /* background: #1d1d1d !important; */
+            background: red !important;
+        }</style>
     </body>
 </html>

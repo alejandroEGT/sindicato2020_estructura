@@ -54,9 +54,12 @@ class Socio extends Model
                                 upper(apellidos) apellidos,
                                 rut,
                                 email,
-                                fecha_nacimiento,
-                                fecha_ingreso,
-                                fecha_egreso
+                                to_char(fecha_nacimiento,'dd/mm/YYYY') fecha_nacimiento,
+                                fecha_nacimiento fecha_nacimiento_e,
+                                fecha_ingreso fecha_ingreso_e,
+                                to_char(fecha_ingreso, 'dd/mm/YYYY') fecha_ingreso,
+                                fecha_egreso fecha_egreso_e,
+                                to_char(fecha_egreso, 'dd/mm/YYYY') fecha_egreso
                             from socios s
                             inner join users u on s.user_id = u.id where s.activo = 'S' 
                             and upper(concat(nombres,' ',apellidos)) like '%$buscar%'

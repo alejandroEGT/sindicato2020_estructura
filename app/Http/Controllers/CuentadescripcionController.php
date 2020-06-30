@@ -14,6 +14,16 @@ class CuentadescripcionController extends Controller
     public function crear(Request $r)
     {
     	try{
+
+			$validar_pdf=$this->validar_archivo($r->archivo,'archivo', 'application/pdf');
+
+			if ($validar_pdf == false) {
+				return [
+					'estado' => 'failed',
+					'mensaje' => 'El archivo no es un PDF'
+				];  
+			}
+
 	    	$file = $this->guardarArchivo($r->archivo,'archivos_cuenta/');
 
 			if($file['estado'] == "success"){
@@ -69,7 +79,8 @@ class CuentadescripcionController extends Controller
     {
     	$list = DB::select("SELECT 
     							cd.id,
-    							cd.fecha,
+    							to_char(cd.fecha, 'dd/mm/yyyy') fecha,
+								cd.fecha as fecha_input,
     							monto_ingreso,
 								monto_egreso,
 								cd.descripcion,
@@ -163,6 +174,16 @@ class CuentadescripcionController extends Controller
 
 	public function actualizar_archivo(Request $r){
 
+		$validar_pdf = $this->validar_archivo($r->valor, 'valor', 'application/pdf');
+
+		if ($validar_pdf == false) {
+           return [
+               'estado' => 'failed',
+               'mensaje' => 'El archivo no es un PDF'
+           ];  
+       }
+
+
 		$cd = Cuentadescripcion::find($r->id);
 
 		if ($cd) {
@@ -203,4 +224,20 @@ class CuentadescripcionController extends Controller
 				'mensaje'=>'Error al borrar'
 			];
 	}
+
+	public function validar_archivo($archivo, $campo_name, $formato)
+    {
+        if($archivo == "null" || $archivo == "undefined"){
+            return "nofile";
+        }else{
+            if($_FILES[$campo_name]['type']==$formato){
+                return true;
+                
+            }
+
+            if($_FILES[$campo_name]['type']!=$formato){
+                return false;
+            }
+        }
+    }
 }

@@ -1,33 +1,33 @@
+
 <template>
-	<div class="q-pa-md">
-		<div class="row justify-center">
-
-            <div class="col-12 col-md-10">
-				<q-card class="my-card">
-			      <q-card-section class="bg-primary text-white">
-			        <div class="text-h6">Cuentas</div>
-			        <!-- <div class="text-subtitle2">by John Doe</div> -->
-			      </q-card-section>
-
-			      <q-separator />
-
-			      <div class="q-pa-md">
-			        <div class="row q-col-gutter-md">
-			        	<div class="col-12 col-md-2">
-			        		<q-btn @click="url_crear_cuenta" color="primary" class="block" icon="create" label="Crear cuenta" />
-			        	</div>
-			        	<div class="col-12 col-md-2">
-			        		<q-btn @click="url_listar_cuenta" color="primary" class="block" icon="list" label="Listar cuentas" />
-			        	</div>
-			        	<div class="col-12 col-md-2">
-			        		<q-btn @click="url_formulario_cuenta" color="primary" class="block" icon="attach_file" label="Formulario" />
-			        	</div>
-			        </div>
-			      </div>
-			    </q-card>
-			</div>
-		</div>
-	</div>
+<!-- style="height:80em; overflow:scroll;" -->
+    <div >
+        <br><br>
+       <div class="row justify-center">
+           <div class="col-md-6">
+               <b-card no-body>
+                    <b-card-header :style="header_color" >
+                    Cuentas
+                    </b-card-header>
+                    <b-card-body>
+                            <b-list-group>
+                            <b-list-group-item>
+                                <b-button @click="url_crear_cuenta" variant="light"><i class="fas fa-address-card"></i> Crear cuenta</b-button>
+                            </b-list-group-item>
+                            <b-list-group-item>
+                                <b-button @click="url_listar_cuenta" variant="light"> <i class="fas fa-list"></i> Listar cuentas</b-button>
+                            </b-list-group-item>
+                            <b-list-group-item>
+                                <b-button @click="url_formulario_cuenta" variant="light"><i class="fas fa-grin-squint-tears"></i> Formulario de cuentas</b-button>
+                            </b-list-group-item>
+                            </b-list-group><br>
+                             <b-button size="sm" class="float-right" @click="ruta('index')"><i class="fas fa-undo-alt"></i> Volver</b-button>
+                    </b-card-body> 
+                 </b-card>
+   
+            </div>
+       </div>
+    </div>
 </template>
 
 <script src="../cuentas_js/modulo_cuentas.js"></script>
