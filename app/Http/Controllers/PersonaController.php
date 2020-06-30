@@ -230,7 +230,7 @@ class PersonaController extends Controller
 	            return ['estado' =>  'failed', 'mensaje' => 'error al guardar el archivo.'];
 	        }
 	    }catch (\Throwable $t) {
-    			return ['estado' =>  'failed', 'mensaje' => 'error al guardar el archivo, posiblemente este dañado o no exista.'];
+    			return ['error'=>$t,'estado' =>  'failed', 'mensaje' => 'error al guardar el archivo, posiblemente este dañado o no exista.'];
 		}
     }
     
