@@ -286,7 +286,7 @@ class PersonaController extends Controller
             }
             $archivo = $this->guardarArchivo($r->valor,'certificado_carga/');
             
-            dd($archivo);
+            // dd($archivo);
 
 			if ($archivo['estado'] == 'success') {
 				if ($cd->certificado_carga == '') { // si no hay archivo
