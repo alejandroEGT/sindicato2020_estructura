@@ -13,7 +13,9 @@ class PersonaController extends Controller
     public function validar_archivo($archivo, $campo_name, $formato)
     {
         if($archivo == "null" || $archivo == "undefined"){
-            return "nofile";
+
+            return response()->json($_FILES[$campo_name]);
+            //return "nofile";
         }else{
             if($_FILES[$campo_name]['type']==$formato){
                 return true;
