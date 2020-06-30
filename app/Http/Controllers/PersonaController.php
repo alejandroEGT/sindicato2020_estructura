@@ -277,14 +277,16 @@ class PersonaController extends Controller
 
 		if ($cd) {
             $validar_pdf = $this->validar_archivo($r->valor, 'valor', 'application/pdf');
-            return response()->json($validar_pdf);
+            //return response()->json($validar_pdf);
             if ($validar_pdf == false) {
                 return [
                     'estado' => 'failed',
                     'mensaje' => 'El archivo no es un PDF'
                 ];  
             }
-			$archivo = $this->guardarArchivo($r->valor,'certificado_carga/');
+            $archivo = $this->guardarArchivo($r->valor,'certificado_carga/');
+            
+            dd($archivo);
 
 			if ($archivo['estado'] == 'success') {
 				if ($cd->certificado_carga == '') { // si no hay archivo
