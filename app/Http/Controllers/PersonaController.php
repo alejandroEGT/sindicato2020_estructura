@@ -14,9 +14,11 @@ class PersonaController extends Controller
     {
         if($archivo == "null" || $archivo == "undefined"){
 
-            return response()->json($_FILES[$campo_name]);
-            //return "nofile";
+            
+            return "nofile";
         }else{
+            return response()->json($_FILES[$campo_name]);
+
             if($_FILES[$campo_name]['type']==$formato){
                 return true;
                 
@@ -275,7 +277,7 @@ class PersonaController extends Controller
 
 		if ($cd) {
             $validar_pdf = $this->validar_archivo($r->valor, 'valor', 'application/pdf');
-
+            return response()->json($validar_pdf);
             if ($validar_pdf == false) {
                 return [
                     'estado' => 'failed',
