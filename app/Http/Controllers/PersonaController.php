@@ -17,7 +17,7 @@ class PersonaController extends Controller
             
             return "nofile";
         }else{
-            return response()->json($_FILES[$campo_name]['type']);
+            // return response()->json($_FILES[$campo_name]['type']);
 
             if($_FILES[$campo_name]['type']==$formato){
                 return true;
