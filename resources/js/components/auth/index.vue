@@ -75,7 +75,7 @@
                 <div class="col-12 col-md-4">
                   
                       <div @click="ruta('socios')" style="width:100%;  border:2px solid #E5E8E8; ">
-                        <q-img  style="height: 200px; max-width: 100%; "  src="https://i.dlpng.com/static/png/6871230_preview.png">
+                        <q-img  style="height: 200px; max-width: 100%; "  src="/socios.png">
                           <div class="absolute-bottom">
                             <div class="text-h6">Socios</div>
                             <div class="text-subtitle2">Registro y lista de socios</div>
