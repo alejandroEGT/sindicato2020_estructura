@@ -75,7 +75,7 @@
                 <div class="col-12 col-md-4">
                   
                       <div @click="ruta('socios')" style="width:100%;  border:2px solid #E5E8E8; ">
-                        <q-img  style="height: 200px; max-width: 100%; "  src="https://informativohoy.com.ar/wp-content/uploads/2019/05/casadei-artesanalaes.jpg">
+                        <q-img  style="height: 200px; max-width: 100%; "  src="https://i.dlpng.com/static/png/6871230_preview.png">
                           <div class="absolute-bottom">
                             <div class="text-h6">Socios</div>
                             <div class="text-subtitle2">Registro y lista de socios</div>
@@ -87,7 +87,7 @@
                 <div class="col-12 col-md-4">
                     <div @click="url_modulo_cuenta" style="width:100%;  border:2px solid #E5E8E8; ">
                       <q-img  style="height: 200px; max-width: 100% "
-                      src="https://billibfinance.com/wp-content/uploads/2019/02/estado-de-flujos-de-tesorer%C3%ADa-1200x565.jpg">
+                      src="https://taylorcommunity.org/wp-content/uploads/2016/12/clipart-money-money-clip-art-pictures-jpg-FvwF6D-clipart.jpg">
                         <div class="absolute-bottom">
                           <div class="text-h6">Tesorería</div>
                           <div class="text-subtitle2">Registro y lista de cuentas sindicales</div>
@@ -100,7 +100,7 @@
                     <div @click="ruta('secretaria')" style="width:100%;  border:2px solid #E5E8E8; ">
                       <q-img 
                       style="height: 200px; max-width: 100%; " 
-                      src="https://www.compartirpalabramaestra.org/sites/default/files/field/image/secretaria-de-educacion-y-organizaciones-sindicales-instalan-mesa-de-negociacion-2019.jpg">
+                      src="https://img.freepik.com/vector-gratis/secretaria-ocupada-que-sonrie-computadora-portatil_61747-4.jpg?size=626&ext=jpg">
                         <div class="absolute-bottom">
                           <div class="text-h6">Secretaría</div>
                           <div class="text-subtitle2">Registro y lista de reuniones, actas, votaciones</div>
@@ -119,13 +119,13 @@
 
       </div>
     </div>
-
-    <div class="row justify-center">
+  <br><br><br>
+    <!-- <div class="row justify-center">
        <div class="col-12 col-md-11">
           <div class="row q-col-gutter-md">
             <div class="col-12 col-md-12">
                     <div @click="url_crear_cliente" style="width:100%;  border:2px solid #E5E8E8; ">
-                      <q-img  style="height: 200px; max-width: 100%; "  src="https://informativohoy.com.ar/wp-content/uploads/2019/05/casadei-artesanalaes.jpg">
+                      <q-img  style="height: 200px; max-width: 100%; "  src="https://d1ngwfo98ojxvt.cloudfront.net/images/blog/redis/config/config.png">
                         <div class="absolute-bottom">
                           <div class="text-h6">Administracion / configuración</div>
                           <div class="text-subtitle2">Configuraciones internas de la compañia</div>
@@ -136,7 +136,7 @@
             
           </div>
        </div>
-    </div>
+    </div> -->
    
   
 

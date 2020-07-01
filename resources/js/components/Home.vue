@@ -105,7 +105,7 @@
                 </b-card-header>
 
                 <b-card-body class="text-center">
-                  <b-form-input v-model="email" size="sm" placeholder="Ingrese su rut"></b-form-input>
+                  <b-form-input v-model="email" size="sm" placeholder="Ingrese su email"></b-form-input>
                   <br>
                   <b-form-input v-model="password" type="password"  size="sm" placeholder="Ingrese su contraseña"></b-form-input>
                   <br>
@@ -123,7 +123,7 @@
                 </b-card-header>
 
                 <b-card-body class="text-center">
-                  <b-form-input v-model="email2" size="sm" placeholder="Ingrese su rut"></b-form-input>
+                  <b-form-input v-model="email2" size="sm" placeholder="Ingrese su email"></b-form-input>
                   <br>
                   <b-form-input v-model="password2" type="password"  size="sm" placeholder="Ingrese su contraseña"></b-form-input>
                   <br>
