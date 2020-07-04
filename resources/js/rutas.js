@@ -27,6 +27,7 @@ import crear_socios from './components/auth/socios/crear_socio.vue';
 import listar_socios from './components/auth/socios/listar_socios.vue';
 import beneficio_socios from './components/auth/socios/beneficio_socio.vue';
 import Entrega_beneficio from "./components/auth/socios/entrega_beneficio.vue";
+import Lista_beneficio from "./components/auth/socios/lista_beneficio.vue";
 import personas_socios from "./components/auth/socios/personas_socios.vue";
 import secretaria from "./components/auth/secretaria/secretaria.vue";
 import crear_tema_votacion from "./components/auth/secretaria/crear_tema_votacion.vue";
@@ -98,6 +99,7 @@ const routes = [
       { path: '/beneficio_socios', component: beneficio_socios, name: 'beneficio_socios' },
       { path: '/personas_socios/:id', component: personas_socios, name: 'personas_socios' },
       { path: '/entrega_beneficio/:id', component: Entrega_beneficio, name: 'entrega_beneficio' },
+      { path: '/lista_beneficio/:id', component: Lista_beneficio, name: 'lista_beneficio' },
       { path: '/secretaria', component: secretaria, name: 'secretaria' },
       { path: '/crear_tema_votacion', component: crear_tema_votacion, name: 'crear_tema_votacion' },
       { path: '/listar_tema_votacion', component: listar_tema_votacion, name: 'listar_tema_votacion' },

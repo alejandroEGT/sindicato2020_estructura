@@ -11,10 +11,10 @@
                         <div class="row justify-center">
                             <div class="col-md-6">
                                 <label for="">Tipo de beneficio</label>
-                                 <b-form-select v-model="tipo" :options="tipos" size="sm"></b-form-select>
+                                 <b-form-select @change="select_tipo(tipo)" v-model="tipo" :options="tipos" size="sm"></b-form-select>
                             </div>
 
-                            <div class="col-md-6">
+                            <div v-if="per_del_mot" class="col-md-6">
                                 <label for="">Persona del motivo</label>
                                 <b-form-select v-model="persona" 
                                 size="sm">
@@ -83,6 +83,7 @@ export default {
             tr_style:"background:#EAEDED; border:1px solid #A6ACAF",
             border:'border:1px solid #A6ACAF',
 
+            per_del_mot: true,
             socio_id: this.$route.params.id,
             socio:{},
 
@@ -159,8 +160,19 @@ export default {
                     message: "" + res.data.mensaje + ""
                 });
                  this.listar();
+                }else{
+                    alert(res.data.mensaje);
                 }
             });
+        },
+
+        select_tipo(tipo){
+            if(tipo == "GASTO MEDICO"){
+                this.per_del_mot = false;
+                this.persona = '';
+            }else{
+                this.per_del_mot = true;
+            }
         }
     }
 }

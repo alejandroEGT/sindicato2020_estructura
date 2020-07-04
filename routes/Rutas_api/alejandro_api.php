@@ -56,6 +56,7 @@
 	Route::get('listar_tema_votacion','SecretariaController@listar_tema_votacion');
 	Route::post('finalizar_tema', 'VotarController@finalizar_tema');
 	Route::post('entregar_beneficio', 'SocioController@entregar_beneficio');
+	Route::get('listar_beneficios_dados/{socio_id}','SocioController@listar_beneficios_dados');
 
 	//SOCIOS
 

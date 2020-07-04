@@ -76,7 +76,7 @@
 
               <div class="outer-block">
                 <p><b>Socio</b></p>
-                Conozca libremente las cuentas sindicales, particeipe tambien en temas de votaciones
+                Conozca libremente las cuentas sindicales, participe tambien en temas de votaciones
               </div>
             </b-col>
 

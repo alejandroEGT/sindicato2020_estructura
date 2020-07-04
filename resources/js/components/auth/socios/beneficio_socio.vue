@@ -51,6 +51,8 @@
                                     <td style="color:#1F618D">Vista:</td>
                                     <td style="#CCD1D1">
                                         <b-button @click="url_params('personas_socios',{id:socio_id})" size="sm" variant="info"><i class="fas fa-list-alt"></i> Personas asociadas</b-button>
+                                        <hr>
+                                        <b-button @click="url_params('lista_beneficio',{id:socio_id})" size="sm" variant="info"><i class="fas fa-list-alt"></i> Beneficios</b-button>
                                     </td>
 
                                     <td style="color:#1F618D">Entrega:</td>
